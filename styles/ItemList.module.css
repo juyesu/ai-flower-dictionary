@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "Noto Serif KR", serif;
+    src: url('./NotoSansKR-VariableFont_wght.ttf') format('truetype');
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.index {
+    font-family: "Noto Serif KR", serif;
+    font-size: 42px;
+    font-weight: bold;
+    font-style: normal;
+    margin-left: 4px;
+    color: rgb(251 113 133);
+}
+
+.txt {
+    font-family: "Noto Serif KR", serif;
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    margin-top: 6px;
+    margin-left: 4px;
+    color: rgb(251 113 133);
+}
+
+.main {
+    font-family: "Noto Serif KR", serif;
+    font-size: 42px;
+    font-weight: bold;
+    font-style: normal;
+    margin-top: 42px;
+    margin-left: 4px;
+    color: rgb(251 113 133);
+}

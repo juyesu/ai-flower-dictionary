@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Poetsen One';
+    src: url('./PoetsenOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    src: url('./NotoSansKR-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.logo {
+    font-family: 'Poetsen One', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    margin-left: 18px;
+}
+
+.menu {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: normal;
+    color: rgb(251 113 133);
+}
+
+.menu:hover {
+    background-color: rgb(255 228 230);
+}
