@@ -5,21 +5,19 @@
 /* 다크모드 */
 :root {
   --white: hsl(210 40% 98%);
-  --black: #2B2B2B;
- 
+  --black: #2b2b2b;
+
   --background: white;
   --foreground: var(--black);
- 
+
   --primary: 222.2 47.4% 11.2%;
   --primary-foreground: 210 40% 98%;
- 
 }
- 
+
 .dark {
   --background: var(--black);
   --foreground: var(--white);
- 
+
   --primary: 210 40% 98%;
   --primary-foreground: 222.2 47.4% 11.2%;
 }
-
