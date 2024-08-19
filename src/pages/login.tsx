@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '@/components/layout'
 import Link from 'next/link'
 
-export default function Login() {
+const Login = () => {
   return (
     <Layout>
       <div className="flex flex-row justify-center items-center w-2/3 h-48 mt-48 mx-24 border border-gray-200">
@@ -27,3 +27,5 @@ export default function Login() {
     </Layout>
   )
 }
+
+export default Login

@@ -3,7 +3,7 @@ import AxiosComponent from '../components/Axios'
 import Layout from '@/components/layout'
 import ScrollBtn from '@/components/ScrollBtn'
 
-export default function Info() {
+const Info = () => {
   return (
     <Layout>
       <AxiosComponent />
@@ -11,3 +11,5 @@ export default function Info() {
     </Layout>
   )
 }
+
+export default Info

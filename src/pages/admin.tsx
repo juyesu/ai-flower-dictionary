@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '@/components/layout'
 import Link from 'next/link'
 
-export default function Admin() {
+const Admin = () => {
   return (
     <Layout>
       <div className="flex flex-col items-start w-full mt-32 ml-6">
@@ -14,3 +14,5 @@ export default function Admin() {
     </Layout>
   )
 }
+
+export default Admin

@@ -1,7 +1,7 @@
 'use client'
 import { useTheme } from 'next-themes'
 
-export default function DarkModeBtn() {
+const DarkModeBtn = () => {
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
 
@@ -46,3 +46,5 @@ export default function DarkModeBtn() {
     </div>
   )
 }
+
+export default DarkModeBtn

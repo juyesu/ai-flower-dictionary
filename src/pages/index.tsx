@@ -3,7 +3,7 @@ import WebcamModel from '../components/WebcamModel'
 import Layout from '@/components/layout'
 import ScrollBtn from '@/components/ScrollBtn'
 
-export default function Home() {
+const Home = () => {
   return (
     <Layout>
       <div className="mt-16 max-w-[420px] mx-auto my-7">
@@ -13,3 +13,5 @@ export default function Home() {
     </Layout>
   )
 }
+
+export default Home

@@ -1,4 +1,4 @@
-export default function ScrollBtn() {
+const ScrollBtn = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -34,3 +34,5 @@ export default function ScrollBtn() {
     </div>
   )
 }
+
+export default ScrollBtn

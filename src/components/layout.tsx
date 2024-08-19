@@ -3,7 +3,7 @@ import Link from 'next/link'
 import ThemeProvider from './ThemeProvider'
 import DarkModeBtn from './DarkModeBtn'
 
-export default function RootLayout({ children }: { children: any }) {
+const RootLayout = ({ children }: { children: any }) => {
   return (
     <div>
       <div>
@@ -43,3 +43,5 @@ export default function RootLayout({ children }: { children: any }) {
     </div>
   )
 }
+
+export default RootLayout

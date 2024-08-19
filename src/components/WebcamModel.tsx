@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import * as tmImage from '@teachablemachine/image'
 import styles from './../../styles/ItemList.module.css'
 
-export default function WebcamModel() {
+const  WebcamModel = () => {
   const [model, setModel] = useState<any>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [label, setLabel] = useState('')
@@ -210,3 +210,5 @@ export default function WebcamModel() {
     </div>
   )
 }
+
+export default WebcamModel

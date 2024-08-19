@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styles from './../../styles/ItemList.module.css'
 import Image from 'next/image'
 
-export default function ItemList({ list }: { list: any }) {
+const ItemList = ({ list }: { list: any }) => {
   return (
     <div className="mx-16 my-28">
       <div>
@@ -43,3 +43,5 @@ export default function ItemList({ list }: { list: any }) {
     </div>
   )
 }
+
+export default ItemList
