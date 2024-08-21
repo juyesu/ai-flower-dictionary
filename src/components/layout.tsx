@@ -2,8 +2,9 @@ import styles from './../../styles/layout.module.css'
 import Link from 'next/link'
 import ThemeProvider from './ThemeProvider'
 import DarkModeBtn from './DarkModeBtn'
+import type { ChildrenComponentsProps } from './ThemeProvider'
 
-const RootLayout = ({ children }: { children: any }) => {
+const RootLayout = ({ children }: ChildrenComponentsProps) => {
   return (
     <div>
       <div>

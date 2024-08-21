@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import * as tmImage from '@teachablemachine/image'
 import styles from './../../styles/ItemList.module.css'
 
-const  WebcamModel = () => {
+const WebcamModel = () => {
   const [model, setModel] = useState<any>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [label, setLabel] = useState('')
@@ -28,7 +28,7 @@ const  WebcamModel = () => {
           const loadedModel = (await tmImage.load(
             MODEL_URL,
             METADATA_URL
-          )) as any
+          ))
           setModel(loadedModel)
           setMaxPredictions(loadedModel.getTotalClasses())
           console.log('Model loaded successfully.')
@@ -114,7 +114,7 @@ const  WebcamModel = () => {
     }
   }
 
-  const fetchChatGPTDescription = async (flowerName: any, content: string) => {
+  const fetchChatGPTDescription = async (flowerName: string, content: string) => {
     const API_URL = 'https://api.openai.com/v1/chat/completions'
     const API_KEY = 'sk-proj-QQyolp7hNhbAsufJ3UDyT3BlbkFJ4zGmSpl9UGkexFEIrHbB'
 

@@ -2,7 +2,18 @@ import Link from 'next/link'
 import styles from './../../styles/ItemList.module.css'
 import Image from 'next/image'
 
-const ItemList = ({ list }: { list: any }) => {
+type PlantIndexProps = {
+  list: Array<PlantIndexItem>
+}
+
+export type PlantIndexItem = {
+  imgUrl: string
+  krnm: string
+  famlNm: string
+  fturCn: string
+}
+
+const ItemList = ({ list }: PlantIndexProps) => {
   return (
     <div className="mx-16 my-28">
       <div>
@@ -13,7 +24,7 @@ const ItemList = ({ list }: { list: any }) => {
         <hr className="mt-6 border-rose-300" />
       </div>
       <div className="mt-10 grid grid-cols-2 gap-4">
-        {list.map((item: any) => (
+        {list.map((item: PlantIndexItem) => (
           <Link
             key={item.famlNm}
             href={{
