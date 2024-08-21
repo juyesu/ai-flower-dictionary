@@ -1,16 +1,10 @@
 import Link from 'next/link'
 import styles from './../../styles/ItemList.module.css'
 import Image from 'next/image'
+import { PlantIndexItem } from '@/types/type'
 
 type PlantIndexProps = {
   list: Array<PlantIndexItem>
-}
-
-export type PlantIndexItem = {
-  imgUrl: string
-  krnm: string
-  famlNm: string
-  fturCn: string
 }
 
 const ItemList = ({ list }: PlantIndexProps) => {

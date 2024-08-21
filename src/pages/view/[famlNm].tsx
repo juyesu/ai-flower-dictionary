@@ -3,7 +3,7 @@ import Layout from '@/components/layout'
 import Link from 'next/link'
 import styles from '../../../styles/ItemList.module.css'
 import Image from 'next/image'
-import { PlantIndexItem } from '@/components/ItemList'
+import { PlantIndexItem } from '@/types/type'
 
 export const metadata = {
   title: 'AI 꽃 도감',
