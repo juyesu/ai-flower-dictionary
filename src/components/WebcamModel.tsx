@@ -3,9 +3,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import * as tmImage from '@teachablemachine/image'
 import styles from './../../styles/ItemList.module.css'
+import { CustomMobileNet } from '@teachablemachine/image'
 
 const WebcamModel = () => {
-  const [model, setModel] = useState<any>(null)
+  const [model, setModel] = useState<CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [label, setLabel] = useState('')
   const [flowerName, setFlowerName] = useState('')
@@ -78,7 +79,7 @@ const WebcamModel = () => {
       // 모델이 꽃을 예측했는지 여부를 초기화
       for (let i = 0; i < maxPredictions; i++) {
         const className = predictions[i].className
-        const probability = predictions[i].probability.toFixed(2)
+        const probability = Number(predictions[i].probability.toFixed(2))
         // 꽃의 이름과 확률을 가져옴
         if (probability == 1.0) {
           // 예측에 성공한 경우
