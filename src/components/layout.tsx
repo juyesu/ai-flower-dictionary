@@ -3,8 +3,22 @@ import Link from 'next/link'
 import ThemeProvider from './ThemeProvider'
 import DarkModeBtn from './DarkModeBtn'
 import type { ChildrenComponentsProps } from '@/types/type'
+import { useEffect, useState } from 'react'
 
 const RootLayout = ({ children }: ChildrenComponentsProps) => {
+  const [loginUser, setLoginUser] = useState<string | null>(null)
+
+  useEffect(() => {
+    setLoginUser(localStorage.getItem('userEmail'))
+  }, [])
+
+  const logout = () => {
+    localStorage.removeItem('userEmail')
+    localStorage.removeItem('userName')
+    alert('로그아웃 되었습니다.')
+    window.location.reload()
+  }
+
   return (
     <>
       <ThemeProvider>
@@ -17,9 +31,17 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
               <Link href="/info" className={styles.menu}>
                 식물 도감
               </Link>
-              <Link href="/login" className={styles.menu}>
-                로그인
+              <Link
+                href={`${loginUser ? '/admin' : 'login'}`}
+                className={styles.menu}
+              >
+                {loginUser ? '마이페이지' : '로그인'}
               </Link>
+              {loginUser && (
+                <button type="button" className={styles.menu} onClick={logout}>
+                  로그아웃
+                </button>
+              )}
               <DarkModeBtn />
             </div>
           </div>
