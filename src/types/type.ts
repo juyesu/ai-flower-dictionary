@@ -8,3 +8,12 @@ export type PlantIndexItem = {
   famlNm: string
   fturCn: string
 }
+
+export type LoginFormType = {
+  name: string
+  email: string
+  password: string
+  address: string
+}
+
+
