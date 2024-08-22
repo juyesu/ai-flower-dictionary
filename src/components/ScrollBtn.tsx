@@ -1,18 +1,18 @@
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+}
+
+const scrollToBottom = () => {
+  window.scrollTo({
+    top: document.documentElement.scrollHeight,
+    behavior: 'smooth',
+  })
+}
+
 const ScrollBtn = () => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
-  const scrollToBottom = () => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    })
-  }
-
   return (
     <div className="flex flex-col items-center fixed right-7 bottom-5 border rounded-xl cursour-poiner bg-rose-200 dark:bg-gray-600 dark:border-gray-400 opacity-70">
       <svg

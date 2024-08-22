@@ -5,6 +5,14 @@ import * as tmImage from '@teachablemachine/image'
 import styles from './../../styles/ItemList.module.css'
 import { CustomMobileNet } from '@teachablemachine/image'
 
+const MODEL_URL =
+  'https://teachablemachine.withgoogle.com/models/6_FbZjcBE/model.json'
+const METADATA_URL =
+  'https://teachablemachine.withgoogle.com/models/6_FbZjcBE/metadata.json'
+
+const GPT_API_URL = 'https://api.openai.com/v1/chat/completions'
+const GPT_API_KEY = 'sk-proj-QQyolp7hNhbAsufJ3UDyT3BlbkFJ4zGmSpl9UGkexFEIrHbB'
+
 const WebcamModel = () => {
   const [model, setModel] = useState<CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
@@ -14,11 +22,6 @@ const WebcamModel = () => {
   const [flowerSeason, setFlowerSeason] = useState('')
   const [isPredicting, setIsPredicting] = useState(false)
 
-  const MODEL_URL =
-    'https://teachablemachine.withgoogle.com/models/6_FbZjcBE/model.json'
-  const METADATA_URL =
-    'https://teachablemachine.withgoogle.com/models/6_FbZjcBE/metadata.json'
-
   const webcamRef = useRef<tmImage.Webcam | null>(null)
 
   useEffect(() => {
@@ -26,10 +29,7 @@ const WebcamModel = () => {
       try {
         if (!model) {
           // 모델이 이미 로드된 상태인지 확인
-          const loadedModel = (await tmImage.load(
-            MODEL_URL,
-            METADATA_URL
-          ))
+          const loadedModel = await tmImage.load(MODEL_URL, METADATA_URL)
           setModel(loadedModel)
           setMaxPredictions(loadedModel.getTotalClasses())
           console.log('Model loaded successfully.')
@@ -115,16 +115,16 @@ const WebcamModel = () => {
     }
   }
 
-  const fetchChatGPTDescription = async (flowerName: string, content: string) => {
-    const API_URL = 'https://api.openai.com/v1/chat/completions'
-    const API_KEY = 'sk-proj-QQyolp7hNhbAsufJ3UDyT3BlbkFJ4zGmSpl9UGkexFEIrHbB'
-
+  const fetchChatGPTDescription = async (
+    flowerName: string,
+    content: string
+  ) => {
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(GPT_API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${API_KEY}`,
+          Authorization: `Bearer ${GPT_API_KEY}`,
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
@@ -167,14 +167,14 @@ const WebcamModel = () => {
   return (
     <div className="flex flex-col items-center w-[420px]">
       <h1 className={styles.main}>AI 꽃 판별기</h1>
-      <h1 className="ml-1 mt-1.5 font-semibold text-rose-400 text-sm">
+      <p className="ml-1 mt-1.5 font-semibold text-rose-400 text-sm">
         웹 캠에 꽃을 비추면 해당 꽃의 이름과 정보를 알려드립니다.
-      </h1>
+      </p>
       <hr className="mt-6 w-full border-rose-300" />
       <div
         id="webcam-container"
         className="flex mt-10 h-80 border border-4 border-gray-400 rounded w-full max-w-full"
-      ></div>
+      />
       <button
         type="button"
         className="h-12 w-48 mt-6 border border-2 rounded-full text-xl font-bold text-rose-300 border-rose-200 hover:bg-rose-400 hover:text-white"
@@ -185,29 +185,35 @@ const WebcamModel = () => {
 
       <hr />
       <p className="mt-12 w-full text-center text-xl font-semibold text-rose-400">
-        분석 결과 <span>{flowerName}</span> 입니다.
+        분석 결과 {flowerName} 입니다.
       </p>
-      <p className="mt-16 w-full text-center text-lg font-semibold text-rose-400">
-        설명
-      </p>
-      <p
-        id="label-container"
-        className="mt-2 mx-3 w-full text-center font-normal text-gray-600"
-      >
-        {label}
-      </p>
-      <p className="mt-12 w-full text-center text-lg font-semibold text-rose-400">
-        꽃말
-      </p>
-      <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
-        {flowerMeaning}
-      </p>
-      <p className="mt-12 w-full text-center text-lg font-semibold text-rose-400">
-        피는 계절
-      </p>
-      <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
-        {flowerSeason}
-      </p>
+
+      <section>
+        <h2 className="mt-16 w-full text-center text-lg font-semibold text-rose-400">
+          설명
+        </h2>
+        <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
+          {label}
+        </p>
+      </section>
+
+      <section>
+        <h2 className="mt-12 w-full text-center text-lg font-semibold text-rose-400">
+          꽃말
+        </h2>
+        <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
+          {flowerMeaning}
+        </p>
+      </section>
+
+      <section>
+        <h2 className="mt-12 w-full text-center text-lg font-semibold text-rose-400">
+          피는 계절
+        </h2>
+        <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
+          {flowerSeason}
+        </p>
+      </section>
     </div>
   )
 }
