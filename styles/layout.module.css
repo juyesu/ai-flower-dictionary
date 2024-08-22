@@ -1,31 +1,25 @@
 @font-face {
   font-family: 'Poetsen One';
-  src: url('./PoetsenOne-Regular.ttf') format('truetype');
-  font-weight: normal;
+  src: url('/fonts/PoetsenOne-Regular.ttf') format('truetype');
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Noto Sans KR';
-  src: url('./NotoSansKR-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
+  src: url('/fonts/NotoSansKR-VariableFont_wght.ttf') format('truetype');
   font-style: normal;
 }
 
 .logo {
-  font-family: 'Poetsen One', sans-serif;
+  font-family: 'Poetsen One';
   font-size: 20px;
-  font-weight: normal;
-  font-style: normal;
   margin-left: 18px;
 }
 
 .menu {
-  font-family: 'Noto Sans KR', sans-serif;
-  font-optical-sizing: auto;
+  font-family: 'Noto Sans KR';
   font-size: 18px;
   font-weight: 600;
-  font-style: normal;
   color: rgb(251 113 133);
 }
 
