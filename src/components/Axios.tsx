@@ -21,9 +21,9 @@ const AxiosComponent = () => {
   }, [])
 
   return (
-    <div>
+    <>
       <ItemList list={list} />
-    </div>
+    </>
   )
 }
 

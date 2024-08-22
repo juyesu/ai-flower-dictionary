@@ -17,7 +17,7 @@ const Post = () => {
   return (
     <Layout>
       <div className="my-24 mx-16 flex flex-col items-start ">
-        <Link href="../info">
+        <Link href="../info" aria-label="식물 도감 페이지로 이동">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -30,10 +30,10 @@ const Post = () => {
           </svg>
         </Link>
         <div className="ml-4">
-          <h1 className={styles.index}>{krnm} </h1>
-          <h1 className="mb-6 mx-2 text-lg font-bold text-rose-400">
-            {famlNm}{' '}
-          </h1>
+          <h2 className={styles.index}>{krnm} </h2>
+          <h3 className="mb-6 mx-2 text-lg font-bold text-rose-400">
+            {famlNm}
+          </h3>
         </div>
         <Image
           className="mx-4 my-3"
@@ -42,7 +42,7 @@ const Post = () => {
           width={500}
           height={300}
         />
-        <h1 className="mt-4 mb-6 mx-2 text-lg font-bold">{fturCn} </h1>
+        <p className="mt-4 mb-6 mx-2 text-lg font-bold">{fturCn}</p>
       </div>
     </Layout>
   )
