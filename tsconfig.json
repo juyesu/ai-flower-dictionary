@@ -109,6 +109,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/components",
+    "src/custom.d.ts"
+  ],
+  "exclude": ["node_modules"],
+  "files": ["custom.d.ts"]
 }
