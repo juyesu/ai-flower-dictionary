@@ -4,6 +4,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import * as tmImage from '@teachablemachine/image'
 import styles from './../../styles/ItemList.module.css'
 import { CustomMobileNet } from '@teachablemachine/image'
+import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
+import { PlantIndexItem } from '@/types/type'
+import Link from 'next/link'
 
 const MODEL_URL =
   'https://teachablemachine.withgoogle.com/models/6_FbZjcBE/model.json'
@@ -41,6 +44,15 @@ const WebcamModel = () => {
 
     loadModel()
   }, [model]) // model이 변경될 때만 useEffect 실행
+
+  const { data, isLoading } = plantIndexFetchData()
+  const famlNmList = data?.data.response.body.items.item.map(
+    (item: PlantIndexItem) => {
+      return item.famlNm
+    }
+  )
+
+  if (isLoading) return
 
   const initWebcam = async () => {
     const flip = true
@@ -186,6 +198,26 @@ const WebcamModel = () => {
       <hr />
       <p className="mt-12 w-full text-center text-xl font-semibold text-rose-400">
         분석 결과 {flowerName} 입니다.
+        {famlNmList.includes(flowerName) &&
+          data?.data.response.body.items.item.map(
+            (item: PlantIndexItem) =>
+              item.famlNm == flowerName && (
+                <Link
+                  key={item.famlNm}
+                  href={{
+                    pathname: `/view/${item.famlNm}`,
+                    query: {
+                      imgUrl: item.imgUrl,
+                      krnm: item.krnm,
+                      famlNm: item.famlNm,
+                      fturCn: item.fturCn,
+                    },
+                  }}
+                >
+                  상세 페이지로 이동
+                </Link>
+              )
+          )}
       </p>
 
       <section>
