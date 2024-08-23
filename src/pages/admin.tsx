@@ -9,6 +9,10 @@ const Admin = () => {
   const router = useRouter()
 
   useEffect(() => {
+    if (!localStorage.getItem('userEmail')) {
+      router.push('/login')
+    }
+
     setUserEmail(localStorage.getItem('userEmail'))
   }, [])
 
@@ -36,9 +40,11 @@ const Admin = () => {
             <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
           </svg>
         </div>
-        <p className="ml-1 font-semibold">
-          {localStorage.getItem(`${userEmail}.name`)}님 환영합니다!
-        </p>
+        {userEmail && (
+          <p className="ml-1 font-semibold">
+            {localStorage.getItem(`${userEmail}.name`)}님 환영합니다!
+          </p>
+        )}
         <div className="flex items-center justify-center mt-4">
           <Link
             href="/"
