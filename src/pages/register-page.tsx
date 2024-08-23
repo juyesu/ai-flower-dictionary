@@ -145,7 +145,7 @@ const RegisterPage = () => {
             <button className={styles.submitButton}>회원가입</button>
             <Link href="/login" className={styles.linkText}>
               이미 계정이 있으신가요?&nbsp;
-              <span className="underline">로그인 페이지로 가기</span>
+              <span className="underline">로그인</span>
             </Link>
           </form>
         </div>
