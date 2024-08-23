@@ -2,12 +2,12 @@ import Link from 'next/link'
 import styles from './../../styles/ItemList.module.css'
 import Image from 'next/image'
 import { PlantIndexItem } from '@/types/type'
+import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 
-type PlantIndexProps = {
-  list: Array<PlantIndexItem>
-}
+const ItemList = () => {
+  const { data, isLoading } = plantIndexFetchData()
 
-const ItemList = ({ list }: PlantIndexProps) => {
+  if (isLoading) return
   return (
     <div className="mx-16 my-28">
       <h1 className={styles.index}>식물도감</h1>
@@ -17,32 +17,33 @@ const ItemList = ({ list }: PlantIndexProps) => {
       <hr className="mt-6 border-rose-300" />
 
       <div className="mt-10 grid grid-cols-2 gap-4">
-        {list.map((item: PlantIndexItem) => (
-          <Link
-            key={item.famlNm}
-            href={{
-              pathname: `/view/${item.famlNm}`,
-              query: {
-                imgUrl: item.imgUrl,
-                krnm: item.krnm,
-                famlNm: item.famlNm,
-                fturCn: item.fturCn,
-              },
-            }}
-          >
-            <div className="mb-4 flex flex-col items-center w-full">
-              <Image
-                className="h-40 w-60"
-                src={item.imgUrl}
-                alt={item.krnm}
-                width={500}
-                height={300}
-              />
-              <p className="mt-1 font-bold text-rose-400/75">{item.krnm}</p>
-              <p className="font-normal text-rose-300/75">{item.famlNm}</p>
-            </div>
-          </Link>
-        ))}
+        {data &&
+          data?.data.response.body.items.item.map((item: PlantIndexItem) => (
+            <Link
+              key={item.famlNm}
+              href={{
+                pathname: `/view/${item.famlNm}`,
+                query: {
+                  imgUrl: item.imgUrl,
+                  krnm: item.krnm,
+                  famlNm: item.famlNm,
+                  fturCn: item.fturCn,
+                },
+              }}
+            >
+              <div className="mb-4 flex flex-col items-center w-full">
+                <Image
+                  className="h-40 w-60"
+                  src={item.imgUrl}
+                  alt={item.krnm}
+                  width={500}
+                  height={300}
+                />
+                <p className="mt-1 font-bold text-rose-400/75">{item.krnm}</p>
+                <p className="font-normal text-rose-300/75">{item.famlNm}</p>
+              </div>
+            </Link>
+          ))}
       </div>
     </div>
   )
