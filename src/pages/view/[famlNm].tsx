@@ -4,6 +4,7 @@ import Link from 'next/link'
 import styles from '../../../styles/ItemList.module.css'
 import Image from 'next/image'
 import { PlantIndexItem } from '@/types/type'
+import PreviousPage from '@/pages/assets/icons/PreviousPage.svg'
 
 export const metadata = {
   title: 'AI 꽃 도감',
@@ -18,16 +19,12 @@ const Post = () => {
     <Layout>
       <div className="my-24 mx-16 flex flex-col items-start ">
         <Link href="../info" aria-label="식물 도감 페이지로 이동">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
+          <PreviousPage
             className="mb-3 ml-3 h-12"
+            width="24px"
+            height="24px"
             fill="#5f6368"
-          >
-            <path d="M407.65-72.35 0-480l407.65-407.65L486.3-809l-329 329 329 329-78.65 78.65Z" />
-          </svg>
+          />
         </Link>
         <div className="ml-4">
           <h2 className={styles.index}>{krnm} </h2>
