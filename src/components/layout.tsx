@@ -38,9 +38,21 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
                 {loginUser ? '마이페이지' : '로그인'}
               </Link>
               {loginUser && (
-                <button type="button" className={styles.menu} onClick={logout}>
-                  로그아웃
-                </button>
+                <div className="flex flex-row gap-2">
+                  <p className="text-rose-400">
+                    <span className="font-bold">
+                      {localStorage.getItem(`${loginUser}.name`)}
+                    </span>
+                    님 환영합니다!
+                  </p>
+                  <button
+                    type="button"
+                    className="p-0.5 border rounded bg-stone-100 text-xs"
+                    onClick={logout}
+                  >
+                    로그아웃
+                  </button>
+                </div>
               )}
               <DarkModeBtn />
             </div>
