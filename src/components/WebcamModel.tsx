@@ -8,14 +8,6 @@ import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { PlantIndexItem } from '@/types/type'
 import Link from 'next/link'
 
-const MODEL_URL =
-  'https://teachablemachine.withgoogle.com/models/6_FbZjcBE/model.json'
-const METADATA_URL =
-  'https://teachablemachine.withgoogle.com/models/6_FbZjcBE/metadata.json'
-
-const GPT_API_URL = 'https://api.openai.com/v1/chat/completions'
-const GPT_API_KEY = 'sk-proj-QQyolp7hNhbAsufJ3UDyT3BlbkFJ4zGmSpl9UGkexFEIrHbB'
-
 const WebcamModel = () => {
   const [model, setModel] = useState<CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
@@ -32,7 +24,10 @@ const WebcamModel = () => {
       try {
         if (!model) {
           // 모델이 이미 로드된 상태인지 확인
-          const loadedModel = await tmImage.load(MODEL_URL, METADATA_URL)
+          const loadedModel = await tmImage.load(
+            process.env.NEXT_PUBLIC_TEACHABLE_MACHINE_MODEL_API_URL,
+            process.env.NEXT_PUBLIC_TEACHABLE_MACHINE_METADATA_API_URL
+          )
           setModel(loadedModel)
           setMaxPredictions(loadedModel.getTotalClasses())
           console.log('Model loaded successfully.')
@@ -132,11 +127,11 @@ const WebcamModel = () => {
     content: string
   ) => {
     try {
-      const response = await fetch(GPT_API_URL, {
+      const response = await fetch(process.env.NEXT_PUBLIC_CHATGPT_API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${GPT_API_KEY}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_CHATGPT_API_KEY}`,
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
