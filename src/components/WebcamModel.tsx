@@ -12,9 +12,11 @@ const WebcamModel = () => {
   const [model, setModel] = useState<CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [label, setLabel] = useState('')
-  const [flowerName, setFlowerName] = useState('')
-  const [flowerMeaning, setFlowerMeaning] = useState('')
-  const [flowerSeason, setFlowerSeason] = useState('')
+  const [flowerDetails, setFlowerDetails] = useState({
+    name: '',
+    meaning: '',
+    season: '',
+  })
   const [isPredicting, setIsPredicting] = useState(false)
 
   const webcamRef = useRef<tmImage.Webcam | null>(null)
@@ -92,25 +94,29 @@ const WebcamModel = () => {
           // 예측에 성공한 경우
           foundPrediction = true
           setIsPredicting(true)
-          setFlowerName(className)
+          // setFlowerName(className)
+          setFlowerDetails((prev) => {
+            return { ...prev, name: className }
+          })
 
           const description = await fetchChatGPTDescription(
-            className,
             `${className} 꽃에 대한 설명을 한 문장으로 적어줘`
           )
           setLabel(description)
 
-          const meaning = await fetchChatGPTDescription(
-            className,
+          const flowerMeaning = await fetchChatGPTDescription(
             `${className}의 꽃말을 한 단어로 알려줘`
           )
-          setFlowerMeaning(meaning)
+          setFlowerDetails((prev) => {
+            return { ...prev, meaning: flowerMeaning }
+          })
 
-          const season = await fetchChatGPTDescription(
-            className,
+          const bloomSeason = await fetchChatGPTDescription(
             `${className}을 볼 수 있는 계절을 단어로 알려줘`
           )
-          setFlowerSeason(season)
+          setFlowerDetails((prev) => {
+            return { ...prev, season: bloomSeason }
+          })
 
           setIsPredicting(false)
           break
@@ -122,10 +128,7 @@ const WebcamModel = () => {
     }
   }
 
-  const fetchChatGPTDescription = async (
-    flowerName: string,
-    content: string
-  ) => {
+  const fetchChatGPTDescription = async (content: string) => {
     try {
       const response = await fetch(process.env.NEXT_PUBLIC_CHATGPT_API_URL, {
         method: 'POST',
@@ -192,11 +195,11 @@ const WebcamModel = () => {
 
       <hr />
       <p className="mt-12 w-full text-center text-xl font-semibold text-rose-400">
-        분석 결과 {flowerName} 입니다.
-        {famlNmList.includes(flowerName) &&
+        분석 결과 {flowerDetails.name} 입니다.
+        {famlNmList.includes(flowerDetails.name) &&
           data?.data.response.body.items.item.map(
             (item: PlantIndexItem) =>
-              item.famlNm == flowerName && (
+              item.famlNm == flowerDetails.name && (
                 <Link
                   key={item.famlNm}
                   href={{
@@ -229,7 +232,7 @@ const WebcamModel = () => {
           꽃말
         </h2>
         <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
-          {flowerMeaning}
+          {flowerDetails.meaning}
         </p>
       </section>
 
@@ -238,7 +241,7 @@ const WebcamModel = () => {
           피는 계절
         </h2>
         <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
-          {flowerSeason}
+          {flowerDetails.season}
         </p>
       </section>
     </div>
