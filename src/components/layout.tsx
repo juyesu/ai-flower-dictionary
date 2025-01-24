@@ -12,8 +12,6 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
 
-  console.log('현재 테마는: ', systemTheme, theme, setTheme)
-
   useEffect(() => {
     setLoginUser(localStorage.getItem('userEmail'))
   }, [])
