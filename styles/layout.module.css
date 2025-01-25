@@ -5,22 +5,22 @@
 }
 
 @font-face {
-  font-family: 'Noto Sans KR';
-  src: url('/fonts/NotoSansKR-VariableFont_wght.ttf') format('truetype');
+  font-family: "Pretendard";
+  src: url("/fonts/PretendardVariable.ttf") format("truetype");
+  font-weight: 100 900;
   font-style: normal;
 }
 
 .logo {
   font-family: 'Poetsen One';
-  font-size: 20px;
+  font-size: 24px;
   margin-left: 18px;
 }
 
 .menu {
-  font-family: 'Noto Sans KR';
-  font-size: 18px;
+  font-family: 'Pretendard';
+  font-size: 20px;
   font-weight: 600;
-  color: rgb(251 113 133);
 }
 
 .menu:hover {

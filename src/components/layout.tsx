@@ -27,20 +27,42 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
     <>
       <ThemeProvider>
         <div className="flex flex-col items-center w-full h-full">
-          <div className="flex flex-row justify-between items-center fixed h-20 w-full border bg-rose-200 opacity-80">
+          <div className="flex flex-row justify-between items-center fixed md:px-2 xl:px-20 2xl:px-80 min-[1920px]:px-[28rem] h-20 w-full bg-zinc-100 opacity-80">
             <Link href="/" className={styles.logo}>
               AI flower dictionary
             </Link>
-            <div className="mr-8 flex flex-row justify-between items-center gap-5">
-              <Link href="/info" className={styles.menu}>
-                식물 도감
+            <div className="mr-8 flex flex-row justify-between items-center gap-8 h-full">
+              <Link href="/webcam" className={styles.menu}>
+                Webcam
               </Link>
-              <Link
+              <Link href="/info" className={styles.menu}>
+                Plant Info
+              </Link>
+              <Link href="/dictionary" className={styles.menu}>
+                My Dictionary
+              </Link>
+              {!loginUser && (
+                <div className="ml-8 flex justify-center items-center gap-1.5 h-full">
+                  <Link
+                    href="/login"
+                    className="px-8 py-1.5 border-2 rounded-full text-zinc-500 font-bold"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/register-page"
+                    className="px-5 py-1.5 border-2 rounded-full bg-zinc-400 text-zinc-100 font-bold"
+                  >
+                    Sign up
+                  </Link>
+                </div>
+              )}
+              {/* <Link
                 href={`${loginUser ? '/admin' : 'login'}`}
                 className={styles.menu}
               >
                 {loginUser ? '마이페이지' : '로그인'}
-              </Link>
+              </Link> */}
               {loginUser && (
                 <div className="flex flex-row gap-2">
                   <p className="text-rose-400">
@@ -65,12 +87,12 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
                 }}
               >
                 {currentTheme === 'dark' ? (
-                  <div className="flex justify-center items-center rounded-2xl h-10 w-10 bg-neutral-400">
-                    <Sun width="24px" height="24px" fill="#5f6368" />
+                  <div className="flex justify-center items-center rounded-2xl h-11 w-11 bg-neutral-400">
+                    <Sun width="24px" height="24px" fill="#e6e6e6" />
                   </div>
                 ) : (
-                  <div className="flex justify-center items-center rounded-2xl h-10 w-10 bg-white">
-                    <Moon width="24px" height="24px" fill="#5f6368" />
+                  <div className="flex justify-center items-center rounded-2xl h-11 w-11 bg-neutral-400">
+                    <Moon width="24px" height="24px" fill="#e6e6e6" />
                   </div>
                 )}
               </button>
