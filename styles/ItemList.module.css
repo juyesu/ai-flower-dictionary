@@ -19,20 +19,10 @@
   color: rgb(251 113 133);
 }
 
-.txt {
-  font-family: 'Noto Serif KR';
-  font-size: 15px;
-  font-weight: normal;
-  margin-top: 6px;
-  margin-left: 4px;
-  color: rgb(251 113 133);
-}
-
 .main {
-  font-family: 'Noto Serif KR';
-  font-size: 42px;
-  font-weight: bold;
+  font-size: 48px;
+  font-weight: 600;
   margin-top: 42px;
   margin-left: 4px;
-  color: rgb(251 113 133);
+  color: oklch(0.274 0.006 286.033);
 }
