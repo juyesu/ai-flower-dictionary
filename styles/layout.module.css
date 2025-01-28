@@ -5,24 +5,35 @@
 }
 
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/PretendardVariable.ttf") format("truetype");
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }
 
 .logo {
   font-family: 'Poetsen One';
-  font-size: 24px;
-  margin-left: 18px;
+  font-size: 17px;
+  margin-left: 8px;
 }
 
 .menu {
   font-family: 'Pretendard';
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
 }
 
 .menu:hover {
   background-color: rgb(255 228 230);
+}
+
+@media (min-width: 1280px) {
+  .logo {
+    font-size: 24px;
+    margin-left: 18px;
+  }
+
+  .menu {
+    font-size: 20px;
+  }
 }
