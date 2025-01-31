@@ -1,17 +1,15 @@
 import React from 'react'
-import WebcamModel from '../components/WebcamModel'
 import Layout from '@/components/layout'
 import ScrollBtn from '@/components/ScrollBtn'
+import Homepage from '@/components/Homepage'
 
-const Home = () => {
+const Index = () => {
   return (
     <Layout>
-      <div className="mt-16 max-w-[420px] mx-auto my-7">
-        <WebcamModel />
-        <ScrollBtn />
-      </div>
+      <Homepage />
+      <ScrollBtn />
     </Layout>
   )
 }
 
-export default Home
+export default Index
