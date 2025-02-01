@@ -112,7 +112,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
             </div>
           </header>
 
-          <main>{children}</main>
+          <main className='w-full'>{children}</main>
 
           <footer className="mt-28 flex flex-col justify-center items-center h-40 w-full border-t">
             <p className="w-full text-center text-sm font-semibold text-rose-400">
