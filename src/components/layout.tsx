@@ -112,7 +112,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
             </div>
           </header>
 
-          <main className="flex flex-col items-center justify-center w-full">
+          <main className="sm:mt-16 lg:mt-20 flex flex-col items-center justify-center w-full">
             {children}
           </main>
 
