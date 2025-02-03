@@ -1,0 +1,18 @@
+.hidden-until-scroll {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-in-right {
+  opacity: 1;
+  transform: translateX(-20px);
+  transition: opacity 1.5s ease-out, transform 1s ease-out;
+  z-index: 2;
+}
+
+.fade-in-left {
+  opacity: 1;
+  transform: translateX(20px);
+  transition: opacity 1.5s ease-out, transform 1s ease-out;
+  z-index: 2;
+}

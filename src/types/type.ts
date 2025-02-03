@@ -16,4 +16,20 @@ export type LoginFormType = {
   address: string
 }
 
+export type PlantIndexParams = {
+  serviceKey: string
+  pageNo: number
+  numOfRows: number
+  type: string
+}
 
+export type PreviewContentSectionProps = {
+  sectionTagId: string
+  id: string
+  title: string
+  description: string
+  linkHref: string
+  linkText: string
+  imgSrc: string
+  isLeftAligned: boolean
+}
