@@ -5,9 +5,10 @@ import { PlantIndexItem } from '@/types/type'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 
 const ItemList = () => {
-  const { data, isLoading } = plantIndexFetchData()
+  const { data, isLoading, error } = plantIndexFetchData()
 
   if (isLoading) return
+  if (error) return <p>데이터 로딩 중 문제가 발생했습니다.</p>
   return (
     <div className="mx-16 my-28">
       <h1 className={styles.index}>식물도감</h1>
@@ -18,7 +19,7 @@ const ItemList = () => {
 
       <div className="mt-10 grid grid-cols-2 gap-4">
         {data &&
-          data?.data.response.body.items.item.map((item: PlantIndexItem) => (
+          data?.response.body.items.item.map((item: PlantIndexItem) => (
             <Link
               key={item.famlNm}
               href={{
