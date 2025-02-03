@@ -18,6 +18,7 @@ const WebcamModel = () => {
     season: '',
   })
   const [isPredicting, setIsPredicting] = useState(false)
+  const [isWebcamMode, setIsWebcamMode] = useState(true)
 
   const webcamRef = useRef<tmImage.Webcam | null>(null)
 
@@ -43,7 +44,8 @@ const WebcamModel = () => {
   }, [model]) // model이 변경될 때만 useEffect 실행
 
   const { data, isLoading } = plantIndexFetchData()
-  const famlNmList = data?.data.response.body.items.item.map(
+  if (!data) return
+  const famlNmList = data?.response.body.items.item.map(
     (item: PlantIndexItem) => {
       return item.famlNm
     }
@@ -175,75 +177,110 @@ const WebcamModel = () => {
   console.log('WebcamModel render function')
 
   return (
-    <div className="flex flex-col items-center w-[420px]">
-      <h1 className={styles.main}>AI 꽃 판별기</h1>
-      <p className="ml-1 mt-1.5 font-semibold text-rose-400 text-sm">
-        웹 캠에 꽃을 비추면 해당 꽃의 이름과 정보를 알려드립니다.
-      </p>
-      <hr className="mt-6 w-full border-rose-300" />
-      <div
-        id="webcam-container"
-        className="flex mt-10 h-80 border border-4 border-gray-400 rounded w-full max-w-full"
-      />
-      <button
-        type="button"
-        className="h-12 w-48 mt-6 border border-2 rounded-full text-xl font-bold text-rose-300 border-rose-200 hover:bg-rose-400 hover:text-white"
-        onClick={initWebcam}
-      >
-        open cam
-      </button>
+    <div className="flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
+      <div className="flex flex-col items-center w-full bg-[url('/images/ai_flower_detection_title_image_3.png')] bg-center bg-cover">
+        <div className="mt-40 mb-20 flex flex-col items-center gap-3">
+          <h1 className={styles.main}>AI Flower Detection</h1>
+          <p className="ml-1 mt-1.5 font-semibold text-zinc-800 text-lg text-center">
+            웹 캠에 꽃을 비추거나, 꽃 이미지를 업로드하면 <br /> 해당 꽃의 이름과
+            정보를 알려드립니다.
+          </p>
+        </div>
+        <div className="mb-36 flex flex-row w-[28rem] border rounded-full">
+          <button
+            type="button"
+            className={`p-3 w-1/2 h-full rounded-l-full ${
+              isWebcamMode
+                ? 'bg-zinc-600 text-white font-semibold'
+                : 'bg-white text-zinc-800'
+            }`}
+            onClick={() => setIsWebcamMode(true)}
+            aria-label="카메라로 꽃을 인식하는 모드로 전환"
+          >
+            WebCam
+          </button>
+          <button
+            type="button"
+            className={`p-3 w-1/2 h-full rounded-r-full ${
+              isWebcamMode
+                ? 'bg-white text-zinc-800'
+                : 'bg-zinc-600 text-white font-semibold'
+            }`}
+            onClick={() => setIsWebcamMode(false)}
+            aria-label="사진을 업로드하여 꽃을 인식하는 모드로 전환"
+          >
+            File Upload
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center px-80 w-full">
+          <div
+            id="webcam-container"
+            className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded"
+          />
+          <button
+            type="button"
+            className="mt-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
+            onClick={initWebcam}
+            aria-label="카메라 실행"
+          >
+            <img src="/images/camera.png" className="w-12 h-auto" />
+          </button>
+        </div>
 
-      <hr />
-      <p className="mt-12 w-full text-center text-xl font-semibold text-rose-400">
-        분석 결과 {flowerDetails.name} 입니다.
-        {famlNmList.includes(flowerDetails.name) &&
-          data?.data.response.body.items.item.map(
-            (item: PlantIndexItem) =>
-              item.famlNm == flowerDetails.name && (
-                <Link
-                  key={item.famlNm}
-                  href={{
-                    pathname: `/view/${item.famlNm}`,
-                    query: {
-                      imgUrl: item.imgUrl,
-                      krnm: item.krnm,
-                      famlNm: item.famlNm,
-                      fturCn: item.fturCn,
-                    },
-                  }}
-                >
-                  상세 페이지로 이동
-                </Link>
-              )
-          )}
-      </p>
-
-      <section>
-        <h2 className="mt-16 w-full text-center text-lg font-semibold text-rose-400">
-          설명
-        </h2>
-        <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
-          {label}
-        </p>
-      </section>
-
-      <section>
-        <h2 className="mt-12 w-full text-center text-lg font-semibold text-rose-400">
-          꽃말
-        </h2>
-        <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
-          {flowerDetails.meaning}
-        </p>
-      </section>
-
-      <section>
-        <h2 className="mt-12 w-full text-center text-lg font-semibold text-rose-400">
-          피는 계절
-        </h2>
-        <p className="mt-2 mx-3 w-full text-center font-normal text-gray-600">
-          {flowerDetails.season}
-        </p>
-      </section>
+        {flowerDetails.name && (
+          <>
+            <p className="mt-12 w-full text-center text-xl font-semibold text-zinc-800">
+              분석 결과 {flowerDetails.name} 입니다.
+              {famlNmList.includes(flowerDetails.name) &&
+                data?.data.response.body.items.item.map(
+                  (item: PlantIndexItem) =>
+                    item.famlNm == flowerDetails.name && (
+                      <Link
+                        key={item.famlNm}
+                        href={{
+                          pathname: `/view/${item.famlNm}`,
+                          query: {
+                            imgUrl: item.imgUrl,
+                            krnm: item.krnm,
+                            famlNm: item.famlNm,
+                            fturCn: item.fturCn,
+                          },
+                        }}
+                      >
+                        상세 페이지로 이동
+                      </Link>
+                    )
+                )}
+            </p>
+            <section>
+              <h2 className="mt-16 w-full text-center text-lg font-semibold text-zinc-800">
+                설명
+              </h2>
+              <p className="mt-2 mx-3 w-full text-center font-normal text-zinc-800">
+                {label}
+              </p>
+            </section>
+            <section>
+              <h2 className="mt-12 w-full text-center text-lg font-semibold text-zinc-800">
+                꽃말
+              </h2>
+              <p className="mt-2 mx-3 w-full text-center font-normal text-zinc-800">
+                {flowerDetails.meaning}
+              </p>
+            </section>
+            <section>
+              <h2 className="mt-12 w-full text-center text-lg font-semibold text-zinc-800">
+                피는 계절
+              </h2>
+              <p className="mt-2 mx-3 w-full text-center font-normal text-zinc-800">
+                {flowerDetails.season}
+              </p>
+            </section>
+          </>
+        )}
+      </div>
     </div>
   )
 }
