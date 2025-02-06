@@ -20,18 +20,7 @@ const ItemList = () => {
       <div className="mt-10 grid grid-cols-2 gap-4">
         {data &&
           data?.response.body.items.item.map((item: PlantIndexItem) => (
-            <Link
-              key={item.famlNm}
-              href={{
-                pathname: `/view/${item.famlNm}`,
-                query: {
-                  imgUrl: item.imgUrl,
-                  krnm: item.krnm,
-                  famlNm: item.famlNm,
-                  fturCn: item.fturCn,
-                },
-              }}
-            >
+            <Link key={item.famlNm} href={{ pathname: `/view/${item.krnm}` }}>
               <div className="mb-4 flex flex-col items-center w-full">
                 <Image
                   className="h-40 w-60"
