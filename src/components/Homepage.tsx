@@ -5,15 +5,25 @@ import useFadeInOnScroll from '../hooks/useFadeInOnScroll'
 import useSectionScroll from '../hooks/useSectionScroll'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { PreviewContentSectionProps } from '@/types/type'
+import { PlantIndexItem } from '@/types/type'
+import { useEffect, useState } from 'react'
 
 const Homepage = () => {
   useSectionScroll()
   const { data, isLoading } = plantIndexFetchData()
+  const [randomItems, setRandomItems] = useState<PlantIndexItem[]>([])
+
+  useEffect(() => {
+    if (data) {
+      setRandomItems(
+        [...(data?.response?.body?.items?.item || [])]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 5)
+      )
+    }
+  }, [data])
 
   if (isLoading) return
-  const randomItems = [...data?.response.body.items.item]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 5)
 
   return (
     <div className="flex flex-col items-center w-full h-auto">
@@ -57,15 +67,21 @@ const Homepage = () => {
             />
           </form>
           <div className="mt-2 mb-4 flex gap-6 text-white">
-            {randomItems.map((item, index) => (
-              <Link
-                key={index}
-                href={`/view/${item.krnm}`}
-                className="underline"
-              >
-                #{item.krnm}
-              </Link>
-            ))}
+            {randomItems ? (
+              <>
+                {randomItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={`/view/${item.krnm}`}
+                    className="underline"
+                  >
+                    #{item.krnm}
+                  </Link>
+                ))}
+              </>
+            ) : (
+              <p>현재 오류가 발생하여 정보를 불러올 수 없습니다.</p>
+            )}
           </div>
         </div>
       </section>
