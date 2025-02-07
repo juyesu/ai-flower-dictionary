@@ -3,10 +3,18 @@ import styles from './../../styles/Homepage.module.css'
 import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
 import useFadeInOnScroll from '../hooks/useFadeInOnScroll'
 import useSectionScroll from '../hooks/useSectionScroll'
+import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { PreviewContentSectionProps } from '@/types/type'
 
 const Homepage = () => {
   useSectionScroll()
+  const { data, isLoading } = plantIndexFetchData()
+
+  if (isLoading) return
+  const randomItems = [...data?.response.body.items.item]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 5)
+
   return (
     <div className="flex flex-col items-center w-full h-auto">
       <section className="relative flex justify-center items-center w-full sm:h-[40rem] lg:h-[62rem] bg-center bg-cover filter">
@@ -49,21 +57,15 @@ const Homepage = () => {
             />
           </form>
           <div className="mt-2 mb-4 flex gap-6 text-white">
-            <a href="" className="underline">
-              #백작약
-            </a>
-            <a href="" className="underline">
-              #동자꽃
-            </a>
-            <a href="" className="underline">
-              #꼬리진달래
-            </a>
-            <a href="" className="underline">
-              #만리화
-            </a>
-            <a href="" className="underline">
-              #산사나무
-            </a>
+            {randomItems.map((item, index) => (
+              <Link
+                key={index}
+                href={`/view/${item.krnm}`}
+                className="underline"
+              >
+                #{item.krnm}
+              </Link>
+            ))}
           </div>
         </div>
       </section>
