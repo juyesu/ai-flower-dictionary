@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Pretendard";
-  src: url("/fonts/PretendardVariable.ttf") format("truetype");
+  font-family: 'Pretendard';
+  src: url('/fonts/PretendardVariable.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }
@@ -13,14 +13,15 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
 body {
-  font-family: "Pretendard", sans-serif;
+  font-family: 'Pretendard', sans-serif;
 }
 
 /* 다크모드 */
@@ -41,4 +42,10 @@ body {
 
   --primary: 210 40% 98%;
   --primary-foreground: 222.2 47.4% 11.2%;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }
