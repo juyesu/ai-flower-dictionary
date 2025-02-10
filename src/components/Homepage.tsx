@@ -8,7 +8,7 @@ import reactStringReplace from 'react-string-replace'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { PreviewContentSectionProps } from '@/types/type'
 import { PlantIndexItem } from '@/types/type'
-import { KeyboardEvent, useEffect, useRef, useState } from 'react'
+import { KeyboardEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 
@@ -212,52 +212,6 @@ const Homepage = () => {
         <div className="mt-16 mb-12 flex flex-col items-center w-full">
           <h1 className="text-5xl pb-3 border-b-2 border-black">Features</h1>
         </div>
-        {/* aiFlowerDetection */}
-        {/* <section
-          id="aiFlowerDetectionSection"
-          className={`mt-16 mb-32 flex flex-row justify-center items-center w-full content-section ${
-            styles['content-section']
-          } ${
-            activeSection === 'aiFlowerDetectionSection' ? styles.scale105 : ''
-          }`}
-        >
-          <div
-            id="aiFlowerDetection"
-            className={`flex flex-col w-1/2 sm:p-3 lg:p-10 2xl:p-24 hidden-until-scroll ${
-              isInView.aiFlowerDetection
-                ? styles['fade-in-left']
-                : styles['hidden-until-scroll']
-            }`}
-          >
-            <img
-              src="/images/webcam_title_image_2.jpg"
-              className="h-[52rem] object-cover object-center hover:scale-105 overflow-hidden transition-transform duration-500 ease-out"
-            />
-          </div>
-          <div
-            className={`flex flex-col w-1/2 hidden-until-scroll ${
-              isInView.aiFlowerDetection
-                ? styles['fade-in-left']
-                : styles['hidden-until-scroll']
-            }`}
-          >
-            <div className="sm:mt-8 lg:mt-12 xl:mt-16 sm:ml-8 lg:ml-12 xl:ml-16">
-              <h2 className="my-6 sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-zinc-800 leading-[1.2]">
-                WebCam AI 분석을 통해 <br /> 눈앞의 꽃을 판별
-              </h2>
-              <p className="sm:text-base lg:text-lg xl:text-xl font-normal text-zinc-800">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. <br />
-                Rerum deserunt iste nulla sequi
-              </p>
-              <Link
-                href="/ai-flower-detection"
-                className="inline-block mt-20 px-6 sm:py-2 lg:py-3 sm:text-lg lg:text-xl font-semibold bg-black text-zinc-100 rounded-full"
-              >
-                Go to WebCam
-              </Link>
-            </div>
-          </div>
-        </section> */}
         <PreviewContentSection
           sectionTagId="aiFlowerDetectionSection"
           id="aiFlowerDetection"
@@ -269,50 +223,6 @@ const Homepage = () => {
           isLeftAligned={false}
         />
         <hr className="w-1/4" />
-        {/* PlantInfo */}
-        {/* <section
-          id="plantInfoSection"
-          className={`my-32 flex flex-row justify-center items-center w-full content-section ${
-            styles['content-section']
-          } ${activeSection === 'plantInfoSection' ? styles.scale105 : ''}`}
-        >
-          <div
-            id="plantInfo"
-            className={`flex flex-col w-1/2 hidden-until-scroll ${
-              isInView.plantInfo
-                ? styles['fade-in-right']
-                : styles['hidden-until-scroll']
-            }`}
-          >
-            <div className="sm:mt-8 lg:mt-12 xl:mt-16 sm:mr-8 lg:mr-12 xl:mr-16 text-right">
-              <h2 className="my-6 sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-zinc-800 leading-[1.2]">
-                한국수목원정원관리원에서 제공하는 <br /> 100종 이상의 식물들
-              </h2>
-              <p className="lg:text-lg xl:text-xl font-normal text-zinc-800">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. <br />
-                Rerum deserunt iste nulla sequi
-              </p>
-              <Link
-                href="/info"
-                className="inline-block mt-20 px-6 sm:py-2 lg:py-3 sm:text-lg lg:text-xl font-semibold bg-black text-zinc-100 rounded-full"
-              >
-                Go to PlantInfo
-              </Link>
-            </div>
-          </div>
-          <div
-            className={`flex flex-col w-1/2 sm:p-3 lg:p-10 2xl:p-24 hidden-until-scroll ${
-              isInView.plantInfo
-                ? styles['fade-in-right']
-                : styles['hidden-until-scroll']
-            }`}
-          >
-            <img
-              src="/images/plantInfo_title_image_1.jpg"
-              className="h-[52rem] object-cover object-center hover:scale-105 overflow-hidden transition-transform duration-500 ease-out"
-            />
-          </div>
-        </section> */}
         <PreviewContentSection
           sectionTagId="plantInfoSection"
           id="plantInfo"
@@ -324,50 +234,6 @@ const Homepage = () => {
           isLeftAligned={true}
         />
         <hr className="w-1/4" />
-        {/* My Dictionary */}
-        {/* <section
-          id="myDictionarySection"
-          className={`my-32 flex flex-row justify-center items-center w-full content-section ${
-            styles['content-section']
-          } ${activeSection === 'myDictionarySection' ? styles.scale105 : ''}`}
-        >
-          <div
-            id="myDictionary"
-            className={`flex flex-col w-1/2 sm:p-3 lg:p-10 2xl:p-24 hidden-until-scroll ${
-              isInView.myDictionary
-                ? styles['fade-in-left']
-                : styles['hidden-until-scroll']
-            }`}
-          >
-            <img
-              src="/images/mydictionary_title_image_2.jpg"
-              className="h-[52rem] object-cover object-center hover:scale-105 overflow-hidden transition-transform duration-500 ease-out"
-            />
-          </div>
-          <div className="flex flex-col w-1/2">
-            <div
-              className={`sm:mt-8 lg:mt-12 xl:mt-16 sm:ml-8 lg:ml-12 xl:ml-16 hidden-until-scroll ${
-                isInView.myDictionary
-                  ? styles['fade-in-left']
-                  : styles['hidden-until-scroll']
-              }`}
-            >
-              <h2 className="my-6 sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-zinc-800 leading-[1.2]">
-                내가 발견한 식물들로 <br /> 채워나가는 도감
-              </h2>
-              <p className="lg:text-lg xl:text-xl font-normal text-zinc-800">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. <br />
-                Rerum deserunt iste nulla sequi
-              </p>
-              <Link
-                href="/dictionary"
-                className="inline-block mt-20 px-6 sm:py-2 lg:py-3 sm:text-lg lg:text-xl font-semibold bg-black text-zinc-100 rounded-full"
-              >
-                Go to My Dictionary
-              </Link>
-            </div>
-          </div>
-        </section> */}
         <PreviewContentSection
           sectionTagId="myDictionarySection"
           id="myDictionary"
