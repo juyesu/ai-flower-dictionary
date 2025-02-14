@@ -32,9 +32,7 @@ const fileUploadModel = () => {
                 className="p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
               >
                 <Upload
-                  className="mx-2"
-                  width="16px"
-                  height="16px"
+                  className="mx-2 w-4 h-4"
                   fill="#f4f4f5"
                   aria-hidden="true"
                 />
@@ -57,9 +55,7 @@ const fileUploadModel = () => {
               className="mt-16 p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
             >
               <Upload
-                className="mx-2"
-                width="16px"
-                height="16px"
+                className="w-4 h-4 mx-2"
                 fill="#f4f4f5"
                 aria-hidden="true"
               />

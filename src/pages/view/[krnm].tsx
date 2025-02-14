@@ -35,12 +35,7 @@ const Post = () => {
     <Layout>
       <div className="my-24 mx-16 flex flex-col items-start ">
         <Link href="../info" aria-label="식물 도감 페이지로 이동">
-          <PreviousPage
-            className="mb-3 ml-3 h-12"
-            width="24px"
-            height="24px"
-            fill="#5f6368"
-          />
+          <PreviousPage className="mb-3 ml-3 w-6 h-6" fill="#5f6368" />
         </Link>
         {plantData && (
           <>
