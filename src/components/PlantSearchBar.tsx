@@ -5,11 +5,21 @@ import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
 import Close from '@/pages/assets/icons/Close.svg'
 import { useRouter } from 'next/router'
 import { KeyboardEvent, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, UseFormReturn } from 'react-hook-form'
 import reactStringReplace from 'react-string-replace'
 
-const PlantSearchBar = ({ color }: { color: string }) => {
-  const methods = useForm()
+type SearchNotFoundModalProps = {
+  methods?: UseFormReturn
+  color: string
+  onSearchFail?: any
+}
+
+const PlantSearchBar = ({
+  methods = useForm(),
+  color,
+  onSearchFail,
+}: SearchNotFoundModalProps) => {
+  const { register, getValues, watch, setValue } = methods
   const [isSearchFocus, setIsSearchFocus] = useState(false)
   const { data, isLoading } = plantIndexFetchData()
   const [randomItems, setRandomItems] = useState<PlantIndexItem[]>([])
@@ -37,21 +47,23 @@ const PlantSearchBar = ({ color }: { color: string }) => {
   }, [data])
 
   useEffect(() => {
-    const filteredItems = autocompletePlantName
-      .filter((el) => el.includes(methods.getValues('input')))
-      .slice(0, 7)
+    if (autocompletePlantName) {
+      const filteredItems = autocompletePlantName
+        .filter((el) => el.includes(getValues('input')))
+        .slice(0, 7)
 
-    setCurrentAutocompletePlantName(filteredItems)
-  }, [methods.watch('input'), autocompletePlantName])
+      setCurrentAutocompletePlantName(filteredItems)
+    }
+  }, [watch('input'), autocompletePlantName])
 
   const searchKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
-    const searchInputValue = methods.getValues('input')
+    const searchInputValue = getValues('input')
     const filteredList = autocompletePlantName.filter((el) =>
       el.includes(searchInputValue)
     )
     if (e.key === 'Enter') {
       if (selectedAutocompleteIndex != -1) {
-        methods.setValue(
+        setValue(
           'input',
           currentAutocompletePlantName[selectedAutocompleteIndex]
         )
@@ -63,8 +75,7 @@ const PlantSearchBar = ({ color }: { color: string }) => {
         ) {
           router.push(`view/${searchInputValue}`)
         } else {
-          // 현재 alert 출력 후 input focus 해제되는 문제 발생. 추후에 modal 또는 toast popup으로 대체
-          alert('일치하는 이름의 식물이 존재하지 않습니다.')
+          onSearchFail()
         }
       }
       setSelectedAutocompleteIndex(-1)
@@ -96,18 +107,16 @@ const PlantSearchBar = ({ color }: { color: string }) => {
             Search for Plants
           </label>
           <MagnifyingGlass
-            className="mx-6 absolute z-10"
-            width="22px"
-            height="22px"
+            className="mx-6 w-[22px] h-[22px] absolute z-10"
             fill="#787878"
             aria-hidden="true"
           />
           <input
-            {...methods.register('input')}
+            {...register('input')}
             id="search_plant"
             type="search"
             autoComplete="off"
-            onFocus={(e) => {
+            onFocus={() => {
               setIsSearchFocus(true)
               setSelectedAutocompleteIndex(-1)
             }}
@@ -118,32 +127,34 @@ const PlantSearchBar = ({ color }: { color: string }) => {
                 }
               }, 100)
             }}
-            onChange={(e) => methods.setValue('input', e.target.value)}
+            onChange={(e) => setValue('input', e.target.value)}
             onKeyUp={searchKeyUp}
             className="pl-16 py-2 sm:w-[40rem] lg:w-[48rem] h-[3.2rem] rounded-full opacity-80 text-xl font-bold bg-white"
           />
-          {methods.getValues('input') && (
+          {getValues('input') && (
             <button
               type="button"
-              onClick={() => methods.setValue('input', '')}
+              onClick={() => setValue('input', '')}
               aria-label="검색어 초기화"
               className="absolute right-8 cursor-pointer"
             >
-              <Close width="16px" height="16px" fill="#787878" />
+              <Close className="w-4 h-4" fill="#787878" />
             </button>
           )}
         </div>
-        {isSearchFocus && methods.watch('input') && (
-          <ul className="absolute top-16 flex flex-col w-full bg-white opacity-80 rounded-3xl">
+        {isSearchFocus && watch('input') && (
+          <ul className="absolute top-16 flex flex-col w-full bg-white opacity-100 rounded-3xl">
             {currentAutocompletePlantName.map((item, index, array) => {
               return (
                 <li
                   tabIndex={0}
                   onClick={() => {
-                    methods.setValue('input', item)
+                    setValue('input', item)
                   }}
                   className={`px-10 py-4 hover:bg-zinc-300 ${
-                    selectedAutocompleteIndex == index ? 'bg-zinc-300' : ''
+                    selectedAutocompleteIndex == index
+                      ? 'bg-zinc-300 font-semibold'
+                      : ''
                   } ${
                     index === 0 && array.length === 1
                       ? 'rounded-3xl'
@@ -154,13 +165,9 @@ const PlantSearchBar = ({ color }: { color: string }) => {
                       : ''
                   }`}
                 >
-                  {reactStringReplace(
-                    item,
-                    methods.getValues('input'),
-                    (match) => (
-                      <span>{match}</span>
-                    )
-                  )}
+                  {reactStringReplace(item, getValues('input'), (match) => (
+                    <span>{match}</span>
+                  ))}
                 </li>
               )
             })}

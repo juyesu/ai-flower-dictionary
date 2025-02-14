@@ -1,12 +1,30 @@
+import { useState } from 'react'
 import Link from 'next/link'
 import styles from './../../styles/Homepage.module.css'
 import PlantSearchBar from './PlantSearchBar'
 import useFadeInOnScroll from '../hooks/useFadeInOnScroll'
 import useSectionScroll from '../hooks/useSectionScroll'
 import { PreviewContentSectionProps } from '@/types/type'
+import SearchNotFoundModal from './SearchNotFoundModal'
+import { useForm } from 'react-hook-form'
 
 const Homepage = () => {
+  const methods = useForm()
+  const [openModal, setOpenModal] = useState(false)
   useSectionScroll()
+
+  const modalOpen = () => {
+    document.body.style.position = 'fixed'
+    setOpenModal(true)
+  }
+
+  const modalClose = () => {
+    document.body.style.position = ''
+    setOpenModal(false)
+    setTimeout(() => {
+      methods.setFocus('input')
+    }, 100)
+  }
 
   return (
     <div className="flex flex-col items-center w-full h-auto">
@@ -28,7 +46,11 @@ const Homepage = () => {
           <p className="sm:text-2xl lg:text-3xl 2xl:text-3xl text-white">
             There are about 1,000 plants
           </p>
-          <PlantSearchBar color='white' />
+          <PlantSearchBar
+            methods={methods}
+            color="white"
+            onSearchFail={modalOpen}
+          />
         </div>
       </section>
       <div className="my-12 flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
@@ -68,6 +90,7 @@ const Homepage = () => {
           isLeftAligned={false}
         />
       </div>
+      {openModal && <SearchNotFoundModal onClose={modalClose} />}
     </div>
   )
 }
