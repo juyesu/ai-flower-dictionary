@@ -2,24 +2,28 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { PlantIndexParams } from '@/types/type'
 
-const fetchPlantIndexData = async (params: PlantIndexParams) => {
+export const MAXIMUM_PAGE_SIZE = 15
+
+const fetchPlantIndexData = async (pageNumber: number) => {
+  const params: PlantIndexParams = {
+    serviceKey: process.env.NEXT_PUBLIC_GARDEN_API_KEY,
+    pageNo: pageNumber,
+    numOfRows: MAXIMUM_PAGE_SIZE,
+    type: 'json',
+  }
   const response = await axios.get(process.env.NEXT_PUBLIC_GARDEN_API_PATH, {
     params,
   })
   return response.data
 }
 
-export const plantIndexFetchData = () => {
-  const params: PlantIndexParams = {
-    serviceKey: process.env.NEXT_PUBLIC_GARDEN_API_KEY,
-    pageNo: 1,
-    numOfRows: 100,
-    type: 'json',
-  }
-
+export const plantIndexFetchData = (currentPage: number) => {
   return useQuery({
-    queryKey: [`GET ${process.env.NEXT_PUBLIC_GARDEN_API_PATH}`, params],
-    queryFn: () => fetchPlantIndexData(params),
+    queryKey: [
+      `GET ${process.env.NEXT_PUBLIC_GARDEN_API_PATH}`,
+      { currentPage },
+    ],
+    queryFn: () => fetchPlantIndexData(currentPage),
     retry: (failureCount, error) =>
       axios.isAxiosError(error) && error.response
         ? failureCount < 3 && error.response.status !== 400

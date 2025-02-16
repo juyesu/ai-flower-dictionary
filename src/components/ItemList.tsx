@@ -3,25 +3,45 @@ import styles from './../../styles/ItemList.module.css'
 import PlantSearchBar from './PlantSearchBar'
 import Like from '@/pages/assets/icons/Like.svg'
 import Share from '@/pages/assets/icons/Share.svg'
+import FirstPage from '@/pages/assets/icons/FirstPage.svg'
+import PrevPage from '@/pages/assets/icons/PrevPage.svg'
+import NextPage from '@/pages/assets/icons/NextPage.svg'
+import LastPage from '@/pages/assets/icons/LastPage.svg'
 import Image from 'next/image'
 import { PlantIndexItem } from '@/types/type'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SearchNotFoundModal from './SearchNotFoundModal'
 import { useForm } from 'react-hook-form'
+import { MAXIMUM_PAGE_SIZE } from '@/hooks/plantIndexFetchData'
+
+// const MAXIMUM_PAGE_SIZE = 10
 
 const ItemList = () => {
   const methods = useForm()
-  const { data, isLoading, error } = plantIndexFetchData()
+  const [currentPage, setCurrentPage] = useState(1)
+  const { data, isLoading, error } = plantIndexFetchData(currentPage)
   const [isCardUi, setIsCardUi] = useState(true)
   const [openModal, setOpenModal] = useState(false)
   const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
+  const hasMounted = useRef(false)
+  const dataDividePageSize = Math.ceil(
+    data?.response.body.totalCount / MAXIMUM_PAGE_SIZE
+  )
 
   useEffect(() => {
     if (!data || isLoading || error) {
       console.log('API 데이터 에러가 발생했습니다.', data)
     }
   })
+
+  useEffect(() => {
+    if (hasMounted.current) {
+      window.scrollTo(0, 400)
+    } else {
+      hasMounted.current = true
+    }
+  }, [currentPage])
 
   const modalOpen = () => {
     document.body.style.position = 'fixed'
@@ -47,6 +67,67 @@ const ItemList = () => {
       }, 1000)
     } catch (err) {
       console.error('링크 복사 실패', err)
+    }
+  }
+
+  const chageFirstPage = () => {
+    if (currentPage != 1) {
+      setCurrentPage(1)
+    }
+  }
+
+  const changePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const changeNextPage = () => {
+    if (data.response.body.totalCount > currentPage * MAXIMUM_PAGE_SIZE) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
+
+  const changeLastPage = () => {
+    if (currentPage != dataDividePageSize) {
+      setCurrentPage(dataDividePageSize)
+    }
+  }
+
+  const paginationNumberList = () => {
+    if (dataDividePageSize == 0) {
+      return (
+        <li>
+          <button
+            className="px-4 py-2 font-xl border rounded-xl bg-zinc-500 text-white"
+            type="button"
+            aria-label="페이지 번호"
+          >
+            1
+          </button>
+        </li>
+      )
+    } else if (dataDividePageSize >= 1) {
+      const pageNumberButton = []
+      for (let i = 1; i <= dataDividePageSize; i++) {
+        pageNumberButton.push(
+          <li key={i}>
+            <button
+              className={`px-4 py-2 font-xl border rounded-xl ${
+                i == currentPage
+                  ? 'bg-zinc-500 text-white'
+                  : 'bg-white text-black'
+              } `}
+              type="button"
+              aria-label="페이지 번호"
+              onClick={() => setCurrentPage(i)}
+            >
+              {i}
+            </button>
+          </li>
+        )
+      }
+      return pageNumberButton
     }
   }
 
@@ -157,6 +238,49 @@ const ItemList = () => {
               </div>
             </Link>
           ))}
+      </div>
+      <div id="pagination" className="mt-20">
+        <nav className="flex justify-between">
+          <ul className="flex items-center gap-2">
+            <li>
+              <button
+                type="button"
+                aria-label="첫 페이지로 이동"
+                onClick={chageFirstPage}
+              >
+                <FirstPage className="w-6 h-6" />
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                aria-label="이전 페이지로 이동"
+                onClick={changePrevPage}
+              >
+                <PrevPage className="w-6 h-6" />
+              </button>
+            </li>
+            {paginationNumberList()}
+            <li>
+              <button
+                type="button"
+                aria-label="다음 페이지로 이동"
+                onClick={changeNextPage}
+              >
+                <NextPage className="w-6 h-6" />
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                aria-label="마지막 페이지로 이동"
+                onClick={changeLastPage}
+              >
+                <LastPage className="w-6 h-6" />
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
       {openModal && <SearchNotFoundModal onClose={modalClose} />}
     </div>
