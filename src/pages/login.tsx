@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '@/components/layout'
 import { useRouter } from 'next/router'
+import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
 import styles from './../../styles/RegisterPage.module.css'
 import { Title } from '@/components/ui/Title'
@@ -10,6 +11,7 @@ import { LoginFormType } from '@/types/type'
 const Login = () => {
   const methods = useForm<LoginFormType>()
   const router = useRouter()
+  const { setLoginUser } = useAuth()
 
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
     if (
@@ -17,6 +19,7 @@ const Login = () => {
       localStorage.getItem(`${data.email}.password`) == data.password
     ) {
       localStorage.setItem('userEmail', data.email)
+      setLoginUser(data.email)
       router.push('/admin')
     } else {
       alert(
@@ -70,7 +73,7 @@ const Login = () => {
             <button className={styles.submitButton}>로그인</button>
             <Link href="/register-page" className={styles.linkText}>
               아직 회원이 아니신가요?&nbsp;
-              <span className='underline'>회원가입</span>
+              <span className="underline">회원가입</span>
             </Link>
           </form>
         </div>

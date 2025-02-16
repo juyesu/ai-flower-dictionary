@@ -1,27 +1,16 @@
 import styles from './../../styles/layout.module.css'
 import Link from 'next/link'
 import ThemeProvider from './ThemeProvider'
+import { useAuth } from '@/context/AuthContext'
 import type { ChildrenComponentsProps } from '@/types/type'
-import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import Sun from '@/pages/assets/icons/Sun.svg'
 import Moon from '@/pages/assets/icons/Moon.svg'
 
 const RootLayout = ({ children }: ChildrenComponentsProps) => {
-  const [loginUser, setLoginUser] = useState<string | null>(null)
+  const { loginUser, logout } = useAuth()
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
-
-  useEffect(() => {
-    setLoginUser(localStorage.getItem('userEmail'))
-  }, [])
-
-  const logout = () => {
-    localStorage.removeItem('userEmail')
-    localStorage.removeItem('userName')
-    alert('로그아웃 되었습니다.')
-    window.location.reload()
-  }
 
   return (
     <>
@@ -43,7 +32,29 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
                   My Dictionary
                 </Link>
               </div>
-              {!loginUser && (
+              {/* <Link
+                href={`${loginUser ? '/admin' : 'login'}`}
+                className={styles.menu}
+              >
+                {loginUser ? '마이페이지' : '로그인'}
+              </Link> */}
+              {loginUser ? (
+                <div className="flex flex-row gap-2">
+                  <Link
+                    href="/admin"
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    <span className="font-bold">{loginUser}</span>님 환영합니다!
+                  </Link>
+                  <button
+                    type="button"
+                    className="p-0.5 border rounded bg-stone-100 text-xs"
+                    onClick={logout}
+                  >
+                    로그아웃
+                  </button>
+                </div>
+              ) : (
                 <div className="sm:ml-2 lg:ml-8 flex justify-center items-center sm:gap-1 lg:gap-1.5 h-full">
                   <Link
                     href="/login"
@@ -57,29 +68,6 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
                   >
                     Sign up
                   </Link>
-                </div>
-              )}
-              {/* <Link
-                href={`${loginUser ? '/admin' : 'login'}`}
-                className={styles.menu}
-              >
-                {loginUser ? '마이페이지' : '로그인'}
-              </Link> */}
-              {loginUser && (
-                <div className="flex flex-row gap-2">
-                  <p className="text-rose-400">
-                    <span className="font-bold">
-                      {localStorage.getItem(`${loginUser}.name`)}
-                    </span>
-                    님 환영합니다!
-                  </p>
-                  <button
-                    type="button"
-                    className="p-0.5 border rounded bg-stone-100 text-xs"
-                    onClick={logout}
-                  >
-                    로그아웃
-                  </button>
                 </div>
               )}
               <button
