@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import styles from './../../styles/ItemList.module.css'
 import PlantSearchBar from './PlantSearchBar'
-import Like from '@/pages/assets/icons/Like.svg'
+import Unliked from '@/pages/assets/icons/Unliked.svg'
+import Liked from '@/pages/assets/icons/Liked.svg'
 import Share from '@/pages/assets/icons/Share.svg'
 import FirstPage from '@/pages/assets/icons/FirstPage.svg'
 import PrevPage from '@/pages/assets/icons/PrevPage.svg'
@@ -14,26 +15,37 @@ import { useEffect, useRef, useState } from 'react'
 import SearchNotFoundModal from './SearchNotFoundModal'
 import { useForm } from 'react-hook-form'
 import { MAXIMUM_PAGE_SIZE } from '@/hooks/plantIndexFetchData'
-
-// const MAXIMUM_PAGE_SIZE = 10
+import { useAuth } from '@/context/AuthContext'
 
 const ItemList = () => {
   const methods = useForm()
+  const { loginUser } = useAuth()
   const [currentPage, setCurrentPage] = useState(1)
   const { data, isLoading, error } = plantIndexFetchData(currentPage)
   const [isCardUi, setIsCardUi] = useState(true)
   const [openModal, setOpenModal] = useState(false)
   const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
+  const [likedPlants, setLikedPlants] = useState<string[]>([])
   const hasMounted = useRef(false)
   const dataDividePageSize = Math.ceil(
     data?.response.body.totalCount / MAXIMUM_PAGE_SIZE
   )
+
+  // console.log(localStorage.getItem(`${loginUser}.likedPlants`))
 
   useEffect(() => {
     if (!data || isLoading || error) {
       console.log('API 데이터 에러가 발생했습니다.', data)
     }
   })
+
+  useEffect(() => {
+    if (loginUser) {
+      setLikedPlants(
+        JSON.parse(localStorage.getItem(`${loginUser}.likedPlants`) || '[]')
+      )
+    }
+  }, [loginUser])
 
   useEffect(() => {
     if (hasMounted.current) {
@@ -54,6 +66,32 @@ const ItemList = () => {
     setTimeout(() => {
       methods.setFocus('input')
     }, 100)
+  }
+
+  const handlePlantLike = (krnm: string) => {
+    if (loginUser) {
+      if (likedPlants.includes(krnm)) {
+        setLikedPlants((prev) => {
+          const updatedLikedPlants = prev.filter((id: string) => id !== krnm)
+          localStorage.setItem(
+            `${loginUser}.likedPlants`,
+            JSON.stringify(updatedLikedPlants)
+          )
+          return updatedLikedPlants
+        })
+      } else {
+        setLikedPlants((prev) => {
+          const updatedLikedPlants = [...prev, krnm]
+          localStorage.setItem(
+            `${loginUser}.likedPlants`,
+            JSON.stringify(updatedLikedPlants)
+          )
+          return updatedLikedPlants
+        })
+      }
+    } else {
+      alert('로그인이 필요합니다.')
+    }
   }
 
   const handlePlantLinkShare = async (krnm: string) => {
@@ -188,12 +226,13 @@ const ItemList = () => {
           </div>
         </div>
       </div>
+      {/* 배경색 적용 여부 고민 : bg-[#F2E4D4] */}
       <div className="mt-36 px-8 grid grid-cols-3 gap-y-24 w-full">
         {data &&
           data?.response.body.items.item.map((item: PlantIndexItem) => (
             <Link key={item.famlNm} href={{ pathname: `/view/${item.krnm}` }}>
               <div className="mb-4 flex flex-col items-center w-full">
-                <div className="flex flex-col shadow-xl rounded-xl">
+                <div className="flex flex-col shadow-xl rounded-xl bg-white">
                   <Image
                     className="h-[22rem] w-[23rem] object-cover rounded-t-xl"
                     src={item.imgUrl}
@@ -201,7 +240,7 @@ const ItemList = () => {
                     width={500}
                     height={300}
                   />
-                  <div className="mx-6 mt-5 mb-4 flex flex-col gap-3">
+                  <div className="mx-6 mt-7 mb-4 flex flex-col gap-3">
                     <span className="self-start px-3 py-1 bg-cyan-500 rounded-full font-semibold text-sm text-white">
                       {item.famlNm}
                     </span>
@@ -212,9 +251,17 @@ const ItemList = () => {
                       <button
                         type="button"
                         aria-label="이 식물이 좋아요"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          handlePlantLike(item.krnm)
+                        }}
                         className="p-1"
                       >
-                        <Like className="w-6 h-6" />
+                        {likedPlants.includes(item.krnm) ? (
+                          <Liked className="w-6 h-6" fill="#FF5C8D" />
+                        ) : (
+                          <Unliked className="w-6 h-6" />
+                        )}
                       </button>
                       <button
                         type="button"
