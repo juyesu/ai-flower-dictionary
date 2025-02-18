@@ -14,14 +14,17 @@ import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { useEffect, useRef, useState } from 'react'
 import SearchNotFoundModal from './SearchNotFoundModal'
 import { useForm } from 'react-hook-form'
-import { MAXIMUM_PAGE_SIZE } from '@/hooks/plantIndexFetchData'
 import { useAuth } from '@/context/AuthContext'
 
 const ItemList = () => {
+  const MAXIMUM_PAGE_SIZE = 15
   const methods = useForm()
   const { loginUser } = useAuth()
   const [currentPage, setCurrentPage] = useState(1)
-  const { data, isLoading, error } = plantIndexFetchData(currentPage)
+  const { data, isLoading, error } = plantIndexFetchData(
+    currentPage,
+    MAXIMUM_PAGE_SIZE
+  )
   const [isCardUi, setIsCardUi] = useState(true)
   const [openModal, setOpenModal] = useState(false)
   const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
@@ -30,8 +33,6 @@ const ItemList = () => {
   const dataDividePageSize = Math.ceil(
     data?.response.body.totalCount / MAXIMUM_PAGE_SIZE
   )
-
-  // console.log(localStorage.getItem(`${loginUser}.likedPlants`))
 
   useEffect(() => {
     if (!data || isLoading || error) {

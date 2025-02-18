@@ -4,11 +4,11 @@ import { PlantIndexParams } from '@/types/type'
 
 export const MAXIMUM_PAGE_SIZE = 15
 
-const fetchPlantIndexData = async (pageNumber: number) => {
+const fetchPlantIndexData = async (pageNumber: number, pageSize: number) => {
   const params: PlantIndexParams = {
     serviceKey: process.env.NEXT_PUBLIC_GARDEN_API_KEY,
     pageNo: pageNumber,
-    numOfRows: MAXIMUM_PAGE_SIZE,
+    numOfRows: pageSize,
     type: 'json',
   }
   const response = await axios.get(process.env.NEXT_PUBLIC_GARDEN_API_PATH, {
@@ -17,13 +17,13 @@ const fetchPlantIndexData = async (pageNumber: number) => {
   return response.data
 }
 
-export const plantIndexFetchData = (currentPage: number) => {
+export const plantIndexFetchData = (currentPage: number, pageSize: number) => {
   return useQuery({
     queryKey: [
       `GET ${process.env.NEXT_PUBLIC_GARDEN_API_PATH}`,
       { currentPage },
     ],
-    queryFn: () => fetchPlantIndexData(currentPage),
+    queryFn: () => fetchPlantIndexData(currentPage, pageSize),
     retry: (failureCount, error) =>
       axios.isAxiosError(error) && error.response
         ? failureCount < 3 && error.response.status !== 400

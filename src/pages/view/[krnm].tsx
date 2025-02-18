@@ -17,7 +17,7 @@ const Post = () => {
   const [plantData, setPlantData] = useState<PlantIndexItem | null>(null)
   const router = useRouter()
   const { krnm } = router.query
-  const { data, isLoading } = plantIndexFetchData()
+  const { data, isLoading } = plantIndexFetchData(1, 300)
 
   useEffect(() => {
     if (!data || isLoading || !krnm) return
