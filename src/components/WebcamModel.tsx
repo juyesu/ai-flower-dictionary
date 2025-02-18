@@ -39,7 +39,7 @@ const WebcamModel = () => {
     loadModel()
   }, [model]) // model이 변경될 때만 useEffect 실행
 
-  const { data, isLoading } = plantIndexFetchData()
+  const { data, isLoading } = plantIndexFetchData(1, 300)
   if (!data) return
   const famlNmList = data?.response.body.items.item.map(
     (item: PlantIndexItem) => {
@@ -179,7 +179,7 @@ const WebcamModel = () => {
         />
         <button
           type="button"
-          className="mt-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
+          className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
           onClick={initWebcam}
           aria-label="카메라 실행"
         >

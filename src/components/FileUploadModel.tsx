@@ -52,7 +52,7 @@ const fileUploadModel = () => {
           <div>
             <label
               htmlFor="fileUpload"
-              className="mt-16 p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
+              className="my-16 p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
             >
               <Upload
                 className="w-4 h-4 mx-2"

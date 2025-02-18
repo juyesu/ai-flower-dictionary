@@ -104,7 +104,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
             {children}
           </main>
 
-          <footer className="mt-28 flex flex-col justify-center items-center h-40 w-full border-t">
+          <footer className="flex flex-col justify-center items-center h-40 w-full border-t">
             <p className="w-full text-center text-sm font-semibold text-rose-400">
               Made by 유한대학교 인공지능학과 인공지능과 언어 4조
             </p>

@@ -286,7 +286,7 @@ const ItemList = () => {
             </Link>
           ))}
       </div>
-      <div id="pagination" className="mt-20">
+      <div id="pagination" className="my-20">
         <nav className="flex justify-between">
           <ul className="flex items-center gap-2">
             <li>
