@@ -226,25 +226,24 @@ const ItemList = () => {
           </div>
         </div>
       </div>
-      {/* 배경색 적용 여부 고민 : bg-[#F2E4D4] */}
-      <div className="mt-36 px-8 grid grid-cols-3 gap-y-24 w-full">
+      <div className="mt-36 px-4 grid grid-cols-3 gap-y-24 w-full">
         {data &&
           data?.response.body.items.item.map((item: PlantIndexItem) => (
             <Link key={item.famlNm} href={{ pathname: `/view/${item.krnm}` }}>
               <div className="mb-4 flex flex-col items-center w-full">
-                <div className="flex flex-col shadow-xl rounded-xl bg-white">
+                <div className="flex flex-col shadow-custom-all rounded-xl bg-white">
                   <Image
-                    className="h-[22rem] w-[23rem] object-cover rounded-t-xl"
+                    className="h-[22rem] w-[25rem] object-cover rounded-t-xl"
                     src={item.imgUrl}
                     alt={item.krnm}
                     width={500}
                     height={300}
                   />
                   <div className="mx-6 mt-7 mb-4 flex flex-col gap-3">
-                    <span className="self-start px-3 py-1 bg-cyan-500 rounded-full font-semibold text-sm text-white">
+                    <span className="self-start px-3 py-0.5 bg-cyan-500 bg-[#797D48] rounded-full font-semibold text-sm text-white">
                       {item.famlNm}
                     </span>
-                    <p className="mx-1.5 mt-1 font-semibold text-xl">
+                    <p className="mx-1.5 mt-1 font-semibold text-[22px]">
                       {item.krnm}
                     </p>
                     <div className="relative mt-4 flex flex-row justify-end gap-4">
