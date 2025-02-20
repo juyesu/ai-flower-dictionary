@@ -29,7 +29,7 @@ const ItemList = () => {
   )
   const [isCardUi, setIsCardUi] = useState(true)
   const [openModal, setOpenModal] = useState(false)
-  const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
+  const [copyTooltipIndex, setCopyTooltipIndex] = useState('')
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const hasMounted = useRef(false)
   const dataDividePageSize = Math.ceil(
@@ -101,10 +101,10 @@ const ItemList = () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
       await navigator.clipboard.writeText(`${baseUrl}/view/${krnm}`)
-      ShowCopyTooltipIndex(krnm)
+      setCopyTooltipIndex(krnm)
 
       setTimeout(() => {
-        ShowCopyTooltipIndex('')
+        setCopyTooltipIndex('')
       }, 1000)
     } catch (err) {
       console.error('링크 복사 실패', err)
@@ -270,7 +270,7 @@ const ItemList = () => {
                           className="relative p-1"
                         >
                           <Share className="w-6 h-6" />
-                          {CopyTooltipIndex === item.krnm && (
+                          {copyTooltipIndex === item.krnm && (
                             <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
                               링크가 복사되었습니다!
                             </div>
