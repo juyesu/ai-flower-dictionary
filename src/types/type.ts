@@ -7,6 +7,9 @@ export type PlantIndexItem = {
   krnm: string
   famlNm: string
   fturCn: string
+  kornFamlNm: string
+  flwrClorCn: string
+  bloomPeriodCn: string
 }
 
 export type LoginFormType = {

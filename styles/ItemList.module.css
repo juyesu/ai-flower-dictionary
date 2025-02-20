@@ -26,3 +26,15 @@
   margin-left: 4px;
   color: oklch(0.274 0.006 286.033);
 }
+
+.title {
+  font-family: 'Noto Serif KR';
+  font-size: 50px;
+  color: #797d48;
+}
+
+.subtitle {
+  font-family: 'Noto Serif KR';
+  font-size: 28px;
+  color: #797d48;
+}

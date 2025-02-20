@@ -5,8 +5,12 @@ import styles from '../../../styles/ItemList.module.css'
 import Image from 'next/image'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { PlantIndexItem } from '@/types/type'
+import Unliked from '@/pages/assets/icons/Unliked.svg'
+import Liked from '@/pages/assets/icons/Liked.svg'
+import Share from '@/pages/assets/icons/Share.svg'
 import PreviousPage from '@/pages/assets/icons/PreviousPage.svg'
 import { useEffect, useState } from 'react'
+import { useAuth } from '@/context/AuthContext'
 
 export const metadata = {
   title: 'AI 꽃 도감',
@@ -15,6 +19,9 @@ export const metadata = {
 
 const Post = () => {
   const [plantData, setPlantData] = useState<PlantIndexItem | null>(null)
+  const { loginUser } = useAuth()
+  const [likedPlants, setLikedPlants] = useState<string[]>([])
+  const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
   const router = useRouter()
   const { krnm } = router.query
   const { data, isLoading } = plantIndexFetchData(1, 300)
@@ -30,31 +37,128 @@ const Post = () => {
     setPlantData(foundPlant || null)
   }, [data, isLoading, krnm])
 
+  useEffect(() => {
+    if (loginUser) {
+      setLikedPlants(
+        JSON.parse(localStorage.getItem(`${loginUser}.likedPlants`) || '[]')
+      )
+    }
+  }, [loginUser])
+
+  const handlePlantLike = () => {
+    if (typeof krnm === 'string' && loginUser) {
+      if (likedPlants.includes(krnm)) {
+        setLikedPlants((prev) => {
+          const updatedLikedPlants = prev.filter((id: string) => id !== krnm)
+          localStorage.setItem(
+            `${loginUser}.likedPlants`,
+            JSON.stringify(updatedLikedPlants)
+          )
+          return updatedLikedPlants
+        })
+      } else {
+        setLikedPlants((prev) => {
+          const updatedLikedPlants = [...prev, krnm]
+          localStorage.setItem(
+            `${loginUser}.likedPlants`,
+            JSON.stringify(updatedLikedPlants)
+          )
+          return updatedLikedPlants
+        })
+      }
+    } else {
+      alert('로그인이 필요합니다.')
+    }
+  }
+
+  const handlePlantLinkShare = () => {
+    try {
+      if (typeof krnm === 'string') {
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+        navigator.clipboard.writeText(`${baseUrl}/view/${krnm}`)
+        ShowCopyTooltipIndex(krnm)
+        setTimeout(() => {
+          ShowCopyTooltipIndex('')
+        }, 1000)
+      }
+    } catch (err) {
+      console.error('링크 복사 실패', err)
+    }
+  }
+
   if (isLoading) return
   return (
     <Layout>
-      <div className="my-24 mx-16 flex flex-col items-start ">
-        <Link href="../info" aria-label="식물 도감 페이지로 이동">
-          <PreviousPage className="mb-3 ml-3 w-6 h-6" fill="#5f6368" />
-        </Link>
+      <div className="flex flex-col items-center w-full min-h-screen sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem] bg-[#FEF5CC]">
         {plantData && (
           <>
-            <div className="ml-4">
-              <h2 className={styles.index}>{plantData?.krnm} </h2>
-              <h3 className="mb-6 mx-2 text-lg font-bold text-rose-400">
-                {plantData?.famlNm}
-              </h3>
+            <div className="relative w-full flex flex-col items-center gap-5">
+              <div className="relative mt-20 flex flex-col items-center">
+                <Link
+                  href="../info"
+                  aria-label="식물 도감 페이지로 이동"
+                  className="absolute top-8 left-[-80px] flex items-center justify-center p-2 bg-white border rounded-2xl"
+                >
+                  <PreviousPage className="w-6 h-6" fill="#5f6368" />
+                </Link>
+                <h1 className={styles.title}>{plantData?.krnm}</h1>
+                <h2 className={styles.subtitle}>
+                  {plantData?.famlNm} / {plantData?.kornFamlNm}
+                </h2>
+              </div>
+              <div className="flex flex-row items-end justify-end w-full">
+                <div className="relative mt-4 mr-16 flex flex-row justify-end gap-4">
+                  <button
+                    type="button"
+                    aria-label="이 식물이 좋아요"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handlePlantLike()
+                    }}
+                    className="p-1"
+                  >
+                    {typeof krnm === 'string' && likedPlants.includes(krnm) ? (
+                      <Liked className="w-8 h-8" fill="#FF5C8D" />
+                    ) : (
+                      <Unliked className="w-8 h-8" />
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="이 식물 페이지를 공유"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handlePlantLinkShare()
+                    }}
+                    className="relative p-1"
+                  >
+                    <Share className="w-8 h-8" />
+                    {CopyTooltipIndex === krnm && (
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
+                        링크가 복사되었습니다!
+                      </div>
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
-            <Image
-              className="mx-4 my-3"
-              src={plantData?.imgUrl}
-              alt={plantData?.krnm}
-              width={500}
-              height={300}
-            />
-            <p className="mt-4 mb-6 mx-2 text-lg font-bold">
-              {plantData?.fturCn}
-            </p>
+            <hr className="my-6 mb-10 w-full" />
+            <div className="flex flex-row w-full">
+              <Image
+                className="w-1/2 mx-16 my-12 border rounded-xl"
+                src={plantData?.imgUrl}
+                alt={plantData?.krnm}
+                width={400}
+                height={300}
+              />
+              <div className="w-1/2 justify-self-center self-center px-8 text-[#797D48]">
+                <p className="my-4 text-3xl font-semibold">
+                  색상 : {plantData?.flwrClorCn} <br /> 개화시기 :{' '}
+                  {plantData?.bloomPeriodCn}
+                </p>
+                <p className="text-xl font-semibold">{plantData?.fturCn}</p>
+              </div>
+            </div>
           </>
         )}
       </div>
