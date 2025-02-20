@@ -21,7 +21,7 @@ const PlantSearchBar = ({
 }: SearchNotFoundModalProps) => {
   const { register, getValues, watch, setValue } = methods
   const [isSearchFocus, setIsSearchFocus] = useState(false)
-  const { data, isLoading } = plantIndexFetchData()
+  const { data, isLoading } = plantIndexFetchData(1, 300)
   const [randomItems, setRandomItems] = useState<PlantIndexItem[]>([])
   const [autocompletePlantName, setAutocompletePlantName] = useState<string[]>(
     []
