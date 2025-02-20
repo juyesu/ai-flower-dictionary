@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Layout from '@/components/layout'
+import Layout from '@/components/common/layout'
 import Link from 'next/link'
 import styles from '../../../styles/ItemList.module.css'
 import Image from 'next/image'

@@ -1,7 +1,7 @@
 import React from 'react'
-import Layout from '@/components/layout'
-import ScrollBtn from '@/components/ScrollBtn'
-import Homepage from '@/components/Homepage'
+import Layout from '@/components/common/layout'
+import ScrollBtn from '@/components/common/ScrollBtn'
+import Homepage from '@/components/homepage/Homepage'
 
 const Index = () => {
   return (

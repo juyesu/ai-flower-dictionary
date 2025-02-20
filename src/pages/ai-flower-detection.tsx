@@ -1,6 +1,6 @@
-import Layout from '@/components/layout'
-import ScrollBtn from '@/components/ScrollBtn'
-import WebcamModel from '@/components/AiFlowerDetection'
+import Layout from '@/components/common/layout'
+import ScrollBtn from '@/components/common/ScrollBtn'
+import WebcamModel from '@/components/ai-flower-dection/AiFlowerDetection'
 
 const AiFlowerDetection = () => {
   return (

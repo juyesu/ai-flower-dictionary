@@ -1,7 +1,7 @@
 import React from 'react'
-import Layout from '@/components/layout'
-import ScrollBtn from '@/components/ScrollBtn'
-import ItemList from '@/components/ItemList'
+import Layout from '@/components/common/layout'
+import ScrollBtn from '@/components/common/ScrollBtn'
+import ItemList from '@/components/plant-info/ItemList'
 
 const Info = () => {
   return (

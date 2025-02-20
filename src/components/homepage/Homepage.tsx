@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import styles from './../../styles/Homepage.module.css'
-import PlantSearchBar from './PlantSearchBar'
-import useFadeInOnScroll from '../hooks/useFadeInOnScroll'
-import useSectionScroll from '../hooks/useSectionScroll'
+import styles from '@styles/Homepage.module.css'
+import PlantSearchBar from '@/components/common/PlantSearchBar'
+import useFadeInOnScroll from '@/hooks/useFadeInOnScroll'
+import useSectionScroll from '@/hooks/useSectionScroll'
 import { PreviewContentSectionProps } from '@/types/type'
-import SearchNotFoundModal from './SearchNotFoundModal'
+import SearchNotFoundModal from '@/components/common/SearchNotFoundModal'
 import { useForm } from 'react-hook-form'
 
 const Homepage = () => {

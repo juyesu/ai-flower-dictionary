@@ -1,6 +1,6 @@
-import styles from './../../styles/layout.module.css'
+import styles from '@styles/layout.module.css'
 import Link from 'next/link'
-import ThemeProvider from './ThemeProvider'
+import ThemeProvider from '@/components/common/ThemeProvider'
 import { useAuth } from '@/context/AuthContext'
 import type { ChildrenComponentsProps } from '@/types/type'
 import { useTheme } from 'next-themes'

@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import styles from './../../styles/ItemList.module.css'
-import PlantSearchBar from './PlantSearchBar'
+import styles from '@styles/ItemList.module.css'
+import PlantSearchBar from '../common/PlantSearchBar'
 import Unliked from '@/pages/assets/icons/Unliked.svg'
 import Liked from '@/pages/assets/icons/Liked.svg'
 import Share from '@/pages/assets/icons/Share.svg'
@@ -8,11 +8,13 @@ import FirstPage from '@/pages/assets/icons/FirstPage.svg'
 import PrevPage from '@/pages/assets/icons/PrevPage.svg'
 import NextPage from '@/pages/assets/icons/NextPage.svg'
 import LastPage from '@/pages/assets/icons/LastPage.svg'
+import TableList from '@/pages/assets/icons/TableList.svg'
+import CardList from '@/pages/assets/icons/CardList.svg'
 import Image from 'next/image'
 import { PlantIndexItem } from '@/types/type'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { useEffect, useRef, useState } from 'react'
-import SearchNotFoundModal from './SearchNotFoundModal'
+import SearchNotFoundModal from '../common/SearchNotFoundModal'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '@/context/AuthContext'
 
@@ -199,93 +201,89 @@ const ItemList = () => {
             color="dark"
             onSearchFail={modalOpen}
           />
-          <div className="mt-16 mb-36 flex flex-row w-[28rem] border rounded-full">
-            <button
-              type="button"
-              className={`p-3 w-1/2 h-full rounded-l-full ${
-                isCardUi
-                  ? 'bg-zinc-600 text-white font-semibold'
-                  : 'bg-white text-zinc-800'
-              }`}
-              onClick={() => setIsCardUi(true)}
-              aria-label="card형태로 정렬"
-            >
-              Card UI
-            </button>
-            <button
-              type="button"
-              className={`p-3 w-1/2 h-full rounded-r-full ${
-                isCardUi
-                  ? 'bg-white text-zinc-800'
-                  : 'bg-zinc-600 text-white font-semibold'
-              }`}
-              onClick={() => setIsCardUi(false)}
-              aria-label="list형태로 정렬"
-            >
-              List UI
-            </button>
-          </div>
         </div>
       </div>
-      <div className="mt-36 px-4 grid grid-cols-3 gap-y-24 w-full">
-        {data &&
-          data?.response.body.items.item.map((item: PlantIndexItem) => (
-            <Link key={item.famlNm} href={{ pathname: `/view/${item.krnm}` }}>
-              <div className="mb-4 flex flex-col items-center w-full">
-                <div className="flex flex-col shadow-custom-all rounded-xl bg-white">
-                  <Image
-                    className="h-[22rem] w-[25rem] object-cover rounded-t-xl"
-                    src={item.imgUrl}
-                    alt={item.krnm}
-                    width={500}
-                    height={300}
-                  />
-                  <div className="mx-6 mt-7 mb-4 flex flex-col gap-3">
-                    <span className="self-start px-3 py-0.5 bg-cyan-500 bg-[#797D48] rounded-full font-semibold text-sm text-white">
-                      {item.famlNm}
-                    </span>
-                    <p className="mx-1.5 mt-1 font-semibold text-[22px]">
-                      {item.krnm}
-                    </p>
-                    <div className="relative mt-4 flex flex-row justify-end gap-4">
-                      <button
-                        type="button"
-                        aria-label="이 식물이 좋아요"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          handlePlantLike(item.krnm)
-                        }}
-                        className="p-1"
-                      >
-                        {likedPlants.includes(item.krnm) ? (
-                          <Liked className="w-6 h-6" fill="#FF5C8D" />
-                        ) : (
-                          <Unliked className="w-6 h-6" />
-                        )}
-                      </button>
-                      <button
-                        type="button"
-                        aria-label="이 식물 페이지를 공유"
-                        onClick={async (e) => {
-                          e.preventDefault()
-                          await handlePlantLinkShare(item.krnm)
-                        }}
-                        className="relative p-1"
-                      >
-                        <Share className="w-6 h-6" />
-                        {CopyTooltipIndex === item.krnm && (
-                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
-                            링크가 복사되었습니다!
-                          </div>
-                        )}
-                      </button>
+      <div className="flex justify-end px-16 w-full">
+        <div className="flex border rounded-lg">
+          <button
+            type="button"
+            aria-label="카드 리스트 레이아웃으로 변경"
+            onClick={() => setIsCardUi(true)}
+            className="px-5 py-4 border rounded-l-lg hover:bg-zinc-400"
+          >
+            <CardList className="w-6 h-6" />
+          </button>
+          <button
+            type="button"
+            aria-label=" 리스트 레이아웃으로 변경"
+            onClick={() => setIsCardUi(false)}
+            className="px-5 py-4 border rounded-r-lg hover:bg-zinc-400"
+          >
+            <TableList className="w-6 h-6" />
+          </button>
+        </div>
+      </div>
+      {isCardUi && (
+        <div className="mt-16 px-4 grid grid-cols-3 gap-y-24 w-full">
+          {data &&
+            data?.response.body.items.item.map((item: PlantIndexItem) => (
+              <Link key={item.famlNm} href={{ pathname: `/view/${item.krnm}` }}>
+                <div className="mb-4 flex flex-col items-center w-full">
+                  <div className="flex flex-col shadow-custom-all rounded-xl bg-white">
+                    <Image
+                      className="h-[22rem] w-[25rem] object-cover rounded-t-xl"
+                      src={item.imgUrl}
+                      alt={item.krnm}
+                      width={500}
+                      height={300}
+                    />
+                    <div className="mx-6 mt-7 mb-4 flex flex-col gap-3">
+                      <span className="self-start px-3 py-0.5 bg-cyan-500 bg-[#797D48] rounded-full font-semibold text-sm text-white">
+                        {item.famlNm}
+                      </span>
+                      <p className="mx-1.5 mt-1 font-semibold text-[22px]">
+                        {item.krnm}
+                      </p>
+                      <div className="relative mt-4 flex flex-row justify-end gap-4">
+                        <button
+                          type="button"
+                          aria-label="이 식물이 좋아요"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            handlePlantLike(item.krnm)
+                          }}
+                          className="p-1"
+                        >
+                          {likedPlants.includes(item.krnm) ? (
+                            <Liked className="w-6 h-6" fill="#FF5C8D" />
+                          ) : (
+                            <Unliked className="w-6 h-6" />
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="이 식물 페이지를 공유"
+                          onClick={async (e) => {
+                            e.preventDefault()
+                            await handlePlantLinkShare(item.krnm)
+                          }}
+                          className="relative p-1"
+                        >
+                          <Share className="w-6 h-6" />
+                          {CopyTooltipIndex === item.krnm && (
+                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
+                              링크가 복사되었습니다!
+                            </div>
+                          )}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-      </div>
+              </Link>
+            ))}
+        </div>
+      )}
       <div id="pagination" className="my-20">
         <nav className="flex justify-between">
           <ul className="flex items-center gap-2">
