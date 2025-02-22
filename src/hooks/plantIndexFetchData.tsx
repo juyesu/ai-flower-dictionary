@@ -2,8 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { PlantIndexParams } from '@/types/type'
 
-export const MAXIMUM_PAGE_SIZE = 15
-
 const fetchPlantIndexData = async (pageNumber: number, pageSize: number) => {
   const params: PlantIndexParams = {
     serviceKey: process.env.NEXT_PUBLIC_GARDEN_API_KEY,
@@ -21,7 +19,7 @@ export const plantIndexFetchData = (currentPage: number, pageSize: number) => {
   return useQuery({
     queryKey: [
       `GET ${process.env.NEXT_PUBLIC_GARDEN_API_PATH}`,
-      { currentPage },
+      { currentPage, pageSize },
     ],
     queryFn: () => fetchPlantIndexData(currentPage, pageSize),
     retry: (failureCount, error) =>

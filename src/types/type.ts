@@ -12,6 +12,32 @@ export type PlantIndexItem = {
   bloomPeriodCn: string
 }
 
+export type CardViewProps = {
+  apiData: any
+  likedPlants: string[]
+  copyTooltipIndex: string
+  handlePlantLike: (plantId: string) => void
+  handlePlantLinkShare: (plantId: string) => void
+}
+
+export type TableViewProps = {
+  apiData: any
+  likedPlants: string[]
+  copyTooltipIndex: string
+  currentPage: number
+  handlePlantLike: (plantId: string) => void
+  handlePlantLinkShare: (plantId: string) => void
+}
+
+export type PlantTableType = {
+  number: number
+  krnm: string
+  famlNm: string
+  kornFamlNm: string
+  bloomPeriodCn: string
+  isLiked: string[]
+}
+
 export type LoginFormType = {
   name: string
   email: string

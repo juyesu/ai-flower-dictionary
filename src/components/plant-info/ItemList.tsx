@@ -1,9 +1,5 @@
-import Link from 'next/link'
 import styles from '@styles/ItemList.module.css'
 import PlantSearchBar from '../common/PlantSearchBar'
-import Unliked from '@/pages/assets/icons/Unliked.svg'
-import Liked from '@/pages/assets/icons/Liked.svg'
-import Share from '@/pages/assets/icons/Share.svg'
 import FirstPage from '@/pages/assets/icons/FirstPage.svg'
 import PrevPage from '@/pages/assets/icons/PrevPage.svg'
 import NextPage from '@/pages/assets/icons/NextPage.svg'
@@ -11,29 +7,31 @@ import LastPage from '@/pages/assets/icons/LastPage.svg'
 import TableList from '@/pages/assets/icons/TableList.svg'
 import CardList from '@/pages/assets/icons/CardList.svg'
 import Image from 'next/image'
-import { PlantIndexItem } from '@/types/type'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { useEffect, useRef, useState } from 'react'
 import SearchNotFoundModal from '../common/SearchNotFoundModal'
+import CardView from './CardView'
+import TableView from './TabelView'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '@/context/AuthContext'
 
 const ItemList = () => {
-  const MAXIMUM_PAGE_SIZE = 15
   const methods = useForm()
   const { loginUser } = useAuth()
   const [currentPage, setCurrentPage] = useState(1)
+  const [maximumPageSize, setMaximumPageSize] = useState(15)
   const { data, isLoading, error } = plantIndexFetchData(
     currentPage,
-    MAXIMUM_PAGE_SIZE
+    maximumPageSize
   )
   const [isCardUi, setIsCardUi] = useState(true)
   const [openModal, setOpenModal] = useState(false)
   const [copyTooltipIndex, setCopyTooltipIndex] = useState('')
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const hasMounted = useRef(false)
+
   const dataDividePageSize = Math.ceil(
-    data?.response.body.totalCount / MAXIMUM_PAGE_SIZE
+    data?.response.body.totalCount / maximumPageSize
   )
 
   useEffect(() => {
@@ -97,7 +95,7 @@ const ItemList = () => {
     }
   }
 
-  const handlePlantLinkShare = async (krnm: string) => {
+  const handlePlantLinkShare = async (krnm: string): Promise<void> => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
       await navigator.clipboard.writeText(`${baseUrl}/view/${krnm}`)
@@ -124,7 +122,7 @@ const ItemList = () => {
   }
 
   const changeNextPage = () => {
-    if (data.response.body.totalCount > currentPage * MAXIMUM_PAGE_SIZE) {
+    if (data.response.body.totalCount > currentPage * maximumPageSize) {
       setCurrentPage(currentPage + 1)
     }
   }
@@ -208,7 +206,11 @@ const ItemList = () => {
           <button
             type="button"
             aria-label="카드 리스트 레이아웃으로 변경"
-            onClick={() => setIsCardUi(true)}
+            onClick={() => {
+              setIsCardUi(true)
+              setCurrentPage(1)
+              setMaximumPageSize(15)
+            }}
             className="px-5 py-4 border rounded-l-lg hover:bg-zinc-400"
           >
             <CardList className="w-6 h-6" />
@@ -216,73 +218,34 @@ const ItemList = () => {
           <button
             type="button"
             aria-label=" 리스트 레이아웃으로 변경"
-            onClick={() => setIsCardUi(false)}
+            onClick={() => {
+              setIsCardUi(false)
+              setCurrentPage(1)
+              setMaximumPageSize(30)
+            }}
             className="px-5 py-4 border rounded-r-lg hover:bg-zinc-400"
           >
             <TableList className="w-6 h-6" />
           </button>
         </div>
       </div>
-      {isCardUi && (
-        <div className="mt-16 px-4 grid grid-cols-3 gap-y-24 w-full">
-          {data &&
-            data?.response.body.items.item.map((item: PlantIndexItem) => (
-              <Link key={item.famlNm} href={{ pathname: `/view/${item.krnm}` }}>
-                <div className="mb-4 flex flex-col items-center w-full">
-                  <div className="flex flex-col shadow-custom-all rounded-xl bg-white">
-                    <Image
-                      className="h-[22rem] w-[25rem] object-cover rounded-t-xl"
-                      src={item.imgUrl}
-                      alt={item.krnm}
-                      width={500}
-                      height={300}
-                    />
-                    <div className="mx-6 mt-7 mb-4 flex flex-col gap-3">
-                      <span className="self-start px-3 py-0.5 bg-cyan-500 bg-[#797D48] rounded-full font-semibold text-sm text-white">
-                        {item.famlNm}
-                      </span>
-                      <p className="mx-1.5 mt-1 font-semibold text-[22px]">
-                        {item.krnm}
-                      </p>
-                      <div className="relative mt-4 flex flex-row justify-end gap-4">
-                        <button
-                          type="button"
-                          aria-label="이 식물이 좋아요"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            handlePlantLike(item.krnm)
-                          }}
-                          className="p-1"
-                        >
-                          {likedPlants.includes(item.krnm) ? (
-                            <Liked className="w-6 h-6" fill="#FF5C8D" />
-                          ) : (
-                            <Unliked className="w-6 h-6" />
-                          )}
-                        </button>
-                        <button
-                          type="button"
-                          aria-label="이 식물 페이지를 공유"
-                          onClick={async (e) => {
-                            e.preventDefault()
-                            await handlePlantLinkShare(item.krnm)
-                          }}
-                          className="relative p-1"
-                        >
-                          <Share className="w-6 h-6" />
-                          {copyTooltipIndex === item.krnm && (
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
-                              링크가 복사되었습니다!
-                            </div>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-        </div>
+      {isCardUi ? (
+        <CardView
+          apiData={data}
+          likedPlants={likedPlants}
+          copyTooltipIndex={copyTooltipIndex}
+          handlePlantLike={handlePlantLike}
+          handlePlantLinkShare={handlePlantLinkShare}
+        />
+      ) : (
+        <TableView
+          apiData={data}
+          likedPlants={likedPlants}
+          copyTooltipIndex={copyTooltipIndex}
+          currentPage={currentPage}
+          handlePlantLike={handlePlantLike}
+          handlePlantLinkShare={handlePlantLinkShare}
+        />
       )}
       <div id="pagination" className="my-20">
         <nav className="flex justify-between">
