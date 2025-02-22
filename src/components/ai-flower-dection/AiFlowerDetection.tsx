@@ -4,9 +4,21 @@ import React, { useState } from 'react'
 import styles from '@styles/ItemList.module.css'
 import WebcamModel from './WebcamModel'
 import FileUploadModel from './FileUploadModel'
+import router from 'next/router'
+import WebCamModelErrorModal from '../modal/WebCamModelErrorModal'
 
 const AiFlowerDetection = () => {
   const [isWebcamMode, setIsWebcamMode] = useState(true)
+  const [openWebcamModelErrorModal, setOpenWebcamModelErrorModal] =
+    useState(false)
+
+  const webcamModelErrorModalOpen = () => {
+    setOpenWebcamModelErrorModal(true)
+  }
+  const webcamModelErrorModalClose = () => {
+    setOpenWebcamModelErrorModal(false)
+    router.push('/')
+  }
 
   return (
     <div className="flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
@@ -46,8 +58,15 @@ const AiFlowerDetection = () => {
         </div>
       </div>
       <div className="flex flex-col items-center w-full">
-        {isWebcamMode ? <WebcamModel /> : <FileUploadModel />}
+        {isWebcamMode ? (
+          <WebcamModel webcamModelErrorModalOpen={webcamModelErrorModalOpen} />
+        ) : (
+          <FileUploadModel />
+        )}
       </div>
+      {openWebcamModelErrorModal && (
+        <WebCamModelErrorModal onClose={webcamModelErrorModalClose} />
+      )}
     </div>
   )
 }

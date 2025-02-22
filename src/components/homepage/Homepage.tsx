@@ -5,7 +5,7 @@ import PlantSearchBar from '@/components/common/PlantSearchBar'
 import useFadeInOnScroll from '@/hooks/useFadeInOnScroll'
 import useSectionScroll from '@/hooks/useSectionScroll'
 import { PreviewContentSectionProps } from '@/types/type'
-import SearchNotFoundModal from '@/components/common/SearchNotFoundModal'
+import SearchNotFoundModal from '@/components/modal/SearchNotFoundModal'
 import { useForm } from 'react-hook-form'
 
 const Homepage = () => {

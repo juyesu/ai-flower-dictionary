@@ -9,11 +9,13 @@ import CardList from '@/pages/assets/icons/CardList.svg'
 import Image from 'next/image'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { useEffect, useRef, useState } from 'react'
-import SearchNotFoundModal from '../common/SearchNotFoundModal'
+import SearchNotFoundModal from '../modal/SearchNotFoundModal'
 import CardView from './CardView'
 import TableView from './TabelView'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '@/context/AuthContext'
+import router from 'next/router'
+import ApiDataErrorModal from '../modal/ApiDataErrorModal'
 
 const ItemList = () => {
   const methods = useForm()
@@ -25,7 +27,8 @@ const ItemList = () => {
     maximumPageSize
   )
   const [isCardUi, setIsCardUi] = useState(true)
-  const [openModal, setOpenModal] = useState(false)
+  const [openSearchNotFoundModal, setOpenSearchNotFoundModal] = useState(false)
+  const [openApiErrorModal, setOpenApiErrorModal] = useState(false)
   const [copyTooltipIndex, setCopyTooltipIndex] = useState('')
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const hasMounted = useRef(false)
@@ -35,10 +38,10 @@ const ItemList = () => {
   )
 
   useEffect(() => {
-    if (!data || isLoading || error) {
-      console.log('API 데이터 에러가 발생했습니다.', data)
+    if (!isLoading && (!data || error)) {
+      setOpenApiErrorModal(true)
     }
-  })
+  }, [data, isLoading, error, router])
 
   useEffect(() => {
     if (loginUser) {
@@ -56,17 +59,22 @@ const ItemList = () => {
     }
   }, [currentPage])
 
-  const modalOpen = () => {
+  const searchNotFoundModalOpen = () => {
     document.body.style.position = 'fixed'
-    setOpenModal(true)
+    setOpenSearchNotFoundModal(true)
   }
 
-  const modalClose = () => {
+  const searchNotFoundModalClose = () => {
     document.body.style.position = ''
-    setOpenModal(false)
+    setOpenSearchNotFoundModal(false)
     setTimeout(() => {
       methods.setFocus('input')
     }, 100)
+  }
+
+  const apiDataErrorModalClose = () => {
+    setOpenApiErrorModal(false)
+    router.push('/')
   }
 
   const handlePlantLike = (krnm: string) => {
@@ -197,7 +205,7 @@ const ItemList = () => {
           <PlantSearchBar
             methods={methods}
             color="dark"
-            onSearchFail={modalOpen}
+            onSearchFail={searchNotFoundModalOpen}
           />
         </div>
       </div>
@@ -290,7 +298,12 @@ const ItemList = () => {
           </ul>
         </nav>
       </div>
-      {openModal && <SearchNotFoundModal onClose={modalClose} />}
+      {openSearchNotFoundModal && (
+        <SearchNotFoundModal onClose={searchNotFoundModalClose} />
+      )}
+      {openApiErrorModal && (
+        <ApiDataErrorModal onClose={apiDataErrorModalClose} />
+      )}
     </div>
   )
 }

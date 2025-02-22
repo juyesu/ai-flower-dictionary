@@ -2,6 +2,10 @@ export type ChildrenComponentsProps = {
   children: React.ReactNode
 }
 
+export type WebcamModelProps = {
+  webcamModelErrorModalOpen: () => void
+}
+
 export type PlantIndexItem = {
   imgUrl: string
   krnm: string
@@ -36,6 +40,16 @@ export type PlantTableType = {
   kornFamlNm: string
   bloomPeriodCn: string
   isLiked: string[]
+}
+
+export type ModalCloseProps = {
+  onClose: () => void
+}
+
+export type ModalProps = {
+  onClose: () => void
+  bgOverlay: boolean
+  message: string
 }
 
 export type LoginFormType = {

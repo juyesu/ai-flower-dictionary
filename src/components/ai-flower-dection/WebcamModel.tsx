@@ -3,9 +3,10 @@ import * as tmImage from '@teachablemachine/image'
 import { CustomMobileNet } from '@teachablemachine/image'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { PlantIndexItem } from '@/types/type'
+import { WebcamModelProps } from '@/types/type'
 import Link from 'next/link'
 
-const WebcamModel = () => {
+const WebcamModel = ({ webcamModelErrorModalOpen }: WebcamModelProps) => {
   const [model, setModel] = useState<CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [label, setLabel] = useState('')
@@ -15,13 +16,14 @@ const WebcamModel = () => {
     season: '',
   })
   const [isPredicting, setIsPredicting] = useState(false)
+  const { data, isLoading, error } = plantIndexFetchData(1, 300)
 
   const webcamRef = useRef<tmImage.Webcam | null>(null)
 
   useEffect(() => {
     const loadModel = async () => {
       try {
-        if (!model) {
+        if (!webcamRef.current) {
           // 모델이 이미 로드된 상태인지 확인
           const loadedModel = await tmImage.load(
             process.env.NEXT_PUBLIC_TEACHABLE_MACHINE_MODEL_API_URL,
@@ -29,25 +31,25 @@ const WebcamModel = () => {
           )
           setModel(loadedModel)
           setMaxPredictions(loadedModel.getTotalClasses())
-          console.log('Model loaded successfully.')
+          webcamRef.current = new tmImage.Webcam(200, 200, true)
         }
-      } catch (error) {
-        console.error('Model loading failed: ', error)
+      } catch (modelError) {
+        console.error('모델 로드 중 에러 발생:', modelError)
+        if (!isLoading && (!data || modelError || error)) {
+          webcamModelErrorModalOpen()
+        }
       }
     }
 
     loadModel()
-  }, [model]) // model이 변경될 때만 useEffect 실행
+  }, [])
 
-  const { data, isLoading } = plantIndexFetchData(1, 300)
   if (!data) return
   const famlNmList = data?.response.body.items.item.map(
     (item: PlantIndexItem) => {
       return item.famlNm
     }
   )
-
-  if (isLoading) return
 
   const initWebcam = async () => {
     const flip = true
