@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import styles from './../../styles/ItemList.module.css'
+import styles from '@styles/ItemList.module.css'
 import WebcamModel from './WebcamModel'
 import FileUploadModel from './FileUploadModel'
 
