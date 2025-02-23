@@ -34,7 +34,7 @@ const ItemList = () => {
   const hasMounted = useRef(false)
 
   const dataDividePageSize = Math.ceil(
-    data?.response.body.totalCount / maximumPageSize
+    data?.response?.body.totalCount / maximumPageSize
   )
 
   useEffect(() => {
@@ -221,7 +221,7 @@ const ItemList = () => {
             }}
             className="px-5 py-4 border rounded-l-lg hover:bg-zinc-400"
           >
-            <CardList className="w-6 h-6" />
+            <CardList className="w-6 h-6" aria-hidden="true" />
           </button>
           <button
             type="button"
@@ -233,7 +233,7 @@ const ItemList = () => {
             }}
             className="px-5 py-4 border rounded-r-lg hover:bg-zinc-400"
           >
-            <TableList className="w-6 h-6" />
+            <TableList className="w-6 h-6" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -264,7 +264,7 @@ const ItemList = () => {
                 aria-label="첫 페이지로 이동"
                 onClick={chageFirstPage}
               >
-                <FirstPage className="w-6 h-6" />
+                <FirstPage className="w-6 h-6" aria-hidden="true" />
               </button>
             </li>
             <li>
@@ -273,7 +273,7 @@ const ItemList = () => {
                 aria-label="이전 페이지로 이동"
                 onClick={changePrevPage}
               >
-                <PrevPage className="w-6 h-6" />
+                <PrevPage className="w-6 h-6" aria-hidden="true" />
               </button>
             </li>
             {paginationNumberList()}
@@ -283,7 +283,7 @@ const ItemList = () => {
                 aria-label="다음 페이지로 이동"
                 onClick={changeNextPage}
               >
-                <NextPage className="w-6 h-6" />
+                <NextPage className="w-6 h-6" aria-hidden="true" />
               </button>
             </li>
             <li>
@@ -292,7 +292,7 @@ const ItemList = () => {
                 aria-label="마지막 페이지로 이동"
                 onClick={changeLastPage}
               >
-                <LastPage className="w-6 h-6" />
+                <LastPage className="w-6 h-6" aria-hidden="true" />
               </button>
             </li>
           </ul>

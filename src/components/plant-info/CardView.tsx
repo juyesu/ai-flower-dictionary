@@ -37,7 +37,11 @@ const CardView = ({
                   <div className="relative mt-4 flex flex-row justify-end gap-4">
                     <button
                       type="button"
-                      aria-label="이 식물이 좋아요"
+                      aria-label={
+                        likedPlants.includes(item.krnm)
+                          ? '좋아요 해제'
+                          : '좋아요 추가'
+                      }
                       onClick={(e) => {
                         e.preventDefault()
                         handlePlantLike(item.krnm)
@@ -45,9 +49,13 @@ const CardView = ({
                       className="p-1"
                     >
                       {likedPlants.includes(item.krnm) ? (
-                        <Liked className="w-6 h-6" fill="#FF5C8D" />
+                        <Liked
+                          className="w-6 h-6"
+                          fill="#FF5C8D"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <Unliked className="w-6 h-6" />
+                        <Unliked className="w-6 h-6" aria-hidden="true" />
                       )}
                     </button>
                     <button
@@ -59,7 +67,7 @@ const CardView = ({
                       }}
                       className="relative p-1"
                     >
-                      <Share className="w-6 h-6" />
+                      <Share className="w-6 h-6" aria-hidden="true" />
                       {copyTooltipIndex === item.krnm && (
                         <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
                           링크가 복사되었습니다!

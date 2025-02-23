@@ -15,6 +15,7 @@ const Modal = ({ onClose, bgOverlay, message }: ModalProps) => {
         <div
           className="w-full h-full fixed z-0 bg-white bg-opacity-90"
           onClick={onClose}
+          aria-hidden="true"
         />
       )}
       <div className="fixed top-[32rem] flex z-99 bg-white shadow-lg opacity-100 rounded-2xl">
@@ -24,6 +25,7 @@ const Modal = ({ onClose, bgOverlay, message }: ModalProps) => {
             ref={buttonRef}
             onClick={onClose}
             className="mt-4 px-16 py-2 self-center bg-orange-300 focus-visible:outline-none rounded-full"
+            aria-label="모달 닫기"
           >
             확인
           </button>

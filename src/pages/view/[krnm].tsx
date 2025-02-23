@@ -110,7 +110,11 @@ const Post = () => {
                 <div className="relative mt-4 mr-16 flex flex-row justify-end gap-4">
                   <button
                     type="button"
-                    aria-label="이 식물이 좋아요"
+                    aria-label={
+                      likedPlants.includes(plantData?.krnm)
+                        ? '좋아요 해제'
+                        : '좋아요 추가'
+                    }
                     onClick={(e) => {
                       e.preventDefault()
                       handlePlantLike()
@@ -118,9 +122,13 @@ const Post = () => {
                     className="p-1"
                   >
                     {typeof krnm === 'string' && likedPlants.includes(krnm) ? (
-                      <Liked className="w-8 h-8" fill="#FF5C8D" />
+                      <Liked
+                        className="w-8 h-8"
+                        fill="#FF5C8D"
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <Unliked className="w-8 h-8" />
+                      <Unliked className="w-8 h-8" aria-hidden="true" />
                     )}
                   </button>
                   <button
@@ -132,7 +140,7 @@ const Post = () => {
                     }}
                     className="relative p-1"
                   >
-                    <Share className="w-8 h-8" />
+                    <Share className="w-8 h-8" aria-hidden="true" />
                     {CopyTooltipIndex === krnm && (
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
                         링크가 복사되었습니다!
