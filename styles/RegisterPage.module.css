@@ -7,7 +7,7 @@
   justify-content: center;
   flex-direction: column;
   width: 400px;
-  margin: 128px 96px 0px 96px;
+  height: 80vh;
 }
 
 .formLayout {
@@ -18,7 +18,7 @@
   border-radius: 4px;
   /* 추후 그라데이션 꾸며보기 */
   /* background: linear-gradient(#fdf9f9, #fffffb, #f9fdfd); */
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.05), 2px 2px 4px rgba(0,0,0,0.1)
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05), 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .popupOpenButton {

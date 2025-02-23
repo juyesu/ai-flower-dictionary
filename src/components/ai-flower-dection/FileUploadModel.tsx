@@ -25,7 +25,7 @@ const fileUploadModel = () => {
           }}
         />
         {uploadedFileName ? (
-          <div className="mt-16 flex flex-row gap-10">
+          <div className="my-16 flex flex-row gap-10">
             <div>
               <label
                 htmlFor="fileUpload"
