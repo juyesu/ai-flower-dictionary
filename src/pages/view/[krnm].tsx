@@ -98,8 +98,13 @@ const Post = () => {
                   href="../info"
                   aria-label="식물 도감 페이지로 이동"
                   className="absolute top-8 left-[-80px] flex items-center justify-center p-2 bg-white border rounded-2xl"
+                  passHref
                 >
-                  <PreviousPage className="w-6 h-6" fill="#5f6368" />
+                  <PreviousPage
+                    className="w-6 h-6"
+                    fill="#5f6368"
+                    aria-hidden="true"
+                  />
                 </Link>
                 <h1 className={styles.title}>{plantData?.krnm}</h1>
                 <h2 className={styles.subtitle}>

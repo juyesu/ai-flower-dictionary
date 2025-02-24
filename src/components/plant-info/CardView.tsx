@@ -17,9 +17,13 @@ const CardView = ({
     <div className="mt-16 px-4 grid grid-cols-3 gap-y-24 w-full">
       {apiData &&
         apiData?.response.body.items.item.map((item: PlantIndexItem) => (
-          <Link key={item.famlNm} href={{ pathname: `/view/${item.krnm}` }}>
-            <div className="mb-4 flex flex-col items-center w-full">
-              <div className="flex flex-col shadow-custom-all rounded-xl bg-white">
+          <div className="mb-4 flex flex-col items-center w-full">
+            <div className="flex flex-col shadow-custom-all rounded-xl bg-white">
+              <Link
+                key={item.famlNm}
+                href={{ pathname: `/view/${item.krnm}` }}
+                passHref
+              >
                 <Image
                   className="h-[22rem] w-[25rem] object-cover rounded-t-xl"
                   src={item.imgUrl}
@@ -76,9 +80,9 @@ const CardView = ({
                     </button>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
-          </Link>
+          </div>
         ))}
     </div>
   )
