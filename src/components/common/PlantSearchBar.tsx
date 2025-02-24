@@ -146,29 +146,28 @@ const PlantSearchBar = ({
           <ul className="absolute top-16 flex flex-col w-full bg-white opacity-100 rounded-3xl">
             {currentAutocompletePlantName.map((item, index, array) => {
               return (
-                <li
-                  tabIndex={0}
-                  onClick={() => {
-                    setValue('input', item)
-                  }}
-                  className={`px-10 py-4 hover:bg-zinc-300 ${
-                    selectedAutocompleteIndex == index
-                      ? 'bg-zinc-300 font-semibold'
-                      : ''
-                  } ${
-                    index === 0 && array.length === 1
-                      ? 'rounded-3xl'
-                      : index === 0
-                      ? 'rounded-t-3xl'
-                      : index === array.length - 1
-                      ? 'rounded-b-3xl'
-                      : ''
-                  }`}
-                >
-                  {reactStringReplace(item, getValues('input'), (match) => (
-                    <span>{match}</span>
-                  ))}
-                </li>
+                <Link key={item} href={`/view/${item}`} passHref>
+                  <li
+                    tabIndex={0}
+                    className={`px-10 py-4 hover:bg-zinc-300 cursor-pointer ${
+                      selectedAutocompleteIndex == index
+                        ? 'bg-zinc-300 font-semibold'
+                        : ''
+                    } ${
+                      index === 0 && array.length === 1
+                        ? 'rounded-3xl'
+                        : index === 0
+                        ? 'rounded-t-3xl'
+                        : index === array.length - 1
+                        ? 'rounded-b-3xl'
+                        : ''
+                    }`}
+                  >
+                    {reactStringReplace(item, getValues('input'), (match) => (
+                      <span>{match}</span>
+                    ))}
+                  </li>
+                </Link>
               )
             })}
           </ul>
