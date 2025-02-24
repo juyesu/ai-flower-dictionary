@@ -10,7 +10,7 @@ import {
 import { TableViewProps } from '@/types/type'
 import { PlantTableType } from '@/types/type'
 import { useEffect, useMemo, useState } from 'react'
-import Link from 'next/link'
+import router from 'next/router'
 
 const TableView = ({
   apiData,
@@ -32,17 +32,20 @@ const TableView = ({
           <div className="relative flex flex-row items-center justify-center gap-4">
             <button
               type="button"
-              aria-label="이 식물이 좋아요"
+              aria-label={
+                likedPlants.includes(item.krnm) ? '좋아요 해제' : '좋아요 추가'
+              }
               onClick={(e) => {
                 e.preventDefault()
+                e.stopPropagation()
                 handlePlantLike(item.krnm)
               }}
               className="p-1"
             >
               {likedPlants.includes(item.krnm) ? (
-                <Liked className="w-6 h-6" fill="#FF5C8D" />
+                <Liked className="w-6 h-6" fill="#FF5C8D" aria-hidden="true" />
               ) : (
-                <Unliked className="w-6 h-6" />
+                <Unliked className="w-6 h-6" aria-hidden="true" />
               )}
             </button>
             <button
@@ -50,11 +53,12 @@ const TableView = ({
               aria-label="이 식물 페이지를 공유"
               onClick={async (e) => {
                 e.preventDefault()
+                e.stopPropagation()
                 await handlePlantLinkShare(item.krnm)
               }}
               className="relative p-1"
             >
-              <Share className="w-6 h-6" />
+              <Share className="w-6 h-6" aria-hidden="true" />
               {copyTooltipIndex === item.krnm && (
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
                   링크가 복사되었습니다!
@@ -134,18 +138,19 @@ const TableView = ({
         {table.getRowModel().rows.map((row) => {
           const rowData = row.original
           return (
-            <tr key={row.id} className="hover:bg-zinc-300" onClick={() => {}}>
+            <tr
+              key={row.id}
+              className="hover:bg-zinc-300 cursor-pointer"
+              onClick={() => {
+                router.push(`/view/${rowData.krnm}`)
+              }}
+            >
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="px-2 py-4 align-middle text-center cursor-pointer"
+                  className="px-2 py-4 align-middle text-center"
                 >
-                  <Link
-                    key={rowData.famlNm}
-                    href={{ pathname: `/view/${rowData.krnm}` }}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Link>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
             </tr>
