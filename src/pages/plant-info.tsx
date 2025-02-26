@@ -3,7 +3,7 @@ import Layout from '@/components/common/layout'
 import ScrollBtn from '@/components/common/ScrollBtn'
 import ItemList from '@/components/plant-info/ItemList'
 
-const Info = () => {
+const PlantInfo = () => {
   return (
     <Layout>
       <ItemList />
@@ -12,4 +12,4 @@ const Info = () => {
   )
 }
 
-export default Info
+export default PlantInfo
