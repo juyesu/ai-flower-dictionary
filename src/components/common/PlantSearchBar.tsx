@@ -53,7 +53,7 @@ const PlantSearchBar = ({
 
   const searchKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     const searchInputValue = getValues('input')
-    const filteredList = autocompletePlantName.filter((el) =>
+    const filteredList = autocompletePlantName?.filter((el) =>
       el.includes(searchInputValue)
     )
     if (e.key === 'Enter') {
@@ -190,7 +190,8 @@ const PlantSearchBar = ({
                 href={{
                   pathname: `/view/${item.krnm}`,
                   query: {
-                    prevPage: currentPage === 'home' ? 'home' : `${currentPage}`,
+                    prevPage:
+                      currentPage === 'home' ? 'home' : `${currentPage}`,
                   },
                 }}
                 className="underline"
