@@ -97,8 +97,9 @@ const Post = () => {
               <div className="relative mt-20 flex flex-col items-center">
                 <Link
                   href={{
-                    pathname: prevPage === 'home' ? '/' : `/${prevPage}`,
-                    query: { sort },
+                    pathname:
+                      prevPage && prevPage !== 'home' ? `/${prevPage}` : '/',
+                    ...(sort ? { query: { sort } } : {}),
                   }}
                   aria-label="식물 도감 페이지로 이동"
                   className="absolute top-8 left-[-80px] flex items-center justify-center p-2 bg-white border rounded-2xl"
