@@ -25,7 +25,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
                 <Link href="/ai-flower-detection" className={styles.menu}>
                   AI flower detection
                 </Link>
-                <Link href="/info" className={styles.menu}>
+                <Link href="/plant-info" className={styles.menu}>
                   Plant Info
                 </Link>
                 <Link href="/dictionary" className={styles.menu}>
