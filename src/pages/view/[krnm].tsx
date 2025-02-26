@@ -23,6 +23,7 @@ const Post = () => {
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
   const router = useRouter()
+  const { prevPage, sort } = router.query
   const { krnm } = router.query
   const { data, isLoading } = plantIndexFetchData(1, 300)
 
@@ -30,7 +31,7 @@ const Post = () => {
     if (!data || isLoading || !krnm) return
     const decodedKrnm = decodeURIComponent(krnm as string)
 
-    const foundPlant = data.response.body.items.item.find(
+    const foundPlant = data?.response?.body?.items.item.find(
       (p: PlantIndexItem) => p.krnm === decodedKrnm
     )
 
@@ -95,7 +96,10 @@ const Post = () => {
             <div className="relative w-full flex flex-col items-center gap-5">
               <div className="relative mt-20 flex flex-col items-center">
                 <Link
-                  href="../info"
+                  href={{
+                    pathname: prevPage === 'home' ? '/' : `/${prevPage}`,
+                    query: { sort },
+                  }}
                   aria-label="식물 도감 페이지로 이동"
                   className="absolute top-8 left-[-80px] flex items-center justify-center p-2 bg-white border rounded-2xl"
                   passHref

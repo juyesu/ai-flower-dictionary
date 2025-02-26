@@ -14,7 +14,7 @@ import CardView from './CardView'
 import TableView from './TabelView'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '@/context/AuthContext'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import ApiDataErrorModal from '../modal/ApiDataErrorModal'
 
 const ItemList = () => {
@@ -31,6 +31,8 @@ const ItemList = () => {
   const [openApiErrorModal, setOpenApiErrorModal] = useState(false)
   const [copyTooltipIndex, setCopyTooltipIndex] = useState('')
   const [likedPlants, setLikedPlants] = useState<string[]>([])
+  const router = useRouter()
+  const { sort } = router.query
   const hasMounted = useRef(false)
 
   const dataDividePageSize = Math.ceil(
@@ -58,6 +60,12 @@ const ItemList = () => {
       hasMounted.current = true
     }
   }, [currentPage])
+
+  useEffect(() => {
+    if (sort == 'table') {
+      setIsCardUi(false)
+    }
+  }, [])
 
   const searchNotFoundModalOpen = () => {
     document.body.style.position = 'fixed'
@@ -206,6 +214,7 @@ const ItemList = () => {
             methods={methods}
             color="dark"
             onSearchFail={searchNotFoundModalOpen}
+            currentPage="plant-info"
           />
         </div>
       </div>

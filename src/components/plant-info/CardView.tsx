@@ -16,12 +16,15 @@ const CardView = ({
   return (
     <div className="mt-16 px-4 grid grid-cols-3 gap-y-24 w-full">
       {apiData &&
-        apiData?.response.body.items.item.map((item: PlantIndexItem) => (
+        apiData?.response?.body?.items.item.map((item: PlantIndexItem) => (
           <div className="mb-4 flex flex-col items-center w-full">
             <div className="flex flex-col shadow-custom-all rounded-xl bg-white">
               <Link
                 key={item.famlNm}
-                href={{ pathname: `/view/${item.krnm}` }}
+                href={{
+                  pathname: `/view/${item.krnm}`,
+                  query: { prevPage: 'plant-info', sort: 'card' },
+                }}
                 passHref
               >
                 <Image

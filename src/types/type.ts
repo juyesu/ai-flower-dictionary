@@ -1,3 +1,5 @@
+import { UseFormReturn } from "react-hook-form"
+
 export type ChildrenComponentsProps = {
   children: React.ReactNode
 }
@@ -14,6 +16,13 @@ export type PlantIndexItem = {
   kornFamlNm: string
   flwrClorCn: string
   bloomPeriodCn: string
+}
+
+export type SearchNotFoundModalProps = {
+  methods?: UseFormReturn
+  color: string
+  onSearchFail?: any
+  currentPage: string
 }
 
 export type CardViewProps = {

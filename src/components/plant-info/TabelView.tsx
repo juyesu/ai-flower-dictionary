@@ -22,7 +22,7 @@ const TableView = ({
 }: TableViewProps) => {
   const tableData = useMemo(() => {
     return (
-      apiData?.response.body.items.item.map((item: any, index: number) => ({
+      apiData?.response?.body?.items.item.map((item: any, index: number) => ({
         number: (currentPage - 1) * 30 + index + 1,
         krnm: item.krnm,
         famlNm: item.famlNm,
@@ -142,7 +142,10 @@ const TableView = ({
               key={row.id}
               className="hover:bg-zinc-300 cursor-pointer"
               onClick={() => {
-                router.push(`/view/${rowData.krnm}`)
+                router.push({
+                  pathname: `/view/${rowData.krnm}`,
+                  query: { prevPage: 'plant-info', sort: 'table' },
+                })
               }}
             >
               {row.getVisibleCells().map((cell) => (

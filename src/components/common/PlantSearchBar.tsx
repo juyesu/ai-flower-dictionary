@@ -1,23 +1,18 @@
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
-import { PlantIndexItem } from '@/types/type'
+import { PlantIndexItem, SearchNotFoundModalProps } from '@/types/type'
 import Link from 'next/link'
 import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
 import Close from '@/pages/assets/icons/Close.svg'
 import { useRouter } from 'next/router'
 import { KeyboardEvent, useEffect, useState } from 'react'
-import { useForm, UseFormReturn } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import reactStringReplace from 'react-string-replace'
-
-type SearchNotFoundModalProps = {
-  methods?: UseFormReturn
-  color: string
-  onSearchFail?: any
-}
 
 const PlantSearchBar = ({
   methods = useForm(),
   color,
   onSearchFail,
+  currentPage,
 }: SearchNotFoundModalProps) => {
   const { register, getValues, watch, setValue } = methods
   const [isSearchFocus, setIsSearchFocus] = useState(false)
@@ -73,7 +68,7 @@ const PlantSearchBar = ({
             (item: PlantIndexItem) => item.krnm == searchInputValue
           )
         ) {
-          router.push(`view/${searchInputValue}`)
+          router.push({ pathname: `view/${searchInputValue}`, query: '' })
         } else {
           onSearchFail()
         }
@@ -146,7 +141,16 @@ const PlantSearchBar = ({
           <ul className="absolute top-16 flex flex-col w-full bg-white opacity-100 rounded-3xl">
             {currentAutocompletePlantName.map((item, index, array) => {
               return (
-                <Link key={item} href={`/view/${item}`} passHref>
+                <Link
+                  key={item}
+                  href={{
+                    pathname: `/view/${item}`,
+                    query: {
+                      prevPage: currentPage === 'home' ? '' : `${currentPage}`,
+                    },
+                  }}
+                  passHref
+                >
                   <li
                     tabIndex={0}
                     className={`px-10 py-4 hover:bg-zinc-300 cursor-pointer ${
@@ -183,7 +187,12 @@ const PlantSearchBar = ({
             {randomItems.map((item, index) => (
               <Link
                 key={index}
-                href={`/view/${item.krnm}`}
+                href={{
+                  pathname: `/view/${item.krnm}`,
+                  query: {
+                    prevPage: currentPage === 'home' ? 'home' : `${currentPage}`,
+                  },
+                }}
                 className="underline"
               >
                 #{item.krnm}

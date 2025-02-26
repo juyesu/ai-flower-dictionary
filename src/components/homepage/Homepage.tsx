@@ -50,6 +50,7 @@ const Homepage = () => {
             methods={methods}
             color="white"
             onSearchFail={modalOpen}
+            currentPage="home"
           />
         </div>
       </section>
