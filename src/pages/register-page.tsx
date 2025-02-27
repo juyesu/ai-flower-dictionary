@@ -1,6 +1,6 @@
 import Layout from '@/components/common/layout'
 import { Title } from '@/components/ui/Title'
-import styles from './../../styles/RegisterPage.module.css'
+import styles from '@styles/RegisterPage.module.css'
 import Link from 'next/link'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
@@ -140,7 +140,7 @@ const RegisterPage = () => {
 
             <button className={styles.submitButton}>회원가입</button>
             <Link href="/login" className={styles.linkText}>
-              이미 계정이 있으신가요? 
+              이미 계정이 있으신가요?
               <span className="ml-1 underline">로그인</span>
             </Link>
           </form>

@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react'
 import styles from '@styles/ItemList.module.css'
-import WebcamModel from './WebcamModel'
-import FileUploadModel from './FileUploadModel'
+import WebcamModel from '@/components/ai-flower-dection/WebcamModel'
+import FileUploadModel from '@/components/ai-flower-dection/FileUploadModel'
 import router from 'next/router'
-import WebCamModelErrorModal from '../modal/WebCamModelErrorModal'
+import WebCamModelErrorModal from '@/components/modal/WebCamModelErrorModal'
 
 const AiFlowerDetection = () => {
   const [isWebcamMode, setIsWebcamMode] = useState(true)
