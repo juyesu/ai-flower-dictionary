@@ -18,7 +18,7 @@ export type PlantIndexItem = {
   bloomPeriodCn: string
 }
 
-export type SearchNotFoundModalProps = {
+export type PlantSearchBarProps = {
   methods?: UseFormReturn
   color: string
   onSearchFail?: any

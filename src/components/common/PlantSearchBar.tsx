@@ -1,5 +1,5 @@
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
-import { PlantIndexItem, SearchNotFoundModalProps } from '@/types/type'
+import { PlantIndexItem, PlantSearchBarProps } from '@/types/type'
 import Link from 'next/link'
 import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
 import Close from '@/pages/assets/icons/Close.svg'
@@ -13,7 +13,7 @@ const PlantSearchBar = ({
   color,
   onSearchFail,
   currentPage,
-}: SearchNotFoundModalProps) => {
+}: PlantSearchBarProps) => {
   const { register, getValues, watch, setValue } = methods
   const [isSearchFocus, setIsSearchFocus] = useState(false)
   const { data, isLoading } = plantIndexFetchData(1, 300)
