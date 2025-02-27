@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/router'
 import ApiDataErrorModal from '../modal/ApiDataErrorModal'
+import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
 
 const ItemList = () => {
   const methods = useForm()
@@ -29,6 +30,7 @@ const ItemList = () => {
   const [isCardUi, setIsCardUi] = useState(true)
   const [openSearchNotFoundModal, setOpenSearchNotFoundModal] = useState(false)
   const [openApiErrorModal, setOpenApiErrorModal] = useState(false)
+  const [openLoginRequiredModal, setOpenLoginRequiredModal] = useState(false)
   const [copyTooltipIndex, setCopyTooltipIndex] = useState('')
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const router = useRouter()
@@ -77,12 +79,21 @@ const ItemList = () => {
     setOpenSearchNotFoundModal(false)
     setTimeout(() => {
       methods.setFocus('input')
-    }, 100)
+    }, 150)
   }
 
   const apiDataErrorModalClose = () => {
     setOpenApiErrorModal(false)
     router.push('/')
+  }
+
+  const loginRequiredModalClose = () => {
+    setOpenLoginRequiredModal(false)
+  }
+
+  const redirectToLoginPage = () => {
+    console.log('클릭 이벤트 발생')
+    router.push('/login')
   }
 
   const handlePlantLike = (krnm: string) => {
@@ -107,7 +118,7 @@ const ItemList = () => {
         })
       }
     } else {
-      alert('로그인이 필요합니다.')
+      setOpenLoginRequiredModal(true)
     }
   }
 
@@ -312,6 +323,12 @@ const ItemList = () => {
       )}
       {openApiErrorModal && (
         <ApiDataErrorModal onClose={apiDataErrorModalClose} />
+      )}
+      {openLoginRequiredModal && (
+        <LoginRequiredModal
+          onClose={loginRequiredModalClose}
+          onSecondButtonClick={redirectToLoginPage}
+        />
       )}
     </div>
   )

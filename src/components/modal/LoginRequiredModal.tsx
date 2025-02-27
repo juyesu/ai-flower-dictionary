@@ -1,0 +1,23 @@
+import Modal from '@/components/modal/Modal'
+import { TwoButtonModalProps } from '@/types/type'
+
+const LoginRequiredModal = ({
+  onClose,
+  onSecondButtonClick,
+}: TwoButtonModalProps) => {
+  return (
+    <Modal
+      onClose={onClose}
+      bgOverlay={false}
+      secoundButton={{
+        secoundButtonLabel: '로그인',
+        onSecondButtonClick: () => {
+          onSecondButtonClick()
+        },
+      }}
+      message="로그인이 필요한 서비스입니다."
+    />
+  )
+}
+
+export default LoginRequiredModal

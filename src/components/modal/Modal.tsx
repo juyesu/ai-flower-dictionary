@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { ModalProps } from '@/types/type'
+import Close from '@/pages/assets/icons/Close.svg'
 
-const Modal = ({ onClose, bgOverlay, message }: ModalProps) => {
+const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -18,17 +19,39 @@ const Modal = ({ onClose, bgOverlay, message }: ModalProps) => {
           aria-hidden="true"
         />
       )}
-      <div className="fixed top-[32rem] flex z-99 bg-white shadow-lg opacity-100 rounded-2xl">
-        <div className="flex flex-col px-10 py-8">
-          <p className="my-8 text-lg font-semibold">{message}</p>
+      <div className="w-[420px] fixed top-[32rem] flex justify-center items-center z-99 bg-white shadow-lg opacity-100 rounded-2xl">
+        <div className="w-full flex flex-col justify-center items-center px-6 py-6">
           <button
-            ref={buttonRef}
+            type="button"
             onClick={onClose}
-            className="mt-4 px-16 py-2 self-center bg-orange-300 focus-visible:outline-none rounded-full"
             aria-label="모달 닫기"
+            className="self-end"
           >
-            확인
+            <Close className="w-4 h-4" />
           </button>
+          <p className="my-8 text-lg font-semibold">{message}</p>
+          <div className="flex flex-row gap-4">
+            <button
+              ref={buttonRef}
+              onClick={onClose}
+              className={`${
+                secoundButton
+                  ? 'w-28 bg-zinc-200'
+                  : 'w-36 bg-sky-400 font-semibold text-white'
+              } my-4 py-2 self-center focus-visible:outline-none rounded-lg`}
+              aria-label="모달 닫기"
+            >
+              확인
+            </button>
+            {secoundButton && (
+              <button
+                onClick={() => secoundButton.onSecondButtonClick?.()}
+                className="my-4 w-28 py-2 self-center bg-sky-400 font-semibold text-white focus-visible:outline-none rounded-lg"
+              >
+                {secoundButton.secoundButtonLabel}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import { UseFormReturn } from "react-hook-form"
+import { UseFormReturn } from 'react-hook-form'
 
 export type ChildrenComponentsProps = {
   children: React.ReactNode
@@ -51,13 +51,22 @@ export type PlantTableType = {
   isLiked: string[]
 }
 
-export type ModalCloseProps = {
+export type OneButtonModalProps = {
   onClose: () => void
+}
+
+export type TwoButtonModalProps = {
+  onClose: () => void
+  onSecondButtonClick: () => void
 }
 
 export type ModalProps = {
   onClose: () => void
   bgOverlay: boolean
+  secoundButton?: {
+    secoundButtonLabel?: string
+    onSecondButtonClick?: () => void
+  }
   message: string
 }
 

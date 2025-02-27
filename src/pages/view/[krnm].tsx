@@ -11,6 +11,7 @@ import Share from '@/pages/assets/icons/Share.svg'
 import PreviousPage from '@/pages/assets/icons/PreviousPage.svg'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
+import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
 
 export const metadata = {
   title: 'AI 꽃 도감',
@@ -22,6 +23,7 @@ const Post = () => {
   const { loginUser } = useAuth()
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
+  const [openLoginRequiredModal, setOpenLoginRequiredModal] = useState(false)
   const router = useRouter()
   const { prevPage, sort } = router.query
   const { krnm } = router.query
@@ -68,7 +70,7 @@ const Post = () => {
         })
       }
     } else {
-      alert('로그인이 필요합니다.')
+      setOpenLoginRequiredModal(true)
     }
   }
 
@@ -85,6 +87,15 @@ const Post = () => {
     } catch (err) {
       console.error('링크 복사 실패', err)
     }
+  }
+
+  const loginRequiredModalClose = () => {
+    setOpenLoginRequiredModal(false)
+  }
+
+  const redirectToLoginPage = () => {
+    console.log('클릭 이벤트 발생')
+    router.push('/login')
   }
 
   if (isLoading) return
@@ -180,6 +191,12 @@ const Post = () => {
           </>
         )}
       </div>
+      {openLoginRequiredModal && (
+        <LoginRequiredModal
+          onClose={loginRequiredModalClose}
+          onSecondButtonClick={redirectToLoginPage}
+        />
+      )}
     </Layout>
   )
 }
