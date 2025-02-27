@@ -1,7 +1,7 @@
 import Modal from '@/components/modal/Modal'
-import { ModalCloseProps } from '@/types/type'
+import { OneButtonModalProps } from '@/types/type'
 
-const SearchNotFoundModal = ({ onClose }: ModalCloseProps) => {
+const SearchNotFoundModal = ({ onClose }: OneButtonModalProps) => {
   return (
     <Modal
       onClose={onClose}

@@ -25,7 +25,7 @@ const Admin = () => {
     localStorage.removeItem('userEmail')
     localStorage.removeItem('userName')
     alert('회원 탈퇴되었습니다.')
-    router.push('/login')
+    router.push('/')
   }
 
   return (

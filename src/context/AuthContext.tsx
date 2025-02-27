@@ -1,3 +1,4 @@
+import LogoutMessageModal from '@/components/modal/LogoutMessageModal'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 interface AuthContextType {
@@ -10,6 +11,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loginUser, setLoginUser] = useState<string | null>(null)
+  const [openLogoutMessageModal, setOpenLogoutMessageModal] = useState(false)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -24,12 +26,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.removeItem('userName')
     }
     setLoginUser(null)
-    alert('로그아웃 되었습니다.')
+    setOpenLogoutMessageModal(true)
+  }
+
+  const logoutMessageModalClose = () => {
+    setOpenLogoutMessageModal(false)
   }
 
   return (
     <AuthContext.Provider value={{ loginUser, setLoginUser, logout }}>
       {children}
+      {openLogoutMessageModal && (
+        <div className="fixed inset-0 flex justify-center items-center">
+          <LogoutMessageModal onClose={logoutMessageModalClose} />
+        </div>
+      )}
     </AuthContext.Provider>
   )
 }
