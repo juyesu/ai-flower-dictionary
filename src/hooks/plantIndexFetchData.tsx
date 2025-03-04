@@ -1,8 +1,15 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, UseQueryResult } from '@tanstack/react-query'
 import axios from 'axios'
-import { PlantIndexParams } from '@/types/type'
+import {
+  PlantIndexItem,
+  PlantIndexParams,
+  PlantIndexResponse,
+} from '@/types/type'
 
-const fetchPlantIndexData = async (pageNumber: number, pageSize: number) => {
+const fetchPlantIndexData = async (
+  pageNumber: number,
+  pageSize: number
+): Promise<PlantIndexResponse> => {
   const params: PlantIndexParams = {
     serviceKey: process.env.NEXT_PUBLIC_GARDEN_API_KEY,
     pageNo: pageNumber,
@@ -12,10 +19,23 @@ const fetchPlantIndexData = async (pageNumber: number, pageSize: number) => {
   const response = await axios.get(process.env.NEXT_PUBLIC_GARDEN_API_PATH, {
     params,
   })
-  return response.data
+  const indexList = response?.data?.response.body.items.item.map(
+    (item: PlantIndexItem) => item
+  )
+  const krnmList = response?.data?.response.body.items.item.map(
+    (item: PlantIndexItem) => item.krnm
+  )
+  return {
+    response: response.data,
+    indexList,
+    krnmList,
+  }
 }
 
-export const plantIndexFetchData = (currentPage: number, pageSize: number) => {
+export const plantIndexFetchData = (
+  currentPage: number,
+  pageSize: number
+): UseQueryResult<PlantIndexResponse, Error> => {
   return useQuery({
     queryKey: [
       `GET ${process.env.NEXT_PUBLIC_GARDEN_API_PATH}`,

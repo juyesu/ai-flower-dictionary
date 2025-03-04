@@ -29,15 +29,9 @@ const PlantSearchBar = ({
   useEffect(() => {
     if (data) {
       setRandomItems(
-        [...(data?.response?.body?.items?.item || [])]
-          .sort(() => Math.random() - 0.5)
-          .slice(0, 5)
+        [...(data?.indexList || [])].sort(() => Math.random() - 0.5).slice(0, 5)
       )
-      const mappedPlantName = data?.response?.body?.items?.item.map(
-        (item: PlantIndexItem, index: number) =>
-          (autocompletePlantName[index] = item.krnm)
-      )
-      setAutocompletePlantName(mappedPlantName)
+      setAutocompletePlantName(data?.krnmList)
     }
   }, [data])
 
@@ -64,7 +58,7 @@ const PlantSearchBar = ({
         )
       } else {
         if (
-          data?.response?.body?.items?.item?.some(
+          data?.indexList.some(
             (item: PlantIndexItem) => item.krnm == searchInputValue
           )
         ) {

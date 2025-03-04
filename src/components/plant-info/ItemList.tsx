@@ -37,15 +37,15 @@ const ItemList = () => {
   const { sort } = router.query
   const hasMounted = useRef(false)
 
-  const dataDividePageSize = Math.ceil(
-    data?.response?.body.totalCount / maximumPageSize
-  )
+  const dataDividePageSize = data
+    ? Math.ceil(data?.response?.response.body.totalCount / maximumPageSize)
+    : 0
 
   useEffect(() => {
     if (!isLoading && (!data || error)) {
       setOpenApiErrorModal(true)
     }
-  }, [data, isLoading, error, router])
+  }, [data, isLoading, error])
 
   useEffect(() => {
     if (loginUser) {
@@ -92,7 +92,6 @@ const ItemList = () => {
   }
 
   const redirectToLoginPage = () => {
-    console.log('클릭 이벤트 발생')
     router.push('/login')
   }
 
@@ -149,7 +148,10 @@ const ItemList = () => {
   }
 
   const changeNextPage = () => {
-    if (data.response.body.totalCount > currentPage * maximumPageSize) {
+    if (
+      data &&
+      data?.response?.response.body.totalCount > currentPage * maximumPageSize
+    ) {
       setCurrentPage(currentPage + 1)
     }
   }
@@ -259,7 +261,7 @@ const ItemList = () => {
       </div>
       {isCardUi ? (
         <CardView
-          apiData={data}
+          apiData={data?.indexList}
           likedPlants={likedPlants}
           copyTooltipIndex={copyTooltipIndex}
           handlePlantLike={handlePlantLike}
@@ -267,7 +269,7 @@ const ItemList = () => {
         />
       ) : (
         <TableView
-          apiData={data}
+          apiData={data?.indexList}
           likedPlants={likedPlants}
           copyTooltipIndex={copyTooltipIndex}
           currentPage={currentPage}

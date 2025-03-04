@@ -4,8 +4,23 @@ export type ChildrenComponentsProps = {
   children: React.ReactNode
 }
 
-export type WebcamModelProps = {
-  webcamModelErrorModalOpen: () => void
+export type AIModelProps = {
+  AIErrorModalOpen: () => void
+}
+
+export type PlantIndexResponse = {
+  response: {
+    response: {
+      body: {
+        items: {
+          item: PlantIndexItem[]
+        }
+        totalCount: number
+      }
+    }
+  }
+  indexList: PlantIndexItem[]
+  krnmList: string[]
 }
 
 export type PlantIndexItem = {
