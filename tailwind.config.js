@@ -13,6 +13,13 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      screens: {
+        xs: '320px',
+      },
+      boxShadow: {
+        'custom-all':
+          '0 8px 16px rgba(0, 0, 0, 0.15), 0 -2px 2px rgba(0, 0, 0, 0.1), 4px 0 10px rgba(0, 0, 0, 0.1), -4px 0 10px rgba(0, 0, 0, 0.1)',
+      },
     },
   },
   plugins: [],
