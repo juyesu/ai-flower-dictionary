@@ -11,6 +11,7 @@ import Share from '@/pages/assets/icons/Share.svg'
 import PreviousPage from '@/pages/assets/icons/PreviousPage.svg'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
+import { useCapturedPlantImageStore } from '@/store/imageStore'
 import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
 
 export const metadata = {
@@ -24,6 +25,7 @@ const Post = () => {
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
   const [openLoginRequiredModal, setOpenLoginRequiredModal] = useState(false)
+  const { imageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
   const { prevPage, sort } = router.query
   const { krnm } = router.query
@@ -33,7 +35,7 @@ const Post = () => {
     if (!data || isLoading || !krnm) return
     const decodedKrnm = decodeURIComponent(krnm as string)
 
-    const foundPlant = data?.response?.body?.items.item.find(
+    const foundPlant = data?.indexList.find(
       (p: PlantIndexItem) => p.krnm === decodedKrnm
     )
 
@@ -94,7 +96,6 @@ const Post = () => {
   }
 
   const redirectToLoginPage = () => {
-    console.log('클릭 이벤트 발생')
     router.push('/login')
   }
 
@@ -172,6 +173,17 @@ const Post = () => {
               </div>
             </div>
             <hr className="my-6 mb-10 w-full" />
+            {sort == 'webcam' && imageUrl && (
+              <div className="p-8 flex flex-col justify-center items-center border rounded-xl">
+                <img
+                  src={imageUrl}
+                  alt="캡쳐된 이미지"
+                  className="w-48 h-48 rounded-xl"
+                />
+                <p className="mt-2 text-lg font-bold">촬영된 식물 이미지</p>
+                <p className="mt-1.5 underline">혹시 인식 결과가 잘못됐나요?</p>
+              </div>
+            )}
             <div className="flex flex-row w-full">
               <Image
                 className="w-1/2 mx-16 my-12 border rounded-xl"
