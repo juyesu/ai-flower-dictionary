@@ -1,176 +1,138 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Webcam from 'react-webcam'
 import * as tmImage from '@teachablemachine/image'
-import { CustomMobileNet } from '@teachablemachine/image'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
-import { PlantIndexItem } from '@/types/type'
-import { WebcamModelProps } from '@/types/type'
-import Link from 'next/link'
+import { AIModelProps } from '@/types/type'
+import { useCapturedPlantImageStore } from '@/store/imageStore'
 
-const WebcamModel = ({ webcamModelErrorModalOpen }: WebcamModelProps) => {
-  const [model, setModel] = useState<CustomMobileNet | null>(null)
+const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
+  const [model, setModel] = useState<tmImage.CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [label, setLabel] = useState('')
-  const [flowerDetails, setFlowerDetails] = useState({
-    name: '',
-    meaning: '',
-    season: '',
+  const [flowerName, setFlowerName] = useState('')
+  const [useWebcam, setUseWebcam] = useState(false)
+  const [highestPrediction, setHighestPrediction] = useState({
+    className: '',
+    probability: 0.0,
   })
-  const [isPredicting, setIsPredicting] = useState(false)
   const { data, isLoading, error } = plantIndexFetchData(1, 300)
-
-  const webcamRef = useRef<tmImage.Webcam | null>(null)
+  const consecutiveMatchCountRef = React.useRef(0)
+  const { imageUrl, setImageUrl } = useCapturedPlantImageStore()
+  const router = useRouter()
 
   useEffect(() => {
     const loadModel = async () => {
       try {
-        if (!webcamRef.current) {
-          // 모델이 이미 로드된 상태인지 확인
+        if (!model) {
           const loadedModel = await tmImage.load(
-            process.env.NEXT_PUBLIC_TEACHABLE_MACHINE_MODEL_API_URL,
-            process.env.NEXT_PUBLIC_TEACHABLE_MACHINE_METADATA_API_URL
+            '/plants_detection_model/model.json',
+            '/plants_detection_model/metadata.json'
           )
           setModel(loadedModel)
           setMaxPredictions(loadedModel.getTotalClasses())
-          webcamRef.current = new tmImage.Webcam(200, 200, true)
         }
       } catch (modelError) {
-        console.error('모델 로드 중 에러 발생:', modelError)
+        console.error('Error loading model:', modelError)
         if (!isLoading && (!data || modelError || error)) {
-          webcamModelErrorModalOpen()
+          AIErrorModalOpen()
         }
       }
     }
 
     loadModel()
-  }, [])
+  }, [model])
 
-  if (!data) return
-  const famlNmList = data?.response.body.items.item.map(
-    (item: PlantIndexItem) => {
-      return item.famlNm
+  useEffect(() => {
+    if (highestPrediction.probability > 0.7) {
+      setFlowerName(highestPrediction.className)
     }
-  )
+  }, [highestPrediction])
 
-  const initWebcam = async () => {
-    const flip = true
-    const webcam = new tmImage.Webcam(200, 200, flip)
+  const processPredictions = (
+    predictions: { className: string; probability: number }[],
+    imgSrc: string | null
+  ) => {
+    let tempHighestPrediction = { className: '', probability: 0 }
 
-    try {
-      await webcam.setup()
-      console.log('Webcam setup complete.')
-      await webcam.play()
+    for (let i = 0; i < maxPredictions; i++) {
+      const className = predictions[i].className
+      const probability = Number(predictions[i].probability.toFixed(2))
 
-      webcamRef.current = webcam
-      window.requestAnimationFrame(loop)
+      if (probability > tempHighestPrediction.probability) {
+        tempHighestPrediction = { className, probability }
+        setHighestPrediction(tempHighestPrediction)
+      }
+    }
 
-      webcam.canvas.style.width = '100%'
-
-      document.getElementById('webcam-container')?.appendChild(webcam.canvas)
-    } catch (error) {
-      console.error('Webcam initialization failed: ', error)
+    if (tempHighestPrediction.probability > 0.7) {
+      setFlowerName((prevName) => {
+        if (prevName === tempHighestPrediction.className) {
+          consecutiveMatchCountRef.current += 1
+          if (consecutiveMatchCountRef.current >= 3) {
+            checkPlantMatch(tempHighestPrediction.className)
+            if (imgSrc) {
+              setImageUrl(imgSrc)
+            }
+          }
+        } else {
+          consecutiveMatchCountRef.current = 1
+        }
+        return tempHighestPrediction.className
+      })
+    } else {
+      consecutiveMatchCountRef.current = 0
     }
   }
 
-  const loop = async () => {
-    if (webcamRef.current) {
-      webcamRef.current.update()
-      await predict()
-      window.requestAnimationFrame(loop)
+  const checkPlantMatch = (className: string) => {
+    const matchedPlant = data?.krnmList?.find(
+      (name: string) => name === className
+    )
+
+    if (matchedPlant) {
+      router.push({
+        pathname: `/view/${matchedPlant}`,
+        query: { prevPage: 'ai-flower-detection', sort: 'webcam' },
+      })
+      setUseWebcam(false)
+    } else {
+      setLabel(
+        `인식한 식물은 ${className}입니다. 해당 식물에 대한 데이터는 현재 존재하지 않습니다.`
+      )
+      setUseWebcam(false)
     }
   }
 
-  const predict = async () => {
-    if (model && webcamRef.current && !isPredicting) {
-      // 웹캠에 모델이 로드 및 활성화되고, 현재 예측중이 아닌 경우
-      const predictions = await model.predict(webcamRef.current.canvas)
-      // 모델을 통해 웹캠의 이미지를 예측하고, 결과를 가져옴
-      let foundPrediction = false
-      // 모델이 꽃을 예측했는지 여부를 초기화
-      for (let i = 0; i < maxPredictions; i++) {
-        const className = predictions[i].className
-        const probability = Number(predictions[i].probability.toFixed(2))
-        // 꽃의 이름과 확률을 가져옴
-        if (probability == 1.0) {
-          // 예측에 성공한 경우
-          foundPrediction = true
-          setIsPredicting(true)
-          // setFlowerName(className)
-          setFlowerDetails((prev) => {
-            return { ...prev, name: className }
-          })
+  const handleWebcamCapture = React.useCallback(() => {
+    if (useWebcam && webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot()
+      if (imageSrc) {
+        const img = new Image()
+        img.src = imageSrc
 
-          const description = await fetchChatGPTDescription(
-            `${className} 꽃에 대한 설명을 한 문장으로 적어줘`
-          )
-          setLabel(description)
-
-          const flowerMeaning = await fetchChatGPTDescription(
-            `${className}의 꽃말을 한 단어로 알려줘`
-          )
-          setFlowerDetails((prev) => {
-            return { ...prev, meaning: flowerMeaning }
-          })
-
-          const bloomSeason = await fetchChatGPTDescription(
-            `${className}을 볼 수 있는 계절을 단어로 알려줘`
-          )
-          setFlowerDetails((prev) => {
-            return { ...prev, season: bloomSeason }
-          })
-
-          setIsPredicting(false)
-          break
+        img.onload = async () => {
+          if (model) {
+            const predictions = await model.predict(img)
+            processPredictions(predictions, img.src)
+          }
         }
       }
-      if (!foundPrediction && label === '꽃에 대한 설명입니다.') {
-        setLabel('꽃을 아직 인식하지 못했습니다.')
-      }
     }
-  }
+  }, [model, useWebcam])
 
-  const fetchChatGPTDescription = async (content: string) => {
-    try {
-      const response = await fetch(process.env.NEXT_PUBLIC_CHATGPT_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_CHATGPT_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: 'gpt-3.5-turbo',
-          messages: [
-            { role: 'system', content: 'You are a helpful assistant.' },
-            { role: 'user', content },
-          ],
-          max_tokens: 60,
-          temperature: 0.7,
-        }),
-      })
+  const webcamRef = React.useRef<Webcam | null>(null)
 
-      if (!response.ok) {
-        const errorText = await response.text()
-        console.error(
-          `Error: ${response.status} ${response.statusText} - ${errorText}`
-        )
-        return '설명을 가져올 수 없습니다'
-      }
+  useEffect(() => {
+    console.log('webcam 가동:', useWebcam)
+    if (useWebcam) {
+      const interval = setInterval(() => {
+        handleWebcamCapture()
+      }, 1000)
 
-      const data = await response.json()
-      if (
-        data.choices &&
-        data.choices.length > 0 &&
-        data.choices[0].message &&
-        data.choices[0].message.content
-      ) {
-        return data.choices[0].message.content.trim()
-      } else {
-        return '설명을 가져올 수 없습니다'
-      }
-    } catch (error) {
-      console.error('Error fetching description:', error)
-      return '설명을 가져올 수 없습니다'
+      return () => clearInterval(interval)
     }
-  }
+  }, [useWebcam, handleWebcamCapture])
 
   return (
     <>
@@ -178,67 +140,63 @@ const WebcamModel = ({ webcamModelErrorModalOpen }: WebcamModelProps) => {
         <div
           id="webcam-container"
           className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded"
-        />
+        >
+          {useWebcam && (
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              className="w-full h-full"
+              videoConstraints={{
+                width: 1280,
+                height: 720,
+                facingMode: 'user',
+              }}
+            />
+          )}
+          {!useWebcam && flowerName && imageUrl && (
+            <img src={imageUrl} alt="촬영된 이미지" className="w-full h-full" />
+          )}
+        </div>
+        {useWebcam && (
+          <p className="mt-6 text-2xl font-semibold text-center">
+            예측이 진행중입니다... 현재
+            <span
+              className={`ml-1.5 font-bold
+            ${
+              highestPrediction.probability <= 0.5
+                ? 'text-zinc-500'
+                : highestPrediction.probability < 0.7
+                ? 'text-lime-500'
+                : highestPrediction.probability < 0.95
+                ? 'text-cyan-400'
+                : 'text-amber-300'
+            }
+          `}
+            >
+              {highestPrediction.probability * 100}%
+            </span>
+            의 확률로
+            <span className="ml-1.5 bold text-fuchsia-400">
+              {highestPrediction.className}
+            </span>
+            식물로 예측하고 있습니다.
+          </p>
+        )}
+        {highestPrediction.className && (
+          <p className="mt-12 w-full text-center text-xl font-semibold text-zinc-800">
+            {label}
+          </p>
+        )}
         <button
           type="button"
           className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
-          onClick={initWebcam}
+          onClick={() => setUseWebcam(!useWebcam)}
           aria-label="카메라 실행"
         >
           <img src="/images/camera.png" className="w-12 h-auto" />
         </button>
       </div>
-      {flowerDetails.name && (
-        <>
-          <p className="mt-12 w-full text-center text-xl font-semibold text-zinc-800">
-            분석 결과 {flowerDetails.name} 입니다.
-            {famlNmList.includes(flowerDetails.name) &&
-              data?.data.response.body.items.item.map(
-                (item: PlantIndexItem) =>
-                  item.famlNm == flowerDetails.name && (
-                    <Link
-                      key={item.famlNm}
-                      href={{
-                        pathname: `/view/${item.famlNm}`,
-                        query: {
-                          imgUrl: item.imgUrl,
-                          krnm: item.krnm,
-                          famlNm: item.famlNm,
-                          fturCn: item.fturCn,
-                        },
-                      }}
-                    >
-                      상세 페이지로 이동
-                    </Link>
-                  )
-              )}
-          </p>
-          <section>
-            <h2 className="mt-16 w-full text-center text-lg font-semibold text-zinc-800">
-              설명
-            </h2>
-            <p className="mt-2 mx-3 w-full text-center font-normal text-zinc-800">
-              {label}
-            </p>
-          </section>
-          <section>
-            <h2 className="mt-12 w-full text-center text-lg font-semibold text-zinc-800">
-              꽃말
-            </h2>
-            <p className="mt-2 mx-3 w-full text-center font-normal text-zinc-800">
-              {flowerDetails.meaning}
-            </p>
-          </section>
-          <section>
-            <h2 className="mt-12 w-full text-center text-lg font-semibold text-zinc-800">
-              피는 계절
-            </h2>
-            <p className="mt-2 mx-3 w-full text-center font-normal text-zinc-800">
-              {flowerDetails.season}
-            </p>
-          </section>
-        </>
-      )}
     </>
   )
 }

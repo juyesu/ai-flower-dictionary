@@ -1,24 +1,39 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@styles/ItemList.module.css'
 import WebcamModel from '@/components/ai-flower-dection/WebcamModel'
 import FileUploadModel from '@/components/ai-flower-dection/FileUploadModel'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import WebCamModelErrorModal from '@/components/modal/WebCamModelErrorModal'
 
 const AiFlowerDetection = () => {
   const [isWebcamMode, setIsWebcamMode] = useState(true)
+  const [isClient, setIsClient] = useState(false)
+  const router = useRouter()
+  const { sort } = router.query
   const [openWebcamModelErrorModal, setOpenWebcamModelErrorModal] =
     useState(false)
 
-  const webcamModelErrorModalOpen = () => {
+  useEffect(() => {
+    if (sort == 'file') {
+      setIsWebcamMode(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  const aiErrorModalOpen = () => {
     setOpenWebcamModelErrorModal(true)
   }
-  const webcamModelErrorModalClose = () => {
+  const aiErrorModalClose = () => {
     setOpenWebcamModelErrorModal(false)
     router.push('/')
   }
+
+  if (!isClient || !router.isReady) return null
 
   return (
     <div className="flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
@@ -59,13 +74,13 @@ const AiFlowerDetection = () => {
       </div>
       <div className="flex flex-col items-center w-full">
         {isWebcamMode ? (
-          <WebcamModel webcamModelErrorModalOpen={webcamModelErrorModalOpen} />
+          <WebcamModel AIErrorModalOpen={aiErrorModalOpen} />
         ) : (
-          <FileUploadModel />
+          <FileUploadModel AIErrorModalOpen={aiErrorModalOpen} />
         )}
       </div>
       {openWebcamModelErrorModal && (
-        <WebCamModelErrorModal onClose={webcamModelErrorModalClose} />
+        <WebCamModelErrorModal onClose={aiErrorModalClose} />
       )}
     </div>
   )
