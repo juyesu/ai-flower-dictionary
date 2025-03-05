@@ -74,7 +74,7 @@ const Homepage = () => {
           id="plantInfo"
           title="한국수목원정원관리원에서 제공하는 <br> 100종 이상의 식물들을 확인해보세요"
           description="각양각색 식물들의 이미지와 구체적인 정보를 확인하고 <br> 다른 사람과 식물을 발견한 경험과 나만의 추억 등 의견을 나눠보세요."
-          linkHref="/info"
+          linkHref="/plant-info"
           linkText="Go to PlantInfo"
           imgSrc="/images/plantInfo_title_image_1.jpg"
           isLeftAligned={true}
