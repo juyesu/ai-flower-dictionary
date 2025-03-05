@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, ChangeEvent } from 'react'
 import * as tmImage from '@teachablemachine/image'
 import { CustomMobileNet } from '@teachablemachine/image'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
@@ -40,7 +40,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
     loadModel()
   }, [model])
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files?.length) {
       setUploadedFileName(event.target.files[0].name)
       setUploadedFileUrl(URL.createObjectURL(event.target.files[0]))

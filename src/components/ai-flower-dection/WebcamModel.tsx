@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Webcam from 'react-webcam'
 import * as tmImage from '@teachablemachine/image'
@@ -151,7 +151,7 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
     }
   }
 
-  const handleWebcamCapture = React.useCallback(() => {
+  const handleWebcamCapture = useCallback(() => {
     if (useWebcam && webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot()
       if (imageSrc) {
