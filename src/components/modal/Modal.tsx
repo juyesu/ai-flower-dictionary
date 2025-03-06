@@ -17,9 +17,15 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
           className="w-full h-full fixed z-0 bg-white bg-opacity-90"
           onClick={onClose}
           aria-hidden="true"
+          tabIndex={-1}
         />
       )}
-      <div className="w-[420px] fixed top-[32rem] flex justify-center items-center z-99 bg-white shadow-lg opacity-100 rounded-2xl">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-describedby="modal-description"
+        className="w-[420px] fixed top-[32rem] flex justify-center items-center z-99 bg-white shadow-lg opacity-100 rounded-2xl"
+      >
         <div className="w-full flex flex-col justify-center items-center px-6 py-6">
           <button
             type="button"
@@ -27,9 +33,11 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
             aria-label="모달 닫기"
             className="self-end"
           >
-            <Close className="w-4 h-4" />
+            <Close className="w-4 h-4" aria-hidden="true" />
           </button>
-          <p className="my-8 text-lg font-semibold">{message}</p>
+          <p id="modal-description" className="my-8 text-lg font-semibold">
+            {message}
+          </p>
           <div className="flex flex-row gap-4">
             <button
               ref={buttonRef}
@@ -47,6 +55,7 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
               <button
                 onClick={() => secoundButton.onSecondButtonClick?.()}
                 className="my-4 w-28 py-2 self-center bg-sky-400 font-semibold text-white focus-visible:outline-none rounded-lg"
+                aria-label="페이지 이동"
               >
                 {secoundButton.secoundButtonLabel}
               </button>
