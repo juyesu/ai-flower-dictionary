@@ -63,7 +63,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
                     Login
                   </Link>
                   <Link
-                    href="/register-page"
+                    href="/register"
                     className="sm:px-3 lg:px-6 sm:py-1 lg:py-1.5 border-2 rounded-full bg-zinc-400 text-zinc-100 sm:text-sm xl:text-base sm:font-semibold lg:font-bold"
                   >
                     Sign up

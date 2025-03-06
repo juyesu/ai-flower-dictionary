@@ -71,7 +71,7 @@ const Login = () => {
             </div>
 
             <button className={styles.submitButton}>로그인</button>
-            <Link href="/register-page" className={styles.linkText}>
+            <Link href="/register" className={styles.linkText}>
               아직 회원이 아니신가요?
               <span className="ml-1 underline">회원가입</span>
             </Link>
