@@ -6,8 +6,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { LoginFormType } from '@/types/type'
 import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
+import { useState } from 'react'
+import DaumPostcode from 'react-daum-postcode'
 
-const RegisterPage = () => {
+const Register = () => {
+  const [openPostcode, setOpenPostcode] = useState(false)
   const methods = useForm<LoginFormType>()
   const router = useRouter()
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
@@ -29,6 +32,7 @@ const RegisterPage = () => {
       }
     }
   }
+
   return (
     <Layout>
       <div className={styles.pageLayout}>
@@ -114,7 +118,6 @@ const RegisterPage = () => {
             <div className={styles.formGroup}>
               <label htmlFor="address">주소</label>
               <div className="flex gap-2">
-                {/* 추후 팝업을 통해서만 입력받을 수 있도록 변경 (readOnly 처리) */}
                 <input
                   id="address"
                   type="text"
@@ -122,10 +125,12 @@ const RegisterPage = () => {
                   {...methods.register('address', {
                     required: '주소를 입력해주세요',
                   })}
+                  readOnly
                 />
                 <button
                   type="button"
                   className={styles.popupOpenButton}
+                  onClick={() => setOpenPostcode(true)}
                   aria-label="주소입력 팝업 열기"
                 >
                   <MagnifyingGlass className="w-4 h-4" />
@@ -146,8 +151,34 @@ const RegisterPage = () => {
           </form>
         </div>
       </div>
+      {openPostcode && (
+        <>
+          <div
+            className="w-full h-full fixed z-0 bg-black bg-opacity-10"
+            onClick={() => setOpenPostcode(false)}
+            aria-hidden="true"
+            aria-labelledby="modal-title"
+          />
+          <div
+            className="w-[400px] fixed flex justify-center items-center roundex-xl"
+            aria-modal="true"
+          >
+            <h2 id="modal-title" className="sr-only">
+              주소 검색 모달
+            </h2>
+            <DaumPostcode
+              className="rounded-xl"
+              onComplete={(data) => {
+                methods.setValue('address', data.address)
+                setOpenPostcode(false)
+              }}
+              autoClose={false}
+            />
+          </div>
+        </>
+      )}
     </Layout>
   )
 }
 
-export default RegisterPage
+export default Register
