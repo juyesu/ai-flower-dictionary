@@ -50,6 +50,25 @@ const Post = () => {
     }
   }, [loginUser])
 
+  useEffect(() => {
+    if (
+      prevPage === 'ai-flower-detection' &&
+      sessionStorage.getItem('cameFromAiFlowerDetection') === 'true'
+    ) {
+      const storedPlants = JSON.parse(
+        localStorage.getItem(`${loginUser}.findPlants`) || '[]'
+      )
+
+      if (!storedPlants.includes(krnm)) {
+        localStorage.setItem(
+          `${loginUser}.findPlants`,
+          JSON.stringify([...storedPlants, krnm])
+        )
+      }
+      sessionStorage.removeItem('cameFromAiFlowerDetection')
+    }
+  }, [prevPage, loginUser, krnm])
+
   const handlePlantLike = () => {
     if (typeof krnm === 'string' && loginUser) {
       if (likedPlants.includes(krnm)) {
@@ -173,17 +192,27 @@ const Post = () => {
               </div>
             </div>
             <hr className="my-6 mb-10 w-full" />
-            {sort == 'webcam' && imageUrl && (
-              <div className="p-8 flex flex-col justify-center items-center border rounded-xl">
-                <img
-                  src={imageUrl}
-                  alt="캡쳐된 이미지"
-                  className="w-48 h-48 rounded-xl"
-                />
-                <p className="mt-2 text-lg font-bold">촬영된 식물 이미지</p>
-                <p className="mt-1.5 underline">혹시 인식 결과가 잘못됐나요?</p>
+            {/* toast popup으로 기능 업데이트 */}
+            {/* {sort == 'webcam' && imageUrl && (
+              <div className="p-2 flex flex-row gap-2 justify-center items-center border rounded-lg">
+                <div className="flex flex-col">
+                  <img
+                    src={imageUrl}
+                    alt="캡쳐된 이미지"
+                    className="w-40 h-[120px] border rounded-lg"
+                  />
+                  <p className="mt-1 text-sm text-center">인식된 식물 이미지</p>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                  <p className="my-1.5 font-semibold text-center">
+                    검색 결과에 만족하시나요?
+                  </p>
+                  <button type="button" aria-label="검색 결과 만족">
+                    👍
+                  </button>
+                </div>
               </div>
-            )}
+            )} */}
             <div className="flex flex-row w-full">
               <Image
                 className="w-1/2 mx-16 my-12 border rounded-xl"

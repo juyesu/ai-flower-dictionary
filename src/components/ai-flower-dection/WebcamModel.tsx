@@ -133,6 +133,7 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
     )
 
     if (matchedPlant) {
+      sessionStorage.setItem('cameFromAiFlowerDetection', 'true')
       router.push({
         pathname: `/view/${matchedPlant}`,
         query: { prevPage: 'ai-flower-detection', sort: 'webcam' },
