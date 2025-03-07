@@ -1,0 +1,143 @@
+import { useAuth } from '@/context/AuthContext'
+import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
+import { PlantIndexItem } from '@/types/type'
+import styles from '@styles/ItemList.module.css'
+import Image from 'next/image'
+import Link from 'next/link'
+import BoxOpen from '@/pages/assets/icons/BoxOpen.svg'
+import { useEffect, useState } from 'react'
+
+const MyDictionaryPage = () => {
+  const [accordionOpen, setAccordionOpen] = useState({
+    likedPlants: true,
+    myDictionary: true,
+  })
+  const [fetchPlantImageArray, setFetchPlantImageArray] = useState<
+    { imgUrl: string; krnm: string }[]
+  >([])
+  const { loginUser } = useAuth()
+  const { data } = plantIndexFetchData(1, 300)
+  useEffect(() => {
+    const likedPlants = JSON.parse(
+      localStorage.getItem(`${loginUser}.likedPlants`) || '[]'
+    )
+
+    if (data?.indexList && Array.isArray(likedPlants)) {
+      const filteredImages = data.indexList
+        .filter((item: PlantIndexItem) => likedPlants.includes(item.krnm))
+        .map((item) => ({ imgUrl: item.imgUrl, krnm: item.krnm }))
+
+      setFetchPlantImageArray(filteredImages)
+      console.log(fetchPlantImageArray)
+    }
+  }, [data])
+  return (
+    <div className="flex flex-col items-center w-full min-h-screen sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
+      <div className="relative w-full h-[500px]">
+        <Image
+          src="/images/my_dictionary_title_image_2.jpg"
+          alt="타이틀 커버 이미지"
+          className="object-cover"
+          fill
+        />
+        <div
+          className="absolute inset-0 bg-white"
+          style={{
+            background:
+              'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.9) 70%, rgba(255, 255, 255, 1) 100%)',
+          }}
+        />
+        <div className="absolute inset-0 w-full flex flex-col justify-center items-center gap-5">
+          <div className="mb-12 flex flex-col items-center">
+            <h1 className={styles.main}>My Dictionary</h1>
+            <p className="ml-1 mt-1.5 font-semibold text-zinc-800 text-lg text-center">
+              내가 발견한 식물들로 <br />
+              세상에 단 하나뿐인 나만의 도감을 완성해보세요
+            </p>
+          </div>
+        </div>
+      </div>
+      <section className="w-full mt-8 px-8">
+        <button
+          onClick={() =>
+            setAccordionOpen((prev) => {
+              return { ...prev, likedPlants: !prev.likedPlants }
+            })
+          }
+          className={`flex justify-between w-full px-6 py-4 border border-l-fuchsia-200 border-l-4 font-semibold transition ${
+            accordionOpen.likedPlants ? '' : ''
+          }`}
+        >
+          <span className="text-xl">내가 좋아요 누른 식물</span>
+          <span className="text-2xl font-bold">
+            {accordionOpen.likedPlants ? '-' : '+'}
+          </span>
+        </button>
+
+        {accordionOpen.likedPlants &&
+          (localStorage.getItem(`${loginUser}.likedPlants`) ? (
+            <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 transition-opacity duration-300 opacity-100">
+              {fetchPlantImageArray.map((item, index) => (
+                <Link
+                  key={item.krnm}
+                  href={{
+                    pathname: `/view/${item.krnm}`,
+                    query: { prevPage: 'my-dictionary' },
+                  }}
+                  passHref
+                >
+                  <figure className="text-center">
+                    <Image
+                      key={index}
+                      src={item.imgUrl}
+                      alt={`${item.imgUrl}의 이미지`}
+                      className="w-full h-32 object-cover rounded"
+                      width={500}
+                      height={300}
+                    />
+                    <figcaption className="mt-2 text-sm text-gray-700">
+                      {item.krnm}
+                    </figcaption>
+                  </figure>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="flex justify-center items-center gap-4 p-20 bg-stone-100">
+              <BoxOpen
+                className="w-10 h-10"
+                fill="#a1a1aa"
+                aria-hidden="true"
+              />
+              <p className="font-bold text-zinc-400">
+                아직 좋아요를 누른 식물이 존재하지 않습니다.
+              </p>
+            </div>
+          ))}
+      </section>
+      <section className="w-full mt-8 my-20 px-8">
+        <button
+          onClick={() =>
+            setAccordionOpen((prev) => {
+              return { ...prev, myDictionary: !prev.myDictionary }
+            })
+          }
+          className={`flex justify-between w-full px-6 py-4 border border-l-fuchsia-200 border-l-4 font-semibold transition ${
+            accordionOpen.myDictionary ? '' : ''
+          }`}
+        >
+          <span className="text-xl">나의 식물도감</span>
+          <span className="text-2xl font-bold">
+            {accordionOpen.myDictionary ? '-' : '+'}
+          </span>
+        </button>
+
+        {accordionOpen.myDictionary && (
+          <div className="grid grid-cols-8 gap-6 px-4 py-6 bg-stone-200 transition-opacity duration-300 opacity-100"></div>
+        )}
+      </section>
+    </div>
+  )
+}
+
+export default MyDictionaryPage
