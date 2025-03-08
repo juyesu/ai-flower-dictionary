@@ -17,7 +17,6 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
           className="w-full h-full fixed z-0 bg-white bg-opacity-90"
           onClick={onClose}
           aria-hidden="true"
-          tabIndex={-1}
         />
       )}
       <div
