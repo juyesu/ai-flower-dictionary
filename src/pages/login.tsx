@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '@/components/common/layout'
+import Layout from '@/components/common/Layout'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'

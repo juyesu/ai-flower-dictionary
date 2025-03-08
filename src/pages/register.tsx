@@ -1,4 +1,4 @@
-import Layout from '@/components/common/layout'
+import Layout from '@/components/common/Layout'
 import { Title } from '@/components/ui/Title'
 import styles from '@styles/RegisterPage.module.css'
 import Link from 'next/link'

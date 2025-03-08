@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '@/components/common/layout'
+import Layout from '@/components/common/Layout'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Title } from '@/components/ui/Title'

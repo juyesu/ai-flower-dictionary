@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '@/components/common/layout'
+import Layout from '@/components/common/Layout'
 import ScrollBtn from '@/components/common/ScrollBtn'
 import Homepage from '@/components/homepage/Homepage'
 
