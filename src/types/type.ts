@@ -110,3 +110,10 @@ export type PreviewContentSectionProps = {
   imgSrc: string
   isLeftAligned: boolean
 }
+
+export type SearchFeedbackToastProps = {
+  openToast: boolean
+  onClick: () => void
+  onClose: () => void
+  imageUrl: string
+}

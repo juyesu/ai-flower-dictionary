@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { useCapturedPlantImageStore } from '@/store/imageStore'
 import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
+import SearchFeedbackToast from '@/components/common/SearchFeedbackToast'
 
 export const metadata = {
   title: 'AI 꽃 도감',
@@ -25,7 +26,8 @@ const Post = () => {
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
   const [openLoginRequiredModal, setOpenLoginRequiredModal] = useState(false)
-  const { imageUrl } = useCapturedPlantImageStore()
+  const [openSearchFeedbackToast, setOpenSearchFeedbackToast] = useState(false)
+  const { imageUrl, setImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
   const { prevPage, sort } = router.query
   const { krnm } = router.query
@@ -51,6 +53,12 @@ const Post = () => {
   }, [loginUser])
 
   useEffect(() => {
+    if (imageUrl) {
+      setOpenSearchFeedbackToast(true)
+    }
+  }, [])
+
+  useEffect(() => {
     if (
       prevPage === 'ai-flower-detection' &&
       sessionStorage.getItem('cameFromAiFlowerDetection') === 'true'
@@ -68,6 +76,18 @@ const Post = () => {
       sessionStorage.removeItem('cameFromAiFlowerDetection')
     }
   }, [prevPage, loginUser, krnm])
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setImageUrl('')
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [router, setImageUrl])
 
   const handlePlantLike = () => {
     if (typeof krnm === 'string' && loginUser) {
@@ -183,27 +203,6 @@ const Post = () => {
               </div>
             </div>
             <hr className="my-6 mb-10 w-full" />
-            {/* toast popup으로 기능 업데이트 */}
-            {/* {sort == 'webcam' && imageUrl && (
-              <div className="p-2 flex flex-row gap-2 justify-center items-center border rounded-lg">
-                <div className="flex flex-col">
-                  <img
-                    src={imageUrl}
-                    alt="캡쳐된 이미지"
-                    className="w-40 h-[120px] border rounded-lg"
-                  />
-                  <p className="mt-1 text-sm text-center">인식된 식물 이미지</p>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                  <p className="my-1.5 font-semibold text-center">
-                    검색 결과에 만족하시나요?
-                  </p>
-                  <button type="button" aria-label="검색 결과 만족">
-                    👍
-                  </button>
-                </div>
-              </div>
-            )} */}
             <div className="flex flex-row w-full">
               <Image
                 className="w-1/2 mx-16 my-12 border rounded-xl"
@@ -221,6 +220,14 @@ const Post = () => {
               </div>
             </div>
           </>
+        )}
+        {imageUrl && (
+          <SearchFeedbackToast
+            openToast={openSearchFeedbackToast}
+            onClick={() => setOpenSearchFeedbackToast(true)}
+            onClose={() => setOpenSearchFeedbackToast(false)}
+            imageUrl={imageUrl}
+          />
         )}
       </div>
       {openLoginRequiredModal && (
