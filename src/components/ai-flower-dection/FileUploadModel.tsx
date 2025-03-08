@@ -2,7 +2,7 @@ import { useEffect, useState, ChangeEvent } from 'react'
 import * as tmImage from '@teachablemachine/image'
 import { CustomMobileNet } from '@teachablemachine/image'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
-import { PlantIndexItem, AIModelProps } from '@/types/type'
+import { AIModelProps } from '@/types/type'
 import { useRouter } from 'next/router'
 import Upload from '@/pages/assets/icons/Upload.svg'
 
