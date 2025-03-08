@@ -329,6 +329,7 @@ const ItemList = () => {
       {openLoginRequiredModal && (
         <LoginRequiredModal
           onClose={loginRequiredModalClose}
+          bgOverlay={false}
           onSecondButtonClick={redirectToLoginPage}
         />
       )}

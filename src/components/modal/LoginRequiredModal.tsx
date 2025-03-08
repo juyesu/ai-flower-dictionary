@@ -3,12 +3,13 @@ import { TwoButtonModalProps } from '@/types/type'
 
 const LoginRequiredModal = ({
   onClose,
+  bgOverlay,
   onSecondButtonClick,
 }: TwoButtonModalProps) => {
   return (
     <Modal
       onClose={onClose}
-      bgOverlay={false}
+      bgOverlay={bgOverlay}
       secoundButton={{
         secoundButtonLabel: '로그인',
         onSecondButtonClick: () => {

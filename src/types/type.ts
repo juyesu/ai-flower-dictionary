@@ -72,6 +72,7 @@ export type OneButtonModalProps = {
 
 export type TwoButtonModalProps = {
   onClose: () => void
+  bgOverlay: boolean
   onSecondButtonClick: () => void
 }
 

@@ -109,15 +109,6 @@ const Post = () => {
       console.error('링크 복사 실패', err)
     }
   }
-
-  const loginRequiredModalClose = () => {
-    setOpenLoginRequiredModal(false)
-  }
-
-  const redirectToLoginPage = () => {
-    router.push('/login')
-  }
-
   if (isLoading) return
   return (
     <Layout>
@@ -234,8 +225,9 @@ const Post = () => {
       </div>
       {openLoginRequiredModal && (
         <LoginRequiredModal
-          onClose={loginRequiredModalClose}
-          onSecondButtonClick={redirectToLoginPage}
+          onClose={() => setOpenLoginRequiredModal(false)}
+          bgOverlay={false}
+          onSecondButtonClick={() => router.push('/login')}
         />
       )}
     </Layout>
