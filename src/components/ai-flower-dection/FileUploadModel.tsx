@@ -5,6 +5,7 @@ import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { AIModelProps } from '@/types/type'
 import { useRouter } from 'next/router'
 import Upload from '@/pages/assets/icons/Upload.svg'
+import { useCapturedPlantImageStore } from '@/store/imageStore'
 
 const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const [uploadedFileName, setUploadedFileName] = useState('')
@@ -16,6 +17,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const [isPredicting, setIsPredicting] = useState(false)
   const [image, setImage] = useState<File | null>(null)
   const { data, isLoading, error } = plantIndexFetchData(1, 300)
+  const { setImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
 
   useEffect(() => {
@@ -74,6 +76,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
         }
 
         if (highestPrediction.probability > 0.7) {
+          setImageUrl(imgURL)
           setFlowerName(highestPrediction.className)
           checkPlantMatch(highestPrediction.className)
         } else {
