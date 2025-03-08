@@ -1,5 +1,11 @@
 import LogoutMessageModal from '@/components/modal/LogoutMessageModal'
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from 'react'
 
 interface AuthContextType {
   loginUser: string | null
@@ -27,6 +33,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
     setLoginUser(null)
     setOpenLogoutMessageModal(true)
+    window.location.reload()
   }
 
   const logoutMessageModalClose = () => {

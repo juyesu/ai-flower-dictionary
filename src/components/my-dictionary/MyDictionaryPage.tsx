@@ -6,31 +6,84 @@ import Image from 'next/image'
 import Link from 'next/link'
 import BoxOpen from '@/pages/assets/icons/BoxOpen.svg'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useLoginRequiredModalOpenStore } from '@/store/modalOpenStore'
+import LoginRequiredModal from '../modal/LoginRequiredModal'
 
 const MyDictionaryPage = () => {
+  const [hasPlantsData, setHasPlantsData] = useState({
+    likedPlants: false,
+    myDictionary: false,
+  })
   const [accordionOpen, setAccordionOpen] = useState({
     likedPlants: true,
     myDictionary: true,
   })
-  const [fetchPlantImageArray, setFetchPlantImageArray] = useState<
-    { imgUrl: string; krnm: string }[]
-  >([])
+  const [plantData, setPlantData] = useState<{
+    likedPlants: { imgUrl: string; krnm: string }[]
+    myDictionary: { imgUrl: string; krnm: string }[]
+  }>({
+    likedPlants: [],
+    myDictionary: [],
+  })
+  const [userEmail, setUserEmail] = useState<string | null>(null)
+  const { modalOpen, setModalOpen } = useLoginRequiredModalOpenStore()
   const { loginUser } = useAuth()
+  const router = useRouter()
   const { data } = plantIndexFetchData(1, 300)
+
   useEffect(() => {
-    const likedPlants = JSON.parse(
+    if (typeof window !== 'undefined') {
+      const emailFromLocalStorage = localStorage.getItem('userEmail')
+      if (emailFromLocalStorage) {
+        setUserEmail(emailFromLocalStorage)
+        setHasPlantsData({
+          likedPlants: !!localStorage.getItem(`${loginUser}.likedPlants`),
+          myDictionary: !!localStorage.getItem(`${loginUser}.findPlants`),
+        })
+      } else {
+        setModalOpen(true)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (userEmail) {
+      setModalOpen(false)
+    }
+  }, [userEmail])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const getLikedPlants = JSON.parse(
       localStorage.getItem(`${loginUser}.likedPlants`) || '[]'
     )
+    const getFindPlants = JSON.parse(
+      localStorage.getItem(`${loginUser}.findPlants`) || '[]'
+    )
 
-    if (data?.indexList && Array.isArray(likedPlants)) {
-      const filteredImages = data.indexList
-        .filter((item: PlantIndexItem) => likedPlants.includes(item.krnm))
+    if (data?.indexList && Array.isArray(getLikedPlants)) {
+      const filteredLikedImages = data.indexList
+        .filter((item: PlantIndexItem) => getLikedPlants.includes(item.krnm))
         .map((item) => ({ imgUrl: item.imgUrl, krnm: item.krnm }))
 
-      setFetchPlantImageArray(filteredImages)
-      console.log(fetchPlantImageArray)
+      setPlantData((prev) => ({
+        ...prev,
+        likedPlants: filteredLikedImages,
+      }))
+    }
+
+    if (data?.indexList && Array.isArray(getFindPlants)) {
+      const filteredFindImages = data.indexList
+        .filter((item: PlantIndexItem) => getFindPlants.includes(item.krnm))
+        .map((item) => ({ imgUrl: item.imgUrl, krnm: item.krnm }))
+      setPlantData((prev) => ({
+        ...prev,
+        myDictionary: filteredFindImages,
+      }))
     }
   }, [data])
+
   return (
     <div className="flex flex-col items-center w-full min-h-screen sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
       <div className="relative w-full h-[500px]">
@@ -68,16 +121,21 @@ const MyDictionaryPage = () => {
             accordionOpen.likedPlants ? '' : ''
           }`}
         >
-          <span className="text-xl">내가 좋아요 누른 식물</span>
+          <span className="text-xl">
+            내가 좋아요 누른 식물
+            <span className="ml-2 text-zinc-400">
+              {`(${plantData.myDictionary.length})`}
+            </span>
+          </span>
           <span className="text-2xl font-bold">
             {accordionOpen.likedPlants ? '-' : '+'}
           </span>
         </button>
 
         {accordionOpen.likedPlants &&
-          (localStorage.getItem(`${loginUser}.likedPlants`) ? (
+          (hasPlantsData.likedPlants ? (
             <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 transition-opacity duration-300 opacity-100">
-              {fetchPlantImageArray.map((item, index) => (
+              {plantData.likedPlants.map((item, index) => (
                 <Link
                   key={item.krnm}
                   href={{
@@ -91,7 +149,7 @@ const MyDictionaryPage = () => {
                       key={index}
                       src={item.imgUrl}
                       alt={`${item.imgUrl}의 이미지`}
-                      className="w-full h-32 object-cover rounded"
+                      className="w-full h-32 border-4 border-stone-400 object-cover rounded"
                       width={500}
                       height={300}
                     />
@@ -126,16 +184,68 @@ const MyDictionaryPage = () => {
             accordionOpen.myDictionary ? '' : ''
           }`}
         >
-          <span className="text-xl">나의 식물도감</span>
+          <span className="text-xl">
+            나의 식물도감
+            <span className="ml-2 text-zinc-400">
+              {`(${plantData.myDictionary.length}/${data?.response.response.body.totalCount})`}
+            </span>
+          </span>
           <span className="text-2xl font-bold">
             {accordionOpen.myDictionary ? '-' : '+'}
           </span>
         </button>
 
-        {accordionOpen.myDictionary && (
-          <div className="grid grid-cols-8 gap-6 px-4 py-6 bg-stone-200 transition-opacity duration-300 opacity-100"></div>
-        )}
+        {accordionOpen.myDictionary &&
+          (hasPlantsData.myDictionary ? (
+            <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 transition-opacity duration-300 opacity-100">
+              {plantData.myDictionary.map((item, index) => (
+                <Link
+                  key={item.krnm}
+                  href={{
+                    pathname: `/view/${item.krnm}`,
+                    query: { prevPage: 'my-dictionary' },
+                  }}
+                  passHref
+                >
+                  <figure className="text-center">
+                    <Image
+                      key={index}
+                      src={item.imgUrl}
+                      alt={`${item.imgUrl}의 이미지`}
+                      className="w-full h-32 border-4 border-stone-400 object-cover rounded"
+                      width={500}
+                      height={300}
+                    />
+                    <figcaption className="mt-2 text-sm text-gray-700">
+                      {item.krnm}
+                    </figcaption>
+                  </figure>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="flex justify-center items-center gap-4 p-20 bg-stone-100">
+              <BoxOpen
+                className="w-10 h-10"
+                fill="#a1a1aa"
+                aria-hidden="true"
+              />
+              <p className="font-bold text-zinc-400">
+                아직 발견한 식물이 존재하지 않습니다.
+              </p>
+            </div>
+          ))}
       </section>
+      {modalOpen && (
+        <LoginRequiredModal
+          onClose={() => {
+            setModalOpen(false)
+            router.back()
+          }}
+          bgOverlay={true}
+          onSecondButtonClick={() => router.push('/login')}
+        />
+      )}
     </div>
   )
 }
