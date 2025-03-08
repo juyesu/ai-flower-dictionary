@@ -143,6 +143,7 @@ const MyDictionaryPage = () => {
                     query: { prevPage: 'my-dictionary' },
                   }}
                   passHref
+                  aria-label={`${item.krnm}상세 페이지로 이동`}
                 >
                   <figure className="text-center">
                     <Image
@@ -206,6 +207,7 @@ const MyDictionaryPage = () => {
                     query: { prevPage: 'my-dictionary' },
                   }}
                   passHref
+                  aria-label={`${item.krnm}상세 페이지로 이동`}
                 >
                   <figure className="text-center">
                     <Image

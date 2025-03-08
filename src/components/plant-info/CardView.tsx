@@ -18,7 +18,7 @@ const CardView = ({
       {apiData &&
         apiData?.map((item: PlantIndexItem) => (
           <div className="mb-4 flex flex-col items-center w-full">
-            <div className="flex flex-col shadow-custom-all rounded-xl bg-white">
+            <article className="flex flex-col shadow-custom-all rounded-xl bg-white">
               <Link
                 key={item.famlNm}
                 href={{
@@ -26,6 +26,7 @@ const CardView = ({
                   query: { prevPage: 'plant-info', sort: 'card' },
                 }}
                 passHref
+                aria-label={`${item.krnm}상세 페이지로 이동`}
               >
                 <Image
                   className="h-[22rem] w-[25rem] object-cover rounded-t-xl"
@@ -84,7 +85,7 @@ const CardView = ({
                   </div>
                 </div>
               </Link>
-            </div>
+            </article>
           </div>
         ))}
     </div>

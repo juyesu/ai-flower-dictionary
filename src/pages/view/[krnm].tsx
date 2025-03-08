@@ -203,22 +203,37 @@ const Post = () => {
               </div>
             </div>
             <hr className="my-6 mb-10 w-full" />
-            <div className="flex flex-row w-full">
+            <figure className="flex flex-row w-full">
               <Image
                 className="w-1/2 mx-16 my-12 border rounded-xl"
                 src={plantData?.imgUrl}
-                alt={plantData?.krnm}
+                alt={`${plantData?.krnm}식물`}
                 width={400}
                 height={300}
               />
-              <div className="w-1/2 justify-self-center self-center px-8 text-[#797D48]">
-                <p className="my-4 text-3xl font-semibold">
-                  색상 : {plantData?.flwrClorCn} <br /> 개화시기 :{' '}
-                  {plantData?.bloomPeriodCn}
-                </p>
-                <p className="text-xl font-semibold">{plantData?.fturCn}</p>
-              </div>
-            </div>
+              <figcaption className="w-1/2 justify-self-center self-center px-8 text-[#797D48]">
+                <dl>
+                  <div className="my-4 font-semibold text-3xl">
+                    <dt className="inline-block">색상:</dt>
+                    <dd className="ml-2 inline-block">
+                      {plantData?.flwrClorCn}
+                    </dd>
+                  </div>
+                  <div className="my-4 font-semibold text-3xl">
+                    <dt className="inline-block">개화시기:</dt>
+                    <dd className="ml-2 inline-block">
+                      {plantData?.bloomPeriodCn}
+                    </dd>
+                  </div>
+                  <div className="my-4 font-semibold">
+                    <dt className="inline-block text-3xl">특징:</dt>
+                    <dd className="inline-block text-xl">
+                      {plantData?.fturCn}
+                    </dd>
+                  </div>
+                </dl>
+              </figcaption>
+            </figure>
           </>
         )}
         {imageUrl && (
