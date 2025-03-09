@@ -24,14 +24,15 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
   useEffect(() => {
     const loadModel = async () => {
       try {
-        if (!model) {
-          const loadedModel = await tmImage.load(
-            '/plants_detection_model/model.json',
-            '/plants_detection_model/metadata.json'
-          )
-          setModel(loadedModel)
-          setMaxPredictions(loadedModel.getTotalClasses())
-        }
+        if (model) return
+
+        const loadedModel = await tmImage.load(
+          '/plants_detection_model/model.json',
+          '/plants_detection_model/metadata.json'
+        )
+
+        setModel(loadedModel)
+        setMaxPredictions(loadedModel.getTotalClasses())
       } catch (modelError) {
         console.error('모델 로드 중 에러 발생:', modelError)
         if (!isLoading && (!data || modelError || error)) {
