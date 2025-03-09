@@ -110,7 +110,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
     <>
       <div className="flex flex-col items-center px-80 w-full">
         <div
-          id="webcam-container"
+          id="image-container"
           className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded bg-cover bg-center"
           style={{
             backgroundImage: uploadedFileUrl

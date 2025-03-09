@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import WebCamModelErrorModal from '@/components/modal/WebCamModelErrorModal'
 
 const AiFlowerDetection = () => {
-  const [isWebcamMode, setIsWebcamMode] = useState(true)
+  const [isCameraMode, setIsCameraMode] = useState(true)
   const [isClient, setIsClient] = useState(false)
   const router = useRouter()
   const { sort } = router.query
@@ -17,7 +17,7 @@ const AiFlowerDetection = () => {
 
   useEffect(() => {
     if (sort == 'file') {
-      setIsWebcamMode(false)
+      setIsCameraMode(false)
     }
   }, [])
 
@@ -41,7 +41,7 @@ const AiFlowerDetection = () => {
         <div className="mt-40 mb-20 flex flex-col items-center gap-3">
           <h1 className={styles.main}>AI Flower Detection</h1>
           <p className="ml-1 mt-1.5 font-semibold text-zinc-800 text-lg text-center">
-            웹 캠에 꽃을 비추거나, 꽃 이미지를 업로드하면 <br /> 해당 꽃의
+            카메라에 꽃을 비추거나, 꽃 이미지를 업로드하면 <br /> 해당 꽃의
             이름과 정보를 알려드립니다.
           </p>
         </div>
@@ -49,31 +49,31 @@ const AiFlowerDetection = () => {
           <button
             type="button"
             className={`p-3 w-1/2 h-full rounded-l-full ${
-              isWebcamMode
+              isCameraMode
                 ? 'bg-zinc-600 text-white font-semibold'
                 : 'bg-white text-zinc-800'
             }`}
-            onClick={() => setIsWebcamMode(true)}
+            onClick={() => setIsCameraMode(true)}
             aria-label="카메라로 꽃을 인식하는 모드로 전환"
           >
-            WebCam
+            카메라
           </button>
           <button
             type="button"
             className={`p-3 w-1/2 h-full rounded-r-full ${
-              isWebcamMode
+              isCameraMode
                 ? 'bg-white text-zinc-800'
                 : 'bg-zinc-600 text-white font-semibold'
             }`}
-            onClick={() => setIsWebcamMode(false)}
+            onClick={() => setIsCameraMode(false)}
             aria-label="사진을 업로드하여 꽃을 인식하는 모드로 전환"
           >
-            File Upload
+            파일 업로드
           </button>
         </div>
       </div>
       <div className="flex flex-col items-center w-full">
-        {isWebcamMode ? (
+        {isCameraMode ? (
           <CameraModel AIErrorModalOpen={aiErrorModalOpen} />
         ) : (
           <FileUploadModel AIErrorModalOpen={aiErrorModalOpen} />

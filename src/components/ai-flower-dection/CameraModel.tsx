@@ -150,7 +150,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
       sessionStorage.setItem('cameFromAiFlowerDetection', 'true')
       router.push({
         pathname: `/view/${matchedPlant}`,
-        query: { prevPage: 'ai-flower-detection', sort: 'webcam' },
+        query: { prevPage: 'ai-flower-detection', sort: 'camera' },
       })
       setUseWebcam(false)
     } else {
@@ -212,40 +212,39 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
   }
 
   return (
-    <>
-      <div className="flex flex-col items-center px-80 w-full">
-        <div
-          id="webcam-container"
-          className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded"
-        >
-          {useWebcam && (
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              className="w-full h-full"
-              videoConstraints={{
-                width: 1280,
-                height: 720,
-                facingMode: 'user',
-              }}
-            />
-          )}
-          {!useWebcam && flowerName && imageUrl && (
-            <NextImage
-              src={imageUrl}
-              alt="촬영된 이미지"
-              className="w-full h-full"
-              width={832}
-              height={624}
-            />
-          )}
-        </div>
+    <div className="flex flex-col items-center px-80 w-full">
+      <div
+        id="camera-display-container"
+        className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded"
+      >
         {useWebcam && (
-          <p className="mt-6 text-2xl font-semibold text-center">
-            예측이 진행중입니다... 현재
-            <span
-              className={`ml-1.5 font-bold
+          <Webcam
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            className="w-full h-full"
+            videoConstraints={{
+              width: 1280,
+              height: 720,
+              facingMode: 'user',
+            }}
+          />
+        )}
+        {!useWebcam && flowerName && imageUrl && (
+          <NextImage
+            src={imageUrl}
+            alt="촬영된 이미지"
+            className="w-full h-full"
+            width={832}
+            height={624}
+          />
+        )}
+      </div>
+      {useWebcam && (
+        <p className="mt-6 text-2xl font-semibold text-center">
+          예측이 진행중입니다... 현재
+          <span
+            className={`ml-1.5 font-bold
             ${
               highestPrediction.probability <= 0.5
                 ? 'text-zinc-500'
@@ -256,77 +255,76 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
                 : 'text-amber-300'
             }
           `}
-            >
-              {highestPrediction.probability * 100}%
-            </span>
-            의 확률로
-            <span className="ml-1.5 bold text-fuchsia-400">
-              {highestPrediction.className}
-            </span>
-            식물로 예측하고 있습니다.
+          >
+            {highestPrediction.probability * 100}%
+          </span>
+          의 확률로
+          <span className="ml-1.5 bold text-fuchsia-400">
+            {highestPrediction.className}
+          </span>
+          식물로 예측하고 있습니다.
+        </p>
+      )}
+      {highestPrediction.className && flowerName && !useWebcam && (
+        <div>
+          <p className="mt-12 text-zinc-400 text-center">
+            ※ 인덱스에 식물 정보가 존재하지 않아, 인공지능 생성 답변으로 대체
+            됩니다.
           </p>
-        )}
-        {highestPrediction.className && flowerName && !useWebcam && (
-          <div>
-            <p className="mt-12 text-zinc-400 text-center">
-              ※ 인덱스에 식물 정보가 존재하지 않아, 인공지능 생성 답변으로 대체
-              됩니다.
-            </p>
-            <p className="mt-2 w-full text-center text-3xl font-bold text-cyan-600">
-              예측 결과 : {flowerName}
-            </p>
-            <p className="mt-6 text-center text-lg">{label}</p>
-          </div>
-        )}
-        {!isMobileDevice() ? (
-          <button
-            type="button"
-            className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
-            onClick={() => {
-              setUseWebcam(!useWebcam)
-              setFlowerName('')
-              setLabel('')
-              isGptFetchingRef.current = false
-            }}
-            aria-label="카메라 실행"
+          <p className="mt-2 w-full text-center text-3xl font-bold text-cyan-600">
+            예측 결과 : {flowerName}
+          </p>
+          <p className="mt-6 text-center text-lg">{label}</p>
+        </div>
+      )}
+      {!isMobileDevice() ? (
+        <button
+          type="button"
+          className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
+          onClick={() => {
+            setUseWebcam(!useWebcam)
+            setFlowerName('')
+            setLabel('')
+            isGptFetchingRef.current = false
+          }}
+          aria-label="카메라 실행"
+        >
+          <NextImage
+            src="/images/camera.png"
+            alt=""
+            className="w-12 h-auto"
+            aria-hidden="true"
+            width={48}
+            height={48}
+          />
+        </button>
+      ) : (
+        <>
+          <label
+            htmlFor="cameraInput"
+            className="my-8 px-1.5 py-0.5 flex items-center justify-center w-[7rem] h-[3rem] bg-zinc-300 border border-zinc-400 cursor-pointer rounded-full"
           >
             <NextImage
               src="/images/camera.png"
               alt=""
-              className="w-12 h-auto"
+              className="w-6 h-auto"
               aria-hidden="true"
-              width={48}
-              height={48}
+              width={24}
+              height={24}
             />
-          </button>
-        ) : (
-          <>
-            <label
-              htmlFor="cameraInput"
-              className="my-8 px-1.5 py-0.5 flex items-center justify-center w-[7rem] h-[3rem] bg-zinc-300 border border-zinc-400 cursor-pointer rounded-full"
-            >
-              <NextImage
-                src="/images/camera.png"
-                alt=""
-                className="w-6 h-auto"
-                aria-hidden="true"
-                width={24}
-                height={24}
-              />
-              카메라 열기
-            </label>
-            <input
-              type="file"
-              id="cameraInput"
-              accept="image/*"
-              capture="environment"
-              className="hidden"
-              onChange={handleMobileCapture}
-            />
-          </>
-        )}
-      </div>
-    </>
+            카메라 열기
+          </label>
+          <input
+            type="file"
+            id="cameraInput"
+            accept="image/*"
+            capture="environment"
+            className="hidden"
+            onChange={handleMobileCapture}
+          />
+        </>
+      )}
+    </div>
   )
 }
 
