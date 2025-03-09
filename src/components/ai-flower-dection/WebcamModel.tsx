@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  ChangeEvent,
+} from 'react'
 import { useRouter } from 'next/router'
 import Webcam from 'react-webcam'
 import * as tmImage from '@teachablemachine/image'
@@ -21,6 +27,12 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const isGptFetchingRef = useRef(false)
   const { imageUrl, setImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
+  const webcamRef = useRef<Webcam | null>(null)
+
+  // 모바일 환경
+  const isMobileDevice = () => {
+    return /Mobi|Android/i.test(navigator.userAgent)
+  }
 
   useEffect(() => {
     const loadModel = async () => {
@@ -170,8 +182,6 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
     }
   }, [model, useWebcam])
 
-  const webcamRef = useRef<Webcam | null>(null)
-
   useEffect(() => {
     console.log('webcam 가동:', useWebcam)
     if (useWebcam) {
@@ -182,6 +192,23 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
       return () => clearInterval(interval)
     }
   }, [useWebcam, handleWebcamCapture])
+
+  // 모바일 환경
+  const handleMobileCapture = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const imgURL = URL.createObjectURL(file)
+      const img = new Image()
+      img.src = imgURL
+
+      img.onload = async () => {
+        if (model) {
+          const predictions = await model.predict(img)
+          processPredictions(predictions, img.src)
+        }
+      }
+    }
+  }
 
   return (
     <>
@@ -244,19 +271,43 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
             <p className="mt-6 text-center text-lg">{label}</p>
           </div>
         )}
-        <button
-          type="button"
-          className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
-          onClick={() => {
-            setUseWebcam(!useWebcam)
-            setFlowerName('')
-            setLabel('')
-            isGptFetchingRef.current = false
-          }}
-          aria-label="카메라 실행"
-        >
-          <img src="/images/camera.png" className="w-12 h-auto" />
-        </button>
+        {!isMobileDevice() ? (
+          <button
+            type="button"
+            className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
+            onClick={() => {
+              setUseWebcam(!useWebcam)
+              setFlowerName('')
+              setLabel('')
+              isGptFetchingRef.current = false
+            }}
+            aria-label="카메라 실행"
+          >
+            <img src="/images/camera.png" className="w-12 h-auto" />
+          </button>
+        ) : (
+          <>
+            <label
+              htmlFor="cameraInput"
+              className="my-8 px-1.5 py-0.5 flex items-center justify-center w-[7rem] h-[3rem] bg-zinc-300 border border-zinc-400 cursor-pointer rounded-full"
+            >
+              <img
+                src="/images/camera.png"
+                alt="카메라 아이콘"
+                className="w-6 h-auto"
+              />
+              카메라 열기
+            </label>
+            <input
+              type="file"
+              id="cameraInput"
+              accept="image/*"
+              capture="environment"
+              className="hidden"
+              onChange={handleMobileCapture}
+            />
+          </>
+        )}
       </div>
     </>
   )
