@@ -277,49 +277,47 @@ const ItemList = () => {
           handlePlantLinkShare={handlePlantLinkShare}
         />
       )}
-      <div id="pagination" className="my-20">
-        <nav className="flex justify-between">
-          <ul className="flex items-center gap-2">
-            <li>
-              <button
-                type="button"
-                aria-label="첫 페이지로 이동"
-                onClick={chageFirstPage}
-              >
-                <FirstPage className="w-6 h-6" aria-hidden="true" />
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                aria-label="이전 페이지로 이동"
-                onClick={changePrevPage}
-              >
-                <PrevPage className="w-6 h-6" aria-hidden="true" />
-              </button>
-            </li>
-            {paginationNumberList()}
-            <li>
-              <button
-                type="button"
-                aria-label="다음 페이지로 이동"
-                onClick={changeNextPage}
-              >
-                <NextPage className="w-6 h-6" aria-hidden="true" />
-              </button>
-            </li>
-            <li>
-              <button
-                type="button"
-                aria-label="마지막 페이지로 이동"
-                onClick={changeLastPage}
-              >
-                <LastPage className="w-6 h-6" aria-hidden="true" />
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <nav id="pagination" className="my-20 flex justify-between">
+        <ul className="flex items-center gap-2">
+          <li>
+            <button
+              type="button"
+              aria-label="첫 페이지로 이동"
+              onClick={chageFirstPage}
+            >
+              <FirstPage className="w-6 h-6" aria-hidden="true" />
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              aria-label="이전 페이지로 이동"
+              onClick={changePrevPage}
+            >
+              <PrevPage className="w-6 h-6" aria-hidden="true" />
+            </button>
+          </li>
+          {paginationNumberList()}
+          <li>
+            <button
+              type="button"
+              aria-label="다음 페이지로 이동"
+              onClick={changeNextPage}
+            >
+              <NextPage className="w-6 h-6" aria-hidden="true" />
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              aria-label="마지막 페이지로 이동"
+              onClick={changeLastPage}
+            >
+              <LastPage className="w-6 h-6" aria-hidden="true" />
+            </button>
+          </li>
+        </ul>
+      </nav>
       {openSearchNotFoundModal && (
         <SearchNotFoundModal onClose={searchNotFoundModalClose} />
       )}
