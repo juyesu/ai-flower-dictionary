@@ -1,6 +1,7 @@
 import { useEffect, useState, ChangeEvent } from 'react'
 import * as tmImage from '@teachablemachine/image'
 import { CustomMobileNet } from '@teachablemachine/image'
+import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { AIModelProps } from '@/types/type'
 import { useRouter } from 'next/router'
@@ -88,7 +89,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
     }
   }
 
-  const checkPlantMatch = (className: string) => {
+  const checkPlantMatch = async (className: string) => {
     const matchedPlant = data?.krnmList?.find(
       (name: string) => name === className
     )
@@ -100,62 +101,40 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
         query: { prevPage: 'ai-flower-detection', sort: 'file' },
       })
     } else {
-      setLabel(
-        `인식한 식물은 ${className}입니다. 일치하는 검색 결과가 없습니다.`
-      )
+      try {
+        const gptResponse = await fetchChatGptResponse(className)
+        setLabel(gptResponse)
+      } catch {
+        setLabel('인공지능 생성 답변을 불러오는데 실패하였습니다.')
+        console.error('GPT API 호출 실패:', error)
+      }
     }
   }
 
   return (
-    <>
-      <div className="flex flex-col items-center px-80 w-full">
-        <div
-          id="image-container"
-          className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded bg-cover bg-center"
-          style={{
-            backgroundImage: uploadedFileUrl
-              ? `url(${uploadedFileUrl})`
-              : 'none',
-          }}
-        />
-        {image && (
-          <div className="mt-2">
-            <h2 className="text-xl text-center">{flowerName}</h2>
-            <p className="font-semibold text-center">{label}</p>
-          </div>
-        )}
-        {uploadedFileName ? (
-          <div className="my-16 flex flex-row gap-10">
-            <div>
-              <label
-                htmlFor="fileUpload"
-                className="p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
-              >
-                <Upload
-                  className="mx-2 w-4 h-4"
-                  fill="#f4f4f5"
-                  aria-hidden="true"
-                />
-                파일 업로드하기
-              </label>
-              <input
-                id="fileUpload"
-                type="file"
-                className="hidden"
-                onChange={handleFileChange}
-              />
-            </div>
-            <div className="border"></div>
-            <p className="mt-4 text-lg">📂 {uploadedFileName}</p>
-          </div>
-        ) : (
+    <div className="flex flex-col items-center px-80 w-full">
+      <div
+        id="image-container"
+        className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded bg-cover bg-center"
+        style={{
+          backgroundImage: uploadedFileUrl ? `url(${uploadedFileUrl})` : 'none',
+        }}
+      />
+      {image && (
+        <div className="mt-2">
+          <h2 className="text-xl text-center">{flowerName}</h2>
+          <p className="font-semibold text-center">{label}</p>
+        </div>
+      )}
+      {uploadedFileName ? (
+        <div className="my-16 flex flex-row gap-10">
           <div>
             <label
               htmlFor="fileUpload"
-              className="my-16 p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
+              className="p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
             >
               <Upload
-                className="w-4 h-4 mx-2"
+                className="mx-2 w-4 h-4"
                 fill="#f4f4f5"
                 aria-hidden="true"
               />
@@ -168,9 +147,31 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
               onChange={handleFileChange}
             />
           </div>
-        )}
-      </div>
-    </>
+          <div className="border"></div>
+          <p className="mt-4 text-lg">📂 {uploadedFileName}</p>
+        </div>
+      ) : (
+        <div>
+          <label
+            htmlFor="fileUpload"
+            className="my-16 p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
+          >
+            <Upload
+              className="w-4 h-4 mx-2"
+              fill="#f4f4f5"
+              aria-hidden="true"
+            />
+            파일 업로드하기
+          </label>
+          <input
+            id="fileUpload"
+            type="file"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+        </div>
+      )}
+    </div>
   )
 }
 
