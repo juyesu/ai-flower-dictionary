@@ -8,6 +8,7 @@ import React, {
 import { useRouter } from 'next/router'
 import Webcam from 'react-webcam'
 import * as tmImage from '@teachablemachine/image'
+import NextImage from 'next/image'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { AIModelProps } from '@/types/type'
 import { useCapturedPlantImageStore } from '@/store/imageStore'
@@ -231,7 +232,13 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
             />
           )}
           {!useWebcam && flowerName && imageUrl && (
-            <img src={imageUrl} alt="촬영된 이미지" className="w-full h-full" />
+            <NextImage
+              src={imageUrl}
+              alt="촬영된 이미지"
+              className="w-full h-full"
+              width={832}
+              height={624}
+            />
           )}
         </div>
         {useWebcam && (
@@ -283,7 +290,14 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
             }}
             aria-label="카메라 실행"
           >
-            <img src="/images/camera.png" className="w-12 h-auto" />
+            <NextImage
+              src="/images/camera.png"
+              alt=""
+              className="w-12 h-auto"
+              aria-hidden="true"
+              width={48}
+              height={48}
+            />
           </button>
         ) : (
           <>
@@ -291,10 +305,13 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
               htmlFor="cameraInput"
               className="my-8 px-1.5 py-0.5 flex items-center justify-center w-[7rem] h-[3rem] bg-zinc-300 border border-zinc-400 cursor-pointer rounded-full"
             >
-              <img
+              <NextImage
                 src="/images/camera.png"
-                alt="카메라 아이콘"
+                alt=""
                 className="w-6 h-auto"
+                aria-hidden="true"
+                width={24}
+                height={24}
               />
               카메라 열기
             </label>

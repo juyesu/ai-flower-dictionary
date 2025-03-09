@@ -31,9 +31,9 @@ const CardView = ({
                 <Image
                   className="h-[22rem] w-[25rem] object-cover rounded-t-xl"
                   src={item.imgUrl}
-                  alt={item.krnm}
-                  width={500}
-                  height={300}
+                  alt={`${item.krnm}식물`}
+                  width={694}
+                  height={521}
                 />
                 <div className="mx-6 mt-7 mb-4 flex flex-col gap-3">
                   <span className="self-start px-3 py-0.5 bg-cyan-500 bg-[#797D48] rounded-full font-semibold text-sm text-white">

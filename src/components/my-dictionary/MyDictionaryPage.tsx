@@ -149,10 +149,10 @@ const MyDictionaryPage = () => {
                     <Image
                       key={index}
                       src={item.imgUrl}
-                      alt={`${item.imgUrl}의 이미지`}
+                      alt={`${item.imgUrl}식물`}
                       className="w-full h-32 border-4 border-stone-400 object-cover rounded"
-                      width={500}
-                      height={300}
+                      width={157}
+                      height={128}
                     />
                     <figcaption className="mt-2 text-sm text-gray-700">
                       {item.krnm}
@@ -215,8 +215,8 @@ const MyDictionaryPage = () => {
                       src={item.imgUrl}
                       alt={`${item.imgUrl}의 이미지`}
                       className="w-full h-32 border-4 border-stone-400 object-cover rounded"
-                      width={500}
-                      height={300}
+                      width={157}
+                      height={128}
                     />
                     <figcaption className="mt-2 text-sm text-gray-700">
                       {item.krnm}

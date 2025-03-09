@@ -204,7 +204,7 @@ const ItemList = () => {
       <div className="relative w-full h-[652px]">
         <Image
           src="/images/plant_info_title_image_2.jpg"
-          alt="타이틀 커버 이미지"
+          alt=""
           className="object-cover"
           fill
         />

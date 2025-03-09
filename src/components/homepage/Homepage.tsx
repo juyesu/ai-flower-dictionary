@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '@styles/Homepage.module.css'
 import PlantSearchBar from '@/components/common/PlantSearchBar'
 import useFadeInOnScroll from '@/hooks/useFadeInOnScroll'
@@ -128,10 +129,15 @@ const PreviewContentSection = ({
                 : styles['hidden-until-scroll']
             }`}
           >
-            <img
-              src={imgSrc}
-              className="h-[52rem] object-cover object-center hover:scale-105 overflow-hidden transition-transform duration-500 ease-out"
-            />
+            <div className="relative h-[52rem] overflow-hidden hover:scale-105 transition-transform duration-500 ease-out">
+              <Image
+                src={imgSrc}
+                alt=""
+                aria-hidden="true"
+                className="h-[52rem] object-cover object-center overflow-hidden"
+                layout="fill"
+              />
+            </div>
           </div>
           <div
             className={`flex flex-col w-1/2 hidden-until-scroll ${
@@ -200,10 +206,15 @@ const PreviewContentSection = ({
                 : styles['hidden-until-scroll']
             }`}
           >
-            <img
-              src={imgSrc}
-              className="h-[52rem] object-cover object-center hover:scale-105 overflow-hidden transition-transform duration-500 ease-out"
-            />
+            <div className="relative h-[52rem] overflow-hidden hover:scale-105 transition-transform duration-500 ease-out">
+              <Image
+                src={imgSrc}
+                alt=""
+                aria-hidden="true"
+                className="object-cover object-center overflow-hidden"
+                layout="fill"
+              />
+            </div>
           </div>
         </>
       )}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Close from '@/pages/assets/icons/Close.svg'
+import Image from 'next/image'
 import { SearchFeedbackToastProps } from '@/types/type'
 
 const SearchFeedbackToast = ({
@@ -36,10 +37,12 @@ const SearchFeedbackToast = ({
       </button>
       <div className="flex flex-col">
         <p className="my-0.5 text-center text-zinc-500">인식한 이미지:</p>
-        <img
+        <Image
           src={imageUrl}
-          alt="캡쳐된 이미지"
+          alt="인식에 사용된 이미지"
           className="w-60 h-[200px] border-4 border-stone-400 rounded-lg"
+          width={240}
+          height={200}
         />
       </div>
       {!isLikeButtonClicked ? (
