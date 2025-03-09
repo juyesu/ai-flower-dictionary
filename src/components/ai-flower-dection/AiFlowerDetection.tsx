@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import styles from '@styles/ItemList.module.css'
-import WebcamModel from '@/components/ai-flower-dection/WebcamModel'
+import CameraModel from '@/components/ai-flower-dection/CameraModel'
 import FileUploadModel from '@/components/ai-flower-dection/FileUploadModel'
 import { useRouter } from 'next/router'
 import WebCamModelErrorModal from '@/components/modal/WebCamModelErrorModal'
@@ -74,7 +74,7 @@ const AiFlowerDetection = () => {
       </div>
       <div className="flex flex-col items-center w-full">
         {isWebcamMode ? (
-          <WebcamModel AIErrorModalOpen={aiErrorModalOpen} />
+          <CameraModel AIErrorModalOpen={aiErrorModalOpen} />
         ) : (
           <FileUploadModel AIErrorModalOpen={aiErrorModalOpen} />
         )}

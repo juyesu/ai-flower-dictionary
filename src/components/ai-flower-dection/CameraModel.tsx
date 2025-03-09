@@ -13,7 +13,7 @@ import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { AIModelProps } from '@/types/type'
 import { useCapturedPlantImageStore } from '@/store/imageStore'
 
-const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
+const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const [model, setModel] = useState<tmImage.CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [label, setLabel] = useState('')
@@ -330,4 +330,4 @@ const WebcamModel = ({ AIErrorModalOpen }: AIModelProps) => {
   )
 }
 
-export default WebcamModel
+export default CameraModel
