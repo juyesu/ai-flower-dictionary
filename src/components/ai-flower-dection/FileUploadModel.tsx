@@ -55,6 +55,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
     const file = event.target.files?.[0]
     if (file) {
       setIsAnalyzing(true)
+      setLabel('')
       setUseGptResponse(false)
       setImage(file)
       predict(file)
@@ -85,6 +86,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
           setFlowerName(highestPrediction.className)
           checkPlantMatch(highestPrediction.className)
         } else {
+          setIsAnalyzing(false)
           setLabel('일치하는 꽃을 발견하지 못했습니다.')
         }
       }
@@ -126,7 +128,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
       >
         {isAnalyzing && <LoadingSpinner />}
       </div>
-      {image && useGptResponse && (
+      {image && useGptResponse ? (
         <>
           <p className="mt-12 text-zinc-400 text-center">
             ※ 인덱스에 식물 정보가 존재하지 않아, 인공지능 생성 답변으로 대체
@@ -137,6 +139,8 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
           </p>
           <p className="mt-6 text-center text-lg">{label}</p>
         </>
+      ) : (
+        <p className="mt-6 text-center text-lg">{label}</p>
       )}
       {uploadedFileName ? (
         <div className="my-16 flex flex-row gap-10">
