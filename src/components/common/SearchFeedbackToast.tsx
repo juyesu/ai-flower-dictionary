@@ -20,7 +20,7 @@ const SearchFeedbackToast = ({
   return (
     <div
       className={`fixed bottom-6 flex items-center gap-6 px-6 py-3 bg-white rounded-lg shadow-md transition-all duration-500 ease-in-out z-[9999] hover:cursor-pointer ${
-        openToast ? 'right-6' : 'right-[-400px]'
+        openToast ? 'right-6' : 'right-[-440px]'
       }`}
       onClick={onClick}
     >
