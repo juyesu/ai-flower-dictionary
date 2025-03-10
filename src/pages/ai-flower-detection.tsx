@@ -1,12 +1,12 @@
 import Layout from '@/components/common/Layout'
-import ScrollBtn from '@/components/common/ScrollBtn'
+import ScrollButton from '@/components/common/ScrollButton'
 import WebcamModel from '@/components/ai-flower-dection/AiFlowerDetection'
 
 const AiFlowerDetection = () => {
   return (
     <Layout>
       <WebcamModel />
-      <ScrollBtn />
+      <ScrollButton />
     </Layout>
   )
 }

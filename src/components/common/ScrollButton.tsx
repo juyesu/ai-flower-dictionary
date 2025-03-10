@@ -15,7 +15,7 @@ const scrollToBottom = () => {
   })
 }
 
-const ScrollBtn = () => {
+const ScrollButton = () => {
   return (
     <div className="flex flex-col items-center fixed right-7 bottom-5 border rounded-xl cursour-poiner bg-rose-200 dark:bg-gray-600 dark:border-gray-400 opacity-70">
       <ArrowUp
@@ -30,4 +30,4 @@ const ScrollBtn = () => {
   )
 }
 
-export default ScrollBtn
+export default ScrollButton

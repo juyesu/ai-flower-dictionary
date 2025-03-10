@@ -1,13 +1,13 @@
 import React from 'react'
 import Layout from '@/components/common/Layout'
-import ScrollBtn from '@/components/common/ScrollBtn'
+import ScrollButton from '@/components/common/ScrollButton'
 import Homepage from '@/components/homepage/Homepage'
 
 const Index = () => {
   return (
     <Layout>
       <Homepage />
-      <ScrollBtn />
+      <ScrollButton />
     </Layout>
   )
 }
