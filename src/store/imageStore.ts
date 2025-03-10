@@ -1,7 +1,7 @@
 import { create } from 'zustand'
-import { ImageStoreState } from '@/types/storeType'
+import { ImageStoreType } from '@/types/storeType'
 
-export const useCapturedPlantImageStore = create<ImageStoreState>((set) => ({
+export const useCapturedPlantImageStore = create<ImageStoreType>((set) => ({
   imageUrl: '',
-  setImageUrl: (url) => set({ imageUrl: url }),
+  setImageUrl: (value) => set({ imageUrl: value }),
 }))

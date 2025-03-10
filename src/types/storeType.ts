@@ -1,6 +1,6 @@
-export type ImageStoreState = {
+export type ImageStoreType = {
   imageUrl: string
-  setImageUrl: (url: string) => void
+  setImageUrl: (value: string) => void
 }
 
 export type LoginRequiredModalOpenStoreType = {
