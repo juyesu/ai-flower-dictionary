@@ -7,6 +7,7 @@ import { AIModelProps } from '@/types/type'
 import { useRouter } from 'next/router'
 import Upload from '@/pages/assets/icons/Upload.svg'
 import { useCapturedPlantImageStore } from '@/store/imageStore'
+import LoadingSpinner from '@/components/common/LoadingSpinner'
 
 const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const [uploadedFileName, setUploadedFileName] = useState('')
@@ -15,7 +16,8 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [label, setLabel] = useState('')
   const [flowerName, setFlowerName] = useState('')
-  const [isPredicting, setIsPredicting] = useState(false)
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [useGptResponse, setUseGptResponse] = useState(false)
   const [image, setImage] = useState<File | null>(null)
   const { data, isLoading, error } = plantIndexFetchData(1, 300)
   const { setImageUrl } = useCapturedPlantImageStore()
@@ -52,14 +54,15 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
 
     const file = event.target.files?.[0]
     if (file) {
+      setIsAnalyzing(true)
+      setUseGptResponse(false)
       setImage(file)
       predict(file)
     }
   }
 
   const predict = async (file: File) => {
-    if (model && !isPredicting) {
-      setIsPredicting(true)
+    if (model) {
       const imgURL = URL.createObjectURL(file)
       const img = new Image()
       img.src = imgURL
@@ -84,8 +87,6 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
         } else {
           setLabel('일치하는 꽃을 발견하지 못했습니다.')
         }
-
-        setIsPredicting(false)
       }
     }
   }
@@ -104,28 +105,38 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
     } else {
       try {
         const gptResponse = await fetchChatGptResponse(className)
+        setUseGptResponse(true)
         setLabel(gptResponse)
       } catch {
         setLabel('인공지능 생성 답변을 불러오는데 실패하였습니다.')
         console.error('GPT API 호출 실패:', error)
       }
     }
+    setIsAnalyzing(false)
   }
 
   return (
     <div className="flex flex-col items-center px-80 w-full">
       <div
         id="image-container"
-        className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded bg-cover bg-center"
+        className="relative flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded bg-cover bg-center"
         style={{
           backgroundImage: uploadedFileUrl ? `url(${uploadedFileUrl})` : 'none',
         }}
-      />
-      {image && (
-        <div className="mt-2">
-          <h2 className="text-xl text-center">{flowerName}</h2>
-          <p className="font-semibold text-center">{label}</p>
-        </div>
+      >
+        {isAnalyzing && <LoadingSpinner />}
+      </div>
+      {image && useGptResponse && (
+        <>
+          <p className="mt-12 text-zinc-400 text-center">
+            ※ 인덱스에 식물 정보가 존재하지 않아, 인공지능 생성 답변으로 대체
+            됩니다.
+          </p>
+          <p className="mt-2 w-full text-center text-3xl font-bold text-cyan-600">
+            예측 결과 : {flowerName}
+          </p>
+          <p className="mt-6 text-center text-lg">{label}</p>
+        </>
       )}
       {uploadedFileName ? (
         <div className="my-16 flex flex-row gap-10">

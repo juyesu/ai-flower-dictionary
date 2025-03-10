@@ -24,6 +24,22 @@ body {
   font-family: 'Pretendard', sans-serif;
 }
 
+.spinner-border {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  border: 0.25em solid currentColor;
+  border-top-color: transparent;
+  border-radius: 9999px;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* 다크모드 */
 :root {
   --white: hsl(210 40% 98%);

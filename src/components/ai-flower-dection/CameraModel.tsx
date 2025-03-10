@@ -13,6 +13,7 @@ import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { AIModelProps } from '@/types/type'
 import { useCapturedPlantImageStore } from '@/store/imageStore'
+import LoadingSpinner from '@/components/common/LoadingSpinner'
 
 const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const [model, setModel] = useState<tmImage.CustomMobileNet | null>(null)
@@ -20,6 +21,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const [label, setLabel] = useState('')
   const [flowerName, setFlowerName] = useState('')
   const [useWebcam, setUseWebcam] = useState(false)
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [highestPrediction, setHighestPrediction] = useState({
     className: '',
     probability: 0.0,
@@ -104,6 +106,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
   const checkPlantMatch = async (className: string) => {
     if (isGptFetchingRef.current) return
     isGptFetchingRef.current = true
+    setIsAnalyzing(true)
     const matchedPlant = data?.krnmList?.find(
       (name: string) => name === className
     )
@@ -126,6 +129,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
         setUseWebcam(false)
       }
     }
+    setIsAnalyzing(false)
   }
 
   const handleWebcamCapture = useCallback(() => {
@@ -177,7 +181,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
     <div className="flex flex-col items-center px-80 w-full">
       <div
         id="camera-display-container"
-        className="flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded"
+        className="relative flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded"
       >
         {useWebcam && (
           <Webcam
@@ -201,6 +205,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
             height={624}
           />
         )}
+        {isAnalyzing && <LoadingSpinner />}
       </div>
       {useWebcam && (
         <p className="mt-6 text-2xl font-semibold text-center">
