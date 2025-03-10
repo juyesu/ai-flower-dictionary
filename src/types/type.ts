@@ -1,4 +1,5 @@
 import { UseFormReturn } from 'react-hook-form'
+import { Dispatch, SetStateAction } from 'react'
 
 export type ChildrenComponentsProps = {
   children: React.ReactNode
@@ -116,4 +117,11 @@ export type SearchFeedbackToastProps = {
   onClick: () => void
   onClose: () => void
   imageUrl: string
+}
+
+export type PaginationProps = {
+  apiData: PlantIndexResponse | undefined
+  currentPage: number
+  setCurrentPage: Dispatch<SetStateAction<number>>
+  maximumPageSize: number
 }

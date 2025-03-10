@@ -1,9 +1,5 @@
 import styles from '@styles/ItemList.module.css'
 import PlantSearchBar from '@/components/common/PlantSearchBar'
-import FirstPage from '@/pages/assets/icons/FirstPage.svg'
-import PrevPage from '@/pages/assets/icons/PrevPage.svg'
-import NextPage from '@/pages/assets/icons/NextPage.svg'
-import LastPage from '@/pages/assets/icons/LastPage.svg'
 import TableList from '@/pages/assets/icons/TableList.svg'
 import CardList from '@/pages/assets/icons/CardList.svg'
 import Image from 'next/image'
@@ -17,6 +13,7 @@ import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/router'
 import ApiDataErrorModal from '@/components/modal/ApiDataErrorModal'
 import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
+import Pagination from '@/components/plant-info/Pagineation'
 
 const ItemList = () => {
   const methods = useForm()
@@ -36,10 +33,6 @@ const ItemList = () => {
   const router = useRouter()
   const { sort } = router.query
   const hasMounted = useRef(false)
-
-  const dataDividePageSize = data
-    ? Math.ceil(data?.response?.response.body.totalCount / maximumPageSize)
-    : 0
 
   useEffect(() => {
     if (!isLoading && (!data || error)) {
@@ -135,70 +128,6 @@ const ItemList = () => {
     }
   }
 
-  const chageFirstPage = () => {
-    if (currentPage != 1) {
-      setCurrentPage(1)
-    }
-  }
-
-  const changePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
-    }
-  }
-
-  const changeNextPage = () => {
-    if (
-      data &&
-      data?.response?.response.body.totalCount > currentPage * maximumPageSize
-    ) {
-      setCurrentPage(currentPage + 1)
-    }
-  }
-
-  const changeLastPage = () => {
-    if (currentPage != dataDividePageSize) {
-      setCurrentPage(dataDividePageSize)
-    }
-  }
-
-  const paginationNumberList = () => {
-    if (dataDividePageSize == 0) {
-      return (
-        <li>
-          <button
-            className="px-4 py-2 font-xl border rounded-xl bg-zinc-500 text-white"
-            type="button"
-            aria-label="페이지 번호"
-          >
-            1
-          </button>
-        </li>
-      )
-    } else if (dataDividePageSize >= 1) {
-      const pageNumberButton = []
-      for (let i = 1; i <= dataDividePageSize; i++) {
-        pageNumberButton.push(
-          <li key={i}>
-            <button
-              className={`px-4 py-2 font-xl border rounded-xl ${
-                i == currentPage
-                  ? 'bg-zinc-500 text-white'
-                  : 'bg-white text-black'
-              } `}
-              type="button"
-              aria-label="페이지 번호"
-              onClick={() => setCurrentPage(i)}
-            >
-              {i}
-            </button>
-          </li>
-        )
-      }
-      return pageNumberButton
-    }
-  }
-
   return (
     <div className="flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
       <div className="relative w-full h-[652px]">
@@ -277,47 +206,12 @@ const ItemList = () => {
           handlePlantLinkShare={handlePlantLinkShare}
         />
       )}
-      <nav id="pagination" className="my-20 flex justify-between">
-        <ul className="flex items-center gap-2">
-          <li>
-            <button
-              type="button"
-              aria-label="첫 페이지로 이동"
-              onClick={chageFirstPage}
-            >
-              <FirstPage className="w-6 h-6" aria-hidden="true" />
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              aria-label="이전 페이지로 이동"
-              onClick={changePrevPage}
-            >
-              <PrevPage className="w-6 h-6" aria-hidden="true" />
-            </button>
-          </li>
-          {paginationNumberList()}
-          <li>
-            <button
-              type="button"
-              aria-label="다음 페이지로 이동"
-              onClick={changeNextPage}
-            >
-              <NextPage className="w-6 h-6" aria-hidden="true" />
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              aria-label="마지막 페이지로 이동"
-              onClick={changeLastPage}
-            >
-              <LastPage className="w-6 h-6" aria-hidden="true" />
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <Pagination
+        apiData={data}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        maximumPageSize={maximumPageSize}
+      />
       {openSearchNotFoundModal && (
         <SearchNotFoundModal onClose={searchNotFoundModalClose} />
       )}
