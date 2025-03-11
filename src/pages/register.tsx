@@ -6,13 +6,22 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { LoginFormType } from '@/types/type'
 import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DaumPostcode from 'react-daum-postcode'
+import { useAuth } from '@/context/AuthContext'
 
 const Register = () => {
   const [openPostcode, setOpenPostcode] = useState(false)
   const methods = useForm<LoginFormType>()
   const router = useRouter()
+  const { loginUser } = useAuth()
+
+  useEffect(() => {
+    if (loginUser) {
+      router.push('/')
+    }
+  }, [loginUser])
+
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
     if (localStorage.getItem(`${data.email}.name`)) {
       alert('이미 존재하는 이메일입니다. 다른 이메일로 시도해주세요')

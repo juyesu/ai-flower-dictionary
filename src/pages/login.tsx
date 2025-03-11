@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '@/components/common/Layout'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
@@ -11,7 +11,13 @@ import { LoginFormType } from '@/types/type'
 const Login = () => {
   const methods = useForm<LoginFormType>()
   const router = useRouter()
-  const { setLoginUser } = useAuth()
+  const { loginUser, setLoginUser } = useAuth()
+
+  useEffect(() => {
+    if (loginUser) {
+      router.push('/')
+    }
+  }, [loginUser])
 
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
     if (
