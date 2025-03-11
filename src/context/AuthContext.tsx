@@ -1,4 +1,5 @@
 import LogoutMessageModal from '@/components/modal/LogoutMessageModal'
+import router from 'next/router'
 import {
   createContext,
   useContext,
@@ -11,6 +12,7 @@ interface AuthContextType {
   loginUser: string | null
   setLoginUser: (user: string | null) => void
   logout: () => void
+  withdrawAccount: () => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -40,8 +42,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setOpenLogoutMessageModal(false)
   }
 
+  const withdrawAccount = () => {
+    localStorage.removeItem(`${loginUser}.name`)
+    localStorage.removeItem(`${loginUser}.email`)
+    localStorage.removeItem(`${loginUser}.password`)
+    localStorage.removeItem(`${loginUser}.address`)
+    localStorage.removeItem(`${loginUser}.likedPlants`)
+    localStorage.removeItem(`${loginUser}.findPlants`)
+    localStorage.removeItem('userEmail')
+    localStorage.removeItem('userName')
+    alert('회원 탈퇴되었습니다.')
+    router.push('/')
+  }
+
   return (
-    <AuthContext.Provider value={{ loginUser, setLoginUser, logout }}>
+    <AuthContext.Provider
+      value={{ loginUser, setLoginUser, logout, withdrawAccount }}
+    >
       {children}
       {openLogoutMessageModal && (
         <div className="fixed inset-0 flex justify-center items-center">
