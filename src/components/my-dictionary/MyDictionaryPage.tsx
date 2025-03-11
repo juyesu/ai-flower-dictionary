@@ -8,7 +8,7 @@ import BoxOpen from '@/pages/assets/icons/BoxOpen.svg'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useLoginRequiredModalOpenStore } from '@/store/modalOpenStore'
-import LoginRequiredModal from '../modal/LoginRequiredModal'
+import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
 
 const MyDictionaryPage = () => {
   const [hasPlantsData, setHasPlantsData] = useState({
