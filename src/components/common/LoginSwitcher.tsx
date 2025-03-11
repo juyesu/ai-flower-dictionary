@@ -16,7 +16,7 @@ const LoginSwitcher = () => {
   return (
     <div className="sm:ml-2 lg:ml-4 mr-4 flex justify-center items-center sm:gap-1 lg:gap-1.5 h-full">
       {loginUser ? (
-        <div className="flex ml-8">
+        <div className="flex ml-3">
           <div className="flex items-center gap-1.5">
             <CircleUser className="w-6 h-6" fill="#60A5FA" aria-hidden="true" />
             {userName && (
@@ -27,13 +27,13 @@ const LoginSwitcher = () => {
           </div>
           <div className="mx-4 flex justify-center gap-2">
             <button
-              className="sm:px-4 sm:py-1 border-2 rounded-full text-zinc-500 sm:text-sm sm:font-semibold lg:font-bold"
+              className="sm:px-4 sm:py-1 border-2 rounded-full hover:border-zinc-600 text-zinc-500 sm:text-sm sm:font-semibold lg:font-bold"
               onClick={() => logout()}
             >
               로그아웃
             </button>
             <button
-              className="sm:px-4 sm:py-1 border-2 rounded-full bg-zinc-400 text-zinc-100 sm:text-sm sm:font-semibold lg:font-bold"
+              className="sm:px-4 sm:py-1 border-2 rounded-full bg-zinc-400 hover:border-zinc-600 text-zinc-100 sm:text-sm sm:font-semibold lg:font-bold"
               type="button"
               onClick={() => withdrawAccount()}
             >
@@ -42,16 +42,16 @@ const LoginSwitcher = () => {
           </div>
         </div>
       ) : (
-        <div className="sm:ml-2 lg:ml-8 mr-4 flex justify-center items-center sm:gap-1 lg:gap-1.5 h-full">
+        <div className="sm:ml-2 lg:ml-4 mr-4 flex justify-center items-center sm:gap-1 lg:gap-1.5 h-full">
           <Link
             href="/login"
-            className="sm:px-4 sm:py-1 border-2 rounded-full bg-blue-300 text-white sm:text-sm sm:font-semibold lg:font-bold"
+            className="sm:px-4 sm:py-1 border-2 rounded-full bg-blue-300 hover:border-blue-400 text-white sm:text-sm sm:font-semibold lg:font-bold"
           >
             로그인
           </Link>
           <Link
             href="/register"
-            className="sm:px-3 sm:py-1 border-2 rounded-full bg-zinc-300 text-zinc-600 text-zinc-100 sm:text-sm sm:font-semibold lg:font-bold"
+            className="sm:px-3 sm:py-1 border-2 rounded-full bg-zinc-300 hover:border-zinc-600 text-zinc-600 text-zinc-100 sm:text-sm sm:font-semibold lg:font-bold"
           >
             회원가입
           </Link>

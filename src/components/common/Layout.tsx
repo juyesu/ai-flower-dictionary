@@ -5,6 +5,10 @@ import type { ChildrenComponentsProps } from '@/types/type'
 import { useTheme } from 'next-themes'
 import Sun from '@/pages/assets/icons/Sun.svg'
 import Moon from '@/pages/assets/icons/Moon.svg'
+import TypeScript from '@/pages/assets/icons/TypeScript.svg'
+import React from '@/pages/assets/icons/React.svg'
+import NextJs from '@/pages/assets/icons/NextJs.svg'
+import TailwindCss from '@/pages/assets/icons/TailwindCss.svg'
 import LoginSwitcher from '@/components/common/LoginSwitcher'
 
 const RootLayout = ({ children }: ChildrenComponentsProps) => {
@@ -19,7 +23,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
             AI flower dictionary
           </Link>
           <div className="lg:mr-8 flex flex-row justify-between items-center h-full">
-            <div className="flex flex-row sm:gap-4 xl:gap-8">
+            <div className="flex flex-row sm:gap-2 xl:gap-4">
               <Link href="/ai-flower-detection" className={styles.menu}>
                 AI flower detection
               </Link>
@@ -67,16 +71,23 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
           {children}
         </main>
 
-        <footer className="flex flex-col justify-center items-center h-40 w-full border-t">
-          <p className="w-full text-center text-sm font-semibold text-rose-400">
-            Made by 유한대학교 인공지능학과 인공지능과 언어 4조
-          </p>
-          <p className="mt-1.5 w-full text-center text-xs font-semibold text-gray-400">
-            김지혁 양서연 이유찬 채기석 최지혜 추연우
-          </p>
-          <p className="mt-4 w-full text-center text-xs text-gray-400">
-            powerd by Chat GPT , Teachable Machine
-          </p>
+        <footer className="flex flex-col justify-center items-center bg-zinc-50 h-44 w-full border-t">
+          <div className="flex flex-col">
+            <p className="w-full text-center text-sm font-semibold">
+              Made by Front-End Developer KIM JI HYEOK
+            </p>
+            <p className="mt-2 w-full text-center text-xs text-gray-400">
+              API : 한국수목정원관리원, Chat GPT , Teachable Machine, Daum
+              Postcode
+            </p>
+          </div>
+          <hr className="my-4 w-16" />
+          <div className="flex flex-row gap-2">
+            <TypeScript className="w-6 h-6" />
+            <React className="w-6 h-6" />
+            <NextJs className="w-6 h-6" />
+            <TailwindCss className="w-10 h-6" />
+          </div>
         </footer>
       </div>
     </ThemeProvider>
