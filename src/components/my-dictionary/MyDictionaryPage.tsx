@@ -1,7 +1,6 @@
 import { useAuth } from '@/context/AuthContext'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { PlantIndexItem } from '@/types/type'
-import styles from '@styles/ItemList.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import BoxOpen from '@/pages/assets/icons/BoxOpen.svg'
@@ -102,7 +101,7 @@ const MyDictionaryPage = () => {
         />
         <div className="absolute inset-0 w-full flex flex-col justify-center items-center gap-5">
           <div className="mb-12 flex flex-col items-center">
-            <h1 className={styles.main}>My Dictionary</h1>
+            <h1 className="page-main-title">My Dictionary</h1>
             <p className="ml-1 mt-1.5 font-semibold text-zinc-800 text-lg text-center">
               내가 발견한 식물들로 <br />
               세상에 단 하나뿐인 나만의 도감을 완성해보세요

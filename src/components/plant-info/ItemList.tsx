@@ -1,4 +1,3 @@
-import styles from '@styles/ItemList.module.css'
 import PlantSearchBar from '@/components/common/PlantSearchBar'
 import TableList from '@/pages/assets/icons/TableList.svg'
 import CardList from '@/pages/assets/icons/CardList.svg'
@@ -146,7 +145,7 @@ const ItemList = () => {
         />
         <div className="absolute inset-0 w-full flex flex-col items-center gap-5">
           <div className="mt-28 flex flex-col items-center">
-            <h1 className={styles.main}>Plant Info</h1>
+            <h1 className="page-main-title">Plant Info</h1>
             <p className="ml-1 mt-1.5 font-semibold text-zinc-800 text-lg text-center">
               다양한 식물 정보를 탐색하고 사용자들과 <br />
               식물에 대한 경험을 공유해보세요

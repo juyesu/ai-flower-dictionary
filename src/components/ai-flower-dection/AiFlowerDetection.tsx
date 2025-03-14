@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import styles from '@styles/ItemList.module.css'
 import CameraModel from '@/components/ai-flower-dection/CameraModel'
 import FileUploadModel from '@/components/ai-flower-dection/FileUploadModel'
 import { useRouter } from 'next/router'
@@ -39,7 +38,7 @@ const AiFlowerDetection = () => {
     <div className="flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
       <div className="flex flex-col items-center w-full bg-[url('/images/ai_flower_detection_title_image_3.png')] bg-center bg-cover">
         <div className="mt-40 mb-20 flex flex-col items-center gap-3">
-          <h1 className={styles.main}>AI Flower Detection</h1>
+          <h1 className="page-main-title">AI Flower Detection</h1>
           <p className="ml-1 mt-1.5 font-semibold text-zinc-800 text-lg text-center">
             카메라에 꽃을 비추거나, 꽃 이미지를 업로드하면 <br /> 해당 꽃의
             이름과 정보를 알려드립니다.

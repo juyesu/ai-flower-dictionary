@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import Layout from '@/components/common/Layout'
 import Link from 'next/link'
-import styles from '@styles/ItemList.module.css'
 import Image from 'next/image'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { PlantIndexItem } from '@/types/type'
@@ -153,8 +152,10 @@ const Post = () => {
                     aria-hidden="true"
                   />
                 </Link>
-                <h1 className={styles.title}>{plantData?.krnm}</h1>
-                <h2 className={styles.subtitle}>
+                <h1 className="my-4 text-5xl font-bold text-[#797D48]">
+                  {plantData?.krnm}
+                </h1>
+                <h2 className="my-1 text-3xl text-[#797D48]">
                   {plantData?.famlNm} / {plantData?.kornFamlNm}
                 </h2>
               </div>

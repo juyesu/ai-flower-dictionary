@@ -24,6 +24,14 @@ body {
   font-family: 'Pretendard', sans-serif;
 }
 
+.page-main-title {
+  font-size: 50px;
+  font-weight: 600;
+  margin-top: 42px;
+  margin-left: 4px;
+  color: #3f3f46;
+}
+
 .spinner-border {
   display: inline-block;
   width: 3rem;
