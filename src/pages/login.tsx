@@ -3,8 +3,6 @@ import Layout from '@/components/common/Layout'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
-import styles from '@styles/RegisterPage.module.css'
-import { Title } from '@/components/ui/Title'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { LoginFormType } from '@/types/type'
 
@@ -31,57 +29,60 @@ const Login = () => {
       alert(
         '일치하는 계정이 존재하지 않습니다.\n이메일 또는 비밀번호를 다시 확인해주세요.'
       )
+      methods.setValue('password', '')
     }
   }
 
   return (
     <Layout>
-      <div className={styles.pageLayout}>
-        <Title>로그인</Title>
-        <div className={styles.formLayout}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <div className={styles.formGroup}>
-              <label htmlFor="email" className="mt-2">
-                이메일
-              </label>
-              <input
-                id="email"
-                type="text"
-                className="mt-2 p-1.5 border w-full rounded"
-                {...methods.register('email', {
-                  required: '이메일을 입력해주세요',
-                })}
-              />
-              {methods.formState.errors.email && (
-                <p className={styles.formSchemaError}>
-                  {methods.formState.errors.email.message}
-                </p>
-              )}
-            </div>
+      <div className="login-page-layout">
+        <div className="login-box">
+          <div className="login-form-layout">
+            <h1 className="login-header-title">로그인</h1>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <div className="login-label-input-group">
+                <label htmlFor="email" className="mt-2">
+                  이메일
+                </label>
+                <input
+                  id="email"
+                  type="text"
+                  className="login-form-input"
+                  {...methods.register('email', {
+                    required: '이메일을 입력해주세요',
+                  })}
+                />
+                {methods.formState.errors.email && (
+                  <p className="login-form-schema-error">
+                    {methods.formState.errors.email.message}
+                  </p>
+                )}
+              </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="password">비밀번호</label>
-              <input
-                id="password"
-                type="password"
-                className="mt-2 p-1.5 border w-full rounded"
-                {...methods.register('password', {
-                  required: '비밀번호를 입력해주세요',
-                })}
-              />
-              {methods.formState.errors.password && (
-                <p className={styles.formSchemaError}>
-                  {methods.formState.errors.password.message}
-                </p>
-              )}
-            </div>
+              <div className="login-label-input-group">
+                <label htmlFor="password">비밀번호</label>
+                <input
+                  id="password"
+                  type="password"
+                  className="login-form-input"
+                  {...methods.register('password', {
+                    required: '비밀번호를 입력해주세요',
+                  })}
+                />
+                {methods.formState.errors.password && (
+                  <p className="login-form-schema-error">
+                    {methods.formState.errors.password.message}
+                  </p>
+                )}
+              </div>
 
-            <button className={styles.submitButton}>로그인</button>
-            <Link href="/register" className={styles.linkText}>
-              아직 회원이 아니신가요?
-              <span className="ml-1 underline">회원가입</span>
-            </Link>
-          </form>
+              <button className="login-form-submit-button">로그인</button>
+              <Link href="/register" className="login-link-text">
+                아직 회원이 아니신가요?
+                <span>회원가입</span>
+              </Link>
+            </form>
+          </div>
         </div>
       </div>
     </Layout>
