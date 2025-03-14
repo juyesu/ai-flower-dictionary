@@ -45,7 +45,7 @@ const Homepage = () => {
             Search for plants you're curious about
           </p>
           <p className="sm:text-2xl lg:text-3xl 2xl:text-3xl text-white">
-            There are about 1,000 plants
+            There are about 100+ plants
           </p>
           <PlantSearchBar
             methods={methods}
