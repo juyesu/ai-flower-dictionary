@@ -1,5 +1,6 @@
 import { useEffect, useState, ChangeEvent } from 'react'
 import * as tmImage from '@teachablemachine/image'
+import * as tf from '@tensorflow/tfjs'
 import { CustomMobileNet } from '@teachablemachine/image'
 import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
@@ -38,6 +39,9 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
       } catch (modelError) {
         console.error('모델 로드 중 에러 발생:', modelError)
         if (!isLoading && (!data || modelError || error)) {
+          model?.dispose()
+          tf.engine().disposeVariables()
+          setModel(null)
           AIErrorModalOpen()
         }
       }
@@ -121,7 +125,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
     <div className="flex flex-col items-center px-80 w-full">
       <div
         id="image-container"
-        className="relative flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded bg-cover bg-center"
+        className="relative flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800 rounded bg-cover bg-center"
         style={{
           backgroundImage: uploadedFileUrl ? `url(${uploadedFileUrl})` : 'none',
         }}
@@ -130,28 +134,30 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
       </div>
       {image && useGptResponse ? (
         <>
-          <p className="mt-12 text-zinc-400 text-center">
+          <p className="mt-12 text-zinc-400 text-center dark:text-slate-600">
             ※ 인덱스에 식물 정보가 존재하지 않아, 인공지능 생성 답변으로 대체
             됩니다.
           </p>
-          <p className="mt-2 w-full text-center text-3xl font-bold text-cyan-600">
+          <p className="mt-2 w-full text-center text-3xl font-bold text-cyan-600 dark:text-emerald-700">
             예측 결과 : {flowerName}
           </p>
-          <p className="mt-6 text-center text-lg">{label}</p>
+          <p className="mt-6 text-center text-lg dark:text-slate-300">
+            {label}
+          </p>
         </>
       ) : (
-        <p className="mt-6 text-center text-lg">{label}</p>
+        <p className="mt-6 text-center text-lg dark:text-slate-300">{label}</p>
       )}
       {uploadedFileName ? (
         <div className="my-16 flex flex-row gap-10">
           <div>
             <label
               htmlFor="fileUpload"
-              className="p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
+              className="p-4 flex items-center justify-center bg-zinc-800 dark:hover:bg-zinc-700 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 dark:border-zinc-600 rounded-lg"
             >
               <Upload
-                className="mx-2 w-4 h-4"
-                fill="#f4f4f5"
+                className="mx-2 w-4 h-4 text-zinc-100 dark:text-slate-300"
+                fill="currentColor"
                 aria-hidden="true"
               />
               파일 업로드하기
@@ -163,18 +169,20 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
               onChange={handleFileChange}
             />
           </div>
-          <div className="border"></div>
-          <p className="mt-4 text-lg">📂 {uploadedFileName}</p>
+          <div className="border dark:border-zinc-500" />
+          <p className="mt-4 text-lg dark:text-slate-300">
+            📂 {uploadedFileName}
+          </p>
         </div>
       ) : (
         <div>
           <label
             htmlFor="fileUpload"
-            className="my-16 p-4 flex items-center justify-center bg-zinc-800 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 rounded-lg"
+            className="my-16 p-4 flex items-center justify-center bg-zinc-800 dark:hover:bg-zinc-700 hover:bg-zinc-600 font-semibold text-zinc-100 dark:text-slate-300 cursor-pointer border border-zinc-400 dark:border-zinc-600 rounded-lg"
           >
             <Upload
-              className="w-4 h-4 mx-2"
-              fill="#f4f4f5"
+              className="w-4 h-4 mx-2 text-zinc-100 dark:text-slate-300"
+              fill="currentColor"
               aria-hidden="true"
             />
             파일 업로드하기

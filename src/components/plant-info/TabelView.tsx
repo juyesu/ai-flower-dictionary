@@ -52,7 +52,11 @@ const TableView = ({
                     aria-hidden="true"
                   />
                 ) : (
-                  <Unliked className="w-6 h-6" aria-hidden="true" />
+                  <Unliked
+                    className="w-6 h-6 text-zinc-800 dark:text-slate-300"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  />
                 )}
               </button>
               <button
@@ -65,7 +69,11 @@ const TableView = ({
                 }}
                 className="relative p-1"
               >
-                <Share className="w-6 h-6" aria-hidden="true" />
+                <Share
+                  className="w-6 h-6 text-zinc-800 dark:text-slate-300"
+                  fill="currentColor"
+                  aria-hidden="true"
+                />
                 {copyTooltipIndex === item.krnm && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
                     링크가 복사되었습니다!
@@ -123,14 +131,14 @@ const TableView = ({
   })
 
   return (
-    <table className="mt-16 w-full rounded table-fixed">
+    <table className="mt-16 w-full text-zinc-900 dark:text-slate-300 rounded table-fixed ">
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header, index) => (
               <th
                 key={header.id}
-                className="px-5 py-3 bg-zinc-100"
+                className="px-5 py-3 bg-zinc-100 dark:bg-zinc-600"
                 style={{ width: columns[index].size || 'auto' }}
               >
                 {flexRender(
@@ -148,7 +156,7 @@ const TableView = ({
           return (
             <tr
               key={row.id}
-              className="hover:bg-zinc-300 cursor-pointer"
+              className="dark:hover:bg-zinc-700 hover:bg-zinc-300 cursor-pointer"
               onClick={() => {
                 router.push({
                   pathname: `/view/${rowData.krnm}`,

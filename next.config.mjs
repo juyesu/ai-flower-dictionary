@@ -9,7 +9,20 @@ const nextConfig = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgo: true,
+            svgoConfig: {
+              plugins: [
+                { name: 'removeViewBox', active: false }, 
+                { name: 'removeAttrs', params: { attrs: ['fill'] } },
+              ],
+            },
+          },
+        },
+      ],
     })
 
     return config

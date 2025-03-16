@@ -47,7 +47,7 @@ const Pagination = ({
       return (
         <li>
           <button
-            className="px-4 py-2 font-xl border rounded-xl bg-zinc-500 text-white"
+            className="px-4 py-2 font-xl border rounded-xl bg-zinc-500 dark:bg-zinc-400 text-white"
             type="button"
             aria-label="페이지 번호"
           >
@@ -61,10 +61,10 @@ const Pagination = ({
         pageNumberButton.push(
           <li key={i}>
             <button
-              className={`px-4 py-2 font-xl border rounded-xl ${
+              className={`px-4 py-2 font-xl border dark:border-zinc-400 rounded-xl ${
                 i == currentPage
-                  ? 'bg-zinc-500 text-white'
-                  : 'bg-white text-black'
+                  ? 'bg-zinc-500 dark:bg-zinc-400 text-white dark:text-slate-800'
+                  : 'bg-white dark:bg-zinc-700 text-black dark:text-slate-300'
               } `}
               type="button"
               aria-label="페이지 번호"
@@ -87,7 +87,11 @@ const Pagination = ({
             aria-label="첫 페이지로 이동"
             onClick={chageFirstPage}
           >
-            <FirstPage className="w-6 h-6" aria-hidden="true" />
+            <FirstPage
+              className="w-6 h-6 text-black dark:text-slate-300"
+              fill="currentColor"
+              aria-hidden="true"
+            />
           </button>
         </li>
         <li>
@@ -96,7 +100,11 @@ const Pagination = ({
             aria-label="이전 페이지로 이동"
             onClick={changePrevPage}
           >
-            <PrevPage className="w-6 h-6" aria-hidden="true" />
+            <PrevPage
+              className="w-6 h-6 text-black dark:text-slate-300"
+              fill="currentColor"
+              aria-hidden="true"
+            />
           </button>
         </li>
         {paginationNumberList()}
@@ -106,7 +114,11 @@ const Pagination = ({
             aria-label="다음 페이지로 이동"
             onClick={changeNextPage}
           >
-            <NextPage className="w-6 h-6" aria-hidden="true" />
+            <NextPage
+              className="w-6 h-6 text-black dark:text-slate-300"
+              fill="currentColor"
+              aria-hidden="true"
+            />
           </button>
         </li>
         <li>
@@ -115,7 +127,11 @@ const Pagination = ({
             aria-label="마지막 페이지로 이동"
             onClick={changeLastPage}
           >
-            <LastPage className="w-6 h-6" aria-hidden="true" />
+            <LastPage
+              className="w-6 h-6 text-black dark:text-slate-300"
+              fill="currentColor"
+              aria-hidden="true"
+            />
           </button>
         </li>
       </ul>

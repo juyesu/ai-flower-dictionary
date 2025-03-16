@@ -92,17 +92,13 @@ const MyDictionaryPage = () => {
           className="object-cover"
           fill
         />
-        <div
-          className="absolute inset-0 bg-white"
-          style={{
-            background:
-              'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.9) 70%, rgba(255, 255, 255, 1) 100%)',
-          }}
-        />
+        <div className="absolute inset-0 title-gradient-overlay dark:title-gradient-overlay" />
         <div className="absolute inset-0 w-full flex flex-col justify-center items-center gap-5">
           <div className="mb-12 flex flex-col items-center">
-            <h1 className="page-main-title">My Dictionary</h1>
-            <p className="ml-1 mt-1.5 font-semibold text-zinc-800 text-lg text-center">
+            <h1 className="page-main-title dark:text-slate-300">
+              My Dictionary
+            </h1>
+            <p className="ml-1 mt-1.5 font-semibold text-zinc-800 dark:text-slate-300 text-lg text-center">
               내가 발견한 식물들로 <br />
               세상에 단 하나뿐인 나만의 도감을 완성해보세요
             </p>
@@ -116,7 +112,7 @@ const MyDictionaryPage = () => {
               return { ...prev, likedPlants: !prev.likedPlants }
             })
           }
-          className={`flex justify-between w-full px-6 py-4 border border-l-fuchsia-200 border-l-4 font-semibold transition ${
+          className={`flex justify-between w-full px-6 py-4 border border-l-fuchsia-200 border-l-4 dark:border-zinc-600 dark:border-l-gray-700 dark:text-slate-300 font-semibold transition ${
             accordionOpen.likedPlants ? '' : ''
           }`}
         >
@@ -133,7 +129,7 @@ const MyDictionaryPage = () => {
 
         {accordionOpen.likedPlants &&
           (hasPlantsData.likedPlants ? (
-            <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 transition-opacity duration-300 opacity-100">
+            <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 dark:bg-zinc-700 transition-opacity duration-300 opacity-100">
               {plantData.likedPlants.map((item, index) => (
                 <Link
                   key={item.krnm}
@@ -149,11 +145,11 @@ const MyDictionaryPage = () => {
                       key={index}
                       src={item.imgUrl}
                       alt={`${item.imgUrl}식물`}
-                      className="w-full h-32 border-4 border-stone-400 object-cover rounded"
+                      className="w-full h-32 border-4 border-stone-400 dark:border-stone-500 object-cover rounded"
                       width={157}
                       height={128}
                     />
-                    <figcaption className="mt-2 text-sm text-gray-700">
+                    <figcaption className="mt-2 text-sm text-gray-700 dark:text-slate-300">
                       {item.krnm}
                     </figcaption>
                   </figure>
@@ -180,7 +176,7 @@ const MyDictionaryPage = () => {
               return { ...prev, myDictionary: !prev.myDictionary }
             })
           }
-          className={`flex justify-between w-full px-6 py-4 border border-l-fuchsia-200 border-l-4 font-semibold transition ${
+          className={`flex justify-between w-full px-6 py-4 border border-l-fuchsia-200 border-l-4 dark:border-zinc-600 dark:border-l-gray-700 dark:text-slate-300 font-semibold transition ${
             accordionOpen.myDictionary ? '' : ''
           }`}
         >
@@ -197,7 +193,7 @@ const MyDictionaryPage = () => {
 
         {accordionOpen.myDictionary &&
           (hasPlantsData.myDictionary ? (
-            <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 transition-opacity duration-300 opacity-100">
+            <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 dark:bg-zinc-700 transition-opacity duration-300 opacity-100">
               {plantData.myDictionary.map((item, index) => (
                 <Link
                   key={item.krnm}
@@ -213,11 +209,11 @@ const MyDictionaryPage = () => {
                       key={index}
                       src={item.imgUrl}
                       alt={`${item.imgUrl}의 이미지`}
-                      className="w-full h-32 border-4 border-stone-400 object-cover rounded"
+                      className="w-full h-32 border-4 border-stone-400 dark:border-stone-500 object-cover rounded"
                       width={157}
                       height={128}
                     />
-                    <figcaption className="mt-2 text-sm text-gray-700">
+                    <figcaption className="mt-2 text-sm text-gray-700 dark:text-slate-300">
                       {item.krnm}
                     </figcaption>
                   </figure>

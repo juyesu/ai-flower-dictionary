@@ -37,11 +37,11 @@ const Login = () => {
     <Layout>
       <div className="login-page-layout">
         <div className="login-box">
-          <div className="login-form-layout">
-            <h1 className="login-header-title">로그인</h1>
+          <div className="login-form-layout dark:border-zinc-500">
+            <h1 className="login-header-title dark:text-slate-300">로그인</h1>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               <div className="login-label-input-group">
-                <label htmlFor="email" className="mt-2">
+                <label htmlFor="email" className="mt-2 dark:text-zinc-300">
                   이메일
                 </label>
                 <input
@@ -60,7 +60,9 @@ const Login = () => {
               </div>
 
               <div className="login-label-input-group">
-                <label htmlFor="password">비밀번호</label>
+                <label htmlFor="password" className="dark:text-zinc-300">
+                  비밀번호
+                </label>
                 <input
                   id="password"
                   type="password"
@@ -76,7 +78,9 @@ const Login = () => {
                 )}
               </div>
 
-              <button className="login-form-submit-button">로그인</button>
+              <button className="login-form-submit-button dark:text-slate-100 dark:bg-blue-500 dark:hover:bg-blue-600">
+                로그인
+              </button>
               <Link href="/register" className="login-link-text">
                 아직 회원이 아니신가요?
                 <span>회원가입</span>

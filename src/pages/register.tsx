@@ -44,11 +44,13 @@ const Register = () => {
     <Layout>
       <div className="login-page-layout">
         <div className="login-box">
-          <div className="login-form-layout">
-            <h1 className="login-header-title">회원가입</h1>
+          <div className="login-form-layout dark:border-zinc-500">
+            <h1 className="login-header-title dark:text-slate-300">회원가입</h1>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               <div className="login-label-input-group">
-                <label htmlFor="name">이름</label>
+                <label htmlFor="name" className=" dark:text-zinc-300">
+                  이름
+                </label>
                 <input
                   id="name"
                   type="text"
@@ -77,7 +79,9 @@ const Register = () => {
               </div>
 
               <div className="login-label-input-group">
-                <label htmlFor="email">이메일</label>
+                <label htmlFor="email" className=" dark:text-zinc-300">
+                  이메일
+                </label>
                 <input
                   id="email"
                   type="email"
@@ -98,7 +102,9 @@ const Register = () => {
               </div>
 
               <div className="login-label-input-group">
-                <label htmlFor="password">비밀번호</label>
+                <label htmlFor="password" className=" dark:text-zinc-300">
+                  비밀번호
+                </label>
                 <input
                   id="password"
                   type="password"
@@ -124,12 +130,14 @@ const Register = () => {
               </div>
 
               <div className="login-label-input-group">
-                <label htmlFor="address">주소</label>
+                <label htmlFor="address" className=" dark:text-zinc-300">
+                  주소
+                </label>
                 <div className="flex gap-2">
                   <input
                     id="address"
                     type="text"
-                    className="login-form-input bg-stone-100"
+                    className="login-form-input bg-stone-100 dark:bg-zinc-800"
                     {...methods.register('address', {
                       required: '주소를 입력해주세요',
                     })}
@@ -137,7 +145,7 @@ const Register = () => {
                   />
                   <button
                     type="button"
-                    className="flex justify-center items-center mt-1.5 px-3 bg-zinc-300 hover:bg-zinc-400 rounded"
+                    className="flex justify-center items-center mt-1.5 px-3 bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-500 rounded"
                     onClick={() => setOpenPostcode(true)}
                     aria-label="주소입력 팝업 열기"
                   >
@@ -151,7 +159,9 @@ const Register = () => {
                 )}
               </div>
 
-              <button className="login-form-submit-button">회원가입</button>
+              <button className="login-form-submit-button dark:text-slate-100 dark:bg-blue-500 dark:hover:bg-blue-600">
+                회원가입
+              </button>
               <Link href="/login" className="login-link-text">
                 이미 계정이 있으신가요?
                 <span>로그인</span>

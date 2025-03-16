@@ -8,6 +8,7 @@ import React, {
 import { useRouter } from 'next/router'
 import Webcam from 'react-webcam'
 import * as tmImage from '@teachablemachine/image'
+import * as tf from '@tensorflow/tfjs'
 import NextImage from 'next/image'
 import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
@@ -53,6 +54,9 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
       } catch (modelError) {
         console.error('Error loading model:', modelError)
         if (!isLoading && (!data || modelError || error)) {
+          model?.dispose()
+          tf.engine().disposeVariables()
+          setModel(null)
           AIErrorModalOpen()
         }
       }
@@ -181,7 +185,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
     <div className="flex flex-col items-center px-80 w-full">
       <div
         id="camera-display-container"
-        className="relative flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 rounded"
+        className="relative flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800 rounded"
       >
         {useWebcam && (
           <Webcam
@@ -247,7 +251,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
       {!isMobileDevice() ? (
         <button
           type="button"
-          className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 border border-zinc-400 rounded-full"
+          className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 dark:bg-zinc-500 border border-zinc-400 rounded-full"
           onClick={() => {
             setUseWebcam(!useWebcam)
             setFlowerName('')
@@ -269,7 +273,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
         <>
           <label
             htmlFor="cameraInput"
-            className="my-8 px-1.5 py-0.5 flex items-center justify-center w-[7rem] h-[3rem] bg-zinc-300 border border-zinc-400 cursor-pointer rounded-full"
+            className="my-8 px-1.5 py-0.5 flex items-center justify-center w-[7rem] h-[3rem] bg-zinc-300 dark:bg-zinc-500 border border-zinc-400 cursor-pointer rounded-full"
           >
             <NextImage
               src="/images/camera.png"

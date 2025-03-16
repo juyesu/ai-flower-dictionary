@@ -31,7 +31,7 @@ const Homepage = () => {
     <div className="flex flex-col items-center w-full h-auto">
       <section className="relative flex justify-center items-center w-full sm:h-[40rem] lg:h-[62rem] bg-center bg-cover filter">
         <video
-          className="absolute w-full h-full inset-0 object-cover"
+          className="absolute w-full h-full inset-0 object-cover filter dark:saturate-[.8]"
           autoPlay
           muted
           playsInline
@@ -41,10 +41,10 @@ const Homepage = () => {
         </video>
         <div className="absolute inset-0 bg-black opacity-30" />
         <div className="relative flex flex-col justify-center items-center gap-5">
-          <p className="mt-10 sm:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-white">
+          <p className="mt-10 sm:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-white dark:text-gray-800">
             Search for plants you're curious about
           </p>
-          <p className="sm:text-2xl lg:text-3xl 2xl:text-3xl text-white">
+          <p className="sm:text-2xl lg:text-3xl 2xl:text-3xl text-white dark:text-gray-800">
             There are about 100+ plants
           </p>
           <PlantSearchBar
@@ -57,7 +57,9 @@ const Homepage = () => {
       </section>
       <div className="my-12 flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
         <div className="mt-16 mb-12 flex flex-col items-center w-full">
-          <h1 className="text-5xl pb-3 border-b-2 border-black">Features</h1>
+          <h1 className="text-5xl dark:text-slate-300 pb-3 border-b-2 border-black dark:border-zinc-300">
+            Features
+          </h1>
         </div>
         <PreviewContentSection
           sectionTagId="aiFlowerDetectionSection"
@@ -65,11 +67,11 @@ const Homepage = () => {
           title="카메라, 이미지 파일 AI 분석을 통해 <br> 궁금한 식물을 알아보세요"
           description="인공지능으로 학습한 모델을 통해 <br> 식물의 종류를 식별하고, 꽃말과 피는 시기 등 정보를 출력해줍니다."
           linkHref="/ai-flower-detection"
-          linkText="Go to WebCam"
+          linkText="Go to AI flower detection"
           imgSrc="/images/webcam_title_image_2.jpg"
           isLeftAligned={false}
         />
-        <hr className="w-1/4" />
+        <hr className="w-1/4 dark:border-zinc-500" />
         <PreviewContentSection
           sectionTagId="plantInfoSection"
           id="plantInfo"
@@ -80,7 +82,7 @@ const Homepage = () => {
           imgSrc="/images/plantInfo_title_image_1.jpg"
           isLeftAligned={true}
         />
-        <hr className="w-1/4" />
+        <hr className="w-1/4 dark:border-zinc-500" />
         <PreviewContentSection
           sectionTagId="myDictionarySection"
           id="myDictionary"
@@ -134,7 +136,7 @@ const PreviewContentSection = ({
                 src={imgSrc}
                 alt=""
                 aria-hidden="true"
-                className="h-[52rem] object-cover object-center overflow-hidden"
+                className="h-[52rem] object-cover object-center overflow-hidden dark:saturate-[.8]"
                 layout="fill"
               />
             </div>
@@ -148,20 +150,20 @@ const PreviewContentSection = ({
           >
             <div className="sm:mt-8 lg:mt-12 xl:mt-16 sm:ml-8 lg:ml-12 xl:ml-16">
               <h2
-                className="my-6 sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-zinc-800 leading-[1.2]"
+                className="my-6 sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-zinc-800 dark:text-slate-300 leading-[1.2]"
                 dangerouslySetInnerHTML={{
                   __html: formatTextWithLineBreaks(title),
                 }}
               />
               <p
-                className="lg:text-lg xl:text-xl font-normal text-zinc-800"
+                className="lg:text-lg xl:text-xl font-normal text-zinc-800 dark:text-slate-300"
                 dangerouslySetInnerHTML={{
                   __html: formatTextWithLineBreaks(description),
                 }}
               />
               <Link
                 href={linkHref}
-                className="inline-block mt-20 px-6 sm:py-2 lg:py-3 w-auto sm:text-lg lg:text-xl font-semibold bg-black text-zinc-100 rounded-full"
+                className="inline-block mt-20 px-6 sm:py-2 lg:py-3 w-auto sm:text-lg lg:text-xl font-semibold bg-black hover:bg-zinc-800 dark:bg-zinc-700 dark:hover:bg-zinc-600 text-zinc-100 dark:text-zinc-300 rounded-full"
               >
                 {linkText}
               </Link>
@@ -179,20 +181,20 @@ const PreviewContentSection = ({
           >
             <div className="sm:mt-8 lg:mt-12 xl:mt-16 sm:mr-8 lg:mr-12 xl:mr-16 text-right">
               <h2
-                className="my-6 sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-zinc-800 leading-[1.2]"
+                className="my-6 sm:text-2xl lg:text-3xl xl:text-4xl font-semibold text-zinc-800 dark:text-slate-300 leading-[1.2]"
                 dangerouslySetInnerHTML={{
                   __html: formatTextWithLineBreaks(title),
                 }}
               />
               <p
-                className="lg:text-lg xl:text-xl font-normal text-zinc-800"
+                className="lg:text-lg xl:text-xl font-normal text-zinc-800 dark:text-slate-300"
                 dangerouslySetInnerHTML={{
                   __html: formatTextWithLineBreaks(description),
                 }}
               />
               <Link
                 href={linkHref}
-                className="inline-block mt-20 px-6 sm:py-2 lg:py-3 sm:text-lg lg:text-xl font-semibold bg-black text-zinc-100 rounded-full"
+                className="inline-block mt-20 px-6 sm:py-2 lg:py-3 sm:text-lg lg:text-xl font-semibold bg-black hover:bg-zinc-800 dark:bg-zinc-700 dark:hover:bg-zinc-600 text-zinc-100 dark:text-zinc-300 rounded-full"
               >
                 {linkText}
               </Link>
@@ -211,7 +213,7 @@ const PreviewContentSection = ({
                 src={imgSrc}
                 alt=""
                 aria-hidden="true"
-                className="object-cover object-center overflow-hidden"
+                className="object-cover object-center overflow-hidden filter dark:saturate-[.8]"
                 layout="fill"
               />
             </div>

@@ -131,22 +131,16 @@ const ItemList = () => {
     <div className="flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
       <div className="relative w-full h-[652px]">
         <Image
-          src="/images/plant_info_title_image_2.jpg"
+          src="/images/plant_info_title_image_3.jpg"
           alt=""
-          className="object-cover"
+          className="object-cover dark:saturate-[.8]"
           fill
         />
-        <div
-          className="absolute inset-0 bg-white"
-          style={{
-            background:
-              'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.9) 70%, rgba(255, 255, 255, 1) 100%)',
-          }}
-        />
+        <div className="absolute inset-0 title-gradient-overlay dark:title-gradient-overlay" />
         <div className="absolute inset-0 w-full flex flex-col items-center gap-5">
           <div className="mt-28 flex flex-col items-center">
-            <h1 className="page-main-title">Plant Info</h1>
-            <p className="ml-1 mt-1.5 font-semibold text-zinc-800 text-lg text-center">
+            <h1 className="page-main-title dark:text-slate-300">Plant Info</h1>
+            <p className="ml-1 mt-1.5 font-semibold text-zinc-800 dark:text-slate-300 text-lg text-center">
               다양한 식물 정보를 탐색하고 사용자들과 <br />
               식물에 대한 경험을 공유해보세요
             </p>
@@ -160,7 +154,7 @@ const ItemList = () => {
         </div>
       </div>
       <div className="flex justify-end px-16 w-full">
-        <div className="flex border rounded-lg">
+        <div className="flex border dark:border-gray-500 rounded-lg">
           <button
             type="button"
             aria-label="카드 리스트 레이아웃으로 변경"
@@ -169,9 +163,13 @@ const ItemList = () => {
               setCurrentPage(1)
               setMaximumPageSize(15)
             }}
-            className="px-5 py-4 border rounded-l-lg hover:bg-zinc-400"
+            className="px-5 py-4 border dark:border-gray-500 rounded-l-lg dark:hover:bg-zinc-600 hover:bg-zinc-400"
           >
-            <CardList className="w-6 h-6" aria-hidden="true" />
+            <CardList
+              className="w-6 h-6 text-zinc-900 dark:text-gray-500"
+              fill="currentColor"
+              aria-hidden="true"
+            />
           </button>
           <button
             type="button"
@@ -181,9 +179,13 @@ const ItemList = () => {
               setCurrentPage(1)
               setMaximumPageSize(30)
             }}
-            className="px-5 py-4 border rounded-r-lg hover:bg-zinc-400"
+            className="px-5 py-4 border dark:border-gray-500 rounded-r-lg dark:hover:bg-zinc-600 hover:bg-zinc-400"
           >
-            <TableList className="w-6 h-6" aria-hidden="true" />
+            <TableList
+              className="w-6 h-6 text-zinc-900 dark:text-gray-500"
+              fill="currentColor"
+              aria-hidden="true"
+            />
           </button>
         </div>
       </div>

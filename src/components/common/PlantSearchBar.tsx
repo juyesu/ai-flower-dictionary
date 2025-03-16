@@ -118,7 +118,7 @@ const PlantSearchBar = ({
             }}
             onChange={(e) => setValue('input', e.target.value)}
             onKeyUp={searchKeyUp}
-            className="pl-16 py-2 sm:w-[40rem] lg:w-[48rem] h-[3.2rem] rounded-full opacity-80 text-xl font-bold bg-white"
+            className="pl-16 py-2 sm:w-[40rem] lg:w-[48rem] h-[3.2rem] rounded-full opacity-80 dark:text-slate-200 text-xl font-bold bg-white dark:bg-zinc-900"
           />
           {getValues('input') && (
             <button
@@ -127,12 +127,12 @@ const PlantSearchBar = ({
               aria-label="검색어 초기화"
               className="absolute right-8 cursor-pointer"
             >
-              <Close className="w-4 h-4" fill="#787878" />
+              <Close className="w-4 h-4" fill="#787878" aria-hidden="true" />
             </button>
           )}
         </div>
         {isSearchFocus && watch('input') && (
-          <ul className="absolute top-16 flex flex-col w-full bg-white opacity-100 rounded-3xl">
+          <ul className="absolute top-16 flex flex-col w-full bg-white dark:bg-zinc-800 opacity-100 rounded-3xl">
             {currentAutocompletePlantName.map((item, index, array) => {
               return (
                 <Link
@@ -147,7 +147,7 @@ const PlantSearchBar = ({
                 >
                   <li
                     tabIndex={0}
-                    className={`px-10 py-4 hover:bg-zinc-300 cursor-pointer ${
+                    className={`px-10 py-4 dark:text-slate-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 cursor-pointer ${
                       selectedAutocompleteIndex == index
                         ? 'bg-zinc-300 font-semibold'
                         : ''
@@ -172,7 +172,7 @@ const PlantSearchBar = ({
         )}
       </form>
       <div
-        className={`mt-2 mb-4 flex gap-6 ${
+        className={`mt-2 mb-4 flex gap-4 rounded-xl ${
           color == 'white' ? 'text-white' : 'text-zinc-800'
         }`}
       >
@@ -188,7 +188,9 @@ const PlantSearchBar = ({
                       currentPage === 'home' ? 'home' : `${currentPage}`,
                   },
                 }}
-                className="underline"
+                className={`underline px-2 py-1 rounded-xl ${
+                  color == 'white' ? 'dark:text-zinc-900' : 'dark:bg-zinc-900 dark:opacity-80 dark:text-slate-400'
+                }`}
               >
                 #{item.krnm}
               </Link>

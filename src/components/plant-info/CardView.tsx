@@ -18,7 +18,7 @@ const CardView = ({
       {apiData &&
         apiData?.map((item: PlantIndexItem) => (
           <div className="mb-4 flex flex-col items-center w-full">
-            <article className="flex flex-col shadow-custom-all rounded-xl bg-white">
+            <article className="flex flex-col shadow-custom-all dark:bg-zinc-800 hover:bg-sky-100 rounded-xl bg-white">
               <Link
                 key={item.famlNm}
                 href={{
@@ -29,17 +29,17 @@ const CardView = ({
                 aria-label={`${item.krnm}상세 페이지로 이동`}
               >
                 <Image
-                  className="h-[22rem] w-[25rem] object-cover rounded-t-xl"
+                  className="h-[22rem] w-[25rem] object-cover rounded-t-xl dark:saturate-[.8]"
                   src={item.imgUrl}
                   alt={`${item.krnm}식물`}
                   width={694}
                   height={521}
                 />
                 <div className="mx-6 mt-7 mb-4 flex flex-col gap-3">
-                  <span className="self-start px-3 py-0.5 bg-cyan-500 bg-[#797D48] rounded-full font-semibold text-sm text-white">
+                  <span className="self-start px-3 py-0.5 bg-cyan-500 dark:bg-cyan-700 rounded-full font-semibold text-sm text-white dark:text-slate-300">
                     {item.famlNm}
                   </span>
-                  <p className="mx-1.5 mt-1 font-semibold text-[22px]">
+                  <p className="mx-1.5 mt-1 dark:text-slate-300 font-semibold text-[22px]">
                     {item.krnm}
                   </p>
                   <div className="relative mt-4 flex flex-row justify-end gap-4">
@@ -63,7 +63,11 @@ const CardView = ({
                           aria-hidden="true"
                         />
                       ) : (
-                        <Unliked className="w-6 h-6" aria-hidden="true" />
+                        <Unliked
+                          className="w-6 h-6 text-zinc-800 dark:text-slate-300"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        />
                       )}
                     </button>
                     <button
@@ -75,9 +79,13 @@ const CardView = ({
                       }}
                       className="relative p-1"
                     >
-                      <Share className="w-6 h-6" aria-hidden="true" />
+                      <Share
+                        className="w-6 h-6 text-zinc-800 dark:text-slate-300"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      />
                       {copyTooltipIndex === item.krnm && (
-                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black dark:bg-zinc-500 text-white dark:text-slate-200 text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
                           링크가 복사되었습니다!
                         </div>
                       )}

@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query": "^5.52.0",
     "@tanstack/react-query-devtools": "^5.52.0",
     "@tanstack/react-table": "^8.21.2",
@@ -26,9 +25,11 @@
     "react-hook-form": "^7.52.2",
     "react-string-replace": "^1.1.1",
     "react-webcam": "^7.2.0",
+    "tailwindcss-filters": "^3.0.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/jsonp": "^0.2.3",
     "@types/node": "^22.13.1",
     "@types/react": "^18.3.3",
