@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     >
       {children}
       {openLogoutMessageModal && (
-        <div className="fixed inset-0 flex justify-center items-center">
+        <div className="fixed inset-0 flex items-center justify-center">
           <LogoutMessageModal onClose={logoutMessageModalClose} />
         </div>
       )}

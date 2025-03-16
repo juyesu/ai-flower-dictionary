@@ -36,31 +36,31 @@ const AiFlowerDetection = () => {
   if (!isClient || !router.isReady) return null
 
   return (
-    <div className="flex flex-col items-center w-full sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
-      <div className="relative flex items-end justify-center w-full h-[500px]">
+    <div className="flex w-full flex-col items-center sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
+      <div className="relative flex h-[500px] w-full items-end justify-center">
         <Image
           src="/images/ai_flower_detection_title_image_4.jpg"
           alt="타이틀 커버 이미지"
           className="object-cover"
           fill
         />
-        <div className="absolute inset-0 title-gradient-overlay dark:title-gradient-overlay" />
-        <div className="absolute inset-0 mt-30 mb-20 flex flex-col justify-center items-center gap-3">
+        <div className="title-gradient-overlay dark:title-gradient-overlay absolute inset-0" />
+        <div className="mt-30 absolute inset-0 mb-20 flex flex-col items-center justify-center gap-3">
           <h1 className="page-main-title dark:text-slate-300">
             AI Flower Detection
           </h1>
-          <p className="ml-1 mt-1.5 font-semibold text-zinc-800 dark:text-slate-300 text-lg text-center">
+          <p className="ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300">
             카메라에 꽃을 비추거나, 꽃 이미지를 업로드하면 <br /> 해당 꽃의
             이름과 정보를 알려드립니다.
           </p>
         </div>
-        <div className="mb-20 flex flex-row w-[28rem] border dark:border-gray-600 rounded-full z-10">
+        <div className="z-10 mb-20 flex w-[28rem] flex-row rounded-full border dark:border-gray-600">
           <button
             type="button"
-            className={`p-3 w-1/2 h-full rounded-l-full ${
+            className={`h-full w-1/2 rounded-l-full p-3 ${
               isCameraMode
-                ? 'bg-zinc-600 dark:bg-zinc-800 text-white dark:text-slate-300 font-semibold'
-                : 'bg-white dark:bg-zinc-400 text-zinc-800'
+                ? 'bg-zinc-600 font-semibold text-white dark:bg-zinc-800 dark:text-slate-300'
+                : 'bg-white text-zinc-800 dark:bg-zinc-400'
             }`}
             onClick={() => setIsCameraMode(true)}
             aria-label="카메라로 꽃을 인식하는 모드로 전환"
@@ -69,10 +69,10 @@ const AiFlowerDetection = () => {
           </button>
           <button
             type="button"
-            className={`p-3 w-1/2 h-full rounded-r-full ${
+            className={`h-full w-1/2 rounded-r-full p-3 ${
               isCameraMode
-                ? 'bg-white dark:bg-zinc-400 text-zinc-800'
-                : 'bg-zinc-600 dark:bg-zinc-800 text-white dark:text-slate-300 font-semibold'
+                ? 'bg-white text-zinc-800 dark:bg-zinc-400'
+                : 'bg-zinc-600 font-semibold text-white dark:bg-zinc-800 dark:text-slate-300'
             }`}
             onClick={() => setIsCameraMode(false)}
             aria-label="사진을 업로드하여 꽃을 인식하는 모드로 전환"
@@ -81,7 +81,7 @@ const AiFlowerDetection = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col items-center w-full">
+      <div className="flex w-full flex-col items-center">
         {isCameraMode ? (
           <CameraModel AIErrorModalOpen={aiErrorModalOpen} />
         ) : (

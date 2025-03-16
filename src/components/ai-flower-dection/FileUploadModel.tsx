@@ -122,10 +122,10 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center px-80 w-full">
+    <div className="flex w-full flex-col items-center px-80">
       <div
         id="image-container"
-        className="relative flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800 rounded bg-cover bg-center"
+        className="relative mt-6 flex aspect-[4/3] max-h-[624px] w-full max-w-[832px] rounded border-2 border-zinc-500 bg-zinc-100 bg-cover bg-center dark:bg-gray-800"
         style={{
           backgroundImage: uploadedFileUrl ? `url(${uploadedFileUrl})` : 'none',
         }}
@@ -134,7 +134,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
       </div>
       {image && useGptResponse ? (
         <>
-          <p className="mt-12 text-zinc-400 text-center dark:text-slate-600">
+          <p className="mt-12 text-center text-zinc-400 dark:text-slate-600">
             ※ 인덱스에 식물 정보가 존재하지 않아, 인공지능 생성 답변으로 대체
             됩니다.
           </p>
@@ -153,10 +153,10 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
           <div>
             <label
               htmlFor="fileUpload"
-              className="p-4 flex items-center justify-center bg-zinc-800 dark:hover:bg-zinc-700 hover:bg-zinc-600 font-semibold text-zinc-100 cursor-pointer border border-zinc-400 dark:border-zinc-600 rounded-lg"
+              className="flex cursor-pointer items-center justify-center rounded-lg border border-zinc-400 bg-zinc-800 p-4 font-semibold text-zinc-100 hover:bg-zinc-600 dark:border-zinc-600 dark:hover:bg-zinc-700"
             >
               <Upload
-                className="mx-2 w-4 h-4 text-zinc-100 dark:text-slate-300"
+                className="mx-2 h-4 w-4 text-zinc-100 dark:text-slate-300"
                 fill="currentColor"
                 aria-hidden="true"
               />
@@ -178,10 +178,10 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
         <div>
           <label
             htmlFor="fileUpload"
-            className="my-16 p-4 flex items-center justify-center bg-zinc-800 dark:hover:bg-zinc-700 hover:bg-zinc-600 font-semibold text-zinc-100 dark:text-slate-300 cursor-pointer border border-zinc-400 dark:border-zinc-600 rounded-lg"
+            className="my-16 flex cursor-pointer items-center justify-center rounded-lg border border-zinc-400 bg-zinc-800 p-4 font-semibold text-zinc-100 hover:bg-zinc-600 dark:border-zinc-600 dark:text-slate-300 dark:hover:bg-zinc-700"
           >
             <Upload
-              className="w-4 h-4 mx-2 text-zinc-100 dark:text-slate-300"
+              className="mx-2 h-4 w-4 text-zinc-100 dark:text-slate-300"
               fill="currentColor"
               aria-hidden="true"
             />

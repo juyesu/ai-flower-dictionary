@@ -78,7 +78,7 @@ const Login = () => {
                 )}
               </div>
 
-              <button className="login-form-submit-button dark:text-slate-100 dark:bg-blue-500 dark:hover:bg-blue-600">
+              <button className="login-form-submit-button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600">
                 로그인
               </button>
               <Link href="/register" className="login-link-text">

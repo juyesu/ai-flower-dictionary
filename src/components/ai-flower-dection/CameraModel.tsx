@@ -182,17 +182,17 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center px-80 w-full">
+    <div className="flex w-full flex-col items-center px-80">
       <div
         id="camera-display-container"
-        className="relative flex mt-6 w-full max-w-[832px] max-h-[624px] aspect-[4/3] border border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800 rounded"
+        className="relative mt-6 flex aspect-[4/3] max-h-[624px] w-full max-w-[832px] rounded border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800"
       >
         {useWebcam && (
           <Webcam
             audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            className="w-full h-full"
+            className="h-full w-full"
             videoConstraints={{
               width: 1280,
               height: 720,
@@ -204,7 +204,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
           <NextImage
             src={imageUrl}
             alt="촬영된 이미지"
-            className="w-full h-full"
+            className="h-full w-full"
             width={832}
             height={624}
           />
@@ -212,25 +212,23 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
         {isAnalyzing && <LoadingSpinner />}
       </div>
       {useWebcam && (
-        <p className="mt-6 text-2xl font-semibold text-center">
+        <p className="mt-6 text-center text-2xl font-semibold">
           예측이 진행중입니다... 현재
           <span
-            className={`ml-1.5 font-bold
-            ${
+            className={`ml-1.5 font-bold ${
               highestPrediction.probability <= 0.5
                 ? 'text-zinc-500'
                 : highestPrediction.probability < 0.7
-                ? 'text-lime-500'
-                : highestPrediction.probability < 0.95
-                ? 'text-cyan-400'
-                : 'text-amber-300'
-            }
-          `}
+                  ? 'text-lime-500'
+                  : highestPrediction.probability < 0.95
+                    ? 'text-cyan-400'
+                    : 'text-amber-300'
+            } `}
           >
             {highestPrediction.probability * 100}%
           </span>
           의 확률로
-          <span className="ml-1.5 bold text-fuchsia-400">
+          <span className="bold ml-1.5 text-fuchsia-400">
             {highestPrediction.className}
           </span>
           식물로 예측하고 있습니다.
@@ -238,7 +236,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
       )}
       {highestPrediction.className && flowerName && !useWebcam && (
         <div>
-          <p className="mt-12 text-zinc-400 text-center">
+          <p className="mt-12 text-center text-zinc-400">
             ※ 인덱스에 식물 정보가 존재하지 않아, 인공지능 생성 답변으로 대체
             됩니다.
           </p>
@@ -251,7 +249,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
       {!isMobileDevice() ? (
         <button
           type="button"
-          className="my-16 flex items-center justify-center w-[5.5rem] h-[5.5rem] bg-zinc-300 dark:bg-zinc-500 border border-zinc-400 rounded-full"
+          className="my-16 flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-zinc-400 bg-zinc-300 dark:bg-zinc-500"
           onClick={() => {
             setUseWebcam(!useWebcam)
             setFlowerName('')
@@ -263,7 +261,7 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
           <NextImage
             src="/images/camera.png"
             alt=""
-            className="w-12 h-auto"
+            className="h-auto w-12"
             aria-hidden="true"
             width={48}
             height={48}
@@ -273,12 +271,12 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
         <>
           <label
             htmlFor="cameraInput"
-            className="my-8 px-1.5 py-0.5 flex items-center justify-center w-[7rem] h-[3rem] bg-zinc-300 dark:bg-zinc-500 border border-zinc-400 cursor-pointer rounded-full"
+            className="my-8 flex h-[3rem] w-[7rem] cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-zinc-300 px-1.5 py-0.5 dark:bg-zinc-500"
           >
             <NextImage
               src="/images/camera.png"
               alt=""
-              className="w-6 h-auto"
+              className="h-auto w-6"
               aria-hidden="true"
               width={24}
               height={24}

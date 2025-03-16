@@ -47,7 +47,7 @@ const Pagination = ({
       return (
         <li>
           <button
-            className="px-4 py-2 font-xl border rounded-xl bg-zinc-500 dark:bg-zinc-400 text-white"
+            className="font-xl rounded-xl border bg-zinc-500 px-4 py-2 text-white dark:bg-zinc-400"
             type="button"
             aria-label="페이지 번호"
           >
@@ -61,10 +61,10 @@ const Pagination = ({
         pageNumberButton.push(
           <li key={i}>
             <button
-              className={`px-4 py-2 font-xl border dark:border-zinc-400 rounded-xl ${
+              className={`font-xl rounded-xl border px-4 py-2 dark:border-zinc-400 ${
                 i == currentPage
-                  ? 'bg-zinc-500 dark:bg-zinc-400 text-white dark:text-slate-800'
-                  : 'bg-white dark:bg-zinc-700 text-black dark:text-slate-300'
+                  ? 'bg-zinc-500 text-white dark:bg-zinc-400 dark:text-slate-800'
+                  : 'bg-white text-black dark:bg-zinc-700 dark:text-slate-300'
               } `}
               type="button"
               aria-label="페이지 번호"
@@ -88,7 +88,7 @@ const Pagination = ({
             onClick={chageFirstPage}
           >
             <FirstPage
-              className="w-6 h-6 text-black dark:text-slate-300"
+              className="h-6 w-6 text-black dark:text-slate-300"
               fill="currentColor"
               aria-hidden="true"
             />
@@ -101,7 +101,7 @@ const Pagination = ({
             onClick={changePrevPage}
           >
             <PrevPage
-              className="w-6 h-6 text-black dark:text-slate-300"
+              className="h-6 w-6 text-black dark:text-slate-300"
               fill="currentColor"
               aria-hidden="true"
             />
@@ -115,7 +115,7 @@ const Pagination = ({
             onClick={changeNextPage}
           >
             <NextPage
-              className="w-6 h-6 text-black dark:text-slate-300"
+              className="h-6 w-6 text-black dark:text-slate-300"
               fill="currentColor"
               aria-hidden="true"
             />
@@ -128,7 +128,7 @@ const Pagination = ({
             onClick={changeLastPage}
           >
             <LastPage
-              className="w-6 h-6 text-black dark:text-slate-300"
+              className="h-6 w-6 text-black dark:text-slate-300"
               fill="currentColor"
               aria-hidden="true"
             />

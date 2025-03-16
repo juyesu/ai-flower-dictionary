@@ -1,4 +1,5 @@
 const typescriptEslintPlugin = require('@typescript-eslint/eslint-plugin')
+const tailwindPlugin = require('eslint-plugin-tailwindcss')
 module.exports = [
   {
     languageOptions: {
@@ -9,9 +10,11 @@ module.exports = [
     },
     plugins: {
       '@typescript-eslint': typescriptEslintPlugin,
+      tailwindcss: tailwindPlugin,
     },
     rules: {
       'no-console': 'warn',
+      'tailwindcss/classnames-order': 'warn',
     },
   },
 ]

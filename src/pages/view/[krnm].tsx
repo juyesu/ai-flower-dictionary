@@ -131,10 +131,10 @@ const Post = () => {
   if (isLoading) return
   return (
     <Layout>
-      <div className="flex flex-col items-center w-full min-h-screen sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem] bg-[#FEF5CC]">
+      <div className="flex min-h-screen w-full flex-col items-center bg-[#FEF5CC] sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
         {plantData && (
           <>
-            <div className="relative w-full flex flex-col items-center gap-5">
+            <div className="relative flex w-full flex-col items-center gap-5">
               <div className="relative mt-20 flex flex-col items-center">
                 <Link
                   href={{
@@ -143,11 +143,11 @@ const Post = () => {
                     ...(sort ? { query: { sort } } : {}),
                   }}
                   aria-label="식물 도감 페이지로 이동"
-                  className="absolute top-8 left-[-80px] flex items-center justify-center p-2 bg-white border rounded-2xl"
+                  className="absolute left-[-80px] top-8 flex items-center justify-center rounded-2xl border bg-white p-2"
                   passHref
                 >
                   <PreviousPage
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                     fill="#5f6368"
                     aria-hidden="true"
                   />
@@ -159,8 +159,8 @@ const Post = () => {
                   {plantData?.famlNm} / {plantData?.kornFamlNm}
                 </h2>
               </div>
-              <div className="flex flex-row items-end justify-end w-full">
-                <div className="relative mt-4 mr-16 flex flex-row justify-end gap-4">
+              <div className="flex w-full flex-row items-end justify-end">
+                <div className="relative mr-16 mt-4 flex flex-row justify-end gap-4">
                   <button
                     type="button"
                     aria-label={
@@ -176,12 +176,12 @@ const Post = () => {
                   >
                     {typeof krnm === 'string' && likedPlants.includes(krnm) ? (
                       <Liked
-                        className="w-8 h-8"
+                        className="h-8 w-8"
                         fill="#FF5C8D"
                         aria-hidden="true"
                       />
                     ) : (
-                      <Unliked className="w-8 h-8" aria-hidden="true" />
+                      <Unliked className="h-8 w-8" aria-hidden="true" />
                     )}
                   </button>
                   <button
@@ -193,9 +193,9 @@ const Post = () => {
                     }}
                     className="relative p-1"
                   >
-                    <Share className="w-8 h-8" aria-hidden="true" />
+                    <Share className="h-8 w-8" aria-hidden="true" />
                     {CopyTooltipIndex === krnm && (
-                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
+                      <div className="absolute left-1/2 top-full mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-3 py-1 text-sm text-white transition-opacity duration-300">
                         링크가 복사되었습니다!
                       </div>
                     )}
@@ -204,23 +204,23 @@ const Post = () => {
               </div>
             </div>
             <hr className="my-6 mb-10 w-full" />
-            <figure className="flex flex-row w-full">
+            <figure className="flex w-full flex-row">
               <Image
-                className="w-1/2 mx-16 my-12 border rounded-xl"
+                className="mx-16 my-12 w-1/2 rounded-xl border"
                 src={plantData?.imgUrl}
                 alt={`${plantData?.krnm}식물`}
                 width={400}
                 height={300}
               />
-              <figcaption className="w-1/2 justify-self-center self-center px-8 text-[#797D48]">
+              <figcaption className="w-1/2 self-center justify-self-center px-8 text-[#797D48]">
                 <dl>
-                  <div className="my-4 font-semibold text-3xl">
+                  <div className="my-4 text-3xl font-semibold">
                     <dt className="inline-block">색상:</dt>
                     <dd className="ml-2 inline-block">
                       {plantData?.flwrClorCn}
                     </dd>
                   </div>
-                  <div className="my-4 font-semibold text-3xl">
+                  <div className="my-4 text-3xl font-semibold">
                     <dt className="inline-block">개화시기:</dt>
                     <dd className="ml-2 inline-block">
                       {plantData?.bloomPeriodCn}

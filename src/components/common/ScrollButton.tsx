@@ -25,22 +25,22 @@ const ScrollButton = () => {
     setTimeout(() => setIsActivate(false), 1000)
   }
   return (
-    <div className="flex flex-col items-center fixed right-10 bottom-8 border rounded-xl cursour-poiner bg-zinc-400 dark:bg-gray-600 dark:border-gray-400 opacity-70">
+    <div className="cursour-poiner fixed bottom-8 right-10 flex flex-col items-center rounded-xl border bg-zinc-400 opacity-70 dark:border-gray-400 dark:bg-gray-600">
       <button
         type="button"
-        className="p-2 border-b"
+        className="border-b p-2"
         onClick={scrollToTop}
         aria-label="스크롤 최상단으로 이동"
       >
-        <ArrowUp className="fill-white w-5 h-6" aria-hidden="true" />
+        <ArrowUp className="h-6 w-5 fill-white" aria-hidden="true" />
       </button>
       <button
         type="button"
-        className="p-2 border-t"
+        className="border-t p-2"
         onClick={scrollToBottom}
         aria-label="스크롤 최하단으로 이동"
       >
-        <ArrowDown className="fill-white w-5 h-6" aria-hidden="true" />
+        <ArrowDown className="h-6 w-5 fill-white" aria-hidden="true" />
       </button>
     </div>
   )

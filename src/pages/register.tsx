@@ -48,7 +48,7 @@ const Register = () => {
             <h1 className="login-header-title dark:text-slate-300">회원가입</h1>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               <div className="login-label-input-group">
-                <label htmlFor="name" className=" dark:text-zinc-300">
+                <label htmlFor="name" className="dark:text-zinc-300">
                   이름
                 </label>
                 <input
@@ -79,7 +79,7 @@ const Register = () => {
               </div>
 
               <div className="login-label-input-group">
-                <label htmlFor="email" className=" dark:text-zinc-300">
+                <label htmlFor="email" className="dark:text-zinc-300">
                   이메일
                 </label>
                 <input
@@ -102,7 +102,7 @@ const Register = () => {
               </div>
 
               <div className="login-label-input-group">
-                <label htmlFor="password" className=" dark:text-zinc-300">
+                <label htmlFor="password" className="dark:text-zinc-300">
                   비밀번호
                 </label>
                 <input
@@ -130,7 +130,7 @@ const Register = () => {
               </div>
 
               <div className="login-label-input-group">
-                <label htmlFor="address" className=" dark:text-zinc-300">
+                <label htmlFor="address" className="dark:text-zinc-300">
                   주소
                 </label>
                 <div className="flex gap-2">
@@ -145,11 +145,11 @@ const Register = () => {
                   />
                   <button
                     type="button"
-                    className="flex justify-center items-center mt-1.5 px-3 bg-zinc-300 dark:bg-zinc-400 hover:bg-zinc-400 dark:hover:bg-zinc-500 rounded"
+                    className="mt-1.5 flex items-center justify-center rounded bg-zinc-300 px-3 hover:bg-zinc-400 dark:bg-zinc-400 dark:hover:bg-zinc-500"
                     onClick={() => setOpenPostcode(true)}
                     aria-label="주소입력 팝업 열기"
                   >
-                    <MagnifyingGlass className="w-4 h-4" aria-hidden="true" />
+                    <MagnifyingGlass className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </div>
                 {methods.formState.errors.address && (
@@ -159,7 +159,7 @@ const Register = () => {
                 )}
               </div>
 
-              <button className="login-form-submit-button dark:text-slate-100 dark:bg-blue-500 dark:hover:bg-blue-600">
+              <button className="login-form-submit-button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600">
                 회원가입
               </button>
               <Link href="/login" className="login-link-text">
@@ -172,13 +172,13 @@ const Register = () => {
         {openPostcode && (
           <>
             <div
-              className="w-full h-full fixed z-0 bg-black bg-opacity-10"
+              className="fixed z-0 h-full w-full bg-black bg-opacity-10"
               onClick={() => setOpenPostcode(false)}
               aria-hidden="true"
               aria-labelledby="modal-title"
             />
             <div
-              className="w-[400px] fixed flex justify-center items-center roundex-xl"
+              className="roundex-xl fixed flex w-[400px] items-center justify-center"
               aria-modal="true"
             >
               <h2 id="modal-title" className="sr-only">

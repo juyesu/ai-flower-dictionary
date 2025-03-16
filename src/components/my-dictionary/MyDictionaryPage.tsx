@@ -84,35 +84,35 @@ const MyDictionaryPage = () => {
   }, [data])
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
-      <div className="relative w-full h-[500px]">
+    <div className="flex min-h-screen w-full flex-col items-center sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
+      <div className="relative h-[500px] w-full">
         <Image
           src="/images/my_dictionary_title_image_2.jpg"
           alt="타이틀 커버 이미지"
           className="object-cover"
           fill
         />
-        <div className="absolute inset-0 title-gradient-overlay dark:title-gradient-overlay" />
-        <div className="absolute inset-0 w-full flex flex-col justify-center items-center gap-5">
+        <div className="title-gradient-overlay dark:title-gradient-overlay absolute inset-0" />
+        <div className="absolute inset-0 flex w-full flex-col items-center justify-center gap-5">
           <div className="mb-12 flex flex-col items-center">
             <h1 className="page-main-title dark:text-slate-300">
               My Dictionary
             </h1>
-            <p className="ml-1 mt-1.5 font-semibold text-zinc-800 dark:text-slate-300 text-lg text-center">
+            <p className="ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300">
               내가 발견한 식물들로 <br />
               세상에 단 하나뿐인 나만의 도감을 완성해보세요
             </p>
           </div>
         </div>
       </div>
-      <section className="w-full mt-8 px-8">
+      <section className="mt-8 w-full px-8">
         <button
           onClick={() =>
             setAccordionOpen((prev) => {
               return { ...prev, likedPlants: !prev.likedPlants }
             })
           }
-          className={`flex justify-between w-full px-6 py-4 border border-l-fuchsia-200 border-l-4 dark:border-zinc-600 dark:border-l-gray-700 dark:text-slate-300 font-semibold transition ${
+          className={`flex w-full justify-between border border-l-4 border-l-fuchsia-200 px-6 py-4 font-semibold transition dark:border-zinc-600 dark:border-l-gray-700 dark:text-slate-300 ${
             accordionOpen.likedPlants ? '' : ''
           }`}
         >
@@ -129,7 +129,7 @@ const MyDictionaryPage = () => {
 
         {accordionOpen.likedPlants &&
           (hasPlantsData.likedPlants ? (
-            <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 dark:bg-zinc-700 transition-opacity duration-300 opacity-100">
+            <div className="grid grid-cols-8 gap-x-6 gap-y-10 bg-stone-100 px-4 py-6 opacity-100 transition-opacity duration-300 dark:bg-zinc-700">
               {plantData.likedPlants.map((item, index) => (
                 <Link
                   key={item.krnm}
@@ -145,7 +145,7 @@ const MyDictionaryPage = () => {
                       key={index}
                       src={item.imgUrl}
                       alt={`${item.imgUrl}식물`}
-                      className="w-full h-32 border-4 border-stone-400 dark:border-stone-500 object-cover rounded"
+                      className="h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500"
                       width={157}
                       height={128}
                     />
@@ -157,9 +157,9 @@ const MyDictionaryPage = () => {
               ))}
             </div>
           ) : (
-            <div className="flex justify-center items-center gap-4 p-20 bg-stone-100">
+            <div className="flex items-center justify-center gap-4 bg-stone-100 p-20">
               <BoxOpen
-                className="w-10 h-10"
+                className="h-10 w-10"
                 fill="#a1a1aa"
                 aria-hidden="true"
               />
@@ -169,14 +169,14 @@ const MyDictionaryPage = () => {
             </div>
           ))}
       </section>
-      <section className="w-full mt-8 my-20 px-8">
+      <section className="my-20 mt-8 w-full px-8">
         <button
           onClick={() =>
             setAccordionOpen((prev) => {
               return { ...prev, myDictionary: !prev.myDictionary }
             })
           }
-          className={`flex justify-between w-full px-6 py-4 border border-l-fuchsia-200 border-l-4 dark:border-zinc-600 dark:border-l-gray-700 dark:text-slate-300 font-semibold transition ${
+          className={`flex w-full justify-between border border-l-4 border-l-fuchsia-200 px-6 py-4 font-semibold transition dark:border-zinc-600 dark:border-l-gray-700 dark:text-slate-300 ${
             accordionOpen.myDictionary ? '' : ''
           }`}
         >
@@ -193,7 +193,7 @@ const MyDictionaryPage = () => {
 
         {accordionOpen.myDictionary &&
           (hasPlantsData.myDictionary ? (
-            <div className="grid grid-cols-8 gap-x-6 gap-y-10 px-4 py-6 bg-stone-100 dark:bg-zinc-700 transition-opacity duration-300 opacity-100">
+            <div className="grid grid-cols-8 gap-x-6 gap-y-10 bg-stone-100 px-4 py-6 opacity-100 transition-opacity duration-300 dark:bg-zinc-700">
               {plantData.myDictionary.map((item, index) => (
                 <Link
                   key={item.krnm}
@@ -209,7 +209,7 @@ const MyDictionaryPage = () => {
                       key={index}
                       src={item.imgUrl}
                       alt={`${item.imgUrl}의 이미지`}
-                      className="w-full h-32 border-4 border-stone-400 dark:border-stone-500 object-cover rounded"
+                      className="h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500"
                       width={157}
                       height={128}
                     />
@@ -221,9 +221,9 @@ const MyDictionaryPage = () => {
               ))}
             </div>
           ) : (
-            <div className="flex justify-center items-center gap-4 p-20 bg-stone-100">
+            <div className="flex items-center justify-center gap-4 bg-stone-100 p-20">
               <BoxOpen
-                className="w-10 h-10"
+                className="h-10 w-10"
                 fill="#a1a1aa"
                 aria-hidden="true"
               />

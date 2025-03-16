@@ -10,6 +10,7 @@ const queryClient = new QueryClient()
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   dotenv.config()
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>

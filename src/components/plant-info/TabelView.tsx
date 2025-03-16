@@ -47,13 +47,13 @@ const TableView = ({
               >
                 {likedPlants.includes(item.krnm) ? (
                   <Liked
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                     fill="#FF5C8D"
                     aria-hidden="true"
                   />
                 ) : (
                   <Unliked
-                    className="w-6 h-6 text-zinc-800 dark:text-slate-300"
+                    className="h-6 w-6 text-zinc-800 dark:text-slate-300"
                     fill="currentColor"
                     aria-hidden="true"
                   />
@@ -70,12 +70,12 @@ const TableView = ({
                 className="relative p-1"
               >
                 <Share
-                  className="w-6 h-6 text-zinc-800 dark:text-slate-300"
+                  className="h-6 w-6 text-zinc-800 dark:text-slate-300"
                   fill="currentColor"
                   aria-hidden="true"
                 />
                 {copyTooltipIndex === item.krnm && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-sm rounded py-1 px-3 transition-opacity duration-300 whitespace-nowrap">
+                  <div className="absolute left-1/2 top-full mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-3 py-1 text-sm text-white transition-opacity duration-300">
                     링크가 복사되었습니다!
                   </div>
                 )}
@@ -131,14 +131,14 @@ const TableView = ({
   })
 
   return (
-    <table className="mt-16 w-full text-zinc-900 dark:text-slate-300 rounded table-fixed ">
+    <table className="mt-16 w-full table-fixed rounded text-zinc-900 dark:text-slate-300">
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header, index) => (
               <th
                 key={header.id}
-                className="px-5 py-3 bg-zinc-100 dark:bg-zinc-600"
+                className="bg-zinc-100 px-5 py-3 dark:bg-zinc-600"
                 style={{ width: columns[index].size || 'auto' }}
               >
                 {flexRender(
@@ -156,7 +156,7 @@ const TableView = ({
           return (
             <tr
               key={row.id}
-              className="dark:hover:bg-zinc-700 hover:bg-zinc-300 cursor-pointer"
+              className="cursor-pointer hover:bg-zinc-300 dark:hover:bg-zinc-700"
               onClick={() => {
                 router.push({
                   pathname: `/view/${rowData.krnm}`,
@@ -167,7 +167,7 @@ const TableView = ({
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="px-2 py-4 align-middle text-center"
+                  className="px-2 py-4 text-center align-middle"
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>

@@ -19,7 +19,7 @@ const SearchFeedbackToast = ({
 
   return (
     <div
-      className={`fixed bottom-6 flex items-center gap-6 px-6 py-3 bg-white rounded-lg shadow-md transition-all duration-500 ease-in-out z-[9999] hover:cursor-pointer ${
+      className={`fixed bottom-6 z-[9999] flex items-center gap-6 rounded-lg bg-white px-6 py-3 shadow-md transition-all duration-500 ease-in-out hover:cursor-pointer ${
         openToast ? 'right-6' : 'right-[-440px]'
       }`}
       onClick={onClick}
@@ -31,23 +31,23 @@ const SearchFeedbackToast = ({
           onClose()
         }}
         aria-label="토스트 팝업 닫기"
-        className="absolute top-4 right-4 p-1 self-end"
+        className="absolute right-4 top-4 self-end p-1"
       >
-        <Close className="w-3 h-3" aria-hidden="true" />
+        <Close className="h-3 w-3" aria-hidden="true" />
       </button>
       <div className="flex flex-col">
         <p className="my-0.5 text-center text-zinc-500">인식한 이미지:</p>
         <Image
           src={imageUrl}
           alt="인식에 사용된 이미지"
-          className="w-60 h-[200px] border-4 border-stone-400 rounded-lg"
+          className="h-[200px] w-60 rounded-lg border-4 border-stone-400"
           width={240}
           height={200}
         />
       </div>
       {!isLikeButtonClicked ? (
-        <div className="flex flex-col justify-center items-center">
-          <p className="my-1.5 font-semibold text-center">
+        <div className="flex flex-col items-center justify-center">
+          <p className="my-1.5 text-center font-semibold">
             검색 결과에 만족하시나요?
           </p>
           <button
@@ -60,7 +60,7 @@ const SearchFeedbackToast = ({
           </button>
         </div>
       ) : (
-        <p className="my-1.5 font-semibold text-center">
+        <p className="my-1.5 text-center font-semibold">
           설문에 참여해주셔서 감사합니다!😄
         </p>
       )}

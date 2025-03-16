@@ -86,7 +86,7 @@ const PlantSearchBar = ({
   return (
     <>
       <form
-        className="mt-12 relative flex-col items-center"
+        className="relative mt-12 flex-col items-center"
         onSubmit={(e) => {
           e.preventDefault()
         }}
@@ -96,7 +96,7 @@ const PlantSearchBar = ({
             Search for Plants
           </label>
           <MagnifyingGlass
-            className="mx-6 w-[22px] h-[22px] absolute z-10"
+            className="absolute z-10 mx-6 h-[22px] w-[22px]"
             fill="#787878"
             aria-hidden="true"
           />
@@ -118,7 +118,7 @@ const PlantSearchBar = ({
             }}
             onChange={(e) => setValue('input', e.target.value)}
             onKeyUp={searchKeyUp}
-            className="pl-16 py-2 sm:w-[40rem] lg:w-[48rem] h-[3.2rem] rounded-full opacity-80 dark:text-slate-200 text-xl font-bold bg-white dark:bg-zinc-900"
+            className="h-[3.2rem] rounded-full bg-white py-2 pl-16 text-xl font-bold opacity-80 dark:bg-zinc-900 dark:text-slate-200 sm:w-[40rem] lg:w-[48rem]"
           />
           {getValues('input') && (
             <button
@@ -127,12 +127,12 @@ const PlantSearchBar = ({
               aria-label="검색어 초기화"
               className="absolute right-8 cursor-pointer"
             >
-              <Close className="w-4 h-4" fill="#787878" aria-hidden="true" />
+              <Close className="h-4 w-4" fill="#787878" aria-hidden="true" />
             </button>
           )}
         </div>
         {isSearchFocus && watch('input') && (
-          <ul className="absolute top-16 flex flex-col w-full bg-white dark:bg-zinc-800 opacity-100 rounded-3xl">
+          <ul className="absolute top-16 flex w-full flex-col rounded-3xl bg-white opacity-100 dark:bg-zinc-800">
             {currentAutocompletePlantName.map((item, index, array) => {
               return (
                 <Link
@@ -147,7 +147,7 @@ const PlantSearchBar = ({
                 >
                   <li
                     tabIndex={0}
-                    className={`px-10 py-4 dark:text-slate-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 cursor-pointer ${
+                    className={`cursor-pointer px-10 py-4 hover:bg-zinc-300 dark:text-slate-300 dark:hover:bg-zinc-700 ${
                       selectedAutocompleteIndex == index
                         ? 'bg-zinc-300 font-semibold'
                         : ''
@@ -155,10 +155,10 @@ const PlantSearchBar = ({
                       index === 0 && array.length === 1
                         ? 'rounded-3xl'
                         : index === 0
-                        ? 'rounded-t-3xl'
-                        : index === array.length - 1
-                        ? 'rounded-b-3xl'
-                        : ''
+                          ? 'rounded-t-3xl'
+                          : index === array.length - 1
+                            ? 'rounded-b-3xl'
+                            : ''
                     }`}
                   >
                     {reactStringReplace(item, getValues('input'), (match) => (
@@ -172,7 +172,7 @@ const PlantSearchBar = ({
         )}
       </form>
       <div
-        className={`mt-2 mb-4 flex gap-4 rounded-xl ${
+        className={`mb-4 mt-2 flex gap-4 rounded-xl ${
           color == 'white' ? 'text-white' : 'text-zinc-800'
         }`}
       >
@@ -188,8 +188,10 @@ const PlantSearchBar = ({
                       currentPage === 'home' ? 'home' : `${currentPage}`,
                   },
                 }}
-                className={`underline px-2 py-1 rounded-xl ${
-                  color == 'white' ? 'dark:text-zinc-900' : 'dark:bg-zinc-900 dark:opacity-80 dark:text-slate-400'
+                className={`rounded-xl px-2 py-1 underline ${
+                  color == 'white'
+                    ? 'dark:text-zinc-900'
+                    : 'dark:bg-zinc-900 dark:text-slate-400 dark:opacity-80'
                 }`}
               >
                 #{item.krnm}

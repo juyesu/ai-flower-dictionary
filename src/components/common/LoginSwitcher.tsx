@@ -14,12 +14,12 @@ const LoginSwitcher = () => {
   }, [loginUser])
 
   return (
-    <div className="sm:ml-2 lg:ml-4 mr-4 flex justify-center items-center sm:gap-1 lg:gap-1.5 h-full">
+    <div className="mr-4 flex h-full items-center justify-center sm:ml-2 sm:gap-1 lg:ml-4 lg:gap-1.5">
       {loginUser ? (
-        <div className="flex ml-3">
+        <div className="ml-3 flex">
           <div className="flex items-center gap-1.5">
             <CircleUser
-              className="w-6 h-6 text-blue-400 dark:text-blue-600"
+              className="h-6 w-6 text-blue-400 dark:text-blue-600"
               fill="currentColor"
               aria-hidden="true"
             />
@@ -31,13 +31,13 @@ const LoginSwitcher = () => {
           </div>
           <div className="mx-4 flex justify-center gap-2">
             <button
-              className="sm:px-4 sm:py-1 border-2 dark:border-gray-500 dark:hover:border-gray-400 hover:border-zinc-600 rounded-full text-zinc-500 dark:text-zinc-400 sm:text-sm sm:font-semibold lg:font-bold"
+              className="rounded-full border-2 text-zinc-500 hover:border-zinc-600 dark:border-gray-500 dark:text-zinc-400 dark:hover:border-gray-400 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"
               onClick={() => logout()}
             >
               로그아웃
             </button>
             <button
-              className="sm:px-4 sm:py-1 border-2 dark:border-gray-500 dark:hover:border-gray-400 bg-zinc-400 dark:bg-zinc-700 hover:border-zinc-600 rounded-full text-zinc-100 dark:text-zinc-500 sm:text-sm sm:font-semibold lg:font-bold"
+              className="rounded-full border-2 bg-zinc-400 text-zinc-100 hover:border-zinc-600 dark:border-gray-500 dark:bg-zinc-700 dark:text-zinc-500 dark:hover:border-gray-400 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"
               type="button"
               onClick={() => withdrawAccount()}
             >
@@ -46,16 +46,16 @@ const LoginSwitcher = () => {
           </div>
         </div>
       ) : (
-        <div className="sm:ml-2 lg:ml-4 mr-4 flex justify-center items-center sm:gap-1 lg:gap-1.5 h-full">
+        <div className="mr-4 flex h-full items-center justify-center sm:ml-2 sm:gap-1 lg:ml-4 lg:gap-1.5">
           <Link
             href="/login"
-            className="sm:px-4 sm:py-1 border-2 dark:border-gray-500 dark:hover:border-gray-300 hover:border-zinc-600 rounded-full bg-blue-300 dark:dark:saturate-30 hover:border-blue-400 text-white sm:text-sm sm:font-semibold lg:font-bold"
+            className="dark:dark:saturate-30 rounded-full border-2 bg-blue-300 text-white hover:border-blue-400 hover:border-zinc-600 dark:border-gray-500 dark:hover:border-gray-300 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"
           >
             로그인
           </Link>
           <Link
             href="/register"
-            className="sm:px-3 sm:py-1 border-2 dark:border-gray-500 dark:hover:border-gray-300 rounded-full bg-zinc-400 hover:border-zinc-600 text-zinc-600 text-zinc-100 sm:text-sm sm:font-semibold lg:font-bold"
+            className="rounded-full border-2 bg-zinc-400 text-zinc-100 text-zinc-600 hover:border-zinc-600 dark:border-gray-500 dark:hover:border-gray-300 sm:px-3 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"
           >
             회원가입
           </Link>
