@@ -13,7 +13,7 @@ import NextImage from 'next/image'
 import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { AIModelProps } from '@/types/type'
-import { useCapturedPlantImageStore } from '@/store/imageStore'
+import { useCapturedPlantImageStore } from '@/store/imageURLStore'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
 
 const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
@@ -182,10 +182,10 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
   }
 
   return (
-    <div className="flex w-full flex-col items-center px-80">
+    <div className="flex w-full flex-col items-center mobile:px-4 sm:px-12 lg:px-28 qhd:px-80">
       <div
         id="camera-display-container"
-        className="relative mt-6 flex aspect-[4/3] max-h-[624px] w-full max-w-[832px] rounded border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800"
+        className="relative mt-6 flex aspect-[4/3] h-auto max-h-[624px] min-h-[225px] w-full min-w-[320px] max-w-[832px] rounded border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800"
       >
         {useWebcam && (
           <Webcam
@@ -271,12 +271,12 @@ const CameraModel = ({ AIErrorModalOpen }: AIModelProps) => {
         <>
           <label
             htmlFor="cameraInput"
-            className="my-8 flex h-[3rem] w-[7rem] cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-zinc-300 px-1.5 py-0.5 dark:bg-zinc-500"
+            className="my-8 flex h-[3rem] w-[8.5rem] cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-zinc-300 px-1.5 py-0.5 dark:bg-zinc-500"
           >
             <NextImage
               src="/images/camera.png"
               alt=""
-              className="h-auto w-6"
+              className="h-auto w-6 mx-1.5"
               aria-hidden="true"
               width={24}
               height={24}

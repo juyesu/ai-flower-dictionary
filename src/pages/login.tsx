@@ -37,8 +37,8 @@ const Login = () => {
     <Layout>
       <div className="login-page-layout">
         <div className="login-box">
-          <div className="login-form-layout dark:border-zinc-500">
-            <h1 className="login-header-title dark:text-slate-300">로그인</h1>
+          <div className="login-form-layout">
+            <h1 className="login-header-title">로그인</h1>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
               <div className="login-label-input-group">
                 <label htmlFor="email" className="mt-2 dark:text-zinc-300">

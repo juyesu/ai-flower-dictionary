@@ -7,7 +7,7 @@ import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { AIModelProps } from '@/types/type'
 import { useRouter } from 'next/router'
 import Upload from '@/pages/assets/icons/Upload.svg'
-import { useCapturedPlantImageStore } from '@/store/imageStore'
+import { useCapturedPlantImageStore } from '@/store/imageURLStore'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
 
 const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
@@ -122,7 +122,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
   }
 
   return (
-    <div className="flex w-full flex-col items-center px-80">
+    <div className="flex w-full flex-col items-center mobile:px-4 sm:px-12 lg:px-28 qhd:px-80">
       <div
         id="image-container"
         className="relative mt-6 flex aspect-[4/3] max-h-[624px] w-full max-w-[832px] rounded border-2 border-zinc-500 bg-zinc-100 bg-cover bg-center dark:bg-gray-800"
@@ -178,7 +178,7 @@ const fileUploadModel = ({ AIErrorModalOpen }: AIModelProps) => {
         <div>
           <label
             htmlFor="fileUpload"
-            className="my-16 flex cursor-pointer items-center justify-center rounded-lg border border-zinc-400 bg-zinc-800 p-4 font-semibold text-zinc-100 hover:bg-zinc-600 dark:border-zinc-600 dark:text-slate-300 dark:hover:bg-zinc-700"
+            className="mobile:my-6 sm:my-16 flex cursor-pointer items-center justify-center rounded-lg border border-zinc-400 bg-zinc-800 mobile:p-3 sm:p-4 font-semibold text-zinc-100 hover:bg-zinc-600 dark:border-zinc-600 dark:text-slate-300 dark:hover:bg-zinc-700"
           >
             <Upload
               className="mx-2 h-4 w-4 text-zinc-100 dark:text-slate-300"

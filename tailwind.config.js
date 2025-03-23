@@ -14,7 +14,9 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       screens: {
-        xs: '320px',
+        mobile: '320px',
+        fhd: '1920px',
+        qhd: '2560px',
       },
       boxShadow: {
         'custom-all':

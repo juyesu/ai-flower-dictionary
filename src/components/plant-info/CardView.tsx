@@ -14,7 +14,7 @@ const CardView = ({
   handlePlantLinkShare,
 }: CardViewProps) => {
   return (
-    <div className="mt-16 grid w-full grid-cols-3 gap-y-24 px-4">
+    <div className="grid w-full mobile:mt-8 mobile:grid-cols-2 mobile:gap-y-8 mobile:px-1 sm:px-4 md:grid-cols-3 md:gap-y-24 lg:mt-16">
       {apiData &&
         apiData?.map((item: PlantIndexItem) => (
           <div className="mb-4 flex w-full flex-col items-center">
@@ -29,20 +29,20 @@ const CardView = ({
                 aria-label={`${item.krnm}상세 페이지로 이동`}
               >
                 <Image
-                  className="h-[22rem] w-[25rem] rounded-t-xl object-cover dark:saturate-[.8]"
+                  className="rounded-t-xl object-cover dark:saturate-[.8] mobile:h-32 mobile:w-44 sm:h-56 sm:w-64 md:h-52 md:w-60 lg:h-64 lg:w-80 xl:h-[22rem] xl:w-[25rem]"
                   src={item.imgUrl}
                   alt={`${item.krnm}식물`}
                   width={694}
                   height={521}
                 />
-                <div className="mx-6 mb-4 mt-7 flex flex-col gap-3">
-                  <span className="self-start rounded-full bg-cyan-500 px-3 py-0.5 text-sm font-semibold text-white dark:bg-cyan-700 dark:text-slate-300">
+                <div className="flex flex-col mobile:mt-2 mobile:gap-1 mobile:px-1 mobile:pb-2 sm:mt-5 sm:gap-3 sm:px-4 sm:pb-4 lg:mt-7 lg:px-6">
+                  <span className="self-start rounded-full bg-cyan-500 px-3 py-0.5 text-sm font-semibold text-white dark:bg-cyan-700 dark:text-slate-300 mobile:hidden sm:block">
                     {item.famlNm}
                   </span>
-                  <p className="mx-1.5 mt-1 text-[22px] font-semibold dark:text-slate-300">
+                  <p className="mx-1.5 mt-1 font-semibold dark:text-slate-300 mobile:text-center mobile:text-xl sm:text-start sm:text-[22px]">
                     {item.krnm}
                   </p>
-                  <div className="relative mt-4 flex flex-row justify-end gap-4">
+                  <div className="relative flex flex-row gap-4 mobile:mt-1.5 mobile:justify-center sm:mt-4 sm:justify-end">
                     <button
                       type="button"
                       aria-label={
@@ -58,13 +58,13 @@ const CardView = ({
                     >
                       {likedPlants.includes(item.krnm) ? (
                         <Liked
-                          className="h-6 w-6"
+                          className="mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
                           fill="#FF5C8D"
                           aria-hidden="true"
                         />
                       ) : (
                         <Unliked
-                          className="h-6 w-6 text-zinc-800 dark:text-slate-300"
+                          className="text-zinc-800 dark:text-slate-300 mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
                           fill="currentColor"
                           aria-hidden="true"
                         />
@@ -80,7 +80,7 @@ const CardView = ({
                       className="relative p-1"
                     >
                       <Share
-                        className="h-6 w-6 text-zinc-800 dark:text-slate-300"
+                        className="text-zinc-800 dark:text-slate-300 mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
                         fill="currentColor"
                         aria-hidden="true"
                       />

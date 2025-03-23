@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { KeyboardEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import reactStringReplace from 'react-string-replace'
+import { useMediaQuery } from 'react-responsive'
 
 const PlantSearchBar = ({
   methods = useForm(),
@@ -17,6 +18,8 @@ const PlantSearchBar = ({
   const { register, getValues, watch, setValue } = methods
   const [isSearchFocus, setIsSearchFocus] = useState(false)
   const { data, isLoading } = plantIndexFetchData(1, 300)
+  const isSmView = useMediaQuery({ minWidth: 640 })
+  const isMobileView = useMediaQuery({ minWidth: 320 })
   const [randomItems, setRandomItems] = useState<PlantIndexItem[]>([])
   const [autocompletePlantName, setAutocompletePlantName] = useState<string[]>(
     []
@@ -86,7 +89,7 @@ const PlantSearchBar = ({
   return (
     <>
       <form
-        className="relative mt-12 flex-col items-center"
+        className="relative flex-col items-center mobile:mt-8 sm:mt-12"
         onSubmit={(e) => {
           e.preventDefault()
         }}
@@ -96,7 +99,7 @@ const PlantSearchBar = ({
             Search for Plants
           </label>
           <MagnifyingGlass
-            className="absolute z-10 mx-6 h-[22px] w-[22px]"
+            className="absolute z-10 mobile:mx-4 mobile:h-5 mobile:w-5 sm:mx-6 sm:h-[22px] sm:w-[22px]"
             fill="#787878"
             aria-hidden="true"
           />
@@ -118,19 +121,19 @@ const PlantSearchBar = ({
             }}
             onChange={(e) => setValue('input', e.target.value)}
             onKeyUp={searchKeyUp}
-            className="h-[3.2rem] rounded-full bg-white py-2 pl-16 text-xl font-bold opacity-80 dark:bg-zinc-900 dark:text-slate-200 sm:w-[40rem] lg:w-[48rem]"
+            className="rounded-full bg-white py-2 mobile:pl-12 sm:pl-16 mobile:font-semibold sm:font-bold opacity-80 dark:bg-zinc-900 dark:text-slate-200 mobile:h-[2.8rem] mobile:w-[22rem] mobile:text-lg sm:h-[3.2rem] sm:w-[40rem] sm:text-xl lg:w-[48rem]"
           />
           {getValues('input') && (
             <button
               type="button"
               onClick={() => setValue('input', '')}
               aria-label="검색어 초기화"
-              className="absolute right-8 cursor-pointer"
+              className="absolute cursor-pointer mobile:right-4 sm:right-8"
             >
               <Close className="h-4 w-4" fill="#787878" aria-hidden="true" />
             </button>
           )}
-        </div>
+        </div>  
         {isSearchFocus && watch('input') && (
           <ul className="absolute top-16 flex w-full flex-col rounded-3xl bg-white opacity-100 dark:bg-zinc-800">
             {currentAutocompletePlantName.map((item, index, array) => {
@@ -172,31 +175,53 @@ const PlantSearchBar = ({
         )}
       </form>
       <div
-        className={`mb-4 mt-2 flex gap-4 rounded-xl ${
+        className={`mb-4 mt-2 flex moblie:gap-3 sm:gap-4 ${
           color == 'white' ? 'text-white' : 'text-zinc-800'
         }`}
       >
         {randomItems ? (
           <>
-            {randomItems.map((item, index) => (
-              <Link
-                key={index}
-                href={{
-                  pathname: `/view/${item.krnm}`,
-                  query: {
-                    prevPage:
-                      currentPage === 'home' ? 'home' : `${currentPage}`,
-                  },
-                }}
-                className={`rounded-xl px-2 py-1 underline ${
-                  color == 'white'
-                    ? 'dark:text-zinc-900'
-                    : 'dark:bg-zinc-900 dark:text-slate-400 dark:opacity-80'
-                }`}
-              >
-                #{item.krnm}
-              </Link>
-            ))}
+            {isSmView
+              ? randomItems.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={{
+                      pathname: `/view/${item.krnm}`,
+                      query: {
+                        prevPage:
+                          currentPage === 'home' ? 'home' : `${currentPage}`,
+                      },
+                    }}
+                    className={`rounded-xl py-1 underline px-2 ${
+                      color == 'white'
+                        ? 'dark:text-zinc-900'
+                        : 'dark:bg-zinc-900 dark:text-slate-400 dark:opacity-80'
+                    }`}
+                  >
+                    #{item.krnm}
+                  </Link>
+                ))
+              : isMobileView
+                ? randomItems.slice(0, 4).map((item, index) => (
+                    <Link
+                      key={index}
+                      href={{
+                        pathname: `/view/${item.krnm}`,
+                        query: {
+                          prevPage:
+                            currentPage === 'home' ? 'home' : `${currentPage}`,
+                        },
+                      }}
+                      className={`rounded-xl py-1 underline text-sm px-1.5 ${
+                        color == 'white'
+                          ? 'dark:text-zinc-900'
+                          : 'dark:bg-zinc-900 dark:text-slate-400 dark:opacity-80'
+                      }`}
+                    >
+                      #{item.krnm}
+                    </Link>
+                  ))
+                : null}
           </>
         ) : (
           <p>현재 오류가 발생하여 정보를 불러올 수 없습니다.</p>

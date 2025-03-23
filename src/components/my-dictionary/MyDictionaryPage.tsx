@@ -84,8 +84,8 @@ const MyDictionaryPage = () => {
   }, [data])
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
-      <div className="relative h-[500px] w-full">
+    <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
+      <div className="relative w-full mobile:h-[380px] sm:h-[500px]">
         <Image
           src="/images/my_dictionary_title_image_2.jpg"
           alt="타이틀 커버 이미지"
@@ -105,7 +105,7 @@ const MyDictionaryPage = () => {
           </div>
         </div>
       </div>
-      <section className="mt-8 w-full px-8">
+      <section className="mt-8 w-full mobile:px-1 sm:px-4">
         <button
           onClick={() =>
             setAccordionOpen((prev) => {
@@ -129,8 +129,8 @@ const MyDictionaryPage = () => {
 
         {accordionOpen.likedPlants &&
           (hasPlantsData.likedPlants ? (
-            <div className="grid grid-cols-8 gap-x-6 gap-y-10 bg-stone-100 px-4 py-6 opacity-100 transition-opacity duration-300 dark:bg-zinc-700">
-              {plantData.likedPlants.map((item, index) => (
+            <div className="accordion-grid-layout">
+              {plantData.likedPlants.map((item) => (
                 <Link
                   key={item.krnm}
                   href={{
@@ -140,11 +140,10 @@ const MyDictionaryPage = () => {
                   passHref
                   aria-label={`${item.krnm}상세 페이지로 이동`}
                 >
-                  <figure className="text-center">
+                  <figure className="rounded-lg text-center hover:bg-zinc-300 mobile:p-1.5 sm:p-2">
                     <Image
-                      key={index}
                       src={item.imgUrl}
-                      alt={`${item.imgUrl}식물`}
+                      alt={`${item.krnm}식물`}
                       className="h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500"
                       width={157}
                       height={128}
@@ -169,7 +168,7 @@ const MyDictionaryPage = () => {
             </div>
           ))}
       </section>
-      <section className="my-20 mt-8 w-full px-8">
+      <section className="my-20 mt-8 w-full mobile:px-1 sm:px-4">
         <button
           onClick={() =>
             setAccordionOpen((prev) => {
@@ -193,8 +192,8 @@ const MyDictionaryPage = () => {
 
         {accordionOpen.myDictionary &&
           (hasPlantsData.myDictionary ? (
-            <div className="grid grid-cols-8 gap-x-6 gap-y-10 bg-stone-100 px-4 py-6 opacity-100 transition-opacity duration-300 dark:bg-zinc-700">
-              {plantData.myDictionary.map((item, index) => (
+            <div className="accordion-grid-layout">
+              {plantData.myDictionary.map((item) => (
                 <Link
                   key={item.krnm}
                   href={{
@@ -204,9 +203,8 @@ const MyDictionaryPage = () => {
                   passHref
                   aria-label={`${item.krnm}상세 페이지로 이동`}
                 >
-                  <figure className="text-center">
+                  <figure className="rounded-lg text-center hover:bg-zinc-300 mobile:p-1.5 sm:p-2">
                     <Image
-                      key={index}
                       src={item.imgUrl}
                       alt={`${item.imgUrl}의 이미지`}
                       className="h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500"

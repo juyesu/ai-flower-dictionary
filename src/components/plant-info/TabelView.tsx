@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from 'react'
 import router from 'next/router'
 
 const TableView = ({
+  viewPortWidth,
   apiData,
   likedPlants,
   copyTooltipIndex,
@@ -30,7 +31,7 @@ const TableView = ({
           kornFamlNm: item.kornFamlNm,
           bloomPeriodCn: item.bloomPeriodCn,
           isLiked: (
-            <div className="relative flex flex-row items-center justify-center gap-4">
+            <div className="relative flex flex-row items-center justify-center mobile:gap-2 md:gap-4">
               <button
                 type="button"
                 aria-label={
@@ -47,13 +48,13 @@ const TableView = ({
               >
                 {likedPlants.includes(item.krnm) ? (
                   <Liked
-                    className="h-6 w-6"
+                    className="mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
                     fill="#FF5C8D"
                     aria-hidden="true"
                   />
                 ) : (
                   <Unliked
-                    className="h-6 w-6 text-zinc-800 dark:text-slate-300"
+                    className="text-zinc-800 dark:text-slate-300 mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
                     fill="currentColor"
                     aria-hidden="true"
                   />
@@ -70,7 +71,7 @@ const TableView = ({
                 className="relative p-1"
               >
                 <Share
-                  className="h-6 w-6 text-zinc-800 dark:text-slate-300"
+                  className="text-zinc-800 dark:text-slate-300 mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
                   fill="currentColor"
                   aria-hidden="true"
                 />
@@ -97,29 +98,73 @@ const TableView = ({
 
   const columnHelper = createColumnHelper<PlantTableType>()
   const columns = [
-    columnHelper.accessor('number', {
-      header: '번호',
-      size: 80,
-    }),
+    ...(viewPortWidth.is1280To1535pxScreen || viewPortWidth.isAbove1536pxScreen
+      ? [
+          columnHelper.accessor('number', {
+            header: '번호',
+            size: 80,
+          }),
+        ]
+      : []),
     columnHelper.accessor('krnm', {
       header: '식물명',
-      size: 380,
+      size:
+        viewPortWidth.isUnder767pxScreen || viewPortWidth.is768To1023pxScreen
+          ? 80
+          : viewPortWidth.is1024To1279pxScreen ||
+              viewPortWidth.is1280To1535pxScreen
+            ? 200
+            : viewPortWidth.isAbove1536pxScreen
+              ? 380
+              : 0,
     }),
-    columnHelper.accessor('famlNm', {
-      header: '과명',
-      size: 300,
-    }),
+    ...(viewPortWidth.is1280To1535pxScreen || viewPortWidth.isAbove1536pxScreen
+      ? [
+          columnHelper.accessor('famlNm', {
+            header: '과명',
+            size: viewPortWidth.is1280To1535pxScreen
+              ? 200
+              : viewPortWidth.isAbove1536pxScreen
+                ? 300
+                : 0,
+          }),
+        ]
+      : []),
     columnHelper.accessor('kornFamlNm', {
       header: '한글과명',
-      size: 300,
+      size:
+        viewPortWidth.isUnder767pxScreen || viewPortWidth.is768To1023pxScreen
+          ? 80
+          : viewPortWidth.is1024To1279pxScreen ||
+              viewPortWidth.is1280To1535pxScreen
+            ? 200
+            : viewPortWidth.isAbove1536pxScreen
+              ? 300
+              : 0,
     }),
-    columnHelper.accessor('bloomPeriodCn', {
-      header: '개화기간',
-      size: 200,
-    }),
+    ...(viewPortWidth.is1280To1535pxScreen || viewPortWidth.isAbove1536pxScreen
+      ? [
+          columnHelper.accessor('bloomPeriodCn', {
+            header: '개화기간',
+            size: viewPortWidth.is1280To1535pxScreen
+              ? 120
+              : viewPortWidth.isAbove1536pxScreen
+                ? 200
+                : 0,
+          }),
+        ]
+      : []),
     columnHelper.accessor('isLiked', {
       header: '',
-      size: 140,
+      size:
+        viewPortWidth.isUnder767pxScreen || viewPortWidth.is768To1023pxScreen
+          ? 40
+          : viewPortWidth.is1024To1279pxScreen ||
+              viewPortWidth.is1280To1535pxScreen
+            ? 120
+            : viewPortWidth.isAbove1536pxScreen
+              ? 140
+              : 0,
       cell: (info) => info.getValue(),
     }),
   ]
@@ -164,14 +209,17 @@ const TableView = ({
                 })
               }}
             >
-              {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
-                  className="px-2 py-4 text-center align-middle"
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
+              {row.getVisibleCells().map((cell) => {
+                const isKrnmColumn = cell.column.id === 'krnm'
+                return (
+                  <td
+                    key={cell.id}
+                    className={`px-2 py-4 text-center align-middle ${isKrnmColumn ? 'font-semibold' : ''}`}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                )
+              })}
             </tr>
           )
         })}

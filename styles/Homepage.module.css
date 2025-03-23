@@ -3,16 +3,40 @@
   z-index: 1;
 }
 
-.fade-in-right {
-  opacity: 1;
-  transform: translateX(-20px);
-  transition: opacity 1.5s ease-out, transform 1s ease-out;
-  z-index: 2;
+@media (min-width: 320px) {
+  .fade-in-left {
+    opacity: 1;
+    transition: opacity 1.5s ease-out;
+    z-index: 2;
+  }
 }
 
-.fade-in-left {
-  opacity: 1;
-  transform: translateX(20px);
-  transition: opacity 1.5s ease-out, transform 1s ease-out;
-  z-index: 2;
+@media (min-width: 640px) {
+  .fade-in-left {
+    opacity: 1;
+    transform: translateX(20px);
+    transition:
+      opacity 1.5s ease-out,
+      transform 1s ease-out;
+    z-index: 2;
+  }
+}
+
+@media (min-width: 320px) {
+  .fade-in-right {
+    opacity: 1;
+    transition: opacity 1.5s ease-out;
+    z-index: 2;
+  }
+}
+
+@media (min-width: 640px) {
+  .fade-in-right {
+    opacity: 1;
+    transform: translateX(-20px);
+    transition:
+      opacity 1.5s ease-out,
+      transform 1s ease-out;
+    z-index: 2;
+  }
 }

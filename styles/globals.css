@@ -9,7 +9,9 @@
   font-style: normal;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -24,12 +26,24 @@ body {
   font-family: 'Pretendard', sans-serif;
 }
 
-.page-main-title {
-  font-size: 50px;
-  font-weight: 600;
-  margin-top: 42px;
-  margin-left: 4px;
-  color: #3f3f46;
+@media (min-width: 320px) {
+  .page-main-title {
+    font-size: 34px;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-left: 0px;
+    color: #3f3f46;
+  }
+}
+
+@media (min-width: 640px) {
+  .page-main-title {
+    font-size: 50px;
+    font-weight: 600;
+    margin-top: 42px;
+    margin-left: 4px;
+    color: #3f3f46;
+  }
 }
 
 .spinner-border {
@@ -48,6 +62,11 @@ body {
   }
 }
 
+/* SideDrawer */
+.side-menu-item {
+  @apply w-full px-8 py-6 text-3xl dark:text-slate-200 hover:bg-zinc-200 dark:hover:bg-zinc-600;
+}
+
 /* login, register 페이지 공통 스타일 (login- 접두사로 시작) */
 .login-page-layout {
   display: flex;
@@ -58,29 +77,18 @@ body {
 }
 
 .login-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 400px;
+  @apply flex items-center justify-center rounded-sm border border-gray-300 pb-[2rem] pt-[1.75rem] mobile:w-[23rem] mobile:px-3 sm:w-[25rem] sm:px-4;
+  box-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.05),
+    2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .login-header-title {
-  margin: 4px 0px 40px 0px;
-  width: 100%;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 600;
-  color: #3f3f46;
+  @apply mt-1 w-full text-center text-3xl font-semibold text-zinc-800 mobile:mb-9 sm:mb-10 dark:text-slate-300;
 }
 
 .login-form-layout {
-  margin-top: 2px;
-  padding: 28px 16px 32px 16px;
-  border: 1px solid #d1d5db;
-  width: 100%;
-  border-radius: 4px;
-  /* background: linear-gradient(#fdf9f9, #fffffb, #f9fdfd); */
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05), 2px 2px 4px rgba(0, 0, 0, 0.1);
+  @apply w-full mt-0.5 dark:border-zinc-500;
 }
 
 .login-label-input-group {
@@ -132,6 +140,11 @@ body {
   color: #60a5fa;
 }
 
+/* Homepage */
+.accordion-grid-layout {
+  @apply grid gap-y-6 bg-stone-100 py-6 opacity-100 transition-opacity duration-300 dark:bg-zinc-700 mobile:grid-cols-3 mobile:gap-x-1 mobile:px-2 sm:grid-cols-4 sm:px-4 md:grid-cols-5 md:gap-x-3 lg:grid-cols-6 xl:grid-cols-8;
+}
+
 @layer components {
   .title-gradient-overlay {
     background: linear-gradient(
@@ -156,11 +169,11 @@ body {
   }
 
   .login-form-input {
-    @apply w-full mt-1.5 p-1.5 border border-gray-300 rounded;
+    @apply mt-1.5 w-full rounded border border-gray-300 p-1.5;
   }
 
   .dark .login-form-input {
-    @apply bg-zinc-700 text-zinc-300 border-zinc-400;
+    @apply border-zinc-400 bg-zinc-700 text-zinc-300;
   }
 
   .dark .login-form-input:focus {

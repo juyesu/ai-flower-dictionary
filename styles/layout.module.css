@@ -13,20 +13,46 @@
 
 .logo {
   font-family: 'Poetsen One';
-  font-size: 17px;
-  margin-left: 8px;
 }
 
 .menu {
-  font-family: 'Pretendard';
   padding: 4px 16px 4px 16px;
   font-size: 17px;
   font-weight: 600;
-  border-radius: 1rem;
+  border-radius: 16px;
 }
 
 .menu:hover {
-  background-color: rgb(235, 228, 255);
+  background-color: #ebe4ff;
+}
+
+@media (min-width: 320px) {
+  .logo {
+    font-size: 18px;
+    margin-left: 6px;
+  }
+}
+
+@media (min-width: 640px) {
+  .logo {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
+  .menu {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo {
+    font-size: 22px;
+    margin-left: 18px;
+  }
+
+  .menu {
+    font-size: 20px;
+  }
 }
 
 @media (min-width: 1280px) {

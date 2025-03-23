@@ -10,15 +10,26 @@ import TableView from '@/components/plant-info/TabelView'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/router'
+import { useMediaQuery } from 'react-responsive'
 import ApiDataErrorModal from '@/components/modal/ApiDataErrorModal'
 import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
 import Pagination from '@/components/plant-info/Pagineation'
+import { ViewPortWidth } from '@/types/type'
 
 const ItemList = () => {
   const methods = useForm()
   const { loginUser } = useAuth()
+  const viewPortWidth: ViewPortWidth = {
+    isUnder767pxScreen: useMediaQuery({ minWidth: 320, maxWidth: 767 }),
+    is768To1023pxScreen: useMediaQuery({ minWidth: 768, maxWidth: 1023 }),
+    is1024To1279pxScreen: useMediaQuery({ minWidth: 1024, maxWidth: 1279 }),
+    is1280To1535pxScreen: useMediaQuery({ minWidth: 1280, maxWidth: 1535 }),
+    isAbove1536pxScreen: useMediaQuery({ minWidth: 1536 }),
+  }
   const [currentPage, setCurrentPage] = useState(1)
-  const [maximumPageSize, setMaximumPageSize] = useState(15)
+  const [maximumPageSize, setMaximumPageSize] = useState(
+    viewPortWidth.isUnder767pxScreen ? 14 : 15
+  )
   const { data, isLoading, error } = plantIndexFetchData(
     currentPage,
     maximumPageSize
@@ -128,8 +139,8 @@ const ItemList = () => {
   }
 
   return (
-    <div className="flex w-full flex-col items-center sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
-      <div className="relative h-[652px] w-full">
+    <div className="flex w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
+      <div className="relative w-full mobile:h-[480px] sm:h-[652px]">
         <Image
           src="/images/plant_info_title_image_3.jpg"
           alt=""
@@ -153,7 +164,7 @@ const ItemList = () => {
           />
         </div>
       </div>
-      <div className="flex w-full justify-end px-16">
+      <div className="flex w-full justify-end mobile:px-5 sm:px-12 lg:px-16">
         <div className="flex rounded-lg border dark:border-gray-500">
           <button
             type="button"
@@ -161,7 +172,11 @@ const ItemList = () => {
             onClick={() => {
               setIsCardUi(true)
               setCurrentPage(1)
-              setMaximumPageSize(15)
+              if (viewPortWidth.isUnder767pxScreen) {
+                setMaximumPageSize(14)
+              } else {
+                setMaximumPageSize(15)
+              }
             }}
             className="rounded-l-lg border px-5 py-4 hover:bg-zinc-400 dark:border-gray-500 dark:hover:bg-zinc-600"
           >
@@ -199,6 +214,7 @@ const ItemList = () => {
         />
       ) : (
         <TableView
+          viewPortWidth={viewPortWidth}
           apiData={data?.indexList}
           likedPlants={likedPlants}
           copyTooltipIndex={copyTooltipIndex}

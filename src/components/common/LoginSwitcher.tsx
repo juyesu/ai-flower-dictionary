@@ -14,7 +14,7 @@ const LoginSwitcher = () => {
   }, [loginUser])
 
   return (
-    <div className="mr-4 flex h-full items-center justify-center sm:ml-2 sm:gap-1 lg:ml-4 lg:gap-1.5">
+    <div className="mr-4 mobile:hidden lg:flex h-full items-center justify-center sm:ml-2 sm:gap-1 lg:ml-4 lg:gap-1.5">
       {loginUser ? (
         <div className="ml-3 flex">
           <div className="flex items-center gap-1.5">
@@ -46,7 +46,7 @@ const LoginSwitcher = () => {
           </div>
         </div>
       ) : (
-        <div className="mr-4 flex h-full items-center justify-center sm:ml-2 sm:gap-1 lg:ml-4 lg:gap-1.5">
+        <div className="flex h-full items-center justify-center sm:ml-2 sm:gap-1 lg:mx-1 xl:mx-4 lg:gap-1.5">
           <Link
             href="/login"
             className="dark:dark:saturate-30 rounded-full border-2 bg-blue-300 text-white hover:border-blue-400 hover:border-zinc-600 dark:border-gray-500 dark:hover:border-gray-300 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"

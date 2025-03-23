@@ -41,6 +41,14 @@ export type PlantSearchBarProps = {
   currentPage: string
 }
 
+export type ViewPortWidth = {
+  isUnder767pxScreen: boolean
+  is768To1023pxScreen: boolean
+  is1024To1279pxScreen: boolean
+  is1280To1535pxScreen: boolean
+  isAbove1536pxScreen: boolean
+}
+
 export type CardViewProps = {
   apiData: any
   likedPlants: string[]
@@ -50,6 +58,7 @@ export type CardViewProps = {
 }
 
 export type TableViewProps = {
+  viewPortWidth: ViewPortWidth
   apiData: any
   likedPlants: string[]
   copyTooltipIndex: string
@@ -65,6 +74,17 @@ export type PlantTableType = {
   kornFamlNm: string
   bloomPeriodCn: string
   isLiked: string[]
+}
+
+export type SideDrawerProps = {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export type ThemeToggleButtonProps = {
+  size: 'small' | 'large'
+  hiddenUntil?: 'mobile' | 'sm' | 'md' | 'lg'
+  hideAtMobile: boolean
 }
 
 export type OneButtonModalProps = {

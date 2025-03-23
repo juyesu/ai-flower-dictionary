@@ -29,7 +29,7 @@ const Homepage = () => {
 
   return (
     <div className="flex h-auto w-full flex-col items-center">
-      <section className="relative flex w-full items-center justify-center bg-cover bg-center filter sm:h-[40rem] lg:h-[62rem]">
+      <section className="relative flex w-full items-center justify-center bg-cover bg-center filter mobile:h-[30rem] sm:h-[40rem] lg:h-[62rem]">
         <video
           className="absolute inset-0 h-full w-full object-cover filter dark:saturate-[.8]"
           autoPlay
@@ -40,11 +40,11 @@ const Homepage = () => {
           <source src="/videos/homepage_title_viedo_1.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black opacity-30" />
-        <div className="relative flex flex-col items-center justify-center gap-5">
-          <p className="mt-10 font-bold text-white dark:text-gray-800 sm:text-4xl lg:text-5xl 2xl:text-6xl">
+        <div className="relative flex flex-col items-center justify-center mobile:gap-1.5 sm:gap-5">
+          <p className="mt-10 font-bold text-center text-white dark:text-gray-800 mobile:text-xl sm:text-4xl lg:text-5xl 2xl:text-6xl">
             Search for plants you're curious about
           </p>
-          <p className="text-white dark:text-gray-800 sm:text-2xl lg:text-3xl 2xl:text-3xl">
+          <p className="text-white dark:text-gray-800 mobile:text-lg sm:text-2xl lg:text-3xl 2xl:text-3xl">
             There are about 100+ plants
           </p>
           <PlantSearchBar
@@ -55,9 +55,9 @@ const Homepage = () => {
           />
         </div>
       </section>
-      <div className="my-12 flex w-full flex-col items-center sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
-        <div className="mb-12 mt-16 flex w-full flex-col items-center">
-          <h1 className="border-b-2 border-black pb-3 text-5xl dark:border-zinc-300 dark:text-slate-300">
+      <div className="flex w-full flex-col items-center mobile:my-6 sm:my-12 sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
+        <div className="flex w-full flex-col items-center mobile:mb-4 mobile:mt-4 sm:mb-12 sm:mt-16">
+          <h1 className="border-b-2 border-black dark:border-zinc-300 dark:text-slate-300 mobile:pb-2 mobile:text-3xl sm:pb-3 sm:text-5xl">
             Features
           </h1>
         </div>
@@ -119,38 +119,38 @@ const PreviewContentSection = ({
   return (
     <section
       id={sectionTagId}
-      className={`scroll-trigger my-32 flex w-full flex-row items-center justify-center`}
+      className={`scroll-trigger flex w-full items-center justify-center mobile:my-16 mobile:flex-col sm:my-32 sm:flex-row ${isLeftAligned && 'mobile:flex-col-reverse'}`}
     >
       {!isLeftAligned ? (
         <>
           <div
             id={id}
-            className={`hidden-until-scroll flex w-1/2 flex-col sm:p-3 lg:p-10 2xl:p-24 ${
+            className={`hidden-until-scroll flex flex-col mobile:w-11/12 sm:w-1/2 sm:p-3 lg:p-10 2xl:p-24 ${
               isInView[id]
                 ? styles['fade-in-left']
                 : styles['hidden-until-scroll']
             }`}
           >
-            <div className="relative h-[52rem] overflow-hidden transition-transform duration-500 ease-out hover:scale-105">
+            <div className="relative overflow-hidden transition-transform duration-500 ease-out hover:scale-105 mobile:h-[28rem] sm:h-[52rem]">
               <Image
                 src={imgSrc}
                 alt=""
                 aria-hidden="true"
-                className="h-[52rem] overflow-hidden object-cover object-center dark:saturate-[.8]"
+                className="overflow-hidden object-cover object-center dark:saturate-[.8] mobile:h-[28rem] sm:h-[52rem]"
                 layout="fill"
               />
             </div>
           </div>
           <div
-            className={`hidden-until-scroll flex w-1/2 flex-col ${
+            className={`hidden-until-scroll flex flex-col mobile:w-4/5 sm:w-1/2 ${
               isInView[id]
                 ? styles['fade-in-left']
                 : styles['hidden-until-scroll']
             }`}
           >
-            <div className="sm:ml-8 sm:mt-8 lg:ml-12 lg:mt-12 xl:ml-16 xl:mt-16">
+            <div className="mobile:mt-4 mobile:px-3 mobile:text-center sm:ml-8 sm:mt-8 sm:text-start lg:ml-12 lg:mt-12 xl:ml-16 xl:mt-16">
               <h2
-                className="my-6 font-semibold leading-[1.2] text-zinc-800 dark:text-slate-300 sm:text-2xl lg:text-3xl xl:text-4xl"
+                className="my-6 font-semibold text-zinc-800 dark:text-slate-300 mobile:text-xl sm:text-2xl sm:leading-[1.2] lg:text-3xl xl:text-4xl"
                 dangerouslySetInnerHTML={{
                   __html: formatTextWithLineBreaks(title),
                 }}
@@ -163,7 +163,7 @@ const PreviewContentSection = ({
               />
               <Link
                 href={linkHref}
-                className="mt-20 inline-block w-auto rounded-full bg-black px-6 font-semibold text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600 sm:py-2 sm:text-lg lg:py-3 lg:text-xl"
+                className="inline-block w-auto rounded-full bg-black px-6 font-semibold text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600 mobile:mt-10 mobile:py-2 sm:mt-20 sm:text-lg lg:py-3 lg:text-xl"
               >
                 {linkText}
               </Link>
@@ -173,15 +173,15 @@ const PreviewContentSection = ({
       ) : (
         <>
           <div
-            className={`hidden-until-scroll flex w-1/2 flex-col ${
+            className={`hidden-until-scroll flex sm:h-[52rem] sm:flex-col sm:justify-center ${
               isInView[id]
                 ? styles['fade-in-right']
                 : styles['hidden-until-scroll']
             }`}
           >
-            <div className="text-right sm:mr-8 sm:mt-8 lg:mr-12 lg:mt-12 xl:mr-16 xl:mt-16">
+            <div className="mobile:mt-4 mobile:px-3 mobile:text-center sm:mr-8 sm:mt-8 sm:text-right lg:mr-12 lg:mt-12 xl:mr-16 xl:mt-16">
               <h2
-                className="my-6 font-semibold leading-[1.2] text-zinc-800 dark:text-slate-300 sm:text-2xl lg:text-3xl xl:text-4xl"
+                className="my-6 font-semibold leading-[1.2] text-zinc-800 dark:text-slate-300 mobile:text-xl sm:text-2xl lg:text-3xl xl:text-4xl"
                 dangerouslySetInnerHTML={{
                   __html: formatTextWithLineBreaks(title),
                 }}
@@ -194,7 +194,7 @@ const PreviewContentSection = ({
               />
               <Link
                 href={linkHref}
-                className="mt-20 inline-block rounded-full bg-black px-6 font-semibold text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600 sm:py-2 sm:text-lg lg:py-3 lg:text-xl"
+                className="inline-block rounded-full bg-black px-6 font-semibold text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600 mobile:mt-10 mobile:py-2 sm:mt-20 sm:text-lg lg:py-3 lg:text-xl"
               >
                 {linkText}
               </Link>
@@ -202,13 +202,13 @@ const PreviewContentSection = ({
           </div>
           <div
             id={id}
-            className={`hidden-until-scroll flex w-1/2 flex-col sm:p-3 lg:p-10 2xl:p-24 ${
+            className={`hidden-until-scroll flex flex-col mobile:w-11/12 sm:w-1/2 sm:p-3 lg:p-10 2xl:p-24 ${
               isInView[id]
                 ? styles['fade-in-right']
                 : styles['hidden-until-scroll']
             }`}
           >
-            <div className="relative h-[52rem] overflow-hidden transition-transform duration-500 ease-out hover:scale-105">
+            <div className="relative overflow-hidden transition-transform duration-500 ease-out hover:scale-105 mobile:h-[28rem] sm:h-[52rem]">
               <Image
                 src={imgSrc}
                 alt=""
