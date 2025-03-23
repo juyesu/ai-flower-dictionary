@@ -41,7 +41,7 @@ const Homepage = () => {
         </video>
         <div className="absolute inset-0 bg-black opacity-30" />
         <div className="relative flex flex-col items-center justify-center mobile:gap-1.5 sm:gap-5">
-          <p className="mt-10 font-bold text-center text-white dark:text-gray-800 mobile:text-xl sm:text-4xl lg:text-5xl 2xl:text-6xl">
+          <p className="mt-10 text-center font-bold text-white dark:text-gray-800 mobile:text-xl sm:text-4xl lg:text-5xl 2xl:text-6xl">
             Search for plants you're curious about
           </p>
           <p className="text-white dark:text-gray-800 mobile:text-lg sm:text-2xl lg:text-3xl 2xl:text-3xl">
@@ -119,10 +119,10 @@ const PreviewContentSection = ({
   return (
     <section
       id={sectionTagId}
-      className={`scroll-trigger flex w-full items-center justify-center mobile:my-16 mobile:flex-col sm:my-32 sm:flex-row ${isLeftAligned && 'mobile:flex-col-reverse'}`}
+      className="scroll-trigger w-full mobile:my-16 sm:my-32 sm:flex-row"
     >
       {!isLeftAligned ? (
-        <>
+        <div className="flex w-full items-center justify-center overflow-hidden mobile:flex-col">
           <div
             id={id}
             className={`hidden-until-scroll flex flex-col mobile:w-11/12 sm:w-1/2 sm:p-3 lg:p-10 2xl:p-24 ${
@@ -148,9 +148,9 @@ const PreviewContentSection = ({
                 : styles['hidden-until-scroll']
             }`}
           >
-            <div className="mobile:mt-4 mobile:px-3 mobile:text-center sm:ml-8 sm:mt-8 sm:text-start lg:ml-12 lg:mt-12 xl:ml-16 xl:mt-16">
+            <div className="mobile:mt-4 mobile:text-center sm:mt-8 sm:pl-3 sm:text-start md:pl-6 lg:ml-12 lg:mt-12 lg:px-3 xl:ml-16 xl:mt-16">
               <h2
-                className="my-6 font-semibold text-zinc-800 dark:text-slate-300 mobile:text-xl sm:text-2xl sm:leading-[1.2] lg:text-3xl xl:text-4xl"
+                className="my-6 font-semibold text-zinc-800 dark:text-slate-300 mobile:text-xl sm:leading-[1.2] lg:text-3xl xl:text-4xl"
                 dangerouslySetInnerHTML={{
                   __html: formatTextWithLineBreaks(title),
                 }}
@@ -169,9 +169,9 @@ const PreviewContentSection = ({
               </Link>
             </div>
           </div>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="flex w-full items-center justify-center mobile:flex-col-reverse">
           <div
             className={`hidden-until-scroll flex sm:h-[52rem] sm:flex-col sm:justify-center ${
               isInView[id]
@@ -179,9 +179,9 @@ const PreviewContentSection = ({
                 : styles['hidden-until-scroll']
             }`}
           >
-            <div className="mobile:mt-4 mobile:px-3 mobile:text-center sm:mr-8 sm:mt-8 sm:text-right lg:mr-12 lg:mt-12 xl:mr-16 xl:mt-16">
+            <div className="mobile:mt-4 mobile:text-center sm:mt-8 sm:pr-3 sm:text-right md:pr-6 lg:mt-12 xl:mr-16 xl:mt-16">
               <h2
-                className="my-6 font-semibold leading-[1.2] text-zinc-800 dark:text-slate-300 mobile:text-xl sm:text-2xl lg:text-3xl xl:text-4xl"
+                className="my-6 font-semibold leading-[1.2] text-zinc-800 dark:text-slate-300 mobile:text-xl lg:text-3xl xl:text-4xl"
                 dangerouslySetInnerHTML={{
                   __html: formatTextWithLineBreaks(title),
                 }}
@@ -218,7 +218,7 @@ const PreviewContentSection = ({
               />
             </div>
           </div>
-        </>
+        </div>
       )}
     </section>
   )
