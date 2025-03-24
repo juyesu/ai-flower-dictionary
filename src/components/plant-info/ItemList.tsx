@@ -147,10 +147,10 @@ const ItemList = () => {
           className="object-cover dark:saturate-[.8]"
           fill
         />
-        <div className="title-gradient-overlay dark:title-gradient-overlay absolute inset-0" />
+        <div className="title_image_gradient dark:title_image_gradient absolute inset-0" />
         <div className="absolute inset-0 flex w-full flex-col items-center gap-5">
           <div className="mt-28 flex flex-col items-center">
-            <h1 className="page-main-title dark:text-slate-300">Plant Info</h1>
+            <h1 className="page_main_title dark:text-slate-300">Plant Info</h1>
             <p className="ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300">
               다양한 식물 정보를 탐색하고 사용자들과 <br />
               식물에 대한 경험을 공유해보세요

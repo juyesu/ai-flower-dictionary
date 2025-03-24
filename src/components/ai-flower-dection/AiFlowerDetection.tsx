@@ -44,9 +44,9 @@ const AiFlowerDetection = () => {
           className="object-cover"
           fill
         />
-        <div className="title-gradient-overlay dark:title-gradient-overlay absolute inset-0" />
-        <div className="mt-30 absolute inset-0 pb-20 flex flex-col items-center justify-center gap-3">
-          <h1 className="page-main-title dark:text-slate-300">
+        <div className="title_image_gradient dark:title_image_gradient absolute inset-0" />
+        <div className="mt-30 absolute inset-0 flex flex-col items-center justify-center gap-3 pb-20">
+          <h1 className="page_main_title dark:text-slate-300">
             AI Flower Detection
           </h1>
           <p className="ml-1 mt-1.5 text-center font-semibold text-zinc-800 dark:text-slate-300 sm:text-lg">

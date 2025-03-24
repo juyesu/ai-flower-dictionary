@@ -1,4 +1,3 @@
-import styles from '@styles/layout.module.css'
 import Link from 'next/link'
 import ThemeProvider from '@/components/common/ThemeProvider'
 import type { ChildrenComponentsProps } from '@/types/type'
@@ -19,26 +18,26 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
     <ThemeProvider>
       <div className="relative flex min-h-screen w-full flex-col items-center">
         <header className="sticky top-0 z-10 flex h-full w-full flex-row items-center justify-between bg-zinc-100 dark:bg-slate-900 mobile:h-16 mobile:px-4 lg:h-20 2xl:px-16 qhd:px-[32rem]">
-          <Link href="/" className={`${styles.logo} dark:text-slate-300`}>
+          <Link href="/" className={`site_logo dark:text-slate-300`}>
             AI flower dictionary
           </Link>
           <div className="flex h-full flex-row items-center justify-between xl:mr-8">
             <div className="flex-row dark:text-slate-300 mobile:hidden sm:gap-2 lg:flex xl:gap-4">
               <Link
                 href="/ai-flower-detection"
-                className={`${styles.menu} dark:hover:bg-gray-700`}
+                className={`header_menu_item dark:hover:bg-gray-700`}
               >
                 AI flower detection
               </Link>
               <Link
                 href="/plant-info"
-                className={`${styles.menu} dark:hover:bg-gray-700`}
+                className={`header_menu_item dark:hover:bg-gray-700`}
               >
                 Plant Info
               </Link>
               <Link
                 href="/my-dictionary"
-                className={`${styles.menu} dark:hover:bg-gray-700`}
+                className={`header_menu_item dark:hover:bg-gray-700`}
               >
                 My Dictionary
               </Link>

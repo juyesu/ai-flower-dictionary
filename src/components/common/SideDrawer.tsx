@@ -41,19 +41,19 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
           <li className="mb-8 w-full px-8">
             <ThemeToggleButton size="large" hideAtMobile={false} />
           </li>
-          <li className="side-menu-item">
+          <li className="drawer_menu_item">
             <Link href="/">Home</Link>
           </li>
-          <li className="side-menu-item">
+          <li className="drawer_menu_item">
             <Link href="/ai-flower-detection">AI flower detection</Link>
           </li>
-          <li className="side-menu-item">
+          <li className="drawer_menu_item">
             <Link href="/plant-info">Plant Info</Link>
           </li>
-          <li className="side-menu-item">
+          <li className="drawer_menu_item">
             <Link href="/my-dictionary">My Dictionary</Link>
           </li>
-          <li className="side-menu-item">
+          <li className="drawer_menu_item">
             {loginUser ? (
               <button onClick={() => logout()}>Logout</button>
             ) : (

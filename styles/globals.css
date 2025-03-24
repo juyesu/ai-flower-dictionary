@@ -9,6 +9,12 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Poetsen One';
+  src: url('/fonts/PoetsenOne-Regular.ttf') format('truetype');
+  font-style: normal;
+}
+
 *,
 *::before,
 *::after {
@@ -26,8 +32,55 @@ body {
   font-family: 'Pretendard', sans-serif;
 }
 
+/* Layout */
+.header_menu_item {
+  @apply rounded-2xl px-4 py-1 text-lg font-semibold hover:bg-[#ebe4ff] sm:text-base lg:text-xl;
+}
+
+.site_logo {
+  font-family: 'Poetsen One';
+  @apply mobile:ml-1.5 mobile:text-lg sm:ml-2.5 sm:text-xl lg:ml-[18px] lg:text-[22px] xl:ml-[18px] xl:text-2xl;
+}
+
+/* Common */
+@layer components {
+  .title_image_gradient {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.5) 40%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 255, 255, 0.9) 70%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
+
+  .dark .title_image_gradient {
+    background: linear-gradient(
+      to bottom,
+      rgba(30, 30, 30, 0) 0%,
+      rgba(30, 30, 30, 0.5) 40%,
+      rgba(30, 30, 30, 0.7) 50%,
+      rgba(30, 30, 30, 0.9) 70%,
+      rgba(30, 30, 30, 1) 100%
+    );
+  }
+
+  .login_form_input {
+    @apply mt-1.5 w-full rounded border border-gray-300 p-1.5;
+  }
+
+  .dark .login_form_input {
+    @apply border-zinc-400 bg-zinc-700 text-zinc-300;
+  }
+
+  .dark .login_form_input:focus {
+    @apply border-slate-300 outline-none ring-1 ring-slate-300;
+  }
+}
+
 @media (min-width: 320px) {
-  .page-main-title {
+  .page_main_title {
     font-size: 34px;
     font-weight: 600;
     margin-top: 0px;
@@ -37,7 +90,7 @@ body {
 }
 
 @media (min-width: 640px) {
-  .page-main-title {
+  .page_main_title {
     font-size: 50px;
     font-weight: 600;
     margin-top: 42px;
@@ -46,7 +99,7 @@ body {
   }
 }
 
-.spinner-border {
+.spinner_border {
   display: inline-block;
   width: 3rem;
   height: 3rem;
@@ -63,12 +116,12 @@ body {
 }
 
 /* SideDrawer */
-.side-menu-item {
-  @apply w-full px-8 py-6 text-3xl dark:text-slate-200 hover:bg-zinc-200 dark:hover:bg-zinc-600;
+.drawer_menu_item {
+  @apply w-full px-8 py-6 text-3xl hover:bg-zinc-200 dark:text-slate-200 dark:hover:bg-zinc-600;
 }
 
 /* login, register 페이지 공통 스타일 (login- 접두사로 시작) */
-.login-page-layout {
+.login_page_layout {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,40 +129,32 @@ body {
   height: 80vh;
 }
 
-.login-box {
+.login_container {
   @apply flex items-center justify-center rounded-sm border border-gray-300 pb-[2rem] pt-[1.75rem] mobile:w-[23rem] mobile:px-3 sm:w-[25rem] sm:px-4;
   box-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.05),
     2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.login-header-title {
-  @apply mt-1 w-full text-center text-3xl font-semibold text-zinc-800 mobile:mb-9 sm:mb-10 dark:text-slate-300;
+.login_page_title {
+  @apply mt-1 w-full text-center text-3xl font-semibold text-zinc-800 dark:text-slate-300 mobile:mb-9 sm:mb-10;
 }
 
-.login-form-layout {
-  @apply w-full mt-0.5 dark:border-zinc-500;
+.login_form {
+  @apply mt-0.5 w-full dark:border-zinc-500;
 }
 
-.login-label-input-group {
+.login_input_group {
   margin-bottom: 12px;
 }
 
-.login-form-input {
-  width: 100%;
-  margin-top: 6px;
-  padding: 6px;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-}
-
-.login-form-schema-error {
+.login_form_schema_error {
   margin-top: 4px;
   font-size: 12px;
   color: #ff1d1d;
 }
 
-.login-form-submit-button {
+.login_form_submit_button {
   width: 100%;
   margin-top: 32px;
   padding: 6px 0px 6px 0px;
@@ -120,12 +165,12 @@ body {
   font-weight: 500;
 }
 
-.login-form-submit-button:hover {
+.login_form_submit_button:hover {
   background-color: #0284c7;
   color: white;
 }
 
-.login-link-text {
+.login_register_switch_link {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -134,51 +179,59 @@ body {
   color: #71717a;
 }
 
-.login-link-text span {
+.login_register_switch_link span {
   margin-left: 4px;
   text-decoration: underline;
   color: #60a5fa;
 }
 
 /* Homepage */
-.accordion-grid-layout {
-  @apply grid gap-y-6 bg-stone-100 py-6 opacity-100 transition-opacity duration-300 dark:bg-zinc-700 mobile:grid-cols-3 mobile:gap-x-1 mobile:px-2 sm:grid-cols-4 sm:px-4 md:grid-cols-5 md:gap-x-3 lg:grid-cols-6 xl:grid-cols-8;
+.hidden_opacity {
+  opacity: 0;
+  z-index: 1;
 }
 
-@layer components {
-  .title-gradient-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.5) 40%,
-      rgba(255, 255, 255, 0.7) 50%,
-      rgba(255, 255, 255, 0.9) 70%,
-      rgba(255, 255, 255, 1) 100%
-    );
+@media (min-width: 320px) {
+  .fade_in_left {
+    opacity: 1;
+    transition: opacity 1.5s ease-out;
+    z-index: 2;
   }
+}
 
-  .dark .title-gradient-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(30, 30, 30, 0) 0%,
-      rgba(30, 30, 30, 0.5) 40%,
-      rgba(30, 30, 30, 0.7) 50%,
-      rgba(30, 30, 30, 0.9) 70%,
-      rgba(30, 30, 30, 1) 100%
-    );
+@media (min-width: 640px) {
+  .fade_in_left {
+    opacity: 1;
+    transform: translateX(20px);
+    transition:
+      opacity 1.5s ease-out,
+      transform 1s ease-out;
+    z-index: 2;
   }
+}
 
-  .login-form-input {
-    @apply mt-1.5 w-full rounded border border-gray-300 p-1.5;
+@media (min-width: 320px) {
+  .fade_in_right {
+    opacity: 1;
+    transition: opacity 1.5s ease-out;
+    z-index: 2;
   }
+}
 
-  .dark .login-form-input {
-    @apply border-zinc-400 bg-zinc-700 text-zinc-300;
+@media (min-width: 640px) {
+  .fade_in_right {
+    opacity: 1;
+    transform: translateX(-20px);
+    transition:
+      opacity 1.5s ease-out,
+      transform 1s ease-out;
+    z-index: 2;
   }
+}
 
-  .dark .login-form-input:focus {
-    @apply border-slate-300 outline-none ring-1 ring-slate-300;
-  }
+/* MyDictionary */
+.accordion_image_grid {
+  @apply grid gap-y-6 bg-stone-100 py-6 opacity-100 transition-opacity duration-300 dark:bg-zinc-700 mobile:grid-cols-3 mobile:gap-x-1 mobile:px-2 sm:grid-cols-4 sm:px-4 md:grid-cols-5 md:gap-x-3 lg:grid-cols-6 xl:grid-cols-8;
 }
 
 /* 다크모드 */

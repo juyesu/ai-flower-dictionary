@@ -92,10 +92,10 @@ const MyDictionaryPage = () => {
           className="object-cover"
           fill
         />
-        <div className="title-gradient-overlay dark:title-gradient-overlay absolute inset-0" />
+        <div className="title_image_gradient dark:title_image_gradient absolute inset-0" />
         <div className="absolute inset-0 flex w-full flex-col items-center justify-center gap-5">
           <div className="mb-12 flex flex-col items-center">
-            <h1 className="page-main-title dark:text-slate-300">
+            <h1 className="page_main_title dark:text-slate-300">
               My Dictionary
             </h1>
             <p className="ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300">
@@ -129,7 +129,7 @@ const MyDictionaryPage = () => {
 
         {accordionOpen.likedPlants &&
           (hasPlantsData.likedPlants ? (
-            <div className="accordion-grid-layout">
+            <div className="accordion_image_grid">
               {plantData.likedPlants.map((item) => (
                 <Link
                   key={item.krnm}
@@ -192,7 +192,7 @@ const MyDictionaryPage = () => {
 
         {accordionOpen.myDictionary &&
           (hasPlantsData.myDictionary ? (
-            <div className="accordion-grid-layout">
+            <div className="accordion_image_grid">
               {plantData.myDictionary.map((item) => (
                 <Link
                   key={item.krnm}

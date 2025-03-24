@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import styles from '@styles/Homepage.module.css'
 import PlantSearchBar from '@/components/common/PlantSearchBar'
 import useFadeInOnScroll from '@/hooks/useFadeInOnScroll'
 import useSectionScroll from '@/hooks/useSectionScroll'
@@ -122,13 +121,11 @@ const PreviewContentSection = ({
       className="scroll-trigger w-full mobile:my-16 sm:my-32 sm:flex-row"
     >
       {!isLeftAligned ? (
-        <div className="flex w-full items-center justify-center overflow-hidden mobile:flex-col">
+        <div className="flex w-full items-center justify-center overflow-hidden mobile:flex-col sm:flex-row">
           <div
             id={id}
-            className={`hidden-until-scroll flex flex-col mobile:w-11/12 sm:w-1/2 sm:p-3 lg:p-10 2xl:p-24 ${
-              isInView[id]
-                ? styles['fade-in-left']
-                : styles['hidden-until-scroll']
+            className={`flex flex-col mobile:w-11/12 sm:w-1/2 sm:p-3 lg:p-10 2xl:p-24 ${
+              isInView[id] ? 'fade_in_left' : 'hidden_opacity'
             }`}
           >
             <div className="relative overflow-hidden transition-transform duration-500 ease-out hover:scale-105 mobile:h-[28rem] sm:h-[52rem]">
@@ -142,10 +139,8 @@ const PreviewContentSection = ({
             </div>
           </div>
           <div
-            className={`hidden-until-scroll flex flex-col mobile:w-4/5 sm:w-1/2 ${
-              isInView[id]
-                ? styles['fade-in-left']
-                : styles['hidden-until-scroll']
+            className={`flex flex-col mobile:w-4/5 sm:w-1/2 ${
+              isInView[id] ? 'fade_in_left' : 'hidden_opacity'
             }`}
           >
             <div className="mobile:mt-4 mobile:text-center sm:mt-8 sm:pl-3 sm:text-start md:pl-6 lg:ml-12 lg:mt-12 lg:px-3 xl:ml-16 xl:mt-16">
@@ -171,12 +166,10 @@ const PreviewContentSection = ({
           </div>
         </div>
       ) : (
-        <div className="flex w-full items-center justify-center mobile:flex-col-reverse">
+        <div className="flex w-full items-center justify-center mobile:flex-col-reverse sm:flex-row">
           <div
-            className={`hidden-until-scroll flex sm:h-[52rem] sm:flex-col sm:justify-center ${
-              isInView[id]
-                ? styles['fade-in-right']
-                : styles['hidden-until-scroll']
+            className={`flex sm:h-[52rem] sm:flex-col sm:justify-center ${
+              isInView[id] ? 'fade_in_right' : 'hidden_opacity'
             }`}
           >
             <div className="mobile:mt-4 mobile:text-center sm:mt-8 sm:pr-3 sm:text-right md:pr-6 lg:mt-12 xl:mr-16 xl:mt-16">
@@ -202,10 +195,8 @@ const PreviewContentSection = ({
           </div>
           <div
             id={id}
-            className={`hidden-until-scroll flex flex-col mobile:w-11/12 sm:w-1/2 sm:p-3 lg:p-10 2xl:p-24 ${
-              isInView[id]
-                ? styles['fade-in-right']
-                : styles['hidden-until-scroll']
+            className={`flex flex-col mobile:w-11/12 sm:w-1/2 sm:p-3 lg:p-10 2xl:p-24 ${
+              isInView[id] ? 'fade_in_right' : 'hidden_opacity'
             }`}
           >
             <div className="relative overflow-hidden transition-transform duration-500 ease-out hover:scale-105 mobile:h-[28rem] sm:h-[52rem]">

@@ -30,7 +30,7 @@ const useFadeInOnScroll = () => {
     )
 
     document
-      .querySelectorAll('.hidden-until-scroll[id]')
+      .querySelectorAll('.hidden_opacity[id]')
       .forEach((el) => observer.observe(el))
 
     return () => observer.disconnect()

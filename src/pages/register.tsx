@@ -42,19 +42,19 @@ const Register = () => {
 
   return (
     <Layout>
-      <div className="login-page-layout">
-        <div className="login-box">
-          <div className="login-form-layout dark:border-zinc-500">
-            <h1 className="login-header-title dark:text-slate-300">회원가입</h1>
+      <div className="login_page_layout">
+        <div className="login_container">
+          <div className="login_form dark:border-zinc-500">
+            <h1 className="login_page_title dark:text-slate-300">회원가입</h1>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
-              <div className="login-label-input-group">
+              <div className="login_input_group">
                 <label htmlFor="name" className="dark:text-zinc-300">
                   이름
                 </label>
                 <input
                   id="name"
                   type="text"
-                  className="login-form-input"
+                  className="login_form_input"
                   {...methods.register('name', {
                     required: '이름을 입력해주세요',
                     minLength: {
@@ -72,20 +72,20 @@ const Register = () => {
                   })}
                 />
                 {methods.formState.errors.name && (
-                  <p className="login-form-schema-error">
+                  <p className="login_form_schema_error">
                     {methods.formState.errors.name.message}
                   </p>
                 )}
               </div>
 
-              <div className="login-label-input-group">
+              <div className="login_input_group">
                 <label htmlFor="email" className="dark:text-zinc-300">
                   이메일
                 </label>
                 <input
                   id="email"
                   type="email"
-                  className="login-form-input"
+                  className="login_form_input"
                   {...methods.register('email', {
                     required: '이메일을 입력해주세요',
                     pattern: {
@@ -95,20 +95,20 @@ const Register = () => {
                   })}
                 />
                 {methods.formState.errors.email && (
-                  <p className="login-form-schema-error">
+                  <p className="login_form_schema_error">
                     {methods.formState.errors.email.message}
                   </p>
                 )}
               </div>
 
-              <div className="login-label-input-group">
+              <div className="login_input_group">
                 <label htmlFor="password" className="dark:text-zinc-300">
                   비밀번호
                 </label>
                 <input
                   id="password"
                   type="password"
-                  className="login-form-input"
+                  className="login_form_input"
                   {...methods.register('password', {
                     required: '비밀번호를 입력해주세요',
                     minLength: {
@@ -123,13 +123,13 @@ const Register = () => {
                   })}
                 />
                 {methods.formState.errors.password && (
-                  <p className="login-form-schema-error">
+                  <p className="login_form_schema_error">
                     {methods.formState.errors.password.message}
                   </p>
                 )}
               </div>
 
-              <div className="login-label-input-group">
+              <div className="login_input_group">
                 <label htmlFor="address" className="dark:text-zinc-300">
                   주소
                 </label>
@@ -137,7 +137,7 @@ const Register = () => {
                   <input
                     id="address"
                     type="text"
-                    className="login-form-input bg-stone-100 dark:bg-zinc-800"
+                    className="login_form_input bg-stone-100 dark:bg-zinc-800"
                     {...methods.register('address', {
                       required: '주소를 입력해주세요',
                     })}
@@ -153,16 +153,16 @@ const Register = () => {
                   </button>
                 </div>
                 {methods.formState.errors.address && (
-                  <p className="login-form-schema-error">
+                  <p className="login_form_schema_error">
                     {methods.formState.errors.address.message}
                   </p>
                 )}
               </div>
 
-              <button className="login-form-submit-button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600">
+              <button className="login_form_submit_button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600">
                 회원가입
               </button>
-              <Link href="/login" className="login-link-text">
+              <Link href="/login" className="login_register_switch_link">
                 이미 계정이 있으신가요?
                 <span>로그인</span>
               </Link>
