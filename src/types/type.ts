@@ -88,7 +88,7 @@ export type ThemeToggleButtonProps = {
 }
 
 export type OneButtonModalProps = {
-  onClose: () => void
+  onClose?: () => void
 }
 
 export type TwoButtonModalProps = {

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import BoxOpen from '@/pages/assets/icons/BoxOpen.svg'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useLoginRequiredModalOpenStore } from '@/store/modalOpenStore'
+import { useModalStore } from '@/store/useModalStore'
 import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
 
 const MyDictionaryPage = () => {
@@ -26,7 +26,8 @@ const MyDictionaryPage = () => {
     myDictionary: [],
   })
   const [userEmail, setUserEmail] = useState<string | null>(null)
-  const { modalOpen, setModalOpen } = useLoginRequiredModalOpenStore()
+  const { isModalOpen, currentModal, setModalOpen, closeModal } =
+    useModalStore()
   const { loginUser } = useAuth()
   const router = useRouter()
   const { data } = plantIndexFetchData(1, 300)
@@ -41,14 +42,14 @@ const MyDictionaryPage = () => {
           myDictionary: !!localStorage.getItem(`${loginUser}.findPlants`),
         })
       } else {
-        setModalOpen(true)
+        setModalOpen('LoginRequiredModal')
       }
     }
   }, [])
 
   useEffect(() => {
     if (userEmail) {
-      setModalOpen(false)
+      closeModal
     }
   }, [userEmail])
 
@@ -231,10 +232,10 @@ const MyDictionaryPage = () => {
             </div>
           ))}
       </section>
-      {modalOpen && (
+      {isModalOpen && currentModal == 'LoginRequiredModal' && (
         <LoginRequiredModal
           onClose={() => {
-            setModalOpen(false)
+            closeModal
             router.back()
           }}
           bgOverlay={true}

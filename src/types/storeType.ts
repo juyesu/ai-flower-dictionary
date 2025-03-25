@@ -3,9 +3,11 @@ export type ImageStoreType = {
   setImageUrl: (value: string) => void
 }
 
-export type LoginRequiredModalOpenStoreType = {
-  modalOpen: boolean
-  setModalOpen: (isOpen: boolean) => void
+export type UseModalStoreType = {
+  isModalOpen: boolean
+  currentModal: string | null
+  setModalOpen: (modalName: string) => void
+  closeModal: () => void
 }
 
 export type scrollButtonActivateStoreType = {

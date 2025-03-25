@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '@/components/common/Layout'
 import ScrollButton from '@/components/common/ScrollButton'
-import Homepage from '@/components/homepage/Homepage'
+import HeroSection from '@/components/homepage/HeroSection'
+import SearchNotFoundModal from '@/components/modal/SearchNotFoundModal'
+import FeatureSections from '@/components/homepage/FeatureSections'
 import Head from 'next/head'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useModalStore } from '@/store/useModalStore'
+import useSectionScroll from '@/hooks/useSectionScroll'
 
 const Index = () => {
+  const methods = useForm()
+  const { isModalOpen, currentModal } = useModalStore()
+  useSectionScroll()
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      methods.setFocus('input')
+    }
+  }, [isModalOpen])
+
   return (
     <>
       <Head>
@@ -31,8 +46,14 @@ const Index = () => {
         <meta property="og:image:height" content="630" /> */}
       </Head>
       <Layout>
-        <Homepage />
-        <ScrollButton />
+        <FormProvider {...methods}>
+          <HeroSection />
+          <FeatureSections />
+          <ScrollButton />
+          {isModalOpen && currentModal == 'SearchNotFoundModal' && (
+            <SearchNotFoundModal />
+          )}
+        </FormProvider>
       </Layout>
     </>
   )
