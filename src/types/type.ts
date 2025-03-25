@@ -103,7 +103,6 @@ export type ThemeToggleButtonProps = {
 }
 
 export type TwoButtonModalProps = {
-  onClose: () => void
   bgOverlay: boolean
   onSecondButtonClick: () => void
 }

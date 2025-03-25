@@ -1,10 +1,11 @@
 import Modal from '@/components/modal/Modal'
-import { OneButtonModalProps } from '@/types/type'
+import { useModalStore } from '@/store/useModalStore'
 
-const ApiDataErrorModal = ({ onClose }: OneButtonModalProps) => {
+const ApiDataErrorModal = () => {
+  const { closeModal } = useModalStore()
   return (
     <Modal
-      onClose={onClose}
+      onClose={closeModal}
       bgOverlay={true}
       message="죄송합니다. 일시적인 서비스 오류가 발생했습니다."
     />

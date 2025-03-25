@@ -1,9 +1,14 @@
 import Modal from '@/components/modal/Modal'
-import { OneButtonModalProps } from '@/types/type'
+import { useModalStore } from '@/store/useModalStore'
 
-const LogoutMessageModal = ({ onClose }: OneButtonModalProps) => {
+const LogoutMessageModal = () => {
+  const { closeModal } = useModalStore()
   return (
-    <Modal onClose={onClose} bgOverlay={false} message="로그아웃되었습니다." />
+    <Modal
+      onClose={closeModal}
+      bgOverlay={false}
+      message="로그아웃되었습니다."
+    />
   )
 }
 

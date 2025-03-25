@@ -234,10 +234,6 @@ const MyDictionaryPage = () => {
       </section>
       {isModalOpen && currentModal == 'LoginRequiredModal' && (
         <LoginRequiredModal
-          onClose={() => {
-            closeModal
-            router.back()
-          }}
           bgOverlay={true}
           onSecondButtonClick={() => router.push('/login')}
         />
