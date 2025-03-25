@@ -1,4 +1,5 @@
 import { UseFormReturn } from 'react-hook-form'
+import * as tmImage from '@teachablemachine/image'
 import { Dispatch, SetStateAction } from 'react'
 
 export type ChildrenComponentsProps = {
@@ -7,6 +8,15 @@ export type ChildrenComponentsProps = {
 
 export type AIModelProps = {
   AIErrorModalOpen: () => void
+}
+
+export type PlantDetectionModelLoadOptions = {
+  model: tmImage.CustomMobileNet | null
+  setModel: Dispatch<React.SetStateAction<tmImage.CustomMobileNet | null>>
+  setMaxPredictions: Dispatch<SetStateAction<number>>
+  data: PlantIndexResponse | undefined
+  isLoading: boolean
+  error: Error | null
 }
 
 export type PlantIndexResponse = {
@@ -76,6 +86,11 @@ export type PlantTableType = {
   isLiked: string[]
 }
 
+export type PageTitleProps = {
+  isCameraMode: boolean
+  setIsCameraMode: Dispatch<React.SetStateAction<boolean>>
+}
+
 export type SideDrawerProps = {
   isOpen: boolean
   onClose: () => void
@@ -85,10 +100,6 @@ export type ThemeToggleButtonProps = {
   size: 'small' | 'large'
   hiddenUntil?: 'mobile' | 'sm' | 'md' | 'lg'
   hideAtMobile: boolean
-}
-
-export type OneButtonModalProps = {
-  onClose?: () => void
 }
 
 export type TwoButtonModalProps = {
