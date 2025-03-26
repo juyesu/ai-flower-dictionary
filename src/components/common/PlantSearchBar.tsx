@@ -152,7 +152,7 @@ const PlantSearchBar = ({
                     tabIndex={0}
                     className={`cursor-pointer px-10 py-4 hover:bg-zinc-300 dark:text-slate-300 dark:hover:bg-zinc-700 ${
                       selectedAutocompleteIndex == index
-                        ? 'bg-zinc-300 font-semibold'
+                        ? 'bg-zinc-300 dark:bg-zinc-700 font-semibold'
                         : ''
                     } ${
                       index === 0 && array.length === 1
