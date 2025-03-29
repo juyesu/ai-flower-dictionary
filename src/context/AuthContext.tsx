@@ -1,4 +1,4 @@
-import LogoutMessageModal from '@/components/modal/LogoutMessageModal'
+import { useModalStore } from '@/store/useModalStore'
 import router from 'next/router'
 import {
   createContext,
@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loginUser, setLoginUser] = useState<string | null>(null)
-  const [openLogoutMessageModal, setOpenLogoutMessageModal] = useState(false)
+  const { setModalOpen } = useModalStore()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -34,12 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem('userName')
     }
     setLoginUser(null)
-    setOpenLogoutMessageModal(true)
-    window.location.reload()
-  }
-
-  const logoutMessageModalClose = () => {
-    setOpenLogoutMessageModal(false)
+    setModalOpen('LogoutMessageModal')
   }
 
   const withdrawAccount = () => {
@@ -60,11 +55,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       value={{ loginUser, setLoginUser, logout, withdrawAccount }}
     >
       {children}
-      {openLogoutMessageModal && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <LogoutMessageModal onClose={logoutMessageModalClose} />
-        </div>
-      )}
     </AuthContext.Provider>
   )
 }

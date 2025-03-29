@@ -5,7 +5,10 @@ const LogoutMessageModal = () => {
   const { closeModal } = useModalStore()
   return (
     <Modal
-      onClose={closeModal}
+      onClose={() => {
+        closeModal()
+        window.location.reload()
+      }}
       bgOverlay={false}
       message="로그아웃되었습니다."
     />

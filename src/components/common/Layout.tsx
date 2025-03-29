@@ -10,9 +10,18 @@ import LoginSwitcher from '@/components/common/LoginSwitcher'
 import ThemeToggleButton from '@/components/common/ThemeToggleButton'
 import { useState } from 'react'
 import SideDrawer from '@/components/common/SideDrawer'
+import { useModalStore } from '@/store/useModalStore'
+import PlantDetectionModelErrorModal from '@/components/modal/PlantDetectionModelErrorModal'
+import ApiDataErrorModal from '@/components/modal/ApiDataErrorModal'
+import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
+import SearchNotFoundModal from '@/components/modal/SearchNotFoundModal'
+import LogoutMessageModal from '@/components/modal/LogoutMessageModal'
+import { useRouter } from 'next/router'
 
 const RootLayout = ({ children }: ChildrenComponentsProps) => {
   const [openSideDrawer, setOpenSideDrawer] = useState(false)
+  const { isModalOpen, currentModal } = useModalStore()
+  const router = useRouter()
 
   return (
     <ThemeProvider>
@@ -96,6 +105,21 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
             </li>
           </ul>
         </footer>
+        {isModalOpen && currentModal == 'PlantDetectionModelErrorModal' && (
+          <PlantDetectionModelErrorModal />
+        )}
+        {isModalOpen && currentModal == 'LoginRequiredModal' && (
+          <LoginRequiredModal />
+        )}
+        {isModalOpen && currentModal == 'SearchNotFoundModal' && (
+          <SearchNotFoundModal />
+        )}
+        {isModalOpen && currentModal == 'ApiDataErrorModal' && (
+          <ApiDataErrorModal />
+        )}
+        {isModalOpen && currentModal == 'LogoutMessageModal' && (
+          <LogoutMessageModal />
+        )}
       </div>
       <SideDrawer
         isOpen={openSideDrawer}
