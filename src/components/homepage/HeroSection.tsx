@@ -1,11 +1,6 @@
 import PlantSearchBar from '@/components/common/PlantSearchBar'
-import { useForm } from 'react-hook-form'
-import { useModalStore } from '@/store/useModalStore'
 
 const HeroSection = () => {
-  const methods = useForm()
-  const { setModalOpen } = useModalStore()
-
   return (
     <section className="relative flex w-full items-center justify-center bg-cover bg-center filter mobile:h-[30rem] sm:h-[40rem] lg:h-[62rem]">
       <video
@@ -26,9 +21,7 @@ const HeroSection = () => {
           There are about 100+ plants
         </p>
         <PlantSearchBar
-          methods={methods}
           color="white"
-          onSearchFail={() => setModalOpen('SearchNotFoundModal')}
           currentPage="home"
         />
       </div>
