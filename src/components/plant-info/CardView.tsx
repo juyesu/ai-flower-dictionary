@@ -3,6 +3,7 @@ import Liked from '@/pages/assets/icons/Liked.svg'
 import Share from '@/pages/assets/icons/Share.svg'
 import Image from 'next/image'
 import Link from 'next/link'
+import handlePlantLinkShare from '@/utils/handlePlantLinkShare'
 import { PlantIndexItem } from '@/types/type'
 import { CardViewProps } from '@/types/type'
 
@@ -10,8 +11,8 @@ const CardView = ({
   apiData,
   likedPlants,
   copyTooltipIndex,
+  setCopyTooltipIndex,
   handlePlantLike,
-  handlePlantLinkShare,
 }: CardViewProps) => {
   return (
     <div className="grid w-full mobile:mt-8 mobile:grid-cols-2 mobile:gap-y-8 mobile:px-1 sm:px-4 md:grid-cols-3 md:gap-y-24 lg:mt-16">
@@ -75,7 +76,10 @@ const CardView = ({
                       aria-label="이 식물 페이지를 공유"
                       onClick={async (e) => {
                         e.preventDefault()
-                        await handlePlantLinkShare(item.krnm)
+                        await handlePlantLinkShare(
+                          item.krnm,
+                          setCopyTooltipIndex
+                        )
                       }}
                       className="relative p-1"
                     >

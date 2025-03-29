@@ -1,4 +1,3 @@
-import { UseFormReturn } from 'react-hook-form'
 import * as tmImage from '@teachablemachine/image'
 import { Dispatch, SetStateAction } from 'react'
 
@@ -45,9 +44,7 @@ export type PlantIndexItem = {
 }
 
 export type PlantSearchBarProps = {
-  methods?: UseFormReturn
   color: string
-  onSearchFail?: any
   currentPage: string
 }
 
@@ -63,8 +60,8 @@ export type CardViewProps = {
   apiData: any
   likedPlants: string[]
   copyTooltipIndex: string
+  setCopyTooltipIndex: Dispatch<React.SetStateAction<string>>
   handlePlantLike: (plantId: string) => void
-  handlePlantLinkShare: (plantId: string) => void
 }
 
 export type TableViewProps = {
@@ -72,9 +69,9 @@ export type TableViewProps = {
   apiData: any
   likedPlants: string[]
   copyTooltipIndex: string
+  setCopyTooltipIndex: Dispatch<React.SetStateAction<string>>
   currentPage: number
   handlePlantLike: (plantId: string) => void
-  handlePlantLinkShare: (plantId: string) => void
 }
 
 export type PlantTableType = {
@@ -87,8 +84,28 @@ export type PlantTableType = {
 }
 
 export type PageTitleProps = {
-  isCameraMode: boolean
-  setIsCameraMode: Dispatch<React.SetStateAction<boolean>>
+  isCameraMode?: boolean
+  setIsCameraMode?: Dispatch<React.SetStateAction<boolean>>
+  titleImage: string
+  titleOptions?: string
+}
+
+export type ModeSwitchButtonProps = {
+  isCameraMode?: boolean
+  setIsCameraMode?: Dispatch<React.SetStateAction<boolean>>
+}
+
+export type ViewModeSwitchButtonProps = {
+  viewPortWidth: ViewPortWidth
+  setIsCardUi: Dispatch<React.SetStateAction<boolean>>
+  setCurrentPage: Dispatch<React.SetStateAction<number>>
+  setMaximumPageSize: Dispatch<React.SetStateAction<number>>
+}
+
+export type useSetApiErrorModalOptions = {
+  data: PlantIndexResponse | undefined
+  isLoading: boolean
+  error: Error | null
 }
 
 export type SideDrawerProps = {
@@ -100,11 +117,6 @@ export type ThemeToggleButtonProps = {
   size: 'small' | 'large'
   hiddenUntil?: 'mobile' | 'sm' | 'md' | 'lg'
   hideAtMobile: boolean
-}
-
-export type TwoButtonModalProps = {
-  bgOverlay: boolean
-  onSecondButtonClick: () => void
 }
 
 export type ModalProps = {
