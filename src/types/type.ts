@@ -108,6 +108,33 @@ export type useSetApiErrorModalOptions = {
   error: Error | null
 }
 
+export type UseSyncStateFromLocalStorageOptions = {
+  data: PlantIndexResponse | undefined
+  setHasPlantsData: Dispatch<
+    React.SetStateAction<{
+      likedPlants: boolean
+      myDictionary: boolean
+    }>
+  >
+  setPlantAccordionData: Dispatch<React.SetStateAction<PlantAccordionDataType>>
+  setUserEmail: Dispatch<React.SetStateAction<string | null>>
+}
+
+export type PlantAccordionDataType = {
+  likedPlants: { imgUrl: string; krnm: string }[]
+  myDictionary: { imgUrl: string; krnm: string }[]
+}
+
+export type AccordionSectionsProps = {
+  hasPlantsData: { likedPlants: boolean; myDictionary: boolean }
+  accordionOpen: { likedPlants: boolean; myDictionary: boolean }
+  setAccordionOpen: Dispatch<
+    React.SetStateAction<{ likedPlants: boolean; myDictionary: boolean }>
+  >
+  plantAccordionData: PlantAccordionDataType
+  data: PlantIndexResponse | undefined
+}
+
 export type SideDrawerProps = {
   isOpen: boolean
   onClose: () => void

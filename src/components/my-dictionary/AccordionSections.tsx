@@ -1,111 +1,17 @@
-import { useAuth } from '@/context/AuthContext'
-import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
-import { PlantIndexItem } from '@/types/type'
 import Image from 'next/image'
 import Link from 'next/link'
 import BoxOpen from '@/pages/assets/icons/BoxOpen.svg'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { useModalStore } from '@/store/useModalStore'
-import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
+import { AccordionSectionsProps } from '@/types/type'
 
-const MyDictionaryPage = () => {
-  const [hasPlantsData, setHasPlantsData] = useState({
-    likedPlants: false,
-    myDictionary: false,
-  })
-  const [accordionOpen, setAccordionOpen] = useState({
-    likedPlants: true,
-    myDictionary: true,
-  })
-  const [plantData, setPlantData] = useState<{
-    likedPlants: { imgUrl: string; krnm: string }[]
-    myDictionary: { imgUrl: string; krnm: string }[]
-  }>({
-    likedPlants: [],
-    myDictionary: [],
-  })
-  const [userEmail, setUserEmail] = useState<string | null>(null)
-  const { isModalOpen, currentModal, setModalOpen, closeModal } =
-    useModalStore()
-  const { loginUser } = useAuth()
-  const router = useRouter()
-  const { data } = plantIndexFetchData(1, 300)
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const emailFromLocalStorage = localStorage.getItem('userEmail')
-      if (emailFromLocalStorage) {
-        setUserEmail(emailFromLocalStorage)
-        setHasPlantsData({
-          likedPlants: !!localStorage.getItem(`${loginUser}.likedPlants`),
-          myDictionary: !!localStorage.getItem(`${loginUser}.findPlants`),
-        })
-      } else {
-        setModalOpen('LoginRequiredModal')
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    if (userEmail) {
-      closeModal
-    }
-  }, [userEmail])
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const getLikedPlants = JSON.parse(
-      localStorage.getItem(`${loginUser}.likedPlants`) || '[]'
-    )
-    const getFindPlants = JSON.parse(
-      localStorage.getItem(`${loginUser}.findPlants`) || '[]'
-    )
-
-    if (data?.indexList && Array.isArray(getLikedPlants)) {
-      const filteredLikedImages = data.indexList
-        .filter((item: PlantIndexItem) => getLikedPlants.includes(item.krnm))
-        .map((item) => ({ imgUrl: item.imgUrl, krnm: item.krnm }))
-
-      setPlantData((prev) => ({
-        ...prev,
-        likedPlants: filteredLikedImages,
-      }))
-    }
-
-    if (data?.indexList && Array.isArray(getFindPlants)) {
-      const filteredFindImages = data.indexList
-        .filter((item: PlantIndexItem) => getFindPlants.includes(item.krnm))
-        .map((item) => ({ imgUrl: item.imgUrl, krnm: item.krnm }))
-      setPlantData((prev) => ({
-        ...prev,
-        myDictionary: filteredFindImages,
-      }))
-    }
-  }, [data])
-
+const AccordionSections = ({
+  hasPlantsData,
+  accordionOpen,
+  setAccordionOpen,
+  plantAccordionData,
+  data,
+}: AccordionSectionsProps) => {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
-      <div className="relative w-full mobile:h-[380px] sm:h-[500px]">
-        <Image
-          src="/images/my_dictionary_title_image_2.jpg"
-          alt="타이틀 커버 이미지"
-          className="object-cover"
-          fill
-        />
-        <div className="title_image_gradient dark:title_image_gradient absolute inset-0" />
-        <div className="absolute inset-0 flex w-full flex-col items-center justify-center gap-5">
-          <div className="mb-12 flex flex-col items-center">
-            <h1 className="page_main_title dark:text-slate-300">
-              My Dictionary
-            </h1>
-            <p className="ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300">
-              내가 발견한 식물들로 <br />
-              세상에 단 하나뿐인 나만의 도감을 완성해보세요
-            </p>
-          </div>
-        </div>
-      </div>
+    <>
       <section className="mt-8 w-full mobile:px-1 sm:px-4">
         <button
           onClick={() =>
@@ -120,7 +26,7 @@ const MyDictionaryPage = () => {
           <span className="text-xl">
             내가 좋아요 누른 식물
             <span className="ml-2 text-zinc-400">
-              {`(${plantData.myDictionary.length})`}
+              {`(${plantAccordionData.myDictionary.length})`}
             </span>
           </span>
           <span className="text-2xl font-bold">
@@ -131,7 +37,7 @@ const MyDictionaryPage = () => {
         {accordionOpen.likedPlants &&
           (hasPlantsData.likedPlants ? (
             <div className="accordion_image_grid">
-              {plantData.likedPlants.map((item) => (
+              {plantAccordionData.likedPlants.map((item) => (
                 <Link
                   key={item.krnm}
                   href={{
@@ -183,7 +89,7 @@ const MyDictionaryPage = () => {
           <span className="text-xl">
             나의 식물도감
             <span className="ml-2 text-zinc-400">
-              {`(${plantData.myDictionary.length}/${data?.response.response.body.totalCount})`}
+              {`(${plantAccordionData.myDictionary.length}/${data?.response.response.body.totalCount})`}
             </span>
           </span>
           <span className="text-2xl font-bold">
@@ -194,7 +100,7 @@ const MyDictionaryPage = () => {
         {accordionOpen.myDictionary &&
           (hasPlantsData.myDictionary ? (
             <div className="accordion_image_grid">
-              {plantData.myDictionary.map((item) => (
+              {plantAccordionData.myDictionary.map((item) => (
                 <Link
                   key={item.krnm}
                   href={{
@@ -232,11 +138,8 @@ const MyDictionaryPage = () => {
             </div>
           ))}
       </section>
-      {isModalOpen && currentModal == 'LoginRequiredModal' && (
-        <LoginRequiredModal />
-      )}
-    </div>
+    </>
   )
 }
 
-export default MyDictionaryPage
+export default AccordionSections

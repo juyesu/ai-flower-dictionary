@@ -55,8 +55,20 @@ const PageTitle = ({
                 <PlantSearchBar color="dark" currentPage="plant-info" />
               </div>
             )
-          default:
-            return null
+          case 'default' :
+            return (
+              <div className="absolute inset-0 flex w-full flex-col items-center justify-center gap-5">
+                <div className="mb-12 flex flex-col items-center">
+                  <h1 className="page_main_title dark:text-slate-300">
+                    My Dictionary
+                  </h1>
+                  <p className="ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300">
+                    내가 발견한 식물들로 <br />
+                    세상에 단 하나뿐인 나만의 도감을 완성해보세요
+                  </p>
+                </div>
+              </div>
+            )
         }
       })()}
     </div>
