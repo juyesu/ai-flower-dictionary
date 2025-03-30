@@ -11,10 +11,11 @@ const LoginRequiredModal = () => {
         closeModal()
         router.back()
       }}
-      bgOverlay={false}
+      bgOverlay={true}
       secoundButton={{
         secoundButtonLabel: '로그인',
         onSecondButtonClick: () => {
+          closeModal()
           router.push('/login')
         },
       }}
