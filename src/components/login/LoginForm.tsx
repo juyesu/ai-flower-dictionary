@@ -21,7 +21,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
         />
         {formState.errors.email && (
           <p className="login_form_schema_error">
-            {String(formState.errors.email.message)}
+            {formState.errors.email.message}
           </p>
         )}
       </div>
@@ -40,7 +40,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
         />
         {formState.errors.password && (
           <p className="login_form_schema_error">
-            {String(formState.errors.password.message)}
+            {formState.errors.password.message}
           </p>
         )}
       </div>
