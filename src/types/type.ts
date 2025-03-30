@@ -1,5 +1,6 @@
 import * as tmImage from '@teachablemachine/image'
 import { Dispatch, SetStateAction } from 'react'
+import { SubmitHandler } from 'react-hook-form'
 
 export type ChildrenComponentsProps = {
   children: React.ReactNode
@@ -154,6 +155,10 @@ export type ModalProps = {
     onSecondButtonClick?: () => void
   }
   message: string
+}
+
+export type LoginFormProps = {
+  onSubmit: SubmitHandler<LoginFormType>
 }
 
 export type LoginFormType = {
