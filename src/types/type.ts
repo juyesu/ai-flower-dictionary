@@ -161,6 +161,15 @@ export type LoginFormProps = {
   onSubmit: SubmitHandler<LoginFormType>
 }
 
+export type AddressPopupProps = {
+  setOpenPostcode: Dispatch<SetStateAction<boolean>>
+}
+
+export type RegisterFormProps = {
+  onSubmit: SubmitHandler<LoginFormType>
+  setOpenPostcode: Dispatch<SetStateAction<boolean>>
+}
+
 export type LoginFormType = {
   name: string
   email: string
