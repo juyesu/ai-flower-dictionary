@@ -1,6 +1,6 @@
 import { PageTitleProps } from '@/types/type'
 import PlantSearchBar from '@/components/common/PlantSearchBar'
-import ModeSwitchButton from '@/components/ai-flower-dection/ModeSwitchButton'
+import ModeSwitchButton from '@/components/ai-flower-detection/ModeSwitchButton'
 import Image from 'next/image'
 
 const PageTitle = ({

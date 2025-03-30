@@ -4,7 +4,7 @@ import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { useRouter } from 'next/router'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'
-import usePlantDetectionModelLoad from '@/components/ai-flower-dection/hooks/usePlantDetectionModelLoad'
+import usePlantDetectionModelLoad from '@/components/ai-flower-detection/hooks/usePlantDetectionModelLoad'
 
 const useFileUploadModel = () => {
   const [uploadedFileName, setUploadedFileName] = useState('')

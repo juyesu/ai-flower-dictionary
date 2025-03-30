@@ -1,6 +1,6 @@
 import Upload from '@/pages/assets/icons/Upload.svg'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
-import useFileUploadModel from '@/components/ai-flower-dection/hooks/useFileUploadModel'
+import useFileUploadModel from '@/components/ai-flower-detection/hooks/useFileUploadModel'
 
 const fileUploadModel = () => {
   const {

@@ -1,7 +1,7 @@
 import Webcam from 'react-webcam'
 import NextImage from 'next/image'
 import LoadingSpinner from '@/components/common/LoadingSpinner'
-import useCameraModel from '@/components/ai-flower-dection/hooks/useCameraModel'
+import useCameraModel from '@/components/ai-flower-detection/hooks/useCameraModel'
 
 const CameraModel = () => {
   const {

@@ -2,8 +2,8 @@ import { useState } from 'react'
 import Layout from '@/components/common/Layout'
 import PageTitle from '@/components/common/PageTitle'
 import ScrollButton from '@/components/common/ScrollButton'
-import CameraModel from '@/components/ai-flower-dection/CameraModel'
-import FileUploadModel from '@/components/ai-flower-dection/FileUploadModel'
+import CameraModel from '@/components/ai-flower-detection/CameraModel'
+import FileUploadModel from '@/components/ai-flower-detection/FileUploadModel'
 
 const AiFlowerDetection = () => {
   const [isCameraMode, setIsCameraMode] = useState(true)

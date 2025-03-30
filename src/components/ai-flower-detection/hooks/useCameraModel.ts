@@ -5,7 +5,7 @@ import * as tmImage from '@teachablemachine/image'
 import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
 import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'
-import usePlantDetectionModelLoad from '@/components/ai-flower-dection/hooks/usePlantDetectionModelLoad'
+import usePlantDetectionModelLoad from '@/components/ai-flower-detection/hooks/usePlantDetectionModelLoad'
 
 const useCameraModel = () => {
   const [model, setModel] = useState<tmImage.CustomMobileNet | null>(null)
