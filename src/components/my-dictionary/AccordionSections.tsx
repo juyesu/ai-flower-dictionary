@@ -47,7 +47,7 @@ const AccordionSections = ({
                   passHref
                   aria-label={`${item.krnm}상세 페이지로 이동`}
                 >
-                  <figure className="rounded-lg text-center hover:bg-zinc-300 mobile:p-1.5 sm:p-2">
+                  <figure className="rounded-lg text-center hover:bg-zinc-300 dark:hover:bg-gray-500 mobile:p-1.5 sm:p-2">
                     <Image
                       src={item.imgUrl}
                       alt={`${item.krnm}식물`}
@@ -110,7 +110,7 @@ const AccordionSections = ({
                   passHref
                   aria-label={`${item.krnm}상세 페이지로 이동`}
                 >
-                  <figure className="rounded-lg text-center hover:bg-zinc-300 mobile:p-1.5 sm:p-2">
+                  <figure className="rounded-lg text-center hover:bg-zinc-300 dark:hover:bg-gray-500 mobile:p-1.5 sm:p-2">
                     <Image
                       src={item.imgUrl}
                       alt={`${item.imgUrl}의 이미지`}
