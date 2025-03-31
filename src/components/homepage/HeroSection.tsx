@@ -1,6 +1,7 @@
 import PlantSearchBar from '@/components/common/PlantSearchBar'
+import { IndexProps } from '@/types/type'
 
-const HeroSection = () => {
+const HeroSection = ({ staticIndexList, staticKrnmList }: IndexProps) => {
   return (
     <section className="relative flex w-full items-center justify-center bg-cover bg-center filter mobile:h-[30rem] sm:h-[40rem] lg:h-[62rem]">
       <video
@@ -23,6 +24,8 @@ const HeroSection = () => {
         <PlantSearchBar
           color="white"
           currentPage="home"
+          staticIndexList={staticIndexList}
+          staticKrnmList={staticKrnmList}
         />
       </div>
     </section>

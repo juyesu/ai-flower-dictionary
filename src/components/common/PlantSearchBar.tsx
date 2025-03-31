@@ -10,10 +10,18 @@ import reactStringReplace from 'react-string-replace'
 import { useMediaQuery } from 'react-responsive'
 import { useModalStore } from '@/store/useModalStore'
 
-const PlantSearchBar = ({ color, currentPage }: PlantSearchBarProps) => {
+const PlantSearchBar = ({
+  color,
+  currentPage,
+  staticIndexList,
+  staticKrnmList,
+}: PlantSearchBarProps) => {
   const { register, getValues, watch, setValue, setFocus } = useForm()
   const [isSearchFocus, setIsSearchFocus] = useState(false)
-  const { data, isLoading } = plantIndexFetchData(1, 300)
+  const { data, isLoading } =
+    !staticIndexList || !staticKrnmList
+      ? plantIndexFetchData(1, 300)
+      : { data: null, isLoading: false }
   const isSmView = useMediaQuery({ minWidth: 640 })
   const isMobileView = useMediaQuery({ minWidth: 320 })
   const [randomItems, setRandomItems] = useState<PlantIndexItem[]>([])
@@ -28,13 +36,18 @@ const PlantSearchBar = ({ color, currentPage }: PlantSearchBarProps) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (data) {
+    if (staticIndexList && staticKrnmList) {
+      setRandomItems(
+        [...(staticIndexList || [])].sort(() => Math.random() - 0.5).slice(0, 5)
+      )
+      setAutocompletePlantName(staticKrnmList)
+    } else if (data) {
       setRandomItems(
         [...(data?.indexList || [])].sort(() => Math.random() - 0.5).slice(0, 5)
       )
       setAutocompletePlantName(data?.krnmList)
     }
-  }, [data])
+  }, [data, staticIndexList, staticKrnmList])
 
   useEffect(() => {
     if (autocompletePlantName) {
@@ -71,6 +84,9 @@ const PlantSearchBar = ({ color, currentPage }: PlantSearchBarProps) => {
         )
       } else {
         if (
+          staticIndexList?.some(
+            (item: PlantIndexItem) => item.krnm == searchInputValue
+          ) ||
           data?.indexList.some(
             (item: PlantIndexItem) => item.krnm == searchInputValue
           )
@@ -185,7 +201,7 @@ const PlantSearchBar = ({ color, currentPage }: PlantSearchBarProps) => {
         )}
       </form>
       <div
-        className={`mobile:gap-3 mb-4 mt-2 flex sm:gap-4 ${
+        className={`mb-4 mt-2 flex mobile:gap-3 sm:gap-4 ${
           color == 'white' ? 'text-white' : 'text-zinc-800'
         }`}
       >

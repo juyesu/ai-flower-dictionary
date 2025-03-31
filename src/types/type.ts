@@ -34,6 +34,11 @@ export type PlantIndexResponse = {
   krnmList: string[]
 }
 
+export type IndexProps = {
+  staticIndexList: PlantIndexItem[]
+  staticKrnmList: string[]
+}
+
 export type PlantIndexItem = {
   imgUrl: string
   krnm: string
@@ -47,6 +52,8 @@ export type PlantIndexItem = {
 export type PlantSearchBarProps = {
   color: string
   currentPage: string
+  staticIndexList?: PlantIndexItem[]
+  staticKrnmList?: string[]
 }
 
 export type ViewPortWidth = {

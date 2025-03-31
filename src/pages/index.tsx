@@ -2,16 +2,18 @@ import React, { useEffect } from 'react'
 import Layout from '@/components/common/Layout'
 import ScrollButton from '@/components/common/ScrollButton'
 import HeroSection from '@/components/homepage/HeroSection'
-import SearchNotFoundModal from '@/components/modal/SearchNotFoundModal'
 import FeatureSections from '@/components/homepage/FeatureSections'
 import Head from 'next/head'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useModalStore } from '@/store/useModalStore'
 import useSectionScroll from '@/hooks/useSectionScroll'
+import { GetStaticProps } from 'next'
+import getPlantIndexData from '@/utils/getPlantIndexData'
+import { IndexProps } from '@/types/type'
 
-const Index = () => {
+const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
   const methods = useForm()
-  const { isModalOpen, currentModal } = useModalStore()
+  const { isModalOpen } = useModalStore()
   useSectionScroll()
 
   useEffect(() => {
@@ -47,16 +49,40 @@ const Index = () => {
       </Head>
       <Layout>
         <FormProvider {...methods}>
-          <HeroSection />
+          <HeroSection
+            staticIndexList={staticIndexList}
+            staticKrnmList={staticKrnmList}
+          />
           <FeatureSections />
           <ScrollButton />
-          {isModalOpen && currentModal == 'SearchNotFoundModal' && (
-            <SearchNotFoundModal />
-          )}
         </FormProvider>
       </Layout>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const { indexList, krnmList } = await getPlantIndexData(1, 300)
+
+    return {
+      props: {
+        indexList,
+        krnmList,
+      },
+      revalidate: 86400,
+    }
+  } catch (error) {
+    console.error('getStaticProps 데이터 패칭 에러:', error)
+
+    return {
+      props: {
+        indexList: [],
+        krnmList: [],
+      },
+      revalidate: 86400,
+    }
+  }
 }
 
 export default Index
