@@ -6,12 +6,14 @@ const HeroSection = ({ staticIndexList, staticKrnmList }: IndexProps) => {
     <section className="relative flex w-full items-center justify-center bg-cover bg-center filter mobile:h-[30rem] sm:h-[40rem] lg:h-[62rem]">
       <video
         className="absolute inset-0 h-full w-full object-cover filter dark:saturate-[.8]"
+        poster="/images/homepage_title_viedo_poster.jpg"
         autoPlay
         muted
         playsInline
         preload="auto"
       >
         <source src="/videos/homepage_title_viedo_1.mp4" type="video/mp4" />
+        <source src="/videos/homepage_title_viedo_1.webm" type="video/webm" />
       </video>
       <div className="absolute inset-0 bg-black opacity-30" />
       <div className="relative flex flex-col items-center justify-center mobile:gap-1.5 sm:gap-5">

@@ -46,6 +46,12 @@ const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
         <meta property="og:url" content="https://yourwebsite.com" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" /> */}
+        <link
+          rel="preload"
+          href="/videos/homepage_title_viedo_1.webm"
+          as="video"
+          type="video/webm"
+        />
       </Head>
       <Layout>
         <FormProvider {...methods}>
