@@ -52,6 +52,20 @@ const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
           as="video"
           type="video/webm"
         />
+        <link
+          rel="preload"
+          href="/fonts/PretendardVariable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/PoetsenOne-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </Head>
       <Layout>
         <FormProvider {...methods}>
