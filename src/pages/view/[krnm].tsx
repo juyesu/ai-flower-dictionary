@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import Layout from '@/components/common/Layout'
 import Link from 'next/link'
 import Image from 'next/image'
-import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
+import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import { PlantIndexItem } from '@/types/type'
 import Unliked from '@/pages/assets/icons/Unliked.svg'
 import Liked from '@/pages/assets/icons/Liked.svg'
@@ -11,8 +11,8 @@ import PreviousPage from '@/pages/assets/icons/PreviousPage.svg'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'
-import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
 import SearchFeedbackToast from '@/components/common/SearchFeedbackToast'
+import { useModalStore } from '@/store/useModalStore'
 
 export const metadata = {
   title: 'AI 꽃 도감',
@@ -24,13 +24,13 @@ const Post = () => {
   const { loginUser } = useAuth()
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
-  const [openLoginRequiredModal, setOpenLoginRequiredModal] = useState(false)
   const [openSearchFeedbackToast, setOpenSearchFeedbackToast] = useState(false)
   const { imageUrl, setImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
   const { prevPage, sort } = router.query
   const { krnm } = router.query
-  const { data, isLoading } = plantIndexFetchData(1, 300)
+  const { data, isLoading } = usePlantIndexFetchData(1, 300)
+  const { setModalOpen } = useModalStore()
 
   useEffect(() => {
     if (!data || isLoading || !krnm) return
@@ -110,7 +110,7 @@ const Post = () => {
         })
       }
     } else {
-      setOpenLoginRequiredModal(true)
+      setModalOpen('LoginRequiredModal')
     }
   }
 
@@ -143,7 +143,7 @@ const Post = () => {
                     ...(sort ? { query: { sort } } : {}),
                   }}
                   aria-label="식물 도감 페이지로 이동"
-                  className="absolute mobile:left-[-12px] lg:left-[-80px] top-6 flex items-center justify-center rounded-2xl border bg-white p-2 dark:border-gray-500 dark:bg-zinc-600"
+                  className="absolute top-6 flex items-center justify-center rounded-2xl border bg-white p-2 dark:border-gray-500 dark:bg-zinc-600 mobile:left-[-12px] lg:left-[-80px]"
                   passHref
                 >
                   <PreviousPage
@@ -160,7 +160,7 @@ const Post = () => {
                 </h2>
               </div>
               <div className="flex w-full flex-row items-end justify-end">
-                <div className="relative mobile:mr-6 lg:mr-16 mobile:mt-2 lg:mt-4 flex flex-row justify-end gap-4">
+                <div className="relative flex flex-row justify-end gap-4 mobile:mr-6 mobile:mt-2 lg:mr-16 lg:mt-4">
                   <button
                     type="button"
                     aria-label={
@@ -220,7 +220,7 @@ const Post = () => {
                 width={1200}
                 height={900}
               />
-              <figcaption className="mobile:my-8 lg:my-0 self-center justify-self-center text-[#797D48] dark:text-slate-300 mobile:px-2 mobile:text-center lg:w-1/2 lg:px-8 lg:text-start">
+              <figcaption className="self-center justify-self-center text-[#797D48] dark:text-slate-300 mobile:my-8 mobile:px-2 mobile:text-center lg:my-0 lg:w-1/2 lg:px-8 lg:text-start">
                 <dl>
                   <div className="my-4 font-semibold mobile:text-2xl lg:text-3xl">
                     <dt className="inline-block">색상:</dt>
@@ -256,13 +256,6 @@ const Post = () => {
           />
         )}
       </div>
-      {openLoginRequiredModal && (
-        <LoginRequiredModal
-          onClose={() => setOpenLoginRequiredModal(false)}
-          bgOverlay={false}
-          onSecondButtonClick={() => router.push('/login')}
-        />
-      )}
     </Layout>
   )
 }
