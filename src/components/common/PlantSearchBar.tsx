@@ -1,4 +1,4 @@
-import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
+import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import { PlantIndexItem, PlantSearchBarProps } from '@/types/type'
 import Link from 'next/link'
 import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
@@ -20,7 +20,7 @@ const PlantSearchBar = ({
   const [isSearchFocus, setIsSearchFocus] = useState(false)
   const { data, isLoading } =
     !staticIndexList || !staticKrnmList
-      ? plantIndexFetchData(1, 300)
+      ? usePlantIndexFetchData(1, 300)
       : { data: null, isLoading: false }
   const isSmView = useMediaQuery({ minWidth: 640 })
   const isMobileView = useMediaQuery({ minWidth: 320 })

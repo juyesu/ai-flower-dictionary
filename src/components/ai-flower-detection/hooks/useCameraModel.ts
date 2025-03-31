@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Webcam from 'react-webcam'
 import * as tmImage from '@teachablemachine/image'
 import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
-import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
+import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'
 import usePlantDetectionModelLoad from '@/components/ai-flower-detection/hooks/usePlantDetectionModelLoad'
 
@@ -18,7 +18,7 @@ const useCameraModel = () => {
     className: '',
     probability: 0.0,
   })
-  const { data, isLoading, error } = plantIndexFetchData(1, 300)
+  const { data, isLoading, error } = usePlantIndexFetchData(1, 300)
   const consecutiveMatchCountRef = useRef(0)
   const isGptFetchingRef = useRef(false)
   const { imageUrl, setImageUrl } = useCapturedPlantImageStore()

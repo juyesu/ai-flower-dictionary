@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react'
 import { CustomMobileNet } from '@teachablemachine/image'
 import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
-import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
+import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import { useRouter } from 'next/router'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'
 import usePlantDetectionModelLoad from '@/components/ai-flower-detection/hooks/usePlantDetectionModelLoad'
@@ -16,7 +16,7 @@ const useFileUploadModel = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [useGptResponse, setUseGptResponse] = useState(false)
   const [image, setImage] = useState<File | null>(null)
-  const { data, isLoading, error } = plantIndexFetchData(1, 300)
+  const { data, isLoading, error } = usePlantIndexFetchData(1, 300)
   const { setImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
   usePlantDetectionModelLoad({

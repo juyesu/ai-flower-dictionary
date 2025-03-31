@@ -32,7 +32,7 @@ const fetchPlantIndexData = async (
   }
 }
 
-export const plantIndexFetchData = (
+export const usePlantIndexFetchData = (
   currentPage: number,
   pageSize: number
 ): UseQueryResult<PlantIndexResponse, Error> => {

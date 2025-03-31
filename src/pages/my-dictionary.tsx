@@ -4,7 +4,7 @@ import useMyDictionary from '@/components/my-dictionary/hooks/useMyDictionaryPag
 import useSyncStateFromLocalStorage from '@/components/my-dictionary/hooks/useSyncLocalStorageWithState'
 import PageTitle from '@/components/common/PageTitle'
 import AccordionSections from '@/components/my-dictionary/AccordionSections'
-import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
+import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import { useEffect } from 'react'
 import { useModalStore } from '@/store/useModalStore'
 
@@ -19,7 +19,7 @@ const MyDictionary = () => {
     userEmail,
     setUserEmail,
   } = useMyDictionary()
-  const { data } = plantIndexFetchData(1, 300)
+  const { data } = usePlantIndexFetchData(1, 300)
   const { closeModal } = useModalStore()
   useSyncStateFromLocalStorage({
     data,

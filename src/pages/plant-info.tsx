@@ -4,7 +4,7 @@ import PageTitle from '@/components/common/PageTitle'
 import ScrollButton from '@/components/common/ScrollButton'
 import CardView from '@/components/plant-info/CardView'
 import TableView from '@/components/plant-info/TabelView'
-import { plantIndexFetchData } from '@/hooks/plantIndexFetchData'
+import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import handlePlantLike from '@/utils/handlePlantLike'
 import { useAuth } from '@/context/AuthContext'
 import ViewModeSwitchButton from '@/components/plant-info/ViewModeSwitchButton'
@@ -27,7 +27,7 @@ const PlantInfo = () => {
     copyTooltipIndex,
     setCopyTooltipIndex,
   } = usePlantInfoPageState()
-  const { data, isLoading, error } = plantIndexFetchData(
+  const { data, isLoading, error } = usePlantIndexFetchData(
     currentPage,
     maximumPageSize
   )
