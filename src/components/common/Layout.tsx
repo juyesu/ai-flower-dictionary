@@ -16,12 +16,10 @@ import ApiDataErrorModal from '@/components/modal/ApiDataErrorModal'
 import LoginRequiredModal from '@/components/modal/LoginRequiredModal'
 import SearchNotFoundModal from '@/components/modal/SearchNotFoundModal'
 import LogoutMessageModal from '@/components/modal/LogoutMessageModal'
-import { useRouter } from 'next/router'
 
 const RootLayout = ({ children }: ChildrenComponentsProps) => {
   const [openSideDrawer, setOpenSideDrawer] = useState(false)
   const { isModalOpen, currentModal } = useModalStore()
-  const router = useRouter()
 
   return (
     <ThemeProvider>
