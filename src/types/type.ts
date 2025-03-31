@@ -65,21 +65,19 @@ export type ViewPortWidth = {
 }
 
 export type CardViewProps = {
-  apiData: any
+  apiData: PlantIndexItem[] | undefined
   likedPlants: string[]
   copyTooltipIndex: string
   setCopyTooltipIndex: Dispatch<React.SetStateAction<string>>
-  handlePlantLike: (plantId: string) => void
 }
 
 export type TableViewProps = {
   viewPortWidth: ViewPortWidth
-  apiData: any
+  apiData: PlantIndexItem[] | undefined
   likedPlants: string[]
   copyTooltipIndex: string
   setCopyTooltipIndex: Dispatch<React.SetStateAction<string>>
   currentPage: number
-  handlePlantLike: (plantId: string) => void
 }
 
 export type PlantTableType = {
@@ -88,7 +86,7 @@ export type PlantTableType = {
   famlNm: string
   kornFamlNm: string
   bloomPeriodCn: string
-  isLiked: string[]
+  isLiked: JSX.Element
 }
 
 export type PageTitleProps = {

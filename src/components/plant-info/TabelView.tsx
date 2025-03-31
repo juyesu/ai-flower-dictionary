@@ -7,6 +7,8 @@ import {
   getCoreRowModel,
   flexRender,
 } from '@tanstack/react-table'
+import handlePlantLinkShare from '@/utils/handlePlantLinkShare'
+import handlePlantLike from '@/utils/handlePlantLike'
 import { TableViewProps } from '@/types/type'
 import { PlantTableType } from '@/types/type'
 import { useEffect, useMemo, useState } from 'react'
@@ -17,9 +19,8 @@ const TableView = ({
   apiData,
   likedPlants,
   copyTooltipIndex,
+  setCopyTooltipIndex,
   currentPage,
-  handlePlantLike,
-  handlePlantLinkShare,
 }: TableViewProps) => {
   const tableData = useMemo(() => {
     return (
@@ -66,7 +67,7 @@ const TableView = ({
                 onClick={async (e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  await handlePlantLinkShare(item.krnm)
+                  await handlePlantLinkShare(item.krnm, setCopyTooltipIndex)
                 }}
                 className="relative p-1"
               >

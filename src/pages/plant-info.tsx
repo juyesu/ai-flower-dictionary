@@ -5,7 +5,6 @@ import ScrollButton from '@/components/common/ScrollButton'
 import CardView from '@/components/plant-info/CardView'
 import TableView from '@/components/plant-info/TabelView'
 import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
-import handlePlantLike from '@/utils/handlePlantLike'
 import { useAuth } from '@/context/AuthContext'
 import ViewModeSwitchButton from '@/components/plant-info/ViewModeSwitchButton'
 import Pagination from '@/components/plant-info/Pagineation'
@@ -77,7 +76,6 @@ const PlantInfo = () => {
             likedPlants={likedPlants}
             copyTooltipIndex={copyTooltipIndex}
             setCopyTooltipIndex={setCopyTooltipIndex}
-            handlePlantLike={handlePlantLike}
           />
         ) : (
           <TableView
@@ -87,7 +85,6 @@ const PlantInfo = () => {
             copyTooltipIndex={copyTooltipIndex}
             setCopyTooltipIndex={setCopyTooltipIndex}
             currentPage={currentPage}
-            handlePlantLike={handlePlantLike}
           />
         )}
         <Pagination
