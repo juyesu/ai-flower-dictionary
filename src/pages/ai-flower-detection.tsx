@@ -14,7 +14,7 @@ const AiFlowerDetection = () => {
         <PageTitle
           isCameraMode={isCameraMode}
           setIsCameraMode={setIsCameraMode}
-          titleImage="ai_flower_detection_title_image_4.jpg"
+          titleImage="ai_flower_detection_title_image_4"
           titleOptions="ModeSwitchButton"
         />
         <div className="flex w-full flex-col items-center">

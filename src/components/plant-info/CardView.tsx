@@ -17,7 +17,7 @@ const CardView = ({
   return (
     <div className="grid w-full mobile:mt-8 mobile:grid-cols-2 mobile:gap-y-8 mobile:px-1 sm:px-4 md:grid-cols-3 md:gap-y-24 lg:mt-16">
       {apiData &&
-        apiData?.map((item: PlantIndexItem) => (
+        apiData?.map((item: PlantIndexItem, index: number) => (
           <div className="mb-4 flex w-full flex-col items-center">
             <article className="flex flex-col rounded-xl bg-white shadow-custom-all hover:bg-sky-100 dark:bg-zinc-800">
               <Link
@@ -35,6 +35,7 @@ const CardView = ({
                   alt={`${item.krnm}식물`}
                   width={694}
                   height={521}
+                  priority={index < 4}
                 />
                 <div className="flex flex-col mobile:mt-2 mobile:gap-1 mobile:px-1 mobile:pb-2 sm:mt-5 sm:gap-3 sm:px-4 sm:pb-4 lg:mt-7 lg:px-6">
                   <span className="self-start rounded-full bg-cyan-500 px-3 py-0.5 text-sm font-semibold text-white dark:bg-cyan-700 dark:text-slate-300 mobile:hidden sm:block">

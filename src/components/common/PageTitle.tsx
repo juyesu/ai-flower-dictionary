@@ -13,12 +13,19 @@ const PageTitle = ({
     <div
       className={`relative flex w-full items-end justify-center overflow-hidden ${titleOptions == 'PlantSearchBar' ? 'mobile:h-[460px] sm:h-[652px]' : 'mobile:h-[360px] sm:h-[500px]'}`}
     >
-      <Image
-        src={`/images/${titleImage}`}
-        alt="타이틀 커버 이미지"
-        className="object-cover"
-        fill
-      />
+      <picture>
+        <source srcSet={`/images/${titleImage}.webp`} type="image/webp" />
+        <source srcSet={`/images/${titleImage}.avif`} type="image/avif" />
+        <Image
+          src={`/images/${titleImage}.jpg`}
+          alt="타이틀 커버 이미지"
+          className="object-cover"
+          fill
+          priority
+          fetchPriority="high"
+          sizes="(max-width: 1919px) 100vw, (min-width: 1920px) 70vw"
+        />
+      </picture>
       <div className="title_image_gradient dark:title_image_gradient absolute inset-0" />
       {(() => {
         switch (titleOptions) {
@@ -55,7 +62,7 @@ const PageTitle = ({
                 <PlantSearchBar color="dark" currentPage="plant-info" />
               </div>
             )
-          case 'default' :
+          case 'default':
             return (
               <div className="absolute inset-0 flex w-full flex-col items-center justify-center gap-5">
                 <div className="mb-12 flex flex-col items-center">

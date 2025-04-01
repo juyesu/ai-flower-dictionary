@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    formats: ['image/avif', 'image/webp'],
     domains: ['221.158.142.142'],
   },
   eslint: {
@@ -16,7 +17,7 @@ const nextConfig = {
             svgo: true,
             svgoConfig: {
               plugins: [
-                { name: 'removeViewBox', active: false }, 
+                { name: 'removeViewBox', active: false },
                 { name: 'removeAttrs', params: { attrs: ['fill'] } },
               ],
             },

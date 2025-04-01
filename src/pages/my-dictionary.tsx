@@ -38,7 +38,7 @@ const MyDictionary = () => {
     <Layout>
       <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
         <PageTitle
-          titleImage="my_dictionary_title_image_2.jpg"
+          titleImage="my_dictionary_title_image_2"
           titleOptions="default"
         />
         <AccordionSections

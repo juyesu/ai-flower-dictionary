@@ -54,6 +54,7 @@ const AccordionSections = ({
                       className="h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500"
                       width={157}
                       height={128}
+                      loading="lazy"
                     />
                     <figcaption className="mt-2 text-sm text-gray-700 dark:text-slate-300">
                       {item.krnm}

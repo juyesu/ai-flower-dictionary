@@ -61,7 +61,7 @@ const PlantInfo = () => {
     <Layout>
       <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
         <PageTitle
-          titleImage="plant_info_title_image_3.jpg"
+          titleImage="plant_info_title_image_3"
           titleOptions="PlantSearchBar"
         />
         <ViewModeSwitchButton

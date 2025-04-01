@@ -66,6 +66,42 @@ const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          as="image"
+          href={`/images/ai_flower_detection_title_image_4.avif`}
+          type="image/avif"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={`/images/ai_flower_detection_title_image_4.webp`}
+          type="image/webp"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={`/images/plant_info_title_image_3.avif`}
+          type="image/avif"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={`/images/plant_info_title_image_3.webp`}
+          type="image/webp"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={`/images/my_dictionary_title_image_2.avif`}
+          type="image/avif"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={`/images/my_dictionary_title_image_2.webp`}
+          type="image/webp"
+        />
       </Head>
       <Layout>
         <FormProvider {...methods}>
