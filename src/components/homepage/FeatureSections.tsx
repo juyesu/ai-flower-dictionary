@@ -83,7 +83,7 @@ const PreviewContentSection = ({
                 alt=""
                 aria-hidden="true"
                 className="overflow-hidden object-cover object-center dark:saturate-[.8] mobile:h-[28rem] sm:h-[52rem]"
-                layout="fill"
+                fill
               />
             </div>
           </div>
@@ -154,7 +154,7 @@ const PreviewContentSection = ({
                 alt=""
                 aria-hidden="true"
                 className="overflow-hidden object-cover object-center filter dark:saturate-[.8]"
-                layout="fill"
+                fill
               />
             </div>
           </div>
