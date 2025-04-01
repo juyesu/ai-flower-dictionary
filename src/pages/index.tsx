@@ -28,18 +28,17 @@ const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
         <title>AI Flower Dictionary</title>
         <meta
           name="description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          content="AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요."
         />
-        <meta name="author" content="Kim Ji Hyeok" />
         <meta property="og:title" content="AI Flower Dictionary" />
         <meta
           property="og:description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          content="AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요."
         />
         <meta name="twitter:title" content="AI Flower Dictionary" />
         <meta
           name="twitter:description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          content="AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요."
         />
         {/* 업데이트 필요 */}
         {/* <meta property="og:image" content="/images/og-image.jpg" />

@@ -11,6 +11,7 @@ import Pagination from '@/components/plant-info/Pagineation'
 import usePlantInfoPageState from '@/components/plant-info/hooks/usePlantInfoPageState'
 import useSetApiErrorModal from '@/components/plant-info/hooks/useSetApiErrorModal'
 import router from 'next/router'
+import Head from 'next/head'
 
 const PlantInfo = () => {
   const {
@@ -58,44 +59,63 @@ const PlantInfo = () => {
   }, [currentPage])
 
   return (
-    <Layout>
-      <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
-        <PageTitle
-          titleImage="plant_info_title_image_3"
-          titleOptions="PlantSearchBar"
+    <>
+      <Head>
+        <title>Plant Info</title>
+        <meta
+          name="description"
+          content="100종 이상의 다양한 식물 정보를 확인해보세요."
         />
-        <ViewModeSwitchButton
-          viewPortWidth={viewPortWidth}
-          setIsCardUi={setIsCardUi}
-          setCurrentPage={setCurrentPage}
-          setMaximumPageSize={setMaximumPageSize}
+        <meta property="og:title" content="Plant Info" />
+        <meta
+          property="og:description"
+          content="100종 이상의 다양한 식물 정보를 확인해보세요."
         />
-        {isCardUi ? (
-          <CardView
-            apiData={data?.indexList}
-            likedPlants={likedPlants}
-            copyTooltipIndex={copyTooltipIndex}
-            setCopyTooltipIndex={setCopyTooltipIndex}
+        <meta name="twitter:title" content="Plant Info" />
+        <meta
+          name="twitter:description"
+          content="100종 이상의 다양한 식물 정보를 확인해보세요."
+        />
+      </Head>
+      <Layout>
+        <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
+          <PageTitle
+            titleImage="plant_info_title_image_3"
+            titleOptions="PlantSearchBar"
           />
-        ) : (
-          <TableView
+          <ViewModeSwitchButton
             viewPortWidth={viewPortWidth}
-            apiData={data?.indexList}
-            likedPlants={likedPlants}
-            copyTooltipIndex={copyTooltipIndex}
-            setCopyTooltipIndex={setCopyTooltipIndex}
-            currentPage={currentPage}
+            setIsCardUi={setIsCardUi}
+            setCurrentPage={setCurrentPage}
+            setMaximumPageSize={setMaximumPageSize}
           />
-        )}
-        <Pagination
-          apiData={data}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          maximumPageSize={maximumPageSize}
-        />
-      </div>
-      <ScrollButton />
-    </Layout>
+          {isCardUi ? (
+            <CardView
+              apiData={data?.indexList}
+              likedPlants={likedPlants}
+              copyTooltipIndex={copyTooltipIndex}
+              setCopyTooltipIndex={setCopyTooltipIndex}
+            />
+          ) : (
+            <TableView
+              viewPortWidth={viewPortWidth}
+              apiData={data?.indexList}
+              likedPlants={likedPlants}
+              copyTooltipIndex={copyTooltipIndex}
+              setCopyTooltipIndex={setCopyTooltipIndex}
+              currentPage={currentPage}
+            />
+          )}
+          <Pagination
+            apiData={data}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            maximumPageSize={maximumPageSize}
+          />
+        </div>
+        <ScrollButton />
+      </Layout>
+    </>
   )
 }
 
