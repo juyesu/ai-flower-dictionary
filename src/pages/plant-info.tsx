@@ -31,7 +31,6 @@ const PlantInfo = () => {
     currentPage,
     maximumPageSize
   )
-  const { sort } = router.query
   useSetApiErrorModal({ data, isLoading, error })
   const { loginUser } = useAuth()
   const hasMounted = useRef(false)
@@ -45,7 +44,7 @@ const PlantInfo = () => {
   }, [loginUser])
 
   useEffect(() => {
-    if (sort == 'table') {
+    if (router.query.sort == 'table') {
       setIsCardUi(false)
     }
   }, [])

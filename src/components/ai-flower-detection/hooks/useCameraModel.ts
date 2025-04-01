@@ -35,7 +35,10 @@ const useCameraModel = () => {
 
   // 모바일 환경
   const isMobileDevice = () => {
-    return /Mobi|Android/i.test(navigator.userAgent)
+    if (typeof navigator !== 'undefined') {
+      return /Mobi|Android/i.test(navigator.userAgent)
+    }
+    return false
   }
 
   useEffect(() => {
