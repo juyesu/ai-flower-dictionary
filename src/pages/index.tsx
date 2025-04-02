@@ -47,6 +47,12 @@ const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
         <meta property="og:image:height" content="630" /> */}
         <link
           rel="preload"
+          as="image"
+          href="/images/homepage_title_viedo_poster.webp"
+          type="image/webp"
+        />
+        <link
+          rel="preload"
           href="/videos/homepage_title_viedo_1.webm"
           as="video"
           type="video/webm"
