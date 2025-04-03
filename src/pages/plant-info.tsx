@@ -92,6 +92,7 @@ const PlantInfo = () => {
             <CardView
               apiData={data?.indexList}
               likedPlants={likedPlants}
+              setLikedPlants={setLikedPlants}
               copyTooltipIndex={copyTooltipIndex}
               setCopyTooltipIndex={setCopyTooltipIndex}
             />
@@ -100,6 +101,7 @@ const PlantInfo = () => {
               viewPortWidth={viewPortWidth}
               apiData={data?.indexList}
               likedPlants={likedPlants}
+              setLikedPlants={setLikedPlants}
               copyTooltipIndex={copyTooltipIndex}
               setCopyTooltipIndex={setCopyTooltipIndex}
               currentPage={currentPage}

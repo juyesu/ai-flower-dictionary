@@ -4,7 +4,7 @@ import Share from '@/pages/assets/icons/Share.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 import handlePlantLinkShare from '@/utils/handlePlantLinkShare'
-import handlePlantLike from '@/utils/handlePlantLike'
+import useHandlePlantLike from '@/hooks/useHandlePlantLike'
 import { PlantIndexItem } from '@/types/type'
 import { CardViewProps } from '@/types/type'
 
@@ -12,8 +12,13 @@ const CardView = ({
   apiData,
   likedPlants,
   copyTooltipIndex,
+  setLikedPlants,
   setCopyTooltipIndex,
 }: CardViewProps) => {
+  const { handlePlantLike } = useHandlePlantLike({
+    likedPlants,
+    setLikedPlants,
+  })
   return (
     <div className="grid w-full mobile:mt-8 mobile:grid-cols-2 mobile:gap-y-8 mobile:px-1 sm:px-4 md:grid-cols-3 md:gap-y-24 lg:mt-16">
       {apiData &&

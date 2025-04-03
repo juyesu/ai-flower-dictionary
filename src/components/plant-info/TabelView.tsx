@@ -8,7 +8,7 @@ import {
   flexRender,
 } from '@tanstack/react-table'
 import handlePlantLinkShare from '@/utils/handlePlantLinkShare'
-import handlePlantLike from '@/utils/handlePlantLike'
+import useHandlePlantLike from '@/hooks/useHandlePlantLike'
 import { TableViewProps } from '@/types/type'
 import { PlantTableType } from '@/types/type'
 import { useEffect, useMemo, useState } from 'react'
@@ -18,10 +18,15 @@ const TableView = ({
   viewPortWidth,
   apiData,
   likedPlants,
+  setLikedPlants,
   copyTooltipIndex,
   setCopyTooltipIndex,
   currentPage,
 }: TableViewProps) => {
+  const { handlePlantLike } = useHandlePlantLike({
+    likedPlants,
+    setLikedPlants,
+  })
   const tableData = useMemo(() => {
     return (
       (apiData &&
