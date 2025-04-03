@@ -41,8 +41,8 @@ const AccordionSections = ({
                 <Link
                   key={item.krnm}
                   href={{
-                    pathname: `/view/${item.krnm}`,
-                    query: { prevPage: 'my-dictionary' },
+                    pathname: '/view/plant-detail',
+                    query: { plantName: item.krnm, prevPage: 'my-dictionary' },
                   }}
                   passHref
                   aria-label={`${item.krnm}상세 페이지로 이동`}
@@ -105,8 +105,8 @@ const AccordionSections = ({
                 <Link
                   key={item.krnm}
                   href={{
-                    pathname: `/view/${item.krnm}`,
-                    query: { prevPage: 'my-dictionary' },
+                    pathname: `/view/plant-detail`,
+                    query: { plantName: item.krnm, prevPage: 'my-dictionary' },
                   }}
                   passHref
                   aria-label={`${item.krnm}상세 페이지로 이동`}

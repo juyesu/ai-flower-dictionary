@@ -210,8 +210,12 @@ const TableView = ({
               className="cursor-pointer hover:bg-zinc-300 dark:hover:bg-zinc-700"
               onClick={() => {
                 router.push({
-                  pathname: `/view/${rowData.krnm}`,
-                  query: { prevPage: 'plant-info', sort: 'table' },
+                  pathname: '/view/plant-detail',
+                  query: {
+                    plantName: rowData.krnm,
+                    prevPage: 'plant-info',
+                    sort: 'table',
+                  },
                 })
               }}
             >

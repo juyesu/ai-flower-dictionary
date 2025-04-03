@@ -167,8 +167,9 @@ const PlantSearchBar = ({
                 <Link
                   key={item}
                   href={{
-                    pathname: `/view/${item}`,
+                    pathname: '/view/plant-detail',
                     query: {
+                      plantName: item,
                       prevPage: currentPage === 'home' ? '' : `${currentPage}`,
                     },
                   }}
@@ -212,8 +213,9 @@ const PlantSearchBar = ({
                   <Link
                     key={index}
                     href={{
-                      pathname: `/view/${item.krnm}`,
+                      pathname: '/view/plant-detail',
                       query: {
+                        plantName: item.krnm,
                         prevPage:
                           currentPage === 'home' ? 'home' : `${currentPage}`,
                       },
@@ -232,8 +234,9 @@ const PlantSearchBar = ({
                     <Link
                       key={index}
                       href={{
-                        pathname: `/view/${item.krnm}`,
+                        pathname: '/view/plant-detail',
                         query: {
+                          plantName: item.krnm,
                           prevPage:
                             currentPage === 'home' ? 'home' : `${currentPage}`,
                         },

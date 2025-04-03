@@ -236,6 +236,6 @@ export type UseHandlePlantLikeOptions = {
 
 export type UseManagePlantStorageOptions = {
   setLikedPlants: Dispatch<SetStateAction<string[]>>
-  krnm: string | string[] | undefined
+  plantName: string | string[] | undefined
   prevPage: string | string[] | undefined
 }

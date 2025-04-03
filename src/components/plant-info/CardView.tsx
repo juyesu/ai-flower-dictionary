@@ -28,8 +28,12 @@ const CardView = ({
               <Link
                 key={item.famlNm}
                 href={{
-                  pathname: `/view/${item.krnm}`,
-                  query: { prevPage: 'plant-info', sort: 'card' },
+                  pathname: '/view/plant-detail',
+                  query: {
+                    plantName: item.krnm,
+                    prevPage: 'plant-info',
+                    sort: 'card',
+                  },
                 }}
                 passHref
                 aria-label={`${item.krnm}상세 페이지로 이동`}

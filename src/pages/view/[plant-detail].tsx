@@ -17,20 +17,20 @@ const Post = () => {
   const { imageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
   const { prevPage, sort } = router.query
-  const { krnm } = router.query
+  const { plantName } = router.query
   const { data, isLoading } = usePlantIndexFetchData(1, 300)
-  useManagePlantStorage({ setLikedPlants, krnm, prevPage })
+  useManagePlantStorage({ setLikedPlants, plantName, prevPage })
 
   useEffect(() => {
-    if (!data || isLoading || !krnm) return
-    const decodedKrnm = decodeURIComponent(krnm as string)
+    if (!data || isLoading || !plantName) return
+    const decodedKrnm = decodeURIComponent(plantName as string)
 
     const foundPlant = data?.indexList.find(
       (p: PlantIndexItem) => p.krnm === decodedKrnm
     )
 
     setPlantData(foundPlant || null)
-  }, [data, isLoading, krnm])
+  }, [data, isLoading, plantName])
 
   useEffect(() => {
     if (imageUrl) {
@@ -41,20 +41,20 @@ const Post = () => {
   return (
     <>
       <Head>
-        <title>{krnm} 상세 페이지</title>
+        <title>{plantName} 상세 페이지</title>
         <meta
           name="description"
-          content={`${krnm}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
+          content={`${plantName}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
         />
-        <meta property="og:title" content={`${krnm} 상세 페이지`} />
+        <meta property="og:title" content={`${plantName} 상세 페이지`} />
         <meta
           property="og:description"
-          content={`${krnm}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
+          content={`${plantName}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
         />
-        <meta name="twitter:title" content={`${krnm} 상세 페이지`} />
+        <meta name="twitter:title" content={`${plantName} 상세 페이지`} />
         <meta
           name="twitter:description"
-          content={`${krnm}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
+          content={`${plantName}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
         />
       </Head>
       <Layout>
@@ -65,7 +65,7 @@ const Post = () => {
                 plantData={plantData}
                 likedPlants={likedPlants}
                 setLikedPlants={setLikedPlants}
-                krnm={krnm}
+                krnm={plantName}
                 prevPage={prevPage}
                 sort={sort}
               />

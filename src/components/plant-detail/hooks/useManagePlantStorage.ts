@@ -3,12 +3,10 @@ import { useAuth } from '@/context/AuthContext'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'
 import { useRouter } from 'next/router'
 import { UseManagePlantStorageOptions } from '@/types/type'
-import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
-import { PlantIndexItem } from '@/types/type'
 
 const useManagePlantStorage = ({
   setLikedPlants,
-  krnm,
+  plantName,
   prevPage,
 }: UseManagePlantStorageOptions) => {
   const { loginUser } = useAuth()
@@ -32,15 +30,15 @@ const useManagePlantStorage = ({
         localStorage.getItem(`${loginUser}.findPlants`) || '[]'
       )
 
-      if (!storedPlants.includes(krnm)) {
+      if (!storedPlants.includes(plantName)) {
         localStorage.setItem(
           `${loginUser}.findPlants`,
-          JSON.stringify([...storedPlants, krnm])
+          JSON.stringify([...storedPlants, plantName])
         )
       }
       sessionStorage.removeItem('cameFromAiFlowerDetection')
     }
-  }, [prevPage, loginUser, krnm])
+  }, [prevPage, loginUser, plantName])
 
   useEffect(() => {
     const handleRouteChange = () => {
