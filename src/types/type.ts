@@ -67,6 +67,7 @@ export type ViewPortWidth = {
 export type CardViewProps = {
   apiData: PlantIndexItem[] | undefined
   likedPlants: string[]
+  setLikedPlants: Dispatch<React.SetStateAction<string[]>>
   copyTooltipIndex: string
   setCopyTooltipIndex: Dispatch<React.SetStateAction<string>>
 }
@@ -75,6 +76,7 @@ export type TableViewProps = {
   viewPortWidth: ViewPortWidth
   apiData: PlantIndexItem[] | undefined
   likedPlants: string[]
+  setLikedPlants: Dispatch<React.SetStateAction<string[]>>
   copyTooltipIndex: string
   setCopyTooltipIndex: Dispatch<React.SetStateAction<string>>
   currentPage: number
@@ -212,4 +214,28 @@ export type PaginationProps = {
   currentPage: number
   setCurrentPage: Dispatch<SetStateAction<number>>
   maximumPageSize: number
+}
+
+export type PlantDetailTitleProps = {
+  plantData: PlantIndexItem | null
+  likedPlants: string[]
+  setLikedPlants: Dispatch<SetStateAction<string[]>>
+  krnm: string | string[] | undefined
+  prevPage: string | string[] | undefined
+  sort: string | string[] | undefined
+}
+
+export type PlantDetailContentProps = {
+  plantData: PlantIndexItem | null
+}
+
+export type UseHandlePlantLikeOptions = {
+  likedPlants: string[]
+  setLikedPlants: Dispatch<SetStateAction<string[]>>
+}
+
+export type UseManagePlantStorageOptions = {
+  setLikedPlants: Dispatch<SetStateAction<string[]>>
+  krnm: string | string[] | undefined
+  prevPage: string | string[] | undefined
 }

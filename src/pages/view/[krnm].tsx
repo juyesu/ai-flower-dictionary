@@ -1,32 +1,25 @@
 import { useRouter } from 'next/router'
 import Layout from '@/components/common/Layout'
-import Link from 'next/link'
-import Image from 'next/image'
-import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import { PlantIndexItem } from '@/types/type'
-import Unliked from '@/pages/assets/icons/Unliked.svg'
-import Liked from '@/pages/assets/icons/Liked.svg'
-import Share from '@/pages/assets/icons/Share.svg'
-import PreviousPage from '@/pages/assets/icons/PreviousPage.svg'
 import { useEffect, useState } from 'react'
-import { useAuth } from '@/context/AuthContext'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'
+import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import SearchFeedbackToast from '@/components/common/SearchFeedbackToast'
-import { useModalStore } from '@/store/useModalStore'
+import PlantDetailTitle from '@/components/plant-detail/PlantDetailTitle'
+import PlantDetailContent from '@/components/plant-detail/PlantDetailContent'
 import Head from 'next/head'
+import useManagePlantStorage from '@/components/plant-detail/hooks/useManagePlantStorage'
 
 const Post = () => {
   const [plantData, setPlantData] = useState<PlantIndexItem | null>(null)
-  const { loginUser } = useAuth()
   const [likedPlants, setLikedPlants] = useState<string[]>([])
-  const [CopyTooltipIndex, ShowCopyTooltipIndex] = useState('')
   const [openSearchFeedbackToast, setOpenSearchFeedbackToast] = useState(false)
-  const { imageUrl, setImageUrl } = useCapturedPlantImageStore()
+  const { imageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
   const { prevPage, sort } = router.query
   const { krnm } = router.query
   const { data, isLoading } = usePlantIndexFetchData(1, 300)
-  const { setModalOpen } = useModalStore()
+  useManagePlantStorage({ setLikedPlants, krnm, prevPage })
 
   useEffect(() => {
     if (!data || isLoading || !krnm) return
@@ -40,91 +33,11 @@ const Post = () => {
   }, [data, isLoading, krnm])
 
   useEffect(() => {
-    if (loginUser) {
-      setLikedPlants(
-        JSON.parse(localStorage.getItem(`${loginUser}.likedPlants`) || '[]')
-      )
-    }
-  }, [loginUser])
-
-  useEffect(() => {
     if (imageUrl) {
       setOpenSearchFeedbackToast(true)
     }
   }, [])
 
-  useEffect(() => {
-    if (
-      prevPage === 'ai-flower-detection' &&
-      sessionStorage.getItem('cameFromAiFlowerDetection') === 'true'
-    ) {
-      const storedPlants = JSON.parse(
-        localStorage.getItem(`${loginUser}.findPlants`) || '[]'
-      )
-
-      if (!storedPlants.includes(krnm)) {
-        localStorage.setItem(
-          `${loginUser}.findPlants`,
-          JSON.stringify([...storedPlants, krnm])
-        )
-      }
-      sessionStorage.removeItem('cameFromAiFlowerDetection')
-    }
-  }, [prevPage, loginUser, krnm])
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setImageUrl('')
-    }
-
-    router.events.on('routeChangeStart', handleRouteChange)
-
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange)
-    }
-  }, [router, setImageUrl])
-
-  const handlePlantLike = () => {
-    if (typeof krnm === 'string' && loginUser) {
-      if (likedPlants.includes(krnm)) {
-        setLikedPlants((prev) => {
-          const updatedLikedPlants = prev.filter((id: string) => id !== krnm)
-          localStorage.setItem(
-            `${loginUser}.likedPlants`,
-            JSON.stringify(updatedLikedPlants)
-          )
-          return updatedLikedPlants
-        })
-      } else {
-        setLikedPlants((prev) => {
-          const updatedLikedPlants = [...prev, krnm]
-          localStorage.setItem(
-            `${loginUser}.likedPlants`,
-            JSON.stringify(updatedLikedPlants)
-          )
-          return updatedLikedPlants
-        })
-      }
-    } else {
-      setModalOpen('LoginRequiredModal')
-    }
-  }
-
-  const handlePlantLinkShare = () => {
-    try {
-      if (typeof krnm === 'string') {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-        navigator.clipboard.writeText(`${baseUrl}/view/${krnm}`)
-        ShowCopyTooltipIndex(krnm)
-        setTimeout(() => {
-          ShowCopyTooltipIndex('')
-        }, 1000)
-      }
-    } catch (err) {
-      console.error('링크 복사 실패', err)
-    }
-  }
-  if (isLoading) return
   return (
     <>
       <Head>
@@ -148,118 +61,16 @@ const Post = () => {
         <div className="flex min-h-screen w-full flex-col items-center bg-[#FEF5CC] dark:bg-inherit sm:px-2 md:px-4 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
           {plantData && (
             <>
-              <div className="relative flex w-full flex-col items-center gap-5">
-                <div className="relative mt-20 flex flex-col items-center">
-                  <Link
-                    href={{
-                      pathname:
-                        prevPage && prevPage !== 'home' ? `/${prevPage}` : '/',
-                      ...(sort ? { query: { sort } } : {}),
-                    }}
-                    aria-label="식물 도감 페이지로 이동"
-                    className="absolute top-6 flex items-center justify-center rounded-2xl border bg-white p-2 dark:border-gray-500 dark:bg-zinc-600 mobile:left-[-12px] lg:left-[-80px]"
-                    passHref
-                  >
-                    <PreviousPage
-                      className="h-6 w-6 text-gray-600 dark:text-slate-300"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    />
-                  </Link>
-                  <h1 className="my-4 text-5xl font-bold text-[#797D48] dark:text-slate-300">
-                    {plantData?.krnm}
-                  </h1>
-                  <h2 className="my-1 text-3xl text-[#797D48] dark:text-slate-300">
-                    {plantData?.famlNm} / {plantData?.kornFamlNm}
-                  </h2>
-                </div>
-                <div className="flex w-full flex-row items-end justify-end">
-                  <div className="relative flex flex-row justify-end gap-4 mobile:mr-6 mobile:mt-2 lg:mr-16 lg:mt-4">
-                    <button
-                      type="button"
-                      aria-label={
-                        likedPlants.includes(plantData?.krnm)
-                          ? '좋아요 해제'
-                          : '좋아요 추가'
-                      }
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handlePlantLike()
-                      }}
-                      className="p-1"
-                    >
-                      {typeof krnm === 'string' &&
-                      likedPlants.includes(krnm) ? (
-                        <Liked
-                          className="h-8 w-8"
-                          fill="#FF5C8D"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <Unliked
-                          className="h-8 w-8 text-zinc-800 dark:text-slate-300"
-                          fill="currentColor"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </button>
-                    <button
-                      type="button"
-                      aria-label="이 식물 페이지를 공유"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handlePlantLinkShare()
-                      }}
-                      className="relative p-1"
-                    >
-                      <Share
-                        className="h-8 w-8 text-zinc-800 dark:text-slate-300"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      />
-                      {CopyTooltipIndex === krnm && (
-                        <div className="absolute left-1/2 top-full mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-3 py-1 text-sm text-white transition-opacity duration-300">
-                          링크가 복사되었습니다!
-                        </div>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <PlantDetailTitle
+                plantData={plantData}
+                likedPlants={likedPlants}
+                setLikedPlants={setLikedPlants}
+                krnm={krnm}
+                prevPage={prevPage}
+                sort={sort}
+              />
               <hr className="my-6 mb-10 w-full dark:border-gray-400" />
-              <figure className="flex w-full items-center justify-center mobile:flex-col mobile:px-2 lg:flex-row lg:px-0">
-                <Image
-                  className="rounded-xl border dark:saturate-[.8] lg:mx-16 lg:my-12 lg:w-1/2"
-                  src={plantData?.imgUrl}
-                  alt={`${plantData?.krnm}식물`}
-                  width={1200}
-                  height={900}
-                />
-                <figcaption className="self-center justify-self-center text-[#797D48] dark:text-slate-300 mobile:my-8 mobile:px-2 mobile:text-center lg:my-0 lg:w-1/2 lg:px-8 lg:text-start">
-                  <dl>
-                    <div className="my-4 font-semibold mobile:text-2xl lg:text-3xl">
-                      <dt className="inline-block">색상:</dt>
-                      <dd className="ml-2 inline-block">
-                        {plantData?.flwrClorCn}
-                      </dd>
-                    </div>
-                    <div className="my-4 font-semibold mobile:text-2xl lg:text-3xl">
-                      <dt className="inline-block">개화시기:</dt>
-                      <dd className="ml-2 inline-block">
-                        {plantData?.bloomPeriodCn}
-                      </dd>
-                    </div>
-                    <div className="my-4 font-semibold">
-                      <dt className="inline-block mobile:text-2xl lg:text-3xl">
-                        특징:
-                      </dt>
-                      <dd className="inline-block text-xl">
-                        {plantData?.fturCn}
-                      </dd>
-                    </div>
-                  </dl>
-                </figcaption>
-              </figure>
+              <PlantDetailContent plantData={plantData} />
             </>
           )}
           {imageUrl && (
