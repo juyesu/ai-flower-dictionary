@@ -7,12 +7,14 @@
   src: url('/fonts/PretendardVariable.woff2') format('truetype');
   font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Poetsen One';
   src: url('/fonts/PoetsenOne-Regular.woff2') format('truetype');
   font-style: normal;
+  font-display: swap;
 }
 
 *,
