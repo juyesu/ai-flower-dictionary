@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ThemeProvider from '@/components/common/ThemeProvider'
+import ThemeProvider from '@/context/ThemeProvider'
 import type { ChildrenComponentsProps } from '@/types/type'
 import MenuBars from '@/pages/assets/icons/MenuBars.svg'
 import TypeScript from '@/pages/assets/icons/TypeScript.svg'
