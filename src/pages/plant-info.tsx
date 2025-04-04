@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import Layout from '@/components/common/Layout'
+import Layout from '@/components/common/layout/Layout'
 import PageTitle from '@/components/common/PageTitle'
 import ScrollButton from '@/components/common/ScrollButton'
 import CardView from '@/components/plant-info/CardView'

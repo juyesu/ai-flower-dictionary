@@ -1,4 +1,4 @@
-import Layout from '@/components/common/Layout'
+import Layout from '@/components/common/layout/Layout'
 import RegisterForm from '@/components/register/RegisterForm'
 import AddressPopup from '@/components/register/AddressPopup'
 import { FormProvider } from 'react-hook-form'

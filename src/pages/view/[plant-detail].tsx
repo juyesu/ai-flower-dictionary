@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import Layout from '@/components/common/Layout'
+import Layout from '@/components/common/layout/Layout'
 import { PlantIndexItem } from '@/types/type'
 import { useEffect, useState } from 'react'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'

@@ -1,4 +1,4 @@
-import Layout from '@/components/common/Layout'
+import Layout from '@/components/common/layout/Layout'
 import ScrollButton from '@/components/common/ScrollButton'
 import useMyDictionary from '@/components/my-dictionary/hooks/useMyDictionaryPageState'
 import useSyncStateFromLocalStorage from '@/components/my-dictionary/hooks/useSyncLocalStorageWithState'

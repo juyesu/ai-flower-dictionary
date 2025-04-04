@@ -3,7 +3,7 @@ import Close from '@/pages/assets/icons/Close.svg'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
-import ThemeToggleButton from '@/components/common/ThemeToggleButton'
+import ThemeToggleButton from '@/components/common/layout/ThemeToggleButton'
 
 const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
   const { loginUser, logout } = useAuth()

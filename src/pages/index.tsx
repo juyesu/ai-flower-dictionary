@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Layout from '@/components/common/Layout'
+import Layout from '@/components/common/layout/Layout'
 import ScrollButton from '@/components/common/ScrollButton'
 import HeroSection from '@/components/homepage/HeroSection'
 import FeatureSections from '@/components/homepage/FeatureSections'
