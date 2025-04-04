@@ -1,4 +1,4 @@
-import PlantSearchBar from '@/components/common/PlantSearchBar'
+import PlantSearchBar from '@/components/common/plant-search-bar/PlantSearchBar'
 import { IndexProps } from '@/types/type'
 
 const HeroSection = ({ staticIndexList, staticKrnmList }: IndexProps) => {
