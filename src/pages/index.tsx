@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Layout from '@/components/common/layout/Layout'
-import ScrollButton from '@/components/common/ScrollButton'
+import ScrollButton from '@/components/common/ui/ScrollButton'
 import HeroSection from '@/components/homepage/HeroSection'
 import FeatureSections from '@/components/homepage/FeatureSections'
 import Head from 'next/head'
