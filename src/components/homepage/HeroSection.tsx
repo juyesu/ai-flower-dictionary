@@ -1,4 +1,4 @@
-import PlantSearchBar from '@/components/common/plant-search-bar'
+import PlantSearchBarContainer from '@/components/common/plant-search-bar'
 import { IndexProps } from '@/types/type'
 
 const HeroSection = ({ staticIndexList, staticKrnmList }: IndexProps) => {
@@ -11,7 +11,7 @@ const HeroSection = ({ staticIndexList, staticKrnmList }: IndexProps) => {
         <p className="text-white dark:text-gray-800 mobile:text-lg sm:text-2xl lg:text-3xl 2xl:text-3xl">
           There are about 100+ plants
         </p>
-        <PlantSearchBar
+        <PlantSearchBarContainer
           color="white"
           currentPage="home"
           staticIndexList={staticIndexList}

@@ -1,5 +1,5 @@
 import { PageTitleProps } from '@/types/type'
-import PlantSearchBar from '@/components/common/plant-search-bar'
+import PlantSearchBarContainer from '@/components/common/plant-search-bar'
 import ModeSwitchButton from '@/components/ai-flower-detection/ModeSwitchButton'
 import Image from 'next/image'
 
@@ -59,7 +59,10 @@ const PageTitle = ({
                     식물에 대한 경험을 공유해보세요
                   </p>
                 </div>
-                <PlantSearchBar color="dark" currentPage="plant-info" />
+                <PlantSearchBarContainer
+                  color="dark"
+                  currentPage="plant-info"
+                />
               </div>
             )
           case 'default':
