@@ -90,7 +90,7 @@ const usePlantSearch = ({
             pathname: 'view/plant-detail',
             query: {
               plantName: searchInputValue,
-              prevPage: currentPage === 'home' ? '' : `${currentPage}`,
+              prevPage: currentPage === 'home' ? '' : currentPage,
             },
           })
         } else {

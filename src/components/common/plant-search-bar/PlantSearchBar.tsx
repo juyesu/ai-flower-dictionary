@@ -78,7 +78,7 @@ const PlantSearchBar = ({
                     pathname: '/view/plant-detail',
                     query: {
                       plantName: item,
-                      prevPage: currentPage === 'home' ? '' : `${currentPage}`,
+                      prevPage: currentPage === 'home' ? '' : currentPage,
                     },
                   }}
                   passHref
@@ -129,7 +129,7 @@ const PlantSearchBar = ({
                       query: {
                         plantName: item.krnm,
                         prevPage:
-                          currentPage === 'home' ? 'home' : `${currentPage}`,
+                          currentPage === 'home' ? 'home' : currentPage,
                       },
                     }}
                     className={`rounded-xl px-2 py-1 underline ${
@@ -150,7 +150,7 @@ const PlantSearchBar = ({
                         query: {
                           plantName: item.krnm,
                           prevPage:
-                            currentPage === 'home' ? 'home' : `${currentPage}`,
+                            currentPage === 'home' ? 'home' : currentPage,
                         },
                       }}
                       className={`rounded-xl px-1.5 py-1 text-sm underline ${
