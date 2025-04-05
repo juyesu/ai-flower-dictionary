@@ -1,6 +1,7 @@
 import * as tmImage from '@teachablemachine/image'
 import { Dispatch, SetStateAction } from 'react'
-import { SubmitHandler } from 'react-hook-form'
+import { SubmitHandler, UseFormReturn } from 'react-hook-form'
+import { KeyboardEvent } from 'react'
 
 export type ChildrenComponentsProps = {
   children: React.ReactNode
@@ -49,11 +50,35 @@ export type PlantIndexItem = {
   bloomPeriodCn: string
 }
 
-export type PlantSearchBarProps = {
+export type PlantSearchFormValues = {
+  input: string
+}
+
+export type UsePlantSearchOptions = {
+  methods: UseFormReturn<PlantSearchFormValues>
+  staticIndexList?: PlantIndexItem[]
+  staticKrnmList?: string[]
+}
+
+export type PlantSearchBarContainerProps = {
   color: string
   currentPage: string
   staticIndexList?: PlantIndexItem[]
   staticKrnmList?: string[]
+}
+
+export type PlantSearchBarProps = {
+  color: string
+  currentPage: string
+  searchKeyUp: (e: KeyboardEvent<HTMLInputElement>) => void
+  isSearchFocus: boolean
+  setIsSearchFocus: Dispatch<SetStateAction<boolean>>
+  setSelectedAutocompleteIndex: Dispatch<SetStateAction<number>>
+  currentAutocompletePlantName: string[]
+  selectedAutocompleteIndex: number
+  randomItems: PlantIndexItem[]
+  isSmView: boolean
+  isMobileView: boolean
 }
 
 export type ViewPortWidth = {

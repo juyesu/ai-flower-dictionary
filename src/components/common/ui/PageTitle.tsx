@@ -1,5 +1,5 @@
 import { PageTitleProps } from '@/types/type'
-import PlantSearchBar from '@/components/common/plant-search-bar/PlantSearchBar'
+import PlantSearchBar from '@/components/common/plant-search-bar'
 import ModeSwitchButton from '@/components/ai-flower-detection/ModeSwitchButton'
 import Image from 'next/image'
 
