@@ -55,6 +55,7 @@ export type PlantSearchFormValues = {
 }
 
 export type UsePlantSearchOptions = {
+  currentPage: string
   methods: UseFormReturn<PlantSearchFormValues>
   staticIndexList?: PlantIndexItem[]
   staticKrnmList?: string[]

@@ -7,9 +7,10 @@ import PlantSearchBar from '@/components/common/plant-search-bar/PlantSearchBar'
 import usePlantSearch from '@/components/common/plant-search-bar/hooks/usePlantSearch'
 
 const PlantSearchBarContainer = (props: PlantSearchBarContainerProps) => {
-  const { staticIndexList, staticKrnmList } = props
+  const { currentPage, staticIndexList, staticKrnmList } = props
   const methods = useForm<PlantSearchFormValues>()
   const usePlantSearchHookValues = usePlantSearch({
+    currentPage,
     methods,
     staticIndexList,
     staticKrnmList,

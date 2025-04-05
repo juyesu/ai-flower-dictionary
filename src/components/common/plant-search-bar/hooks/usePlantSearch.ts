@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, KeyboardEvent } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
 const usePlantSearch = ({
+  currentPage,
   methods,
   staticIndexList,
   staticKrnmList,
@@ -85,7 +86,13 @@ const usePlantSearch = ({
             (item: PlantIndexItem) => item.krnm == searchInputValue
           )
         ) {
-          router.push({ pathname: `view/${searchInputValue}`, query: '' })
+          router.push({
+            pathname: 'view/plant-detail',
+            query: {
+              plantName: searchInputValue,
+              prevPage: currentPage === 'home' ? '' : `${currentPage}`,
+            },
+          })
         } else {
           setModalOpen('SearchNotFoundModal')
         }
