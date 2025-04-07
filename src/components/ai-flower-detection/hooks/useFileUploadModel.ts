@@ -83,8 +83,12 @@ const useFileUploadModel = () => {
     if (matchedPlant) {
       sessionStorage.setItem('cameFromAiFlowerDetection', 'true')
       router.push({
-        pathname: `/view/${matchedPlant}`,
-        query: { prevPage: 'ai-flower-detection', sort: 'file' },
+        pathname: '/view/plant-detail',
+        query: {
+          plantName: matchedPlant,
+          prevPage: 'ai-flower-detection',
+          sort: 'file',
+        },
       })
     } else {
       try {

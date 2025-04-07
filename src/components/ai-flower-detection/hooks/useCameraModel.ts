@@ -94,8 +94,12 @@ const useCameraModel = () => {
     if (matchedPlant) {
       sessionStorage.setItem('cameFromAiFlowerDetection', 'true')
       router.push({
-        pathname: `/view/${matchedPlant}`,
-        query: { prevPage: 'ai-flower-detection', sort: 'camera' },
+        pathname: '/view/plant-detail',
+        query: {
+          plantName: matchedPlant,
+          prevPage: 'ai-flower-detection',
+          sort: 'camera',
+        },
       })
       setUseWebcam(false)
     } else {
