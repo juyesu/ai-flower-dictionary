@@ -14,7 +14,7 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
     <>
       {bgOverlay && (
         <div
-          className="fixed z-40 h-full w-full bg-white bg-opacity-90 dark:bg-zinc-900 dark:bg-opacity-80"
+          className="fixed z-[60] h-full w-full bg-white bg-opacity-90 dark:bg-zinc-900 dark:bg-opacity-80"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -23,7 +23,7 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
         role="dialog"
         aria-modal="true"
         aria-describedby="modal-description"
-        className="z-50 fixed top-[32rem] flex w-[26.25rem] items-center justify-center rounded-2xl bg-white opacity-100 shadow-lg dark:bg-zinc-700"
+        className="z-[70] fixed top-[32rem] flex w-[26.25rem] items-center justify-center rounded-2xl bg-white opacity-100 shadow-lg dark:bg-zinc-700"
       >
         <div className="flex w-full flex-col items-center justify-center px-6 py-6">
           <button
