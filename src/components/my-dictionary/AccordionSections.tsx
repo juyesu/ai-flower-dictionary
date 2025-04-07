@@ -26,7 +26,7 @@ const AccordionSections = ({
           <span className="text-xl">
             내가 좋아요 누른 식물
             <span className="ml-2 text-zinc-400">
-              {`(${plantAccordionData.myDictionary.length})`}
+              {`(${plantAccordionData.likedPlants.length}/${data?.response.response.body.totalCount})`}
             </span>
           </span>
           <span className="text-2xl font-bold">
