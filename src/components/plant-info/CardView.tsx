@@ -24,7 +24,7 @@ const CardView = ({
       {apiData &&
         apiData?.map((item: PlantIndexItem, index: number) => (
           <div className="mb-4 flex w-full flex-col items-center">
-            <article className="flex flex-col rounded-xl bg-white shadow-custom-all hover:bg-sky-100 dark:bg-zinc-800">
+            <article className="flex flex-col rounded-xl bg-white shadow-custom-all hover:bg-sky-100 dark:bg-zinc-800 dark:hover:bg-gray-700">
               <Link
                 key={item.famlNm}
                 href={{
