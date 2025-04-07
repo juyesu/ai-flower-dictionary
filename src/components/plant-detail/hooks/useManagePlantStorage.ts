@@ -30,7 +30,7 @@ const useManagePlantStorage = ({
         localStorage.getItem(`${loginUser}.findPlants`) || '[]'
       )
 
-      if (!storedPlants.includes(plantName)) {
+      if (loginUser && !storedPlants.includes(plantName)) {
         localStorage.setItem(
           `${loginUser}.findPlants`,
           JSON.stringify([...storedPlants, plantName])
