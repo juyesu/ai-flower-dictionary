@@ -58,7 +58,7 @@ const Post = () => {
         />
       </Head>
       <Layout>
-        <div className="flex min-h-screen w-full flex-col items-center bg-[#FEF5CC] dark:bg-inherit sm:px-2 md:px-4 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
+        <div className="flex min-h-screen w-full flex-col items-center bg-[#FEF5CC] dark:bg-inherit sm:px-2 md:px-4 xl:px-8 2xl:px-16 fhd:px-[32rem]">
           {plantData && (
             <>
               <PlantDetailTitle

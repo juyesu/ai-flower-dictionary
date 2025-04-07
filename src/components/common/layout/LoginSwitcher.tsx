@@ -49,13 +49,13 @@ const LoginSwitcher = () => {
         <div className="flex h-full items-center justify-center sm:ml-2 sm:gap-1 lg:mx-1 xl:mx-4 lg:gap-1.5">
           <Link
             href="/login"
-            className="dark:dark:saturate-30 rounded-full border-2 bg-blue-300 text-white hover:border-blue-400 hover:border-zinc-600 dark:border-gray-500 dark:hover:border-gray-300 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"
+            className="dark:dark:saturate-30 rounded-full border-2 bg-blue-300 text-white hover:border-zinc-600 dark:border-gray-500 dark:hover:border-gray-300 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"
           >
             로그인
           </Link>
           <Link
             href="/register"
-            className="rounded-full border-2 bg-zinc-400 text-zinc-100 text-zinc-600 hover:border-zinc-600 dark:border-gray-500 dark:hover:border-gray-300 sm:px-3 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"
+            className="rounded-full border-2 bg-zinc-400 text-zinc-600 hover:border-zinc-600 dark:border-gray-500 dark:hover:border-gray-300 sm:px-3 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold"
           >
             회원가입
           </Link>

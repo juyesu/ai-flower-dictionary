@@ -11,7 +11,7 @@ const PageTitle = ({
 }: PageTitleProps) => {
   return (
     <div
-      className={`relative flex w-full items-end justify-center overflow-hidden ${titleOptions == 'PlantSearchBar' ? 'mobile:h-[460px] sm:h-[652px]' : 'mobile:h-[360px] sm:h-[500px]'}`}
+      className={`relative flex w-full items-end justify-center overflow-hidden ${titleOptions == 'PlantSearchBar' ? 'mobile:h-[28.75rem] sm:h-[40.75rem]' : 'mobile:h-[22.5rem] sm:h-[31.25rem]'}`}
     >
       <picture>
         <source srcSet={`/images/${titleImage}.webp`} type="image/webp" />

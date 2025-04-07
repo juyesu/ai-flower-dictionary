@@ -33,7 +33,7 @@ const PlantSearchBar = ({
             Search for Plants
           </label>
           <MagnifyingGlass
-            className="absolute z-10 mobile:mx-4 mobile:h-5 mobile:w-5 sm:mx-6 sm:h-[22px] sm:w-[22px]"
+            className="absolute z-10 mobile:mx-4 mobile:h-5 mobile:w-5 sm:mx-6 sm:h-[1.4rem] sm:w-[1.4rem]"
             fill="#787878"
             aria-hidden="true"
           />
@@ -128,8 +128,7 @@ const PlantSearchBar = ({
                       pathname: '/view/plant-detail',
                       query: {
                         plantName: item.krnm,
-                        prevPage:
-                          currentPage === 'home' ? 'home' : currentPage,
+                        prevPage: currentPage === 'home' ? 'home' : currentPage,
                       },
                     }}
                     className={`rounded-xl px-2 py-1 underline ${

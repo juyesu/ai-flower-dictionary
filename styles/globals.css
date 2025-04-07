@@ -39,7 +39,7 @@ body {
 
 .site_logo {
   font-family: 'Poetsen One';
-  @apply mobile:ml-1.5 mobile:text-lg sm:ml-2.5 sm:text-xl lg:ml-[18px] lg:text-[22px] xl:ml-[18px] xl:text-2xl;
+  @apply mobile:ml-1.5 mobile:text-lg sm:ml-2.5 sm:text-xl lg:ml-[1.125rem] lg:text-[1.375rem] xl:ml-[1.125rem] xl:text-2xl;
 }
 
 /* Common */
@@ -72,7 +72,7 @@ body {
 }
 
 .page_main_title {
-  @apply text-[#3f3f46] mobile:ml-0 mobile:mt-0 mobile:text-[34px] mobile:font-semibold sm:ml-1 sm:mt-[42px] sm:text-[50px];
+  @apply text-[#3f3f46] mobile:ml-0 mobile:mt-0 mobile:text-[2.125rem] mobile:font-semibold sm:ml-1 sm:mt-[2.625rem] sm:text-[3.125rem];
 }
 
 .spinner_border {

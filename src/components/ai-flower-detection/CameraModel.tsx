@@ -24,7 +24,7 @@ const CameraModel = () => {
     <div className="flex w-full flex-col items-center mobile:px-4 sm:px-12 lg:px-28 qhd:px-80">
       <div
         id="camera-display-container"
-        className="relative mt-6 flex aspect-[4/3] h-auto max-h-[624px] min-h-[225px] w-full min-w-[320px] max-w-[832px] rounded border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800"
+        className="relative mt-6 flex aspect-[4/3] h-auto max-h-[39rem] min-h-[14rem] w-full min-w-[20rem] max-w-[52rem] rounded border-2 border-zinc-500 bg-zinc-100 dark:bg-gray-800"
       >
         {useWebcam && (
           <Webcam

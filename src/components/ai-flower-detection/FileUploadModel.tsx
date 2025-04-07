@@ -18,7 +18,7 @@ const fileUploadModel = () => {
     <div className="flex w-full flex-col items-center mobile:px-4 sm:px-12 lg:px-28 qhd:px-80">
       <div
         id="image-container"
-        className="relative mt-6 flex aspect-[4/3] max-h-[624px] w-full max-w-[832px] rounded border-2 border-zinc-500 bg-zinc-100 bg-cover bg-center dark:bg-gray-800"
+        className="relative mt-6 flex aspect-[4/3] max-h-[39rem] w-full max-w-[52rem] rounded border-2 border-zinc-500 bg-zinc-100 bg-cover bg-center dark:bg-gray-800"
         style={{
           backgroundImage: uploadedFileUrl ? `url(${uploadedFileUrl})` : 'none',
         }}

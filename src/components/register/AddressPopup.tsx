@@ -14,7 +14,7 @@ const AddressPopup = ({ setOpenPostcode }: AddressPopupProps) => {
         aria-labelledby="modal-title"
       />
       <div
-        className="roundex-xl fixed z-50 flex w-[400px] items-center justify-center"
+        className="roundex-xl fixed z-50 flex w-[25rem] items-center justify-center"
         aria-modal="true"
       >
         <h2 id="modal-title" className="sr-only">

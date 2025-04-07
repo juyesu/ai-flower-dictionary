@@ -20,7 +20,7 @@ const SearchFeedbackToast = ({
   return (
     <div
       className={`fixed bottom-6 z-[9999] flex items-center gap-6 rounded-lg bg-white px-6 py-3 shadow-md transition-all duration-500 ease-in-out hover:cursor-pointer ${
-        openToast ? 'right-6' : 'right-[-440px]'
+        openToast ? 'right-6' : 'right-[-27.5rem]'
       }`}
       onClick={onClick}
     >
@@ -40,7 +40,7 @@ const SearchFeedbackToast = ({
         <Image
           src={imageUrl}
           alt="인식에 사용된 이미지"
-          className="h-[200px] w-60 rounded-lg border-4 border-stone-400"
+          className="h-[12.5rem] w-60 rounded-lg border-4 border-stone-400"
           width={240}
           height={200}
         />

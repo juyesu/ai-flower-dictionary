@@ -5,7 +5,7 @@ import useFadeInOnScroll from '@/hooks/useFadeInOnScroll'
 
 const FeatureSections = () => {
   return (
-    <div className="flex w-full flex-col items-center mobile:my-6 sm:my-12 sm:px-2 xl:px-8 2xl:px-16 min-[1920px]:px-[32rem]">
+    <div className="flex w-full flex-col items-center mobile:my-6 sm:my-12 sm:px-2 xl:px-8 2xl:px-16 fhd:px-[32rem]">
       <div className="flex w-full flex-col items-center mobile:mb-4 mobile:mt-4 sm:mb-12 sm:mt-16">
         <h1 className="border-b-2 border-black dark:border-zinc-300 dark:text-slate-300 mobile:pb-2 mobile:text-3xl sm:pb-3 sm:text-5xl">
           Features

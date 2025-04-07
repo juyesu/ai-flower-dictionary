@@ -30,7 +30,7 @@ const PlantDetailTitle = ({
             ...(sort ? { query: { sort } } : {}),
           }}
           aria-label="식물 도감 페이지로 이동"
-          className="absolute top-6 flex items-center justify-center rounded-2xl border bg-white p-2 dark:border-gray-500 dark:bg-zinc-600 mobile:left-[-12px] lg:left-[-80px]"
+          className="absolute top-6 flex items-center justify-center rounded-2xl border bg-white p-2 dark:border-gray-500 dark:bg-zinc-600 mobile:left-[-0.75rem] lg:left-[-5rem]"
           passHref
         >
           <PreviousPage

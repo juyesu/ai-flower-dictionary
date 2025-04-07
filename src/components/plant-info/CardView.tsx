@@ -50,7 +50,7 @@ const CardView = ({
                   <span className="self-start rounded-full bg-cyan-500 px-3 py-0.5 text-sm font-semibold text-white dark:bg-cyan-700 dark:text-slate-300 mobile:hidden sm:block">
                     {item.famlNm}
                   </span>
-                  <p className="mx-1.5 mt-1 font-semibold dark:text-slate-300 mobile:text-center mobile:text-xl sm:text-start sm:text-[22px]">
+                  <p className="mx-1.5 mt-1 font-semibold dark:text-slate-300 mobile:text-center mobile:text-xl sm:text-start sm:text-[1.375rem]">
                     {item.krnm}
                   </p>
                   <div className="relative flex flex-row gap-4 mobile:mt-1.5 mobile:justify-center sm:mt-4 sm:justify-end">
