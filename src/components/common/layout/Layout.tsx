@@ -24,7 +24,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
   return (
     <ThemeProvider>
       <div className="relative flex min-h-screen w-full flex-col items-center">
-        <header className="sticky top-0 z-10 flex h-full w-full flex-row items-center justify-between bg-zinc-100 dark:bg-slate-900 mobile:h-16 mobile:px-4 lg:h-20 2xl:px-16 qhd:px-[32rem]">
+        <header className="sticky top-0 z-50 flex h-full w-full flex-row items-center justify-between bg-zinc-100 dark:bg-slate-900 mobile:h-16 mobile:px-4 lg:h-20 2xl:px-16 qhd:px-[32rem]">
           <Link href="/" className={`site_logo dark:text-slate-300`}>
             AI flower dictionary
           </Link>
