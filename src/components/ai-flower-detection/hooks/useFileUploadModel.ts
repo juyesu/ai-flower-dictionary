@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, DragEvent } from 'react'
 import { CustomMobileNet } from '@teachablemachine/image'
 import { fetchChatGptResponse } from '@/utils/fetchChatGptResponse'
 import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
@@ -28,20 +28,32 @@ const useFileUploadModel = () => {
     error,
   })
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files?.length) {
-      setUploadedFileName(event.target.files[0].name)
-      setUploadedFileUrl(URL.createObjectURL(event.target.files[0]))
+  const handleFileChange = (
+    event: ChangeEvent<HTMLInputElement> | DragEvent<HTMLDivElement>
+  ) => {
+    let file: File | null = null
+
+    if ('dataTransfer' in event) {
+      file = event.dataTransfer.files?.[0] ?? null
+    } else if ('target' in event && event.target instanceof HTMLInputElement) {
+      file = event.target.files?.[0] ?? null
     }
 
-    const file = event.target.files?.[0]
-    if (file) {
-      setIsAnalyzing(true)
-      setLabel('')
-      setUseGptResponse(false)
-      setImage(file)
-      predict(file)
+    if (!file) return
+
+    const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp']
+    if (!validTypes.includes(file.type)) {
+      alert('지원하지 않는 파일 형식입니다.')
+      return
     }
+
+    setUploadedFileName(file.name)
+    setUploadedFileUrl(URL.createObjectURL(file))
+    setIsAnalyzing(true)
+    setLabel('')
+    setUseGptResponse(false)
+    setImage(file)
+    predict(file)
   }
 
   const predict = async (file: File) => {

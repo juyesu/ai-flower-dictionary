@@ -22,6 +22,13 @@ const fileUploadModel = () => {
         style={{
           backgroundImage: uploadedFileUrl ? `url(${uploadedFileUrl})` : 'none',
         }}
+        onDragOver={(e) => {
+          e.preventDefault()
+        }}
+        onDrop={(e) => {
+          e.preventDefault()
+          handleFileChange(e)
+        }}
       >
         {isAnalyzing && <LoadingSpinner />}
       </div>
@@ -83,6 +90,7 @@ const fileUploadModel = () => {
           <input
             id="fileUpload"
             type="file"
+            accept=".png,.jpg,.jpeg,.webp"
             className="hidden"
             onChange={handleFileChange}
           />
