@@ -1,4 +1,5 @@
 import Upload from '@/pages/assets/icons/Upload.svg'
+import SampleImage from '@/pages/assets/icons/SampleImage.svg'
 import LoadingSpinner from '@/components/common/ui/LoadingSpinner'
 import useFileUploadModel from '@/components/ai-flower-detection/hooks/useFileUploadModel'
 
@@ -31,6 +32,19 @@ const fileUploadModel = () => {
         }}
       >
         {isAnalyzing && <LoadingSpinner />}
+        {!isAnalyzing && !image && (
+          <div className="p-4 absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center">
+            <SampleImage
+              className="h-10 w-10 text-zinc-500 dark:text-slate-300"
+              fill="currentColor"
+              aria-hidden="true"
+            />
+            <p className="mt-6 font-semibold text-center text-zinc-500 dark:text-slate-300">
+              하단의 파일 업로드 버튼을 클릭하거나, 이곳에 이미지를 드래그하여
+              업로드할 수 있습니다.
+            </p>
+          </div>
+        )}
       </div>
       {image && useGptResponse ? (
         <>

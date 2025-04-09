@@ -1,5 +1,6 @@
 import Webcam from 'react-webcam'
 import NextImage from 'next/image'
+import Camera from '@/pages/assets/icons/Camera.svg'
 import LoadingSpinner from '@/components/common/ui/LoadingSpinner'
 import useCameraModel from '@/components/ai-flower-detection/hooks/useCameraModel'
 
@@ -49,6 +50,18 @@ const CameraModel = () => {
           />
         )}
         {isAnalyzing && <LoadingSpinner />}
+        {!useWebcam && !flowerName && !imageUrl && (
+          <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center p-4">
+            <Camera
+              className="h-10 w-10 text-zinc-500 dark:text-slate-300"
+              fill="currentColor"
+              aria-hidden="true"
+            />
+            <p className="mt-6 text-center font-semibold text-zinc-500 dark:text-slate-300">
+              하단의 버튼을 클릭하면 카메라가 실행됩니다.
+            </p>
+          </div>
+        )}
       </div>
       {useWebcam && (
         <p className="mt-6 text-center text-2xl font-semibold">
