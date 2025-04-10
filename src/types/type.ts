@@ -175,7 +175,6 @@ export type SideDrawerProps = {
 }
 
 export type ThemeToggleButtonProps = {
-  size: 'small' | 'large'
   hiddenUntil?: 'mobile' | 'sm' | 'md' | 'lg'
   hideAtMobile: boolean
 }

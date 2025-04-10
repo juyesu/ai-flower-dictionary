@@ -3,11 +3,16 @@ import Close from '@/pages/assets/icons/Close.svg'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
-import ThemeToggleButton from '@/components/common/layout/ThemeToggleButton'
+import Sun from '@/pages/assets/icons/Sun.svg'
+import Moon from '@/pages/assets/icons/Moon.svg'
+import Desktop from '@/pages/assets/icons/Desktop.svg'
+import { useTheme } from 'next-themes'
 
 const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
   const { loginUser, logout } = useAuth()
   const [isNavActive, setIsNavActive] = useState(false)
+  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
+  const { setTheme } = useTheme()
 
   useEffect(() => {
     if (isOpen) {
@@ -38,9 +43,6 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
           <Close className="h-5 w-5" aria-hidden="true" />
         </button>
         <ul className="mt-12 flex w-full flex-col">
-          <li className="mb-8 w-full px-8">
-            <ThemeToggleButton size="large" hideAtMobile={false} />
-          </li>
           <li className="drawer_menu_item">
             <Link href="/">Home</Link>
           </li>
@@ -59,6 +61,65 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
             ) : (
               <Link href="/login">Login</Link>
             )}
+          </li>
+          <li className="mt-8 w-full px-8 text-xl">
+            <button
+              onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
+              aria-controls="theme-submenu"
+              aria-expanded={isThemeMenuOpen}
+            >
+              Theme <span className="ml-1 text-sm">▼</span>
+            </button>
+            <ul
+              id="theme-submenu"
+              className={`transition-all duration-100 ease-out ${isThemeMenuOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none opacity-0'} mt-2 -translate-y-2`}
+            >
+              <li className="py-2 text-xl">
+                <button
+                  className="flex items-center"
+                  onClick={() => setTheme('light')}
+                >
+                  <span className="mr-2">
+                    <Sun
+                      className="h-5 w-5 text-zinc-800 dark:text-gray-200"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    />
+                  </span>
+                  밝은 테마
+                </button>
+              </li>
+              <li className="py-2 text-xl">
+                <button
+                  className="flex items-center"
+                  onClick={() => setTheme('dark')}
+                >
+                  <span className="mr-3">
+                    <Moon
+                      className="h-5 w-5 text-zinc-800 dark:text-gray-200"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    />
+                  </span>
+                  어두운 테마
+                </button>
+              </li>
+              <li className="py-2 text-xl">
+                <button
+                  className="flex items-center"
+                  onClick={() => setTheme('system')}
+                >
+                  <span className="mr-3">
+                    <Desktop
+                      className="h-5 w-5 text-zinc-800 dark:text-gray-200"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    />
+                  </span>
+                  시스템 테마
+                </button>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
