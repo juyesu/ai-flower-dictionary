@@ -2,7 +2,7 @@ import React from 'react'
 import { AppProps } from 'next/app'
 import '@styles/globals.css'
 import dotenv from 'dotenv'
-import Providers from '@/context/ThemeProvider'
+import { ThemeProvider } from 'next-themes'
 import { AuthProvider } from '@/context/AuthContext'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Head from 'next/head'
@@ -21,9 +21,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Providers>
+          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
             <Component {...pageProps} />
-          </Providers>
+          </ThemeProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>

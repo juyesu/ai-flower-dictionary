@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import ThemeProvider from '@/context/ThemeProvider'
 import type { ChildrenComponentsProps } from '@/types/type'
 import MenuBars from '@/pages/assets/icons/MenuBars.svg'
 import TypeScript from '@/pages/assets/icons/TypeScript.svg'
@@ -22,7 +21,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
   const { isModalOpen, currentModal } = useModalStore()
 
   return (
-    <ThemeProvider>
+    <>
       <div className="relative flex min-h-screen w-full flex-col items-center">
         <header className="sticky top-0 z-50 flex h-full w-full flex-row items-center justify-between bg-zinc-100 dark:bg-slate-900 mobile:h-16 mobile:px-4 lg:h-20 2xl:px-16 qhd:px-[32rem]">
           <Link href="/" className={`site_logo dark:text-slate-300`}>
@@ -51,7 +50,6 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
             </div>
             {/* width: 1024px미만 */}
             <div className="mr-3 mt-0.5 flex items-center gap-5 lg:hidden">
-              <ThemeToggleButton size="small" hideAtMobile={true} />
               <button
                 type="button"
                 aria-label="메뉴 오버레이 열기"
@@ -65,11 +63,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
               </button>
             </div>
             <LoginSwitcher />
-            <ThemeToggleButton
-              size="small"
-              hiddenUntil="md"
-              hideAtMobile={true}
-            />
+            <ThemeToggleButton hiddenUntil="md" hideAtMobile={true} />
           </div>
         </header>
 
@@ -123,7 +117,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
         isOpen={openSideDrawer}
         onClose={() => setOpenSideDrawer(false)}
       />
-    </ThemeProvider>
+    </>
   )
 }
 
