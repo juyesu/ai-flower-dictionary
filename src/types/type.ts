@@ -174,7 +174,7 @@ export type SideDrawerProps = {
   onClose: () => void
 }
 
-export type ThemeToggleButtonProps = {
+export type ThemeDropdownProps = {
   hiddenUntil?: 'mobile' | 'sm' | 'md' | 'lg'
   hideAtMobile: boolean
 }

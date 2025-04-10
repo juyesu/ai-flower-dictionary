@@ -6,7 +6,7 @@ import React from '@/pages/assets/icons/React.svg'
 import NextJs from '@/pages/assets/icons/NextJs.svg'
 import TailwindCss from '@/pages/assets/icons/TailwindCss.svg'
 import LoginSwitcher from '@/components/common/layout/LoginSwitcher'
-import ThemeToggleButton from '@/components/common/layout/ThemeToggleButton'
+import ThemeDropdown from '@/components/common/layout/ThemeDropdown'
 import { useState } from 'react'
 import SideDrawer from '@/components/common/layout/SideDrawer'
 import { useModalStore } from '@/store/useModalStore'
@@ -63,7 +63,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
               </button>
             </div>
             <LoginSwitcher />
-            <ThemeToggleButton hiddenUntil="md" hideAtMobile={true} />
+            <ThemeDropdown hiddenUntil="md" hideAtMobile={true} />
           </div>
         </header>
 

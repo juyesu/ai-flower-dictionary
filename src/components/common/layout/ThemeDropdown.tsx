@@ -2,13 +2,10 @@ import { useTheme } from 'next-themes'
 import Sun from '@/pages/assets/icons/Sun.svg'
 import Moon from '@/pages/assets/icons/Moon.svg'
 import Desktop from '@/pages/assets/icons/Desktop.svg'
-import { ThemeToggleButtonProps } from '@/types/type'
+import { ThemeDropdownProps } from '@/types/type'
 import { useState } from 'react'
 
-const ThemeToggleButton = ({
-  hiddenUntil,
-  hideAtMobile,
-}: ThemeToggleButtonProps) => {
+const ThemeDropdown = ({ hiddenUntil, hideAtMobile }: ThemeDropdownProps) => {
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
   const { systemTheme, theme, setTheme } = useTheme()
   const currentTheme = theme === 'system' ? systemTheme : theme
@@ -50,7 +47,7 @@ const ThemeToggleButton = ({
       )}
       <ul
         id="theme-menu"
-        className={`absolute right-0 transition-all duration-300 ease-out qhd:right-auto ${isThemeMenuOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'} top-full mt-2 mobile:hidden lg:flex flex-col whitespace-nowrap rounded-xl bg-zinc-200 text-lg dark:bg-slate-600`}
+        className={`absolute right-0 transition-all duration-300 ease-out qhd:right-auto ${isThemeMenuOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'} top-full mt-2 flex-col whitespace-nowrap rounded-xl bg-zinc-200 text-lg dark:bg-slate-600 mobile:hidden lg:flex`}
         role="menu"
       >
         <li role="menuitem">
@@ -103,4 +100,4 @@ const ThemeToggleButton = ({
   )
 }
 
-export default ThemeToggleButton
+export default ThemeDropdown
