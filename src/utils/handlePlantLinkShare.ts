@@ -1,6 +1,8 @@
+import { Dispatch, SetStateAction } from 'react'
+
 const handlePlantLinkShare = async (
   krnm: string,
-  setCopyTooltipIndex: React.Dispatch<React.SetStateAction<string>>
+  setCopyTooltipIndex: Dispatch<SetStateAction<string>>
 ): Promise<void> => {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL

@@ -1,10 +1,10 @@
 import * as tmImage from '@teachablemachine/image'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, ReactNode } from 'react'
 import { SubmitHandler, UseFormReturn } from 'react-hook-form'
 import { KeyboardEvent } from 'react'
 
 export type ChildrenComponentsProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export type AIModelProps = {
@@ -13,7 +13,7 @@ export type AIModelProps = {
 
 export type PlantDetectionModelLoadOptions = {
   model: tmImage.CustomMobileNet | null
-  setModel: Dispatch<React.SetStateAction<tmImage.CustomMobileNet | null>>
+  setModel: Dispatch<SetStateAction<tmImage.CustomMobileNet | null>>
   setMaxPredictions: Dispatch<SetStateAction<number>>
   data: PlantIndexResponse | undefined
   isLoading: boolean
@@ -93,18 +93,18 @@ export type ViewPortWidth = {
 export type CardViewProps = {
   apiData: PlantIndexItem[] | undefined
   likedPlants: string[]
-  setLikedPlants: Dispatch<React.SetStateAction<string[]>>
+  setLikedPlants: Dispatch<SetStateAction<string[]>>
   copyTooltipIndex: string
-  setCopyTooltipIndex: Dispatch<React.SetStateAction<string>>
+  setCopyTooltipIndex: Dispatch<SetStateAction<string>>
 }
 
 export type TableViewProps = {
   viewPortWidth: ViewPortWidth
   apiData: PlantIndexItem[] | undefined
   likedPlants: string[]
-  setLikedPlants: Dispatch<React.SetStateAction<string[]>>
+  setLikedPlants: Dispatch<SetStateAction<string[]>>
   copyTooltipIndex: string
-  setCopyTooltipIndex: Dispatch<React.SetStateAction<string>>
+  setCopyTooltipIndex: Dispatch<SetStateAction<string>>
   currentPage: number
 }
 
@@ -119,21 +119,21 @@ export type PlantTableType = {
 
 export type PageTitleProps = {
   isCameraMode?: boolean
-  setIsCameraMode?: Dispatch<React.SetStateAction<boolean>>
+  setIsCameraMode?: Dispatch<SetStateAction<boolean>>
   titleImage: string
   titleOptions?: string
 }
 
 export type ModeSwitchButtonProps = {
   isCameraMode?: boolean
-  setIsCameraMode?: Dispatch<React.SetStateAction<boolean>>
+  setIsCameraMode?: Dispatch<SetStateAction<boolean>>
 }
 
 export type ViewModeSwitchButtonProps = {
   viewPortWidth: ViewPortWidth
-  setIsCardUi: Dispatch<React.SetStateAction<boolean>>
-  setCurrentPage: Dispatch<React.SetStateAction<number>>
-  setMaximumPageSize: Dispatch<React.SetStateAction<number>>
+  setIsCardUi: Dispatch<SetStateAction<boolean>>
+  setCurrentPage: Dispatch<SetStateAction<number>>
+  setMaximumPageSize: Dispatch<SetStateAction<number>>
 }
 
 export type useSetApiErrorModalOptions = {
@@ -145,13 +145,13 @@ export type useSetApiErrorModalOptions = {
 export type UseSyncStateFromLocalStorageOptions = {
   data: PlantIndexResponse | undefined
   setHasPlantsData: Dispatch<
-    React.SetStateAction<{
+    SetStateAction<{
       likedPlants: boolean
       myDictionary: boolean
     }>
   >
-  setPlantAccordionData: Dispatch<React.SetStateAction<PlantAccordionDataType>>
-  setUserEmail: Dispatch<React.SetStateAction<string | null>>
+  setPlantAccordionData: Dispatch<SetStateAction<PlantAccordionDataType>>
+  setUserEmail: Dispatch<SetStateAction<string | null>>
 }
 
 export type PlantAccordionDataType = {
@@ -163,7 +163,7 @@ export type AccordionSectionsProps = {
   hasPlantsData: { likedPlants: boolean; myDictionary: boolean }
   accordionOpen: { likedPlants: boolean; myDictionary: boolean }
   setAccordionOpen: Dispatch<
-    React.SetStateAction<{ likedPlants: boolean; myDictionary: boolean }>
+    SetStateAction<{ likedPlants: boolean; myDictionary: boolean }>
   >
   plantAccordionData: PlantAccordionDataType
   data: PlantIndexResponse | undefined
