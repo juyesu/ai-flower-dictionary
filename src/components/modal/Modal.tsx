@@ -23,7 +23,7 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
         role="dialog"
         aria-modal="true"
         aria-describedby="modal-description"
-        className="z-[70] fixed top-[32rem] flex w-[26.25rem] items-center justify-center rounded-2xl bg-white opacity-100 shadow-lg dark:bg-zinc-700"
+        className="fixed top-[32rem] z-[70] flex w-[26.25rem] items-center justify-center rounded-2xl bg-white opacity-100 shadow-lg dark:bg-zinc-700"
       >
         <div className="flex w-full flex-col items-center justify-center px-6 py-6">
           <button
@@ -36,7 +36,7 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
           </button>
           <p
             id="modal-description"
-            className="my-8 text-lg font-semibold dark:text-slate-300"
+            className="text-center my-8 whitespace-pre-line text-lg font-semibold dark:text-slate-300"
           >
             {message}
           </p>
