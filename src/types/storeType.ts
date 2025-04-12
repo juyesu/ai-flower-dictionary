@@ -1,12 +1,23 @@
+
 export type ImageStoreType = {
   imageUrl: string
   setImageUrl: (value: string) => void
 }
 
+type ModalType =
+  | { type: 'ALERT'; message: string }
+  | { type: 'PLANT_DETECTION_MODEL_ERROR' }
+  | { type: 'LOGIN_REQUIRED'; goBackOnClose: boolean }
+  | { type: 'LOGOUT_MESSAGE' }
+  | { type: 'SEARCH_NOT_FOUND' }
+  | { type: 'API_DATA_ERROR' }
+  | { type: 'REGISTER_SUCCESS' }
+  | { type: 'ACCOUNT_DELETION_SUCCESS' }
+  | null
+
 export type UseModalStoreType = {
-  isModalOpen: boolean
-  currentModal: string | null
-  setModalOpen: (modalName: string) => void
+  modal: ModalType
+  openModal: (modal: ModalType) => void
   closeModal: () => void
 }
 
