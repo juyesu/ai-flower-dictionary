@@ -5,6 +5,7 @@ import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
 import { useRouter } from 'next/router'
 import { useCapturedPlantImageStore } from '@/store/imageURLStore'
 import usePlantDetectionModelLoad from '@/components/ai-flower-detection/hooks/usePlantDetectionModelLoad'
+import { useModalStore } from '@/store/useModalStore'
 
 const useFileUploadModel = () => {
   const [uploadedFileName, setUploadedFileName] = useState('')
@@ -19,6 +20,7 @@ const useFileUploadModel = () => {
   const { data, isLoading, error } = usePlantIndexFetchData(1, 300)
   const { setImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
+  const { openModal } = useModalStore()
   usePlantDetectionModelLoad({
     model,
     setModel,
@@ -43,7 +45,7 @@ const useFileUploadModel = () => {
 
     const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp']
     if (!validTypes.includes(file.type)) {
-      alert('지원하지 않는 파일 형식입니다.')
+      openModal({ type: 'ALERT', message: '지원하지 않는 파일 형식입니다.' })
       return
     }
 

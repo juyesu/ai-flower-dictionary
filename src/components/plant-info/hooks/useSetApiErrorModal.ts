@@ -7,13 +7,13 @@ const useSetApiErrorModal = ({
   isLoading,
   error,
 }: useSetApiErrorModalOptions) => {
-  const { setModalOpen } = useModalStore()
+  const { openModal } = useModalStore()
 
   useEffect(() => {
     if (!isLoading && (!data || error)) {
-      setModalOpen('ApiErrorModal')
+      openModal({ type: 'API_DATA_ERROR' })
     }
-  }, [data, isLoading, error, setModalOpen])
+  }, [data, isLoading, error, openModal])
 }
 
 export default useSetApiErrorModal

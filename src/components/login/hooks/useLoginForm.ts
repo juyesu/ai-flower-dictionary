@@ -3,11 +3,13 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
 import { LoginFormType } from '@/types/type'
+import { useModalStore } from '@/store/useModalStore'
 
 const useLoginForm = () => {
   const methods = useForm<LoginFormType>()
   const router = useRouter()
   const { loginUser, setLoginUser } = useAuth()
+  const { openModal } = useModalStore()
 
   useEffect(() => {
     if (loginUser) {
@@ -24,9 +26,11 @@ const useLoginForm = () => {
       setLoginUser(data.email)
       router.push('/')
     } else {
-      alert(
-        '일치하는 계정이 존재하지 않습니다.\n이메일 또는 비밀번호를 다시 확인해주세요.'
-      )
+      openModal({
+        type: 'ALERT',
+        message:
+          '일치하는 계정이 존재하지 않습니다.\n 이메일 또는 비밀번호를 다시 확인해주세요.',
+      })
       methods.setValue('password', '')
     }
   }

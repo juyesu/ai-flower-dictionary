@@ -3,11 +3,13 @@ import { LoginFormType } from '@/types/type'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/context/AuthContext'
 import { useEffect, useState } from 'react'
+import { useModalStore } from '@/store/useModalStore'
 
 const useRegisterForm = () => {
   const [openPostcode, setOpenPostcode] = useState(false)
   const methods = useForm<LoginFormType>()
   const router = useRouter()
+  const { openModal } = useModalStore()
   const { loginUser } = useAuth()
 
   useEffect(() => {
@@ -18,7 +20,10 @@ const useRegisterForm = () => {
 
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
     if (localStorage.getItem(`${data.email}.name`)) {
-      alert('이미 존재하는 이메일입니다. 다른 이메일로 시도해주세요')
+      openModal({
+        type: 'ALERT',
+        message: '이미 존재하는 이메일입니다.\n 다른 이메일로 시도해주세요',
+      })
       methods.setFocus('email')
       methods.reset({ email: '' })
     } else {
@@ -28,10 +33,14 @@ const useRegisterForm = () => {
         localStorage.setItem(`${data.email}.password`, data.password)
         localStorage.setItem(`${data.email}.address`, data.address)
 
-        alert('회원 가입에 성공했습니다. ^^/')
-        router.push('/login')
+        openModal({
+          type: 'REGISTER_SUCCESS',
+        })
       } catch {
-        alert('오류가 발생했습니다.')
+        openModal({
+          type: 'ALERT',
+          message: '회원가입 중 오류가 발생했습니다.',
+        })
       }
     }
   }

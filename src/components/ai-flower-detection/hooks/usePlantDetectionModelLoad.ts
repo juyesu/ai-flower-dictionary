@@ -12,8 +12,8 @@ const usePlantDetectionModelLoad = async ({
   isLoading,
   error,
 }: PlantDetectionModelLoadOptions) => {
-  const { setModalOpen } = useModalStore()
-  
+  const { openModal } = useModalStore()
+
   useEffect(() => {
     const loadModel = async () => {
       try {
@@ -32,7 +32,7 @@ const usePlantDetectionModelLoad = async ({
           model?.dispose()
           tf.engine().disposeVariables()
           setModel(null)
-          setModalOpen('PlantDetectionModelErrorModal')
+          openModal({ type: 'PLANT_DETECTION_MODEL_ERROR' })
         }
       }
     }

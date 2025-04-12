@@ -7,7 +7,7 @@ const useHandlePlantLike = ({
   setLikedPlants,
 }: UseHandlePlantLikeOptions) => {
   const { loginUser } = useAuth()
-  const { setModalOpen } = useModalStore()
+  const { openModal } = useModalStore()
 
   const handlePlantLike = (krnm: string) => {
     if (loginUser) {
@@ -31,7 +31,7 @@ const useHandlePlantLike = ({
         })
       }
     } else {
-      setModalOpen('LoginRequiredModal')
+      openModal({ type: 'LOGIN_REQUIRED', goBackOnClose: false })
     }
   }
 

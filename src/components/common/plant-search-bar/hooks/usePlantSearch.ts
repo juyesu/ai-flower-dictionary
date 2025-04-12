@@ -26,7 +26,7 @@ const usePlantSearch = ({
   const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState(-1)
   const [currentAutocompletePlantName, setCurrentAutocompletePlantName] =
     useState<string[]>([])
-  const { isModalOpen, setModalOpen } = useModalStore()
+  const { modal, openModal } = useModalStore()
   const skipAutoFocus = useRef(true)
   const router = useRouter()
 
@@ -59,12 +59,12 @@ const usePlantSearch = ({
       skipAutoFocus.current = false
       return
     }
-    if (skipAutoFocus.current == false && isModalOpen == false) {
+    if (skipAutoFocus.current == false && !modal) {
       setTimeout(() => {
         setFocus('input')
       }, 150)
     }
-  }, [isModalOpen])
+  }, [modal])
 
   const searchKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     const searchInputValue = getValues('input')
@@ -94,7 +94,7 @@ const usePlantSearch = ({
             },
           })
         } else {
-          setModalOpen('SearchNotFoundModal')
+          openModal({ type: 'SEARCH_NOT_FOUND' })
         }
       }
       setSelectedAutocompleteIndex(-1)

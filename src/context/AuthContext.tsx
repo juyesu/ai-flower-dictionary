@@ -1,5 +1,4 @@
 import { useModalStore } from '@/store/useModalStore'
-import router from 'next/router'
 import {
   createContext,
   useContext,
@@ -19,7 +18,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loginUser, setLoginUser] = useState<string | null>(null)
-  const { setModalOpen } = useModalStore()
+  const { openModal } = useModalStore()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -34,7 +33,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem('userName')
     }
     setLoginUser(null)
-    setModalOpen('LogoutMessageModal')
+    openModal({ type: 'LOGOUT_MESSAGE' })
   }
 
   const withdrawAccount = () => {
@@ -46,8 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem(`${loginUser}.findPlants`)
     localStorage.removeItem('userEmail')
     localStorage.removeItem('userName')
-    alert('회원 탈퇴되었습니다.')
-    router.push('/')
+    openModal({ type: 'ACCOUNT_DELETION_SUCCESS' })
   }
 
   return (

@@ -12,7 +12,7 @@ const useSyncStateFromLocalStorage = ({
   setPlantAccordionData,
   setUserEmail,
 }: UseSyncStateFromLocalStorageOptions) => {
-  const { setModalOpen } = useModalStore()
+  const { openModal } = useModalStore()
   const { loginUser } = useAuth()
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const useSyncStateFromLocalStorage = ({
           myDictionary: !!localStorage.getItem(`${loginUser}.findPlants`),
         })
       } else {
-        setModalOpen('LoginRequiredModal')
+        openModal({ type: 'LOGIN_REQUIRED', goBackOnClose: true })
       }
     }
   }, [loginUser])
