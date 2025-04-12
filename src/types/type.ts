@@ -7,10 +7,6 @@ export type ChildrenComponentsProps = {
   children: ReactNode
 }
 
-export type AIModelProps = {
-  AIErrorModalOpen: () => void
-}
-
 export type PlantDetectionModelLoadOptions = {
   model: tmImage.CustomMobileNet | null
   setModel: Dispatch<SetStateAction<tmImage.CustomMobileNet | null>>
@@ -136,7 +132,7 @@ export type ViewModeSwitchButtonProps = {
   setMaximumPageSize: Dispatch<SetStateAction<number>>
 }
 
-export type useSetApiErrorModalOptions = {
+export type UseSetApiErrorModalOptions = {
   data: PlantIndexResponse | undefined
   isLoading: boolean
   error: Error | null

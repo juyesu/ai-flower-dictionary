@@ -21,7 +21,7 @@ export type UseModalStoreType = {
   closeModal: () => void
 }
 
-export type scrollButtonActivateStoreType = {
+export type ScrollButtonActivateStoreType = {
   isActivate: boolean
   setIsActivate: (value: boolean) => void
 }

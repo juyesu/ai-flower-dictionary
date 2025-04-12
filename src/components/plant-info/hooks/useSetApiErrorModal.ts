@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { useModalStore } from '@/store/useModalStore'
-import { useSetApiErrorModalOptions } from '@/types/type'
+import { UseSetApiErrorModalOptions } from '@/types/type'
 
 const useSetApiErrorModal = ({
   data,
   isLoading,
   error,
-}: useSetApiErrorModalOptions) => {
+}: UseSetApiErrorModalOptions) => {
   const { openModal } = useModalStore()
 
   useEffect(() => {
