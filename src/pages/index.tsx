@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
 import Layout from '@/components/common/layout/Layout'
 import ScrollButton from '@/components/common/ui/ScrollButton'
 import HeroSection from '@/components/homepage/HeroSection'
 import FeatureSections from '@/components/homepage/FeatureSections'
 import Head from 'next/head'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useModalStore } from '@/store/useModalStore'
 import useSectionScroll from '@/hooks/useSectionScroll'
 import { GetStaticProps } from 'next'
 import getPlantIndexData from '@/utils/getPlantIndexData'
@@ -13,14 +11,7 @@ import { IndexProps } from '@/types/type'
 
 const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
   const methods = useForm()
-  const { isModalOpen } = useModalStore()
   useSectionScroll()
-
-  useEffect(() => {
-    if (!isModalOpen) {
-      methods.setFocus('input')
-    }
-  }, [isModalOpen])
 
   return (
     <>
