@@ -11,13 +11,7 @@ const ModalManager = () => {
   switch (modal.type) {
     case 'ALERT':
       return (
-        <Modal
-          message={modal.message}
-          bgOverlay={false}
-          onClose={() => {
-            closeModal()
-          }}
-        />
+        <Modal message={modal.message} bgOverlay={false} onClose={closeModal} />
       )
     case 'PLANT_DETECTION_MODEL_ERROR':
       return (
