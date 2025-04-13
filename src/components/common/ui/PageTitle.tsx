@@ -4,8 +4,8 @@ import ModeSwitchButton from '@/components/ai-flower-detection/ModeSwitchButton'
 import Image from 'next/image'
 
 const PageTitle = ({
-  isCameraMode,
-  setIsCameraMode,
+  analysisMode,
+  setAnalysisMode,
   titleImage,
   titleOptions,
 }: PageTitleProps) => {
@@ -41,10 +41,12 @@ const PageTitle = ({
                     꽃의 이름과 정보를 알려드립니다.
                   </p>
                 </div>
-                <ModeSwitchButton
-                  isCameraMode={isCameraMode}
-                  setIsCameraMode={setIsCameraMode}
-                />
+                {analysisMode && setAnalysisMode && (
+                  <ModeSwitchButton
+                    analysisMode={analysisMode}
+                    setAnalysisMode={setAnalysisMode}
+                  />
+                )}
               </>
             )
           case 'PlantSearchBar':

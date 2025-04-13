@@ -4,7 +4,7 @@ import { ViewModeSwitchButtonProps } from '@/types/type'
 
 const ViewModeSwitchButton = ({
   viewPortWidth,
-  setIsCardUi,
+  setViewMode,
   setCurrentPage,
   setMaximumPageSize,
 }: ViewModeSwitchButtonProps) => {
@@ -15,7 +15,7 @@ const ViewModeSwitchButton = ({
           type="button"
           aria-label="카드 리스트 레이아웃으로 변경"
           onClick={() => {
-            setIsCardUi(true)
+            setViewMode('card')
             setCurrentPage(1)
             if (viewPortWidth.isUnder767pxScreen) {
               setMaximumPageSize(14)
@@ -35,7 +35,7 @@ const ViewModeSwitchButton = ({
           type="button"
           aria-label="테이블 리스트 레이아웃으로 변경"
           onClick={() => {
-            setIsCardUi(false)
+            setViewMode('table')
             setCurrentPage(1)
             setMaximumPageSize(30)
           }}

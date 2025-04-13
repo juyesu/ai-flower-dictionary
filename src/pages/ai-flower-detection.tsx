@@ -1,13 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Layout from '@/components/common/layout/Layout'
 import PageTitle from '@/components/common/ui/PageTitle'
 import ScrollButton from '@/components/common/ui/ScrollButton'
 import CameraModel from '@/components/ai-flower-detection/CameraModel'
 import FileUploadModel from '@/components/ai-flower-detection/FileUploadModel'
 import Head from 'next/head'
+import router from 'next/router'
 
 const AiFlowerDetection = () => {
-  const [isCameraMode, setIsCameraMode] = useState(true)
+  const [analysisMode, setAnalysisMode] = useState<'camera' | 'imageUpload'>(
+    'camera'
+  )
+
+  useEffect(() => {
+    if (router.query.sort == 'imageUpload') {
+      setAnalysisMode('imageUpload')
+    }
+  }, [])
 
   return (
     <>
@@ -31,13 +40,13 @@ const AiFlowerDetection = () => {
       <Layout>
         <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
           <PageTitle
-            isCameraMode={isCameraMode}
-            setIsCameraMode={setIsCameraMode}
+            analysisMode={analysisMode}
+            setAnalysisMode={setAnalysisMode}
             titleImage="ai_flower_detection_title_image_4"
             titleOptions="ModeSwitchButton"
           />
           <div className="flex w-full flex-col items-center">
-            {isCameraMode ? <CameraModel /> : <FileUploadModel />}
+            {analysisMode == 'camera' ? <CameraModel /> : <FileUploadModel />}
           </div>
         </div>
         <ScrollButton />

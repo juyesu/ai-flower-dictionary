@@ -1,7 +1,7 @@
 
 export type ImageStoreType = {
-  imageUrl: string
-  setImageUrl: (value: string) => void
+  capturedImageUrl: string
+  setCapturedImageUrl: (value: string) => void
 }
 
 type ModalType =
@@ -21,7 +21,7 @@ export type UseModalStoreType = {
   closeModal: () => void
 }
 
-export type ScrollButtonActivateStoreType = {
-  isActivate: boolean
-  setIsActivate: (value: boolean) => void
+export type scrollStateStoreType = {
+  isScrolling: boolean
+  setIsScrolling: (value: boolean) => void
 }

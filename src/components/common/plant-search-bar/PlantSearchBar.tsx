@@ -9,14 +9,14 @@ const PlantSearchBar = ({
   color,
   currentPage,
   searchKeyUp,
-  isSearchFocus,
-  setIsSearchFocus,
+  isSearchInputFocus,
+  setIsSearchInputFocus,
   setSelectedAutocompleteIndex,
-  currentAutocompletePlantName,
+  currentAutoCompletePlantNames,
   selectedAutocompleteIndex,
-  randomItems,
-  isSmView,
-  isMobileView,
+  randomPlants,
+  isMinSmScreen,
+  isMinMobileScreen,
 }: PlantSearchBarProps) => {
   const methods = useFormContext()
 
@@ -43,13 +43,13 @@ const PlantSearchBar = ({
             type="search"
             autoComplete="off"
             onFocus={() => {
-              setIsSearchFocus(true)
+              setIsSearchInputFocus(true)
               setSelectedAutocompleteIndex(-1)
             }}
             onBlur={(e) => {
               setTimeout(() => {
                 if (!e.relatedTarget?.closest('ul')) {
-                  setIsSearchFocus(false)
+                  setIsSearchInputFocus(false)
                 }
               }, 100)
             }}
@@ -68,9 +68,9 @@ const PlantSearchBar = ({
             </button>
           )}
         </div>
-        {isSearchFocus && methods.watch('input') && (
+        {isSearchInputFocus && methods.watch('input') && (
           <ul className="absolute top-16 flex w-full flex-col rounded-3xl bg-white opacity-100 dark:bg-zinc-800">
-            {currentAutocompletePlantName.map((item, index, array) => {
+            {currentAutoCompletePlantNames.map((item, index, array) => {
               return (
                 <Link
                   key={item}
@@ -118,10 +118,10 @@ const PlantSearchBar = ({
           color == 'white' ? 'text-white' : 'text-zinc-800'
         }`}
       >
-        {randomItems ? (
+        {randomPlants ? (
           <>
-            {isSmView
-              ? randomItems.map((item, index) => (
+            {isMinSmScreen
+              ? randomPlants.map((item, index) => (
                   <Link
                     key={index}
                     href={{
@@ -140,8 +140,8 @@ const PlantSearchBar = ({
                     #{item.krnm}
                   </Link>
                 ))
-              : isMobileView
-                ? randomItems.slice(0, 4).map((item, index) => (
+              : isMinMobileScreen
+                ? randomPlants.slice(0, 4).map((item, index) => (
                     <Link
                       key={index}
                       href={{

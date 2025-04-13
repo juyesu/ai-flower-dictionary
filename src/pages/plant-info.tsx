@@ -16,36 +16,36 @@ import Head from 'next/head'
 const PlantInfo = () => {
   const {
     viewPortWidth,
-    isCardUi,
-    setIsCardUi,
+    viewMode,
+    setViewMode,
     currentPage,
     setCurrentPage,
     maximumPageSize,
     setMaximumPageSize,
     likedPlants,
     setLikedPlants,
-    copyTooltipIndex,
-    setCopyTooltipIndex,
+    activeTooltipKey,
+    setActiveTooltipKey,
   } = usePlantInfoPageState()
   const { data, isLoading, error } = usePlantIndexFetchData(
     currentPage,
     maximumPageSize
   )
   useSetApiErrorModal({ data, isLoading, error })
-  const { loginUser } = useAuth()
+  const { userId } = useAuth()
   const hasMounted = useRef(false)
 
   useEffect(() => {
-    if (loginUser) {
+    if (userId) {
       setLikedPlants(
-        JSON.parse(localStorage.getItem(`${loginUser}.likedPlants`) || '[]')
+        JSON.parse(localStorage.getItem(`${userId}.likedPlants`) || '[]')
       )
     }
-  }, [loginUser])
+  }, [userId])
 
   useEffect(() => {
     if (router.query.sort == 'table') {
-      setIsCardUi(false)
+      setViewMode('table')
     }
   }, [])
 
@@ -84,17 +84,17 @@ const PlantInfo = () => {
           />
           <ViewModeSwitchButton
             viewPortWidth={viewPortWidth}
-            setIsCardUi={setIsCardUi}
+            setViewMode={setViewMode}
             setCurrentPage={setCurrentPage}
             setMaximumPageSize={setMaximumPageSize}
           />
-          {isCardUi ? (
+          {viewMode == 'card' ? (
             <CardView
               apiData={data?.indexList}
               likedPlants={likedPlants}
               setLikedPlants={setLikedPlants}
-              copyTooltipIndex={copyTooltipIndex}
-              setCopyTooltipIndex={setCopyTooltipIndex}
+              activeTooltipKey={activeTooltipKey}
+              setActiveTooltipKey={setActiveTooltipKey}
             />
           ) : (
             <TableView
@@ -102,8 +102,8 @@ const PlantInfo = () => {
               apiData={data?.indexList}
               likedPlants={likedPlants}
               setLikedPlants={setLikedPlants}
-              copyTooltipIndex={copyTooltipIndex}
-              setCopyTooltipIndex={setCopyTooltipIndex}
+              activeTooltipKey={activeTooltipKey}
+              setActiveTooltipKey={setActiveTooltipKey}
               currentPage={currentPage}
             />
           )}

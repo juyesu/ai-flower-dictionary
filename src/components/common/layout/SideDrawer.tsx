@@ -9,7 +9,7 @@ import Desktop from '@/pages/assets/icons/Desktop.svg'
 import { useTheme } from 'next-themes'
 
 const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
-  const { loginUser, logout } = useAuth()
+  const { userId, logout } = useAuth()
   const [isNavActive, setIsNavActive] = useState(false)
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
   const { setTheme } = useTheme()
@@ -56,7 +56,7 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
             <Link href="/my-dictionary">My Dictionary</Link>
           </li>
           <li className="drawer_menu_item">
-            {loginUser ? (
+            {userId ? (
               <button onClick={() => logout()}>Logout</button>
             ) : (
               <Link href="/login">Login</Link>

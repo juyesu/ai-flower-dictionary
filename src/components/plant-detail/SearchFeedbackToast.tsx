@@ -7,9 +7,10 @@ const SearchFeedbackToast = ({
   openToast,
   onClick,
   onClose,
-  imageUrl,
+  capturedImageUrl,
 }: SearchFeedbackToastProps) => {
-  const [isLikeButtonClicked, setIsLikedButtonClicked] = useState(false)
+  const [hasFeedbackSubmitted, setHasFeedbackSubmitted] = useState(false)
+
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose()
@@ -38,14 +39,14 @@ const SearchFeedbackToast = ({
       <div className="flex flex-col">
         <p className="my-0.5 text-center text-zinc-500">인식한 이미지:</p>
         <Image
-          src={imageUrl}
+          src={capturedImageUrl}
           alt="인식에 사용된 이미지"
           className="h-[12.5rem] w-60 rounded-lg border-4 border-stone-400"
           width={240}
           height={200}
         />
       </div>
-      {!isLikeButtonClicked ? (
+      {!hasFeedbackSubmitted ? (
         <div className="flex flex-col items-center justify-center">
           <p className="my-1.5 text-center font-semibold">
             검색 결과에 만족하시나요?
@@ -53,7 +54,7 @@ const SearchFeedbackToast = ({
           <button
             type="button"
             className="p-0.5"
-            onClick={() => setIsLikedButtonClicked(true)}
+            onClick={() => setHasFeedbackSubmitted(true)}
             aria-label="검색 결과 만족"
           >
             👍

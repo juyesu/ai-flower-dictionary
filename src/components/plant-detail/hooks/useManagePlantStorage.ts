@@ -9,17 +9,17 @@ const useManagePlantStorage = ({
   plantName,
   prevPage,
 }: UseManagePlantStorageOptions) => {
-  const { loginUser } = useAuth()
-  const { setImageUrl } = useCapturedPlantImageStore()
+  const { userId } = useAuth()
+  const { setCapturedImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
 
   useEffect(() => {
-    if (loginUser) {
+    if (userId) {
       setLikedPlants(
-        JSON.parse(localStorage.getItem(`${loginUser}.likedPlants`) || '[]')
+        JSON.parse(localStorage.getItem(`${userId}.likedPlants`) || '[]')
       )
     }
-  }, [loginUser])
+  }, [userId])
 
   useEffect(() => {
     if (
@@ -27,22 +27,22 @@ const useManagePlantStorage = ({
       sessionStorage.getItem('cameFromAiFlowerDetection') === 'true'
     ) {
       const storedPlants = JSON.parse(
-        localStorage.getItem(`${loginUser}.findPlants`) || '[]'
+        localStorage.getItem(`${userId}.findPlants`) || '[]'
       )
 
-      if (loginUser && !storedPlants.includes(plantName)) {
+      if (userId && !storedPlants.includes(plantName)) {
         localStorage.setItem(
-          `${loginUser}.findPlants`,
+          `${userId}.findPlants`,
           JSON.stringify([...storedPlants, plantName])
         )
       }
       sessionStorage.removeItem('cameFromAiFlowerDetection')
     }
-  }, [prevPage, loginUser, plantName])
+  }, [prevPage, userId, plantName])
 
   useEffect(() => {
     const handleRouteChange = () => {
-      setImageUrl('')
+      setCapturedImageUrl('')
     }
 
     router.events.on('routeChangeStart', handleRouteChange)
@@ -50,7 +50,7 @@ const useManagePlantStorage = ({
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
-  }, [router, setImageUrl])
+  }, [router, setCapturedImageUrl])
 }
 
 export default useManagePlantStorage

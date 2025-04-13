@@ -8,35 +8,30 @@ import { useAuth } from '@/context/AuthContext'
 
 const useSyncStateFromLocalStorage = ({
   data,
-  setHasPlantsData,
   setPlantAccordionData,
   setUserEmail,
 }: UseSyncStateFromLocalStorageOptions) => {
   const { openModal } = useModalStore()
-  const { loginUser } = useAuth()
+  const { userId } = useAuth()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const emailFromLocalStorage = localStorage.getItem('userEmail')
       if (emailFromLocalStorage) {
         setUserEmail(emailFromLocalStorage)
-        setHasPlantsData({
-          likedPlants: !!localStorage.getItem(`${loginUser}.likedPlants`),
-          myDictionary: !!localStorage.getItem(`${loginUser}.findPlants`),
-        })
       } else {
         openModal({ type: 'LOGIN_REQUIRED', goBackOnClose: true })
       }
     }
-  }, [loginUser])
+  }, [userId])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
     const getLikedPlants = JSON.parse(
-      localStorage.getItem(`${loginUser}.likedPlants`) || '[]'
+      localStorage.getItem(`${userId}.likedPlants`) || '[]'
     )
     const getFindPlants = JSON.parse(
-      localStorage.getItem(`${loginUser}.findPlants`) || '[]'
+      localStorage.getItem(`${userId}.findPlants`) || '[]'
     )
 
     if (data?.indexList && Array.isArray(getLikedPlants)) {

@@ -3,11 +3,11 @@ import { ModalProps } from '@/types/type'
 import Close from '@/pages/assets/icons/Close.svg'
 
 const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
-  const buttonRef = useRef<HTMLButtonElement>(null)
+  const confirmButtonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (buttonRef.current) {
-      buttonRef.current.focus()
+    if (confirmButtonRef.current) {
+      confirmButtonRef.current.focus()
     }
   }, [])
   return (
@@ -36,13 +36,13 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
           </button>
           <p
             id="modal-description"
-            className="text-center my-8 whitespace-pre-line text-lg font-semibold dark:text-slate-300"
+            className="my-8 whitespace-pre-line text-center text-lg font-semibold dark:text-slate-300"
           >
             {message}
           </p>
           <div className="flex flex-row gap-4">
             <button
-              ref={buttonRef}
+              ref={confirmButtonRef}
               onClick={onClose}
               className={`${
                 secoundButton

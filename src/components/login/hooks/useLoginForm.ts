@@ -8,14 +8,14 @@ import { useModalStore } from '@/store/useModalStore'
 const useLoginForm = () => {
   const methods = useForm<LoginFormType>()
   const router = useRouter()
-  const { loginUser, setLoginUser } = useAuth()
+  const { userId, setUserId } = useAuth()
   const { openModal } = useModalStore()
 
   useEffect(() => {
-    if (loginUser) {
+    if (userId) {
       router.push('/')
     }
-  }, [loginUser, router])
+  }, [userId, router])
 
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
     if (
@@ -23,7 +23,7 @@ const useLoginForm = () => {
       localStorage.getItem(`${data.email}.password`) === data.password
     ) {
       localStorage.setItem('userEmail', data.email)
-      setLoginUser(data.email)
+      setUserId(data.email)
       router.push('/')
     } else {
       openModal({

@@ -14,7 +14,7 @@ const Post = () => {
   const [plantData, setPlantData] = useState<PlantIndexItem | null>(null)
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const [openSearchFeedbackToast, setOpenSearchFeedbackToast] = useState(false)
-  const { imageUrl } = useCapturedPlantImageStore()
+  const { capturedImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
   const { prevPage, sort } = router.query
   const { plantName } = router.query
@@ -33,7 +33,7 @@ const Post = () => {
   }, [data, isLoading, plantName])
 
   useEffect(() => {
-    if (imageUrl) {
+    if (capturedImageUrl) {
       setOpenSearchFeedbackToast(true)
     }
   }, [])
@@ -73,12 +73,12 @@ const Post = () => {
               <PlantDetailContent plantData={plantData} />
             </>
           )}
-          {imageUrl && (
+          {capturedImageUrl && (
             <SearchFeedbackToast
               openToast={openSearchFeedbackToast}
               onClick={() => setOpenSearchFeedbackToast(true)}
               onClose={() => setOpenSearchFeedbackToast(false)}
-              imageUrl={imageUrl}
+              capturedImageUrl={capturedImageUrl}
             />
           )}
         </div>

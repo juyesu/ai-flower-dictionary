@@ -6,16 +6,16 @@ const useHandlePlantLike = ({
   likedPlants,
   setLikedPlants,
 }: UseHandlePlantLikeOptions) => {
-  const { loginUser } = useAuth()
+  const { userId } = useAuth()
   const { openModal } = useModalStore()
 
   const handlePlantLike = (krnm: string) => {
-    if (loginUser) {
+    if (userId) {
       if (likedPlants.includes(krnm)) {
         setLikedPlants((prev) => {
           const updatedLikedPlants = prev.filter((id: string) => id !== krnm)
           localStorage.setItem(
-            `${loginUser}.likedPlants`,
+            `${userId}.likedPlants`,
             JSON.stringify(updatedLikedPlants)
           )
           return updatedLikedPlants
@@ -24,7 +24,7 @@ const useHandlePlantLike = ({
         setLikedPlants((prev) => {
           const updatedLikedPlants = [...prev, krnm]
           localStorage.setItem(
-            `${loginUser}.likedPlants`,
+            `${userId}.likedPlants`,
             JSON.stringify(updatedLikedPlants)
           )
           return updatedLikedPlants

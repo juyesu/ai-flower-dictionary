@@ -8,9 +8,10 @@ import { useCapturedPlantImageStore } from '@/store/imageURLStore'
 import usePlantDetectionModelLoad from '@/components/ai-flower-detection/hooks/usePlantDetectionModelLoad'
 
 const useCameraModel = () => {
-  const [model, setModel] = useState<tmImage.CustomMobileNet | null>(null)
+  const [plantDetectionModel, setPlantDetectionModel] =
+    useState<tmImage.CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
-  const [label, setLabel] = useState('')
+  const [plantDescription, setPlantDescription] = useState('')
   const [flowerName, setFlowerName] = useState('')
   const [useWebcam, setUseWebcam] = useState(false)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -21,12 +22,12 @@ const useCameraModel = () => {
   const { data, isLoading, error } = usePlantIndexFetchData(1, 300)
   const consecutiveMatchCountRef = useRef(0)
   const isGptFetchingRef = useRef(false)
-  const { imageUrl, setImageUrl } = useCapturedPlantImageStore()
+  const { capturedImageUrl, setCapturedImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
-  const webcamRef = useRef<Webcam | null>(null)
+  const cameraRef = useRef<Webcam | null>(null)
   usePlantDetectionModelLoad({
-    model,
-    setModel,
+    plantDetectionModel,
+    setPlantDetectionModel,
     setMaxPredictions,
     data,
     isLoading,
@@ -70,7 +71,7 @@ const useCameraModel = () => {
           if (consecutiveMatchCountRef.current >= 3) {
             checkPlantMatch(tempHighestPrediction.className)
             if (imgSrc) {
-              setImageUrl(imgSrc)
+              setCapturedImageUrl(imgSrc)
             }
           }
         } else {
@@ -105,9 +106,9 @@ const useCameraModel = () => {
     } else {
       try {
         const gptResponse = await fetchChatGptResponse(className)
-        setLabel(gptResponse)
+        setPlantDescription(gptResponse)
       } catch {
-        setLabel('인공지능 생성 답변을 불러오는데 실패하였습니다.')
+        setPlantDescription('인공지능 생성 답변을 불러오는데 실패하였습니다.')
         console.error('GPT API 호출 실패:', error)
       } finally {
         setUseWebcam(false)
@@ -117,21 +118,21 @@ const useCameraModel = () => {
   }
 
   const handleWebcamCapture = useCallback(() => {
-    if (useWebcam && webcamRef.current) {
-      const imageSrc = webcamRef.current.getScreenshot()
+    if (useWebcam && cameraRef.current) {
+      const imageSrc = cameraRef.current.getScreenshot()
       if (imageSrc) {
         const img = new Image()
         img.src = imageSrc
 
         img.onload = async () => {
-          if (model) {
-            const predictions = await model.predict(img)
+          if (plantDetectionModel) {
+            const predictions = await plantDetectionModel.predict(img)
             processPredictions(predictions, img.src)
           }
         }
       }
     }
-  }, [model, useWebcam])
+  }, [plantDetectionModel, useWebcam])
 
   useEffect(() => {
     console.log('webcam 가동:', useWebcam)
@@ -153,8 +154,8 @@ const useCameraModel = () => {
       img.src = imgURL
 
       img.onload = async () => {
-        if (model) {
-          const predictions = await model.predict(img)
+        if (plantDetectionModel) {
+          const predictions = await plantDetectionModel.predict(img)
           processPredictions(predictions, img.src)
         }
       }
@@ -165,12 +166,12 @@ const useCameraModel = () => {
     isMobileDevice,
     useWebcam,
     setUseWebcam,
-    webcamRef,
+    cameraRef,
     flowerName,
     setFlowerName,
-    imageUrl,
-    label,
-    setLabel,
+    capturedImageUrl,
+    plantDescription,
+    setPlantDescription,
     isGptFetchingRef,
     isAnalyzing,
     highestPrediction,

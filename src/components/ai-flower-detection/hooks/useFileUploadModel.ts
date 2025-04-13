@@ -8,22 +8,22 @@ import usePlantDetectionModelLoad from '@/components/ai-flower-detection/hooks/u
 import { useModalStore } from '@/store/useModalStore'
 
 const useFileUploadModel = () => {
-  const [uploadedFileName, setUploadedFileName] = useState('')
-  const [uploadedFileUrl, setUploadedFileUrl] = useState('')
-  const [model, setModel] = useState<CustomMobileNet | null>(null)
+  const [uploadedImage, setUploadedImage] = useState({ name: '', url: '' })
+  const [plantDetectionModel, setPlantDetectionModel] =
+    useState<CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
-  const [label, setLabel] = useState('')
+  const [plantDescription, setPlantDescription] = useState('')
   const [flowerName, setFlowerName] = useState('')
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [useGptResponse, setUseGptResponse] = useState(false)
   const [image, setImage] = useState<File | null>(null)
   const { data, isLoading, error } = usePlantIndexFetchData(1, 300)
-  const { setImageUrl } = useCapturedPlantImageStore()
+  const { setCapturedImageUrl } = useCapturedPlantImageStore()
   const router = useRouter()
   const { openModal } = useModalStore()
   usePlantDetectionModelLoad({
-    model,
-    setModel,
+    plantDetectionModel,
+    setPlantDetectionModel,
     setMaxPredictions,
     data,
     isLoading,
@@ -49,23 +49,22 @@ const useFileUploadModel = () => {
       return
     }
 
-    setUploadedFileName(file.name)
-    setUploadedFileUrl(URL.createObjectURL(file))
+    setUploadedImage({ name: file.name, url: URL.createObjectURL(file) })
     setIsAnalyzing(true)
-    setLabel('')
+    setPlantDescription('')
     setUseGptResponse(false)
     setImage(file)
     predict(file)
   }
 
   const predict = async (file: File) => {
-    if (model) {
+    if (plantDetectionModel) {
       const imgURL = URL.createObjectURL(file)
       const img = new Image()
       img.src = imgURL
 
       img.onload = async () => {
-        const predictions = await model.predict(img)
+        const predictions = await plantDetectionModel.predict(img)
         let highestPrediction = { className: '', probability: 0 }
 
         for (let i = 0; i < maxPredictions; i++) {
@@ -78,12 +77,12 @@ const useFileUploadModel = () => {
         }
 
         if (highestPrediction.probability > 0.7) {
-          setImageUrl(imgURL)
+          setCapturedImageUrl(imgURL)
           setFlowerName(highestPrediction.className)
           checkPlantMatch(highestPrediction.className)
         } else {
           setIsAnalyzing(false)
-          setLabel('일치하는 꽃을 발견하지 못했습니다.')
+          setPlantDescription('일치하는 꽃을 발견하지 못했습니다.')
         }
       }
     }
@@ -101,16 +100,16 @@ const useFileUploadModel = () => {
         query: {
           plantName: matchedPlant,
           prevPage: 'ai-flower-detection',
-          sort: 'file',
+          sort: 'imageUpload',
         },
       })
     } else {
       try {
         const gptResponse = await fetchChatGptResponse(className)
         setUseGptResponse(true)
-        setLabel(gptResponse)
+        setPlantDescription(gptResponse)
       } catch {
-        setLabel('인공지능 생성 답변을 불러오는데 실패하였습니다.')
+        setPlantDescription('인공지능 생성 답변을 불러오는데 실패하였습니다.')
         console.error('GPT API 호출 실패:', error)
       }
     }
@@ -118,13 +117,12 @@ const useFileUploadModel = () => {
   }
 
   return {
-    uploadedFileUrl,
+    uploadedImage,
     isAnalyzing,
     image,
     useGptResponse,
     flowerName,
-    label,
-    uploadedFileName,
+    plantDescription,
     handleFileChange,
   }
 }

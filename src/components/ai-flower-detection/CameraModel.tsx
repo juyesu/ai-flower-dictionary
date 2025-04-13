@@ -9,12 +9,12 @@ const CameraModel = () => {
     isMobileDevice,
     useWebcam,
     setUseWebcam,
-    webcamRef,
+    cameraRef,
     flowerName,
     setFlowerName,
-    imageUrl,
-    label,
-    setLabel,
+    capturedImageUrl,
+    plantDescription,
+    setPlantDescription,
     isGptFetchingRef,
     isAnalyzing,
     highestPrediction,
@@ -30,7 +30,7 @@ const CameraModel = () => {
         {useWebcam && (
           <Webcam
             audio={false}
-            ref={webcamRef}
+            ref={cameraRef}
             screenshotFormat="image/jpeg"
             className="h-full w-full"
             videoConstraints={{
@@ -40,9 +40,9 @@ const CameraModel = () => {
             }}
           />
         )}
-        {!useWebcam && flowerName && imageUrl && (
+        {!useWebcam && flowerName && capturedImageUrl && (
           <NextImage
-            src={imageUrl}
+            src={capturedImageUrl}
             alt="촬영된 이미지"
             className="h-full w-full"
             width={832}
@@ -50,7 +50,7 @@ const CameraModel = () => {
           />
         )}
         {isAnalyzing && <LoadingSpinner />}
-        {!useWebcam && !flowerName && !imageUrl && (
+        {!useWebcam && !flowerName && !capturedImageUrl && (
           <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center p-4">
             <Camera
               className="h-10 w-10 text-zinc-500 dark:text-slate-300"
@@ -95,7 +95,7 @@ const CameraModel = () => {
           <p className="mt-2 w-full text-center text-3xl font-bold text-cyan-600">
             예측 결과 : {flowerName}
           </p>
-          <p className="mt-6 text-center text-lg">{label}</p>
+          <p className="mt-6 text-center text-lg">{plantDescription}</p>
         </div>
       )}
       {!isMobileDevice() ? (
@@ -105,7 +105,7 @@ const CameraModel = () => {
           onClick={() => {
             setUseWebcam(!useWebcam)
             setFlowerName('')
-            setLabel('')
+            setPlantDescription('')
             isGptFetchingRef.current = false
           }}
           aria-label="카메라 실행"

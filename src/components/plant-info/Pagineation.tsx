@@ -78,6 +78,7 @@ const Pagination = ({
       return pageNumberButton
     }
   }
+
   return (
     <nav id="pagination" className="my-20 flex justify-between">
       <ul className="flex items-center mobile:gap-1.5 sm:gap-2">

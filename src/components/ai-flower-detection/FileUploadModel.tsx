@@ -5,13 +5,12 @@ import useFileUploadModel from '@/components/ai-flower-detection/hooks/useFileUp
 
 const fileUploadModel = () => {
   const {
-    uploadedFileUrl,
+    uploadedImage,
     isAnalyzing,
     image,
     useGptResponse,
     flowerName,
-    label,
-    uploadedFileName,
+    plantDescription,
     handleFileChange,
   } = useFileUploadModel()
 
@@ -21,7 +20,9 @@ const fileUploadModel = () => {
         id="image-container"
         className="relative mt-6 flex aspect-[4/3] max-h-[39rem] w-full max-w-[52rem] rounded border-2 border-zinc-500 bg-zinc-100 bg-cover bg-center dark:bg-gray-800"
         style={{
-          backgroundImage: uploadedFileUrl ? `url(${uploadedFileUrl})` : 'none',
+          backgroundImage: uploadedImage.url
+            ? `url(${uploadedImage.url})`
+            : 'none',
         }}
         onDragOver={(e) => {
           e.preventDefault()
@@ -33,13 +34,13 @@ const fileUploadModel = () => {
       >
         {isAnalyzing && <LoadingSpinner />}
         {!isAnalyzing && !image && (
-          <div className="p-4 absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center">
+          <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center p-4">
             <SampleImage
               className="h-10 w-10 text-zinc-500 dark:text-slate-300"
               fill="currentColor"
               aria-hidden="true"
             />
-            <p className="mt-6 font-semibold text-center text-zinc-500 dark:text-slate-300">
+            <p className="mt-6 text-center font-semibold text-zinc-500 dark:text-slate-300">
               하단의 파일 업로드 버튼을 클릭하거나, 이곳에 이미지를 드래그하여
               업로드할 수 있습니다.
             </p>
@@ -56,13 +57,15 @@ const fileUploadModel = () => {
             예측 결과 : {flowerName}
           </p>
           <p className="mt-6 text-center text-lg dark:text-slate-300">
-            {label}
+            {plantDescription}
           </p>
         </>
       ) : (
-        <p className="mt-6 text-center text-lg dark:text-slate-300">{label}</p>
+        <p className="mt-6 text-center text-lg dark:text-slate-300">
+          {plantDescription}
+        </p>
       )}
-      {uploadedFileName ? (
+      {uploadedImage.name ? (
         <div className="my-16 flex flex-row gap-10">
           <div>
             <label
@@ -85,7 +88,7 @@ const fileUploadModel = () => {
           </div>
           <div className="border dark:border-zinc-500" />
           <p className="mt-4 text-lg dark:text-slate-300">
-            📂 {uploadedFileName}
+            📂 {uploadedImage.name}
           </p>
         </div>
       ) : (

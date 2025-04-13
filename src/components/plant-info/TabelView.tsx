@@ -19,8 +19,8 @@ const TableView = ({
   apiData,
   likedPlants,
   setLikedPlants,
-  copyTooltipIndex,
-  setCopyTooltipIndex,
+  activeTooltipKey,
+  setActiveTooltipKey,
   currentPage,
 }: TableViewProps) => {
   const { handlePlantLike } = useHandlePlantLike({
@@ -72,7 +72,7 @@ const TableView = ({
                 onClick={async (e) => {
                   e.preventDefault()
                   e.stopPropagation()
-                  await handlePlantLinkShare(item.krnm, setCopyTooltipIndex)
+                  await handlePlantLinkShare(item.krnm, setActiveTooltipKey)
                 }}
                 className="relative p-1"
               >
@@ -81,7 +81,7 @@ const TableView = ({
                   fill="currentColor"
                   aria-hidden="true"
                 />
-                {copyTooltipIndex === item.krnm && (
+                {activeTooltipKey === item.krnm && (
                   <div className="absolute left-1/2 top-full mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-3 py-1 text-sm text-white transition-opacity duration-300">
                     링크가 복사되었습니다!
                   </div>
@@ -92,7 +92,7 @@ const TableView = ({
         }))) ||
       []
     )
-  }, [apiData, likedPlants, copyTooltipIndex])
+  }, [apiData, likedPlants, activeTooltipKey])
 
   const [tableDataState, setTableDataState] = useState<PlantTableType[]>([
     ...tableData,

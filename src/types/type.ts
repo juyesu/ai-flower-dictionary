@@ -8,8 +8,10 @@ export type ChildrenComponentsProps = {
 }
 
 export type PlantDetectionModelLoadOptions = {
-  model: tmImage.CustomMobileNet | null
-  setModel: Dispatch<SetStateAction<tmImage.CustomMobileNet | null>>
+  plantDetectionModel: tmImage.CustomMobileNet | null
+  setPlantDetectionModel: Dispatch<
+    SetStateAction<tmImage.CustomMobileNet | null>
+  >
   setMaxPredictions: Dispatch<SetStateAction<number>>
   data: PlantIndexResponse | undefined
   isLoading: boolean
@@ -68,14 +70,14 @@ export type PlantSearchBarProps = {
   color: string
   currentPage: string
   searchKeyUp: (e: KeyboardEvent<HTMLInputElement>) => void
-  isSearchFocus: boolean
-  setIsSearchFocus: Dispatch<SetStateAction<boolean>>
+  isSearchInputFocus: boolean
+  setIsSearchInputFocus: Dispatch<SetStateAction<boolean>>
   setSelectedAutocompleteIndex: Dispatch<SetStateAction<number>>
-  currentAutocompletePlantName: string[]
+  currentAutoCompletePlantNames: string[]
   selectedAutocompleteIndex: number
-  randomItems: PlantIndexItem[]
-  isSmView: boolean
-  isMobileView: boolean
+  randomPlants: PlantIndexItem[]
+  isMinSmScreen: boolean
+  isMinMobileScreen: boolean
 }
 
 export type ViewPortWidth = {
@@ -90,8 +92,8 @@ export type CardViewProps = {
   apiData: PlantIndexItem[] | undefined
   likedPlants: string[]
   setLikedPlants: Dispatch<SetStateAction<string[]>>
-  copyTooltipIndex: string
-  setCopyTooltipIndex: Dispatch<SetStateAction<string>>
+  activeTooltipKey: string
+  setActiveTooltipKey: Dispatch<SetStateAction<string>>
 }
 
 export type TableViewProps = {
@@ -99,8 +101,8 @@ export type TableViewProps = {
   apiData: PlantIndexItem[] | undefined
   likedPlants: string[]
   setLikedPlants: Dispatch<SetStateAction<string[]>>
-  copyTooltipIndex: string
-  setCopyTooltipIndex: Dispatch<SetStateAction<string>>
+  activeTooltipKey: string
+  setActiveTooltipKey: Dispatch<SetStateAction<string>>
   currentPage: number
 }
 
@@ -114,20 +116,20 @@ export type PlantTableType = {
 }
 
 export type PageTitleProps = {
-  isCameraMode?: boolean
-  setIsCameraMode?: Dispatch<SetStateAction<boolean>>
+  analysisMode?: 'camera' | 'imageUpload'
+  setAnalysisMode?: Dispatch<SetStateAction<'camera' | 'imageUpload'>>
   titleImage: string
   titleOptions?: string
 }
 
 export type ModeSwitchButtonProps = {
-  isCameraMode?: boolean
-  setIsCameraMode?: Dispatch<SetStateAction<boolean>>
+  analysisMode: 'camera' | 'imageUpload'
+  setAnalysisMode: Dispatch<SetStateAction<'camera' | 'imageUpload'>>
 }
 
 export type ViewModeSwitchButtonProps = {
   viewPortWidth: ViewPortWidth
-  setIsCardUi: Dispatch<SetStateAction<boolean>>
+  setViewMode: Dispatch<SetStateAction<'card' | 'table'>>
   setCurrentPage: Dispatch<SetStateAction<number>>
   setMaximumPageSize: Dispatch<SetStateAction<number>>
 }
@@ -140,12 +142,6 @@ export type UseSetApiErrorModalOptions = {
 
 export type UseSyncStateFromLocalStorageOptions = {
   data: PlantIndexResponse | undefined
-  setHasPlantsData: Dispatch<
-    SetStateAction<{
-      likedPlants: boolean
-      myDictionary: boolean
-    }>
-  >
   setPlantAccordionData: Dispatch<SetStateAction<PlantAccordionDataType>>
   setUserEmail: Dispatch<SetStateAction<string | null>>
 }
@@ -156,7 +152,6 @@ export type PlantAccordionDataType = {
 }
 
 export type AccordionSectionsProps = {
-  hasPlantsData: { likedPlants: boolean; myDictionary: boolean }
   accordionOpen: { likedPlants: boolean; myDictionary: boolean }
   setAccordionOpen: Dispatch<
     SetStateAction<{ likedPlants: boolean; myDictionary: boolean }>
@@ -227,7 +222,7 @@ export type SearchFeedbackToastProps = {
   openToast: boolean
   onClick: () => void
   onClose: () => void
-  imageUrl: string
+  capturedImageUrl: string
 }
 
 export type PaginationProps = {

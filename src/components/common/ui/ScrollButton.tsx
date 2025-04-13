@@ -1,28 +1,28 @@
 import ArrowUp from '@/pages/assets/icons/ArrowUp.svg'
 import ArrowDown from '@/pages/assets/icons/ArrowDown.svg'
-import { scrollButtonActivateStore } from '@/store/scrollButtonActivateStore'
+import { scrollStateStore } from '@/store/scrollStateStore'
 
 const ScrollButton = () => {
-  const { setIsActivate } = scrollButtonActivateStore()
+  const { setIsScrolling } = scrollStateStore()
 
   const scrollToTop = () => {
-    setIsActivate(true)
+    setIsScrolling(true)
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     })
 
-    setTimeout(() => setIsActivate(false), 1000)
+    setTimeout(() => setIsScrolling(false), 1000)
   }
 
   const scrollToBottom = () => {
-    setIsActivate(true)
+    setIsScrolling(true)
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: 'smooth',
     })
 
-    setTimeout(() => setIsActivate(false), 1000)
+    setTimeout(() => setIsScrolling(false), 1000)
   }
   return (
     <div className="cursour-poiner fixed z-50 flex flex-col items-center rounded-xl border bg-zinc-400 opacity-70 dark:border-gray-400 dark:bg-gray-600 mobile:bottom-6 mobile:right-6 sm:bottom-8 sm:right-10">

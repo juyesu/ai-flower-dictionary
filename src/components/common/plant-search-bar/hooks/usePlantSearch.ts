@@ -12,54 +12,54 @@ const usePlantSearch = ({
   staticKrnmList,
 }: UsePlantSearchOptions) => {
   const { getValues, watch, setValue, setFocus } = methods
-  const [isSearchFocus, setIsSearchFocus] = useState(false)
+  const [isSearchInputFocus, setIsSearchInputFocus] = useState(false)
+  const [randomPlants, setRandomPlants] = useState<PlantIndexItem[]>([])
+  const [autoCompletePlantNames, setAutoCompletePlantNames] = useState<
+    string[]
+  >([])
+  const [currentAutoCompletePlantNames, setCurrentAutoCompletePlantNames] =
+    useState<string[]>([])
+  const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState(-1)
+  const isMinMobileScreen = useMediaQuery({ minWidth: 320 })
+  const isMinSmScreen = useMediaQuery({ minWidth: 640 })
+  const { modal, openModal } = useModalStore()
+  const skipAutoFocusRef = useRef(true)
+  const router = useRouter()
   const { data } =
     !staticIndexList || !staticKrnmList
       ? usePlantIndexFetchData(1, 300)
       : { data: null }
-  const isSmView = useMediaQuery({ minWidth: 640 })
-  const isMobileView = useMediaQuery({ minWidth: 320 })
-  const [randomItems, setRandomItems] = useState<PlantIndexItem[]>([])
-  const [autocompletePlantName, setAutocompletePlantName] = useState<string[]>(
-    []
-  )
-  const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState(-1)
-  const [currentAutocompletePlantName, setCurrentAutocompletePlantName] =
-    useState<string[]>([])
-  const { modal, openModal } = useModalStore()
-  const skipAutoFocus = useRef(true)
-  const router = useRouter()
 
   useEffect(() => {
     if (staticIndexList && staticKrnmList) {
-      setRandomItems(
+      setRandomPlants(
         [...(staticIndexList || [])].sort(() => Math.random() - 0.5).slice(0, 5)
       )
-      setAutocompletePlantName(staticKrnmList)
+      setAutoCompletePlantNames(staticKrnmList)
     } else if (data) {
-      setRandomItems(
+      setRandomPlants(
         [...(data?.indexList || [])].sort(() => Math.random() - 0.5).slice(0, 5)
       )
-      setAutocompletePlantName(data?.krnmList)
+      setAutoCompletePlantNames(data?.krnmList)
     }
   }, [data, staticIndexList, staticKrnmList])
 
   useEffect(() => {
-    if (autocompletePlantName) {
-      const filteredItems = autocompletePlantName
+    if (autoCompletePlantNames) {
+      const filteredItems = autoCompletePlantNames
         .filter((el) => el.includes(getValues('input')))
         .slice(0, 7)
 
-      setCurrentAutocompletePlantName(filteredItems)
+      setCurrentAutoCompletePlantNames(filteredItems)
     }
-  }, [watch('input'), autocompletePlantName])
+  }, [watch('input'), autoCompletePlantNames])
 
   useEffect(() => {
-    if (skipAutoFocus.current) {
-      skipAutoFocus.current = false
+    if (skipAutoFocusRef.current) {
+      skipAutoFocusRef.current = false
       return
     }
-    if (skipAutoFocus.current == false && !modal) {
+    if (skipAutoFocusRef.current == false && !modal) {
       setTimeout(() => {
         setFocus('input')
       }, 150)
@@ -68,14 +68,14 @@ const usePlantSearch = ({
 
   const searchKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     const searchInputValue = getValues('input')
-    const filteredList = autocompletePlantName?.filter((el) =>
+    const filteredList = autoCompletePlantNames?.filter((el) =>
       el.includes(searchInputValue)
     )
     if (e.key === 'Enter') {
       if (selectedAutocompleteIndex != -1) {
         setValue(
           'input',
-          currentAutocompletePlantName[selectedAutocompleteIndex]
+          currentAutoCompletePlantNames[selectedAutocompleteIndex]
         )
       } else {
         if (
@@ -113,14 +113,14 @@ const usePlantSearch = ({
 
   return {
     searchKeyUp,
-    isSearchFocus,
-    setIsSearchFocus,
+    isSearchInputFocus,
+    setIsSearchInputFocus,
     setSelectedAutocompleteIndex,
-    currentAutocompletePlantName,
+    currentAutoCompletePlantNames,
     selectedAutocompleteIndex,
-    randomItems,
-    isSmView,
-    isMobileView,
+    randomPlants,
+    isMinSmScreen,
+    isMinMobileScreen,
   }
 }
 

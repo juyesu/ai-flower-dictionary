@@ -11,14 +11,15 @@ import { CardViewProps } from '@/types/type'
 const CardView = ({
   apiData,
   likedPlants,
-  copyTooltipIndex,
   setLikedPlants,
-  setCopyTooltipIndex,
+  activeTooltipKey,
+  setActiveTooltipKey,
 }: CardViewProps) => {
   const { handlePlantLike } = useHandlePlantLike({
     likedPlants,
     setLikedPlants,
   })
+
   return (
     <div className="grid w-full mobile:mt-8 mobile:grid-cols-2 mobile:gap-y-8 mobile:px-1 sm:px-4 md:grid-cols-3 md:gap-y-24 lg:mt-16">
       {apiData &&
@@ -88,7 +89,7 @@ const CardView = ({
                         e.preventDefault()
                         await handlePlantLinkShare(
                           item.krnm,
-                          setCopyTooltipIndex
+                          setActiveTooltipKey
                         )
                       }}
                       className="relative p-1"
@@ -98,7 +99,7 @@ const CardView = ({
                         fill="currentColor"
                         aria-hidden="true"
                       />
-                      {copyTooltipIndex === item.krnm && (
+                      {activeTooltipKey === item.krnm && (
                         <div className="absolute left-1/2 top-full mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-3 py-1 text-sm text-white transition-opacity duration-300 dark:bg-zinc-500 dark:text-slate-200">
                           링크가 복사되었습니다!
                         </div>

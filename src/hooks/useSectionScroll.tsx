@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { scrollButtonActivateStore } from '@/store/scrollButtonActivateStore'
+import { scrollStateStore } from '@/store/scrollStateStore'
 
 const useSectionScroll = () => {
   const [activeSection, setActiveSection] = useState<string | null>(null)
-  const { isActivate } = scrollButtonActivateStore()
+  const { isScrolling } = scrollStateStore()
 
   useEffect(() => {
-    if (isActivate) return
+    if (isScrolling) return
     const sections = document.querySelectorAll('.scroll-trigger')
 
     const observer = new IntersectionObserver(
@@ -35,7 +35,7 @@ const useSectionScroll = () => {
     sections.forEach((section) => observer.observe(section))
 
     return () => observer.disconnect()
-  }, [isActivate])
+  }, [isScrolling])
 
   return activeSection
 }

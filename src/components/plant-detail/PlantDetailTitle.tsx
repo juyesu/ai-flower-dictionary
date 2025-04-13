@@ -16,11 +16,12 @@ const PlantDetailTitle = ({
   prevPage,
   sort,
 }: PlantDetailTitleProps) => {
-  const [CopyTooltipIndex, setCopyTooltipIndex] = useState('')
+  const [activeTooltipKey, setActiveTooltipKey] = useState('')
   const { handlePlantLike } = useHandlePlantLike({
     likedPlants,
     setLikedPlants,
   })
+
   return (
     <div className="relative flex w-full flex-col items-center gap-5">
       <div className="relative mt-20 flex flex-col items-center">
@@ -79,7 +80,7 @@ const PlantDetailTitle = ({
             onClick={(e) => {
               e.preventDefault()
               if (plantData?.krnm) {
-                handlePlantLinkShare(plantData.krnm, setCopyTooltipIndex)
+                handlePlantLinkShare(plantData.krnm, setActiveTooltipKey)
               }
             }}
             className="relative p-1"
@@ -89,7 +90,7 @@ const PlantDetailTitle = ({
               fill="currentColor"
               aria-hidden="true"
             />
-            {CopyTooltipIndex === krnm && (
+            {activeTooltipKey === krnm && (
               <div className="absolute left-1/2 top-full mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-3 py-1 text-sm text-white transition-opacity duration-300">
                 링크가 복사되었습니다!
               </div>

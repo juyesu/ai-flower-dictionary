@@ -1,7 +1,7 @@
 import Layout from '@/components/common/layout/Layout'
 import ScrollButton from '@/components/common/ui/ScrollButton'
 import useMyDictionary from '@/components/my-dictionary/hooks/useMyDictionaryPageState'
-import useSyncStateFromLocalStorage from '@/components/my-dictionary/hooks/useSyncLocalStorageWithState'
+import useSyncLocalStorageWithState from '@/components/my-dictionary/hooks/useSyncLocalStorageWithState'
 import PageTitle from '@/components/common/ui/PageTitle'
 import AccordionSections from '@/components/my-dictionary/AccordionSections'
 import { usePlantIndexFetchData } from '@/hooks/usePlantIndexFetchData'
@@ -11,8 +11,6 @@ import Head from 'next/head'
 
 const MyDictionary = () => {
   const {
-    hasPlantsData,
-    setHasPlantsData,
     accordionOpen,
     setAccordionOpen,
     plantAccordionData,
@@ -22,9 +20,8 @@ const MyDictionary = () => {
   } = useMyDictionary()
   const { data } = usePlantIndexFetchData(1, 300)
   const { closeModal } = useModalStore()
-  useSyncStateFromLocalStorage({
+  useSyncLocalStorageWithState({
     data,
-    setHasPlantsData,
     setPlantAccordionData,
     setUserEmail,
   })
@@ -61,7 +58,6 @@ const MyDictionary = () => {
             titleOptions="default"
           />
           <AccordionSections
-            hasPlantsData={hasPlantsData}
             accordionOpen={accordionOpen}
             setAccordionOpen={setAccordionOpen}
             plantAccordionData={plantAccordionData}

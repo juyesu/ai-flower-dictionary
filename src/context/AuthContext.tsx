@@ -8,8 +8,8 @@ import {
 } from 'react'
 
 interface AuthContextType {
-  loginUser: string | null
-  setLoginUser: (user: string | null) => void
+  userId: string | null
+  setUserId: (user: string | null) => void
   logout: () => void
   withdrawAccount: () => void
 }
@@ -17,13 +17,13 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [loginUser, setLoginUser] = useState<string | null>(null)
+  const [userId, setUserId] = useState<string | null>(null)
   const { openModal } = useModalStore()
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedEmail = localStorage.getItem('userEmail')
-      setLoginUser(storedEmail)
+      setUserId(storedEmail)
     }
   }, [])
 
@@ -32,17 +32,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem('userEmail')
       localStorage.removeItem('userName')
     }
-    setLoginUser(null)
+    setUserId(null)
     openModal({ type: 'LOGOUT_MESSAGE' })
   }
 
   const withdrawAccount = () => {
-    localStorage.removeItem(`${loginUser}.name`)
-    localStorage.removeItem(`${loginUser}.email`)
-    localStorage.removeItem(`${loginUser}.password`)
-    localStorage.removeItem(`${loginUser}.address`)
-    localStorage.removeItem(`${loginUser}.likedPlants`)
-    localStorage.removeItem(`${loginUser}.findPlants`)
+    localStorage.removeItem(`${userId}.name`)
+    localStorage.removeItem(`${userId}.email`)
+    localStorage.removeItem(`${userId}.password`)
+    localStorage.removeItem(`${userId}.address`)
+    localStorage.removeItem(`${userId}.likedPlants`)
+    localStorage.removeItem(`${userId}.findPlants`)
     localStorage.removeItem('userEmail')
     localStorage.removeItem('userName')
     openModal({ type: 'ACCOUNT_DELETION_SUCCESS' })
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ loginUser, setLoginUser, logout, withdrawAccount }}
+      value={{ userId, setUserId, logout, withdrawAccount }}
     >
       {children}
     </AuthContext.Provider>

@@ -4,7 +4,6 @@ import BoxOpen from '@/pages/assets/icons/BoxOpen.svg'
 import { AccordionSectionsProps } from '@/types/type'
 
 const AccordionSections = ({
-  hasPlantsData,
   accordionOpen,
   setAccordionOpen,
   plantAccordionData,
@@ -35,7 +34,7 @@ const AccordionSections = ({
         </button>
 
         {accordionOpen.likedPlants &&
-          (hasPlantsData.likedPlants ? (
+          (plantAccordionData.likedPlants.length > 0 ? (
             <div className="accordion_image_grid">
               {plantAccordionData.likedPlants.map((item) => (
                 <Link
@@ -99,7 +98,7 @@ const AccordionSections = ({
         </button>
 
         {accordionOpen.myDictionary &&
-          (hasPlantsData.myDictionary ? (
+          (plantAccordionData.myDictionary.length > 0 ? (
             <div className="accordion_image_grid">
               {plantAccordionData.myDictionary.map((item) => (
                 <Link

@@ -10,13 +10,13 @@ const useRegisterForm = () => {
   const methods = useForm<LoginFormType>()
   const router = useRouter()
   const { openModal } = useModalStore()
-  const { loginUser } = useAuth()
+  const { userId } = useAuth()
 
   useEffect(() => {
-    if (loginUser) {
+    if (userId) {
       router.push('/')
     }
-  }, [loginUser])
+  }, [userId])
 
   const onSubmit: SubmitHandler<LoginFormType> = (data) => {
     if (localStorage.getItem(`${data.email}.name`)) {

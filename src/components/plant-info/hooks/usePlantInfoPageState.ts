@@ -10,26 +10,26 @@ const usePlantInfoPageState = () => {
     is1280To1535pxScreen: useMediaQuery({ minWidth: 1280, maxWidth: 1535 }),
     isAbove1536pxScreen: useMediaQuery({ minWidth: 1536 }),
   }
-  const [isCardUi, setIsCardUi] = useState(true)
+  const [viewMode, setViewMode] = useState<'card' | 'table'>('card')
   const [currentPage, setCurrentPage] = useState(1)
   const [maximumPageSize, setMaximumPageSize] = useState(
     viewPortWidth.isUnder767pxScreen ? 14 : 15
   )
   const [likedPlants, setLikedPlants] = useState<string[]>([])
-  const [copyTooltipIndex, setCopyTooltipIndex] = useState('')
+  const [activeTooltipKey, setActiveTooltipKey] = useState('')
 
   return {
     viewPortWidth,
-    isCardUi,
-    setIsCardUi,
+    viewMode,
+    setViewMode,
     currentPage,
     setCurrentPage,
     maximumPageSize,
     setMaximumPageSize,
     likedPlants,
     setLikedPlants,
-    copyTooltipIndex,
-    setCopyTooltipIndex,
+    activeTooltipKey,
+    setActiveTooltipKey,
   }
 }
 
