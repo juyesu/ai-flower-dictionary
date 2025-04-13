@@ -1,4 +1,5 @@
 import { useModalStore } from '@/store/useModalStore'
+import { AuthContextType } from '@/types/type'
 import {
   createContext,
   useContext,
@@ -6,13 +7,6 @@ import {
   useState,
   ReactNode,
 } from 'react'
-
-interface AuthContextType {
-  userId: string | null
-  setUserId: (user: string | null) => void
-  logout: () => void
-  withdrawAccount: () => void
-}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 

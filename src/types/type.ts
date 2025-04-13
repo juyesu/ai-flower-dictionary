@@ -7,6 +7,13 @@ export type ChildrenComponentsProps = {
   children: ReactNode
 }
 
+export type AuthContextType = {
+  userId: string | null
+  setUserId: (user: string | null) => void
+  logout: () => void
+  withdrawAccount: () => void
+}
+
 export type PlantDetectionModelLoadOptions = {
   plantDetectionModel: tmImage.CustomMobileNet | null
   setPlantDetectionModel: Dispatch<
