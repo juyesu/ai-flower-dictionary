@@ -1,5 +1,5 @@
 import Webcam from 'react-webcam'
-import NextImage from 'next/image'
+import Image from 'next/image'
 import Camera from '@/pages/assets/icons/Camera.svg'
 import LoadingSpinner from '@/components/common/ui/LoadingSpinner'
 import useCameraModel from '@/components/ai-flower-detection/hooks/useCameraModel'
@@ -41,7 +41,7 @@ const CameraModel = () => {
           />
         )}
         {!useWebcam && flowerName && capturedImageUrl && (
-          <NextImage
+          <Image
             src={capturedImageUrl}
             alt="촬영된 이미지"
             className="h-full w-full"
@@ -110,7 +110,7 @@ const CameraModel = () => {
           }}
           aria-label="카메라 실행"
         >
-          <NextImage
+          <Image
             src="/images/camera.png"
             alt=""
             className="h-auto w-12"
@@ -125,7 +125,7 @@ const CameraModel = () => {
             htmlFor="cameraInput"
             className="my-8 flex h-[3rem] w-[8.5rem] cursor-pointer items-center justify-center rounded-full border border-zinc-400 bg-zinc-300 px-1.5 py-0.5 dark:bg-zinc-500"
           >
-            <NextImage
+            <Image
               src="/images/camera.png"
               alt=""
               className="mx-1.5 h-auto w-6"
