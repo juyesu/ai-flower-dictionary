@@ -10,7 +10,7 @@ import PlantDetailContent from '@/components/plant-detail/PlantDetailContent'
 import Head from 'next/head'
 import useManagePlantStorage from '@/components/plant-detail/hooks/useManagePlantStorage'
 
-const Post = () => {
+const PlantDetail = () => {
   const [plantData, setPlantData] = useState<PlantIndexItem | null>(null)
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const [openSearchFeedbackToast, setOpenSearchFeedbackToast] = useState(false)
@@ -87,4 +87,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default PlantDetail
