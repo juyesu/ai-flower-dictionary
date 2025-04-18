@@ -8,10 +8,10 @@ import reactStringReplace from 'react-string-replace'
 const PlantSearchBar = ({
   color,
   currentPage,
+  searchInputFocus,
+  searchInputBlur,
   searchKeyUp,
   isSearchInputFocus,
-  setIsSearchInputFocus,
-  setSelectedAutocompleteIndex,
   currentAutoCompletePlantNames,
   selectedAutocompleteIndex,
   randomPlants,
@@ -42,17 +42,8 @@ const PlantSearchBar = ({
             id="search_plant"
             type="search"
             autoComplete="off"
-            onFocus={() => {
-              setIsSearchInputFocus(true)
-              setSelectedAutocompleteIndex(-1)
-            }}
-            onBlur={(e) => {
-              setTimeout(() => {
-                if (!e.relatedTarget?.closest('ul')) {
-                  setIsSearchInputFocus(false)
-                }
-              }, 100)
-            }}
+            onFocus={searchInputFocus}
+            onBlur={searchInputBlur}
             onChange={(e) => methods.setValue('input', e.target.value)}
             onKeyUp={searchKeyUp}
             className="rounded-full bg-white py-2 opacity-80 dark:bg-zinc-900 dark:text-slate-200 mobile:h-[2.8rem] mobile:w-[22rem] mobile:pl-12 mobile:text-lg mobile:font-semibold sm:h-[3.2rem] sm:w-[40rem] sm:pl-16 sm:text-xl sm:font-bold lg:w-[48rem]"

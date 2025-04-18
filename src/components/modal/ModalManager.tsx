@@ -1,14 +1,18 @@
-import { useModalStore } from '@/store/useModalStore'
 import Modal from '@/components/modal/Modal'
-import { useRouter } from 'next/router'
+import useModalHandlers from '@/components/modal/hooks/useModalHandlers'
 
 const ModalManager = () => {
-  const { modal, closeModal } = useModalStore()
-  const router = useRouter()
+  const {
+    modal,
+    closeModal,
+    handleModelErrorClose,
+    handleLoginRequiredClose,
+    redirectToLoginAfterClose,
+    handleLogoutMessageClose,
+    handleAccountDeletionClose,
+  } = useModalHandlers()
 
-  if (!modal) return null
-
-  switch (modal.type) {
+  switch (modal?.type) {
     case 'ALERT':
       return (
         <Modal message={modal.message} bgOverlay={false} onClose={closeModal} />
@@ -17,10 +21,7 @@ const ModalManager = () => {
       return (
         <Modal
           message="죄송합니다. 모델 로드 중 오류가 발생했습니다."
-          onClose={() => {
-            closeModal()
-            router.back()
-          }}
+          onClose={handleModelErrorClose}
           bgOverlay={true}
         />
       )
@@ -28,19 +29,11 @@ const ModalManager = () => {
       return (
         <Modal
           message="로그인이 필요한 서비스입니다."
-          onClose={() => {
-            closeModal()
-            if (modal.goBackOnClose) {
-              router.back()
-            }
-          }}
+          onClose={handleLoginRequiredClose}
           bgOverlay={true}
           secoundButton={{
             secoundButtonLabel: '로그인',
-            onSecondButtonClick: () => {
-              closeModal()
-              router.push('/login')
-            },
+            onSecondButtonClick: redirectToLoginAfterClose,
           }}
         />
       )
@@ -49,10 +42,7 @@ const ModalManager = () => {
         <Modal
           message="로그아웃되었습니다."
           bgOverlay={false}
-          onClose={() => {
-            closeModal()
-            window.location.reload()
-          }}
+          onClose={handleLogoutMessageClose}
         />
       )
     case 'SEARCH_NOT_FOUND':
@@ -76,10 +66,7 @@ const ModalManager = () => {
         <Modal
           message="회원 가입에 성공했습니다."
           bgOverlay={false}
-          onClose={() => {
-            closeModal()
-            router.push('/login')
-          }}
+          onClose={redirectToLoginAfterClose}
         />
       )
     case 'ACCOUNT_DELETION_SUCCESS':
@@ -87,13 +74,7 @@ const ModalManager = () => {
         <Modal
           message="회원 탈퇴가 완료되었습니다. 그동안 이용해주셔서 감사합니다."
           bgOverlay={false}
-          onClose={() => {
-            closeModal()
-            if (router.pathname !== '/') {
-              router.push('/')
-            }
-            window.location.reload()
-          }}
+          onClose={handleAccountDeletionClose}
         />
       )
     default:

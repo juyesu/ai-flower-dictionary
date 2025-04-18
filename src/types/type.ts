@@ -76,10 +76,10 @@ export type PlantSearchBarContainerProps = {
 export type PlantSearchBarProps = {
   color: string
   currentPage: string
+  searchInputFocus: () => void
+  searchInputBlur: (e: React.FocusEvent<HTMLInputElement>) => void
   searchKeyUp: (e: KeyboardEvent<HTMLInputElement>) => void
   isSearchInputFocus: boolean
-  setIsSearchInputFocus: Dispatch<SetStateAction<boolean>>
-  setSelectedAutocompleteIndex: Dispatch<SetStateAction<number>>
   currentAutoCompletePlantNames: string[]
   selectedAutocompleteIndex: number
   randomPlants: PlantIndexItem[]
@@ -135,6 +135,11 @@ export type ModeSwitchButtonProps = {
 }
 
 export type ViewModeSwitchButtonProps = {
+  handleChangeToCardList: () => void
+  handleChangeToTableList: () => void
+}
+
+export type UseModalHandlersOptions = {
   viewPortWidth: ViewPortWidth
   setViewMode: Dispatch<SetStateAction<'card' | 'table'>>
   setCurrentPage: Dispatch<SetStateAction<number>>

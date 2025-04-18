@@ -8,16 +8,13 @@ const CameraModel = () => {
   const {
     isMobileDevice,
     useWebcam,
-    setUseWebcam,
     cameraRef,
     flowerName,
-    setFlowerName,
     capturedImageUrl,
     plantDescription,
-    setPlantDescription,
-    isGptFetchingRef,
     isAnalyzing,
     highestPrediction,
+    handleToggleCamera,
     handleMobileCapture,
   } = useCameraModel()
 
@@ -102,12 +99,7 @@ const CameraModel = () => {
         <button
           type="button"
           className="my-16 flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-zinc-400 bg-zinc-300 dark:bg-zinc-500"
-          onClick={() => {
-            setUseWebcam(!useWebcam)
-            setFlowerName('')
-            setPlantDescription('')
-            isGptFetchingRef.current = false
-          }}
+          onClick={handleToggleCamera}
           aria-label="카메라 실행"
         >
           <Image

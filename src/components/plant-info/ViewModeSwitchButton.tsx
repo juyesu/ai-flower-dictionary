@@ -3,10 +3,8 @@ import CardList from '@/pages/assets/icons/CardList.svg'
 import { ViewModeSwitchButtonProps } from '@/types/type'
 
 const ViewModeSwitchButton = ({
-  viewPortWidth,
-  setViewMode,
-  setCurrentPage,
-  setMaximumPageSize,
+  handleChangeToCardList,
+  handleChangeToTableList,
 }: ViewModeSwitchButtonProps) => {
   return (
     <div className="flex w-full justify-end mobile:px-5 sm:px-12 lg:px-16">
@@ -14,15 +12,7 @@ const ViewModeSwitchButton = ({
         <button
           type="button"
           aria-label="카드 리스트 레이아웃으로 변경"
-          onClick={() => {
-            setViewMode('card')
-            setCurrentPage(1)
-            if (viewPortWidth.isUnder767pxScreen) {
-              setMaximumPageSize(14)
-            } else {
-              setMaximumPageSize(15)
-            }
-          }}
+          onClick={handleChangeToCardList}
           className="rounded-l-lg border px-5 py-4 hover:bg-zinc-400 dark:border-gray-500 dark:hover:bg-zinc-600"
         >
           <CardList
@@ -34,11 +24,7 @@ const ViewModeSwitchButton = ({
         <button
           type="button"
           aria-label="테이블 리스트 레이아웃으로 변경"
-          onClick={() => {
-            setViewMode('table')
-            setCurrentPage(1)
-            setMaximumPageSize(30)
-          }}
+          onClick={handleChangeToTableList}
           className="rounded-r-lg border px-5 py-4 hover:bg-zinc-400 dark:border-gray-500 dark:hover:bg-zinc-600"
         >
           <TableList

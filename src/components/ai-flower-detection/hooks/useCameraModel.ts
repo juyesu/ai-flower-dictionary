@@ -145,6 +145,13 @@ const useCameraModel = () => {
     }
   }, [useWebcam, handleWebcamCapture])
 
+  const handleToggleCamera = () => {
+    setUseWebcam(!useWebcam)
+    setFlowerName('')
+    setPlantDescription('')
+    isGptFetchingRef.current = false
+  }
+
   // 모바일 환경
   const handleMobileCapture = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -165,16 +172,13 @@ const useCameraModel = () => {
   return {
     isMobileDevice,
     useWebcam,
-    setUseWebcam,
     cameraRef,
     flowerName,
-    setFlowerName,
     capturedImageUrl,
     plantDescription,
-    setPlantDescription,
-    isGptFetchingRef,
     isAnalyzing,
     highestPrediction,
+    handleToggleCamera,
     handleMobileCapture,
   }
 }

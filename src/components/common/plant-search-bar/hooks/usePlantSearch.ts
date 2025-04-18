@@ -66,6 +66,19 @@ const usePlantSearch = ({
     }
   }, [modal])
 
+  const searchInputFocus = () => {
+    setIsSearchInputFocus(true)
+    setSelectedAutocompleteIndex(-1)
+  }
+
+  const searchInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTimeout(() => {
+      if (!e.relatedTarget?.closest('ul')) {
+        setIsSearchInputFocus(false)
+      }
+    }, 100)
+  }
+
   const searchKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     const searchInputValue = getValues('input')
     const filteredList = autoCompletePlantNames?.filter((el) =>
@@ -112,10 +125,10 @@ const usePlantSearch = ({
   }
 
   return {
+    searchInputFocus,
+    searchInputBlur,
     searchKeyUp,
     isSearchInputFocus,
-    setIsSearchInputFocus,
-    setSelectedAutocompleteIndex,
     currentAutoCompletePlantNames,
     selectedAutocompleteIndex,
     randomPlants,

@@ -12,6 +12,7 @@ import usePlantInfoPageState from '@/components/plant-info/hooks/usePlantInfoPag
 import useSetApiErrorModal from '@/components/plant-info/hooks/useSetApiErrorModal'
 import router from 'next/router'
 import Head from 'next/head'
+import useViewModeHandlers from '@/components/plant-info/hooks/useViewModeHandlers'
 
 const PlantInfo = () => {
   const {
@@ -27,6 +28,13 @@ const PlantInfo = () => {
     activeTooltipKey,
     setActiveTooltipKey,
   } = usePlantInfoPageState()
+  const { handleChangeToCardList, handleChangeToTableList } =
+    useViewModeHandlers({
+      setViewMode,
+      setCurrentPage,
+      setMaximumPageSize,
+      viewPortWidth,
+    })
   const { data, isLoading, error } = usePlantIndexFetchData(
     currentPage,
     maximumPageSize
@@ -83,10 +91,8 @@ const PlantInfo = () => {
             titleOptions="PlantSearchBar"
           />
           <ViewModeSwitchButton
-            viewPortWidth={viewPortWidth}
-            setViewMode={setViewMode}
-            setCurrentPage={setCurrentPage}
-            setMaximumPageSize={setMaximumPageSize}
+            handleChangeToCardList={handleChangeToCardList}
+            handleChangeToTableList={handleChangeToTableList}
           />
           {viewMode == 'card' ? (
             <CardView

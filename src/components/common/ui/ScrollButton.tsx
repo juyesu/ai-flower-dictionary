@@ -1,29 +1,10 @@
 import ArrowUp from '@/pages/assets/icons/ArrowUp.svg'
 import ArrowDown from '@/pages/assets/icons/ArrowDown.svg'
-import { scrollStateStore } from '@/store/scrollStateStore'
+import useScrollToEdge from '@/components/common/ui/hooks/useScrollToEdge'
 
 const ScrollButton = () => {
-  const { setIsScrolling } = scrollStateStore()
+  const { scrollToTop, scrollToBottom } = useScrollToEdge()
 
-  const scrollToTop = () => {
-    setIsScrolling(true)
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-
-    setTimeout(() => setIsScrolling(false), 1000)
-  }
-
-  const scrollToBottom = () => {
-    setIsScrolling(true)
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    })
-
-    setTimeout(() => setIsScrolling(false), 1000)
-  }
   return (
     <div className="cursour-poiner fixed z-50 flex flex-col items-center rounded-xl border bg-zinc-400 opacity-70 dark:border-gray-400 dark:bg-gray-600 mobile:bottom-6 mobile:right-6 sm:bottom-8 sm:right-10">
       <button
