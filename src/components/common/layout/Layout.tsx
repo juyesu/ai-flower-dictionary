@@ -9,7 +9,7 @@ import LoginSwitcher from '@/components/common/layout/LoginSwitcher'
 import ThemeDropdown from '@/components/common/layout/ThemeDropdown'
 import { useState } from 'react'
 import SideDrawer from '@/components/common/layout/SideDrawer'
-import ModalManager from '@/components/modal/ModalManager'
+import ModalManager from '@/components/common/modal/ModalManager'
 
 const RootLayout = ({ children }: ChildrenComponentsProps) => {
   const [openSideDrawer, setOpenSideDrawer] = useState(false)

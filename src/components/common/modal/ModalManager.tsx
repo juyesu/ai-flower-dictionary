@@ -1,5 +1,5 @@
-import Modal from '@/components/modal/Modal'
-import useModalHandlers from '@/components/modal/hooks/useModalHandlers'
+import Modal from '@/components/common/modal/Modal'
+import useModalHandlers from '@/components/common/modal/hooks/useModalHandlers'
 
 const ModalManager = () => {
   const {
