@@ -40,9 +40,12 @@
  ┣ 📂components
  ┃ ┣ 📂ai-flower-detection
  ┃ ┣ 📂common
+ ┃ ┃ ┣ 📂layout
+ ┃ ┃ ┣ 📂modal
+ ┃ ┃ ┣ 📂plant-search-bar
+ ┃ ┃ ┗ 📂ui
  ┃ ┣ 📂homepage
  ┃ ┣ 📂login
- ┃ ┣ 📂modal
  ┃ ┣ 📂my-dictionary
  ┃ ┣ 📂plant-detail
  ┃ ┣ 📂plant-info
@@ -51,6 +54,7 @@
  ┣ 📂hooks
  ┣ 📂pages
  ┃ ┣ 📂assets
+ ┃ ┃ ┗ 📂icons
  ┃ ┣ 📂view
  ┃ ┃ ┗ 📜[plant-detail].tsx
  ┃ ┣ 📜ai-flower-detection.tsx
@@ -68,10 +72,11 @@
 ```
 폴더명|폴더 설명
 ---|---|
+components |components/의 최상단 디렉토리는 공통 컴포넌트를 모은 common을 제외하고, 모두 페이지명을 기준으로 구성되어 있습니다. 각 페이지 디렉토리의 하위 폴더는 UI 컴포넌트와 /hooks 폴더 아래의 커스텀 훅으로 구분됩니다.|
 components/common |둘 이상의 페이지 또는 컴포넌트에서 사용되는 공통 컴포넌트를 포함합니다.|
-components/modal |Modal 관련 컴포넌트들을 포함합니다. Modal 컴포넌트는 (1) 공통 UI를 담당하는 기본 Modal 컴포넌트와 (2) 특정 용도에 따라 메시지, 배경 오버레이 여부 등을 Props로 제어하는 개별 Modal 컴포넌트로 구분됩니다.|
+components/common/modal |Modal 관련 컴포넌트 및 커스텀 훅을 포함합니다. Modal 컴포넌트는 (1) 공통 UI를 담당하는 기본 Modal 컴포넌트와 (2) 특정 용도에 따라 메시지, 배경 오버레이 여부 등을 Props로 제어하는 개별 Modal 컴포넌트로 구분됩니다.|
 context |여러 페이지에서 전역적으로 상태를 공유하기 위한 Context를 포함합니다. |
-hooks |둘 이상의 페이지 또는 컴포넌트에서 재사용되는 공통 커스텀 훅을 포함합니다. 특정 페이지에서만 사용되는 커스텀 훅은 components/페이지명/hooks 폴더에서 관리합니다.|
+hooks |둘 이상의 페이지 또는 컴포넌트에서 재사용되는 공통 커스텀 훅을 포함합니다.|
 assets |SVG를 React 컴포넌트처럼 import하여 사용하는 .svg 파일들을 포함합니다.|
 store |Zustand를 사용한 전역 상태 관리 파일들을 포함합니다. |
 types |TypeScript에서 사용되는 Type Alias와 Zustand store의 타입을 구분하여 포함합니다. |
