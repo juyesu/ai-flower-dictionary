@@ -1,15 +1,17 @@
 import Link from 'next/link'
 import type { ChildrenComponentsProps } from '@/types/type'
-import MenuBars from '@/pages/assets/icons/MenuBars.svg'
-import TypeScript from '@/pages/assets/icons/TypeScript.svg'
-import React from '@/pages/assets/icons/React.svg'
-import NextJs from '@/pages/assets/icons/NextJs.svg'
-import TailwindCss from '@/pages/assets/icons/TailwindCss.svg'
 import LoginSwitcher from '@/components/common/layout/LoginSwitcher'
 import ThemeDropdown from '@/components/common/layout/ThemeDropdown'
 import { useState } from 'react'
 import SideDrawer from '@/components/common/layout/SideDrawer'
 import ModalManager from '@/components/common/modal/ModalManager'
+import {
+  MenuBars,
+  TypeScript,
+  React,
+  NextJs,
+  TailwindCss,
+} from '@/pages/assets/icons'
 
 const RootLayout = ({ children }: ChildrenComponentsProps) => {
   const [openSideDrawer, setOpenSideDrawer] = useState(false)

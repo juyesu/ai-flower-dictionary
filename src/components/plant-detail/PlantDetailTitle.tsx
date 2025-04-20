@@ -1,12 +1,9 @@
-import PreviousPage from '@/pages/assets/icons/PreviousPage.svg'
 import Link from 'next/link'
-import Unliked from '@/pages/assets/icons/Unliked.svg'
-import Liked from '@/pages/assets/icons/Liked.svg'
 import useHandlePlantLike from '@/hooks/useHandlePlantLike'
 import handlePlantLinkShare from '@/utils/handlePlantLinkShare'
-import Share from '@/pages/assets/icons/Share.svg'
 import { useState } from 'react'
 import { PlantDetailTitleProps } from '@/types/type'
+import { PreviousPage, Unliked, Liked, Share } from '@/pages/assets/icons'
 
 const PlantDetailTitle = ({
   plantData,

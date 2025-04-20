@@ -1,6 +1,4 @@
-import Unliked from '@/pages/assets/icons/Unliked.svg'
-import Liked from '@/pages/assets/icons/Liked.svg'
-import Share from '@/pages/assets/icons/Share.svg'
+import { Unliked, Liked, Share } from '@/pages/assets/icons'
 import {
   createColumnHelper,
   useReactTable,

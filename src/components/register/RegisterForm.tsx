@@ -1,7 +1,7 @@
 import { RegisterFormProps, LoginFormType } from '@/types/type'
 import Link from 'next/link'
 import { useFormContext } from 'react-hook-form'
-import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
+import { MagnifyingGlass } from '@/pages/assets/icons'
 
 const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
   const { register, handleSubmit, formState } = useFormContext<LoginFormType>()

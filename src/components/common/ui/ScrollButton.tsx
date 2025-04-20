@@ -1,5 +1,4 @@
-import ArrowUp from '@/pages/assets/icons/ArrowUp.svg'
-import ArrowDown from '@/pages/assets/icons/ArrowDown.svg'
+import { ArrowUp, ArrowDown } from '@/pages/assets/icons'
 import useScrollToEdge from '@/components/common/ui/hooks/useScrollToEdge'
 
 const ScrollButton = () => {

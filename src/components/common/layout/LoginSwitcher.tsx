@@ -1,6 +1,6 @@
 import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
-import CircleUser from '@/pages/assets/icons/CircleUser.svg'
+import { CircleUser } from '@/pages/assets/icons'
 import { useEffect, useState } from 'react'
 
 const LoginSwitcher = () => {

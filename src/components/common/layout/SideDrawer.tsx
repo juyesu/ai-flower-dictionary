@@ -1,11 +1,8 @@
 import { SideDrawerProps } from '@/types/type'
-import Close from '@/pages/assets/icons/Close.svg'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
-import Sun from '@/pages/assets/icons/Sun.svg'
-import Moon from '@/pages/assets/icons/Moon.svg'
-import Desktop from '@/pages/assets/icons/Desktop.svg'
+import { Close, Sun, Moon, Desktop } from '@/pages/assets/icons'
 import { useTheme } from 'next-themes'
 
 const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {

@@ -1,7 +1,4 @@
-import FirstPage from '@/pages/assets/icons/FirstPage.svg'
-import PrevPage from '@/pages/assets/icons/PrevPage.svg'
-import NextPage from '@/pages/assets/icons/NextPage.svg'
-import LastPage from '@/pages/assets/icons/LastPage.svg'
+import { FirstPage, PrevPage, NextPage, LastPage } from '@/pages/assets/icons'
 import { PaginationProps } from '@/types/type'
 import usePaginationControls from '@/components/plant-info/hooks/usePaginationControls'
 

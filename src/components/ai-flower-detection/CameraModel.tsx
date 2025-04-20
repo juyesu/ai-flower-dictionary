@@ -1,6 +1,6 @@
 import Webcam from 'react-webcam'
 import Image from 'next/image'
-import Camera from '@/pages/assets/icons/Camera.svg'
+import { Camera } from '@/pages/assets/icons'
 import LoadingSpinner from '@/components/common/ui/LoadingSpinner'
 import useCameraModel from '@/components/ai-flower-detection/hooks/useCameraModel'
 

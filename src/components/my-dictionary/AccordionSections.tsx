@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import BoxOpen from '@/pages/assets/icons/BoxOpen.svg'
+import { BoxOpen } from '@/pages/assets/icons'
 import { AccordionSectionsProps } from '@/types/type'
 
 const AccordionSections = ({

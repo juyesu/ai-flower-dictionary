@@ -1,5 +1,4 @@
-import Upload from '@/pages/assets/icons/Upload.svg'
-import SampleImage from '@/pages/assets/icons/SampleImage.svg'
+import { Upload, SampleImage } from '@/pages/assets/icons'
 import LoadingSpinner from '@/components/common/ui/LoadingSpinner'
 import useFileUploadModel from '@/components/ai-flower-detection/hooks/useFileUploadModel'
 

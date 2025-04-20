@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Close from '@/pages/assets/icons/Close.svg'
+import { Close } from '@/pages/assets/icons'
 import Image from 'next/image'
 import { SearchFeedbackToastProps } from '@/types/type'
 

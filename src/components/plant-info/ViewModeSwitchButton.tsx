@@ -1,5 +1,4 @@
-import TableList from '@/pages/assets/icons/TableList.svg'
-import CardList from '@/pages/assets/icons/CardList.svg'
+import { TableList, CardList } from '@/pages/assets/icons'
 import { ViewModeSwitchButtonProps } from '@/types/type'
 
 const ViewModeSwitchButton = ({

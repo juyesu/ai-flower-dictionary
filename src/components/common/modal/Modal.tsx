@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { ModalProps } from '@/types/type'
-import Close from '@/pages/assets/icons/Close.svg'
+import { Close } from '@/pages/assets/icons'
 
 const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
   const confirmButtonRef = useRef<HTMLButtonElement>(null)

@@ -1,7 +1,6 @@
 import { PlantSearchBarProps } from '@/types/type'
 import Link from 'next/link'
-import MagnifyingGlass from '@/pages/assets/icons/MagnifyingGlass.svg'
-import Close from '@/pages/assets/icons/Close.svg'
+import { MagnifyingGlass, Close } from '@/pages/assets/icons'
 import { useFormContext } from 'react-hook-form'
 import reactStringReplace from 'react-string-replace'
 

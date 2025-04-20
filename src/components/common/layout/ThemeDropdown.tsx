@@ -1,7 +1,5 @@
 import { useTheme } from 'next-themes'
-import Sun from '@/pages/assets/icons/Sun.svg'
-import Moon from '@/pages/assets/icons/Moon.svg'
-import Desktop from '@/pages/assets/icons/Desktop.svg'
+import { Sun, Moon, Desktop } from '@/pages/assets/icons'
 import { ThemeDropdownProps } from '@/types/type'
 import { useState } from 'react'
 
