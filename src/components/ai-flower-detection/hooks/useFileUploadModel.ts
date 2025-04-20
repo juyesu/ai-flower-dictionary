@@ -9,8 +9,7 @@ import { useModalStore } from '@/store/useModalStore'
 
 const useFileUploadModel = () => {
   const [uploadedImage, setUploadedImage] = useState({ name: '', url: '' })
-  const [plantDetectionModel, setPlantDetectionModel] =
-    useState<CustomMobileNet | null>(null)
+  const [plantDetectionModel, setPlantDetectionModel] = useState<CustomMobileNet | null>(null)
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [plantDescription, setPlantDescription] = useState('')
   const [flowerName, setFlowerName] = useState('')
@@ -30,9 +29,7 @@ const useFileUploadModel = () => {
     error,
   })
 
-  const handleFileChange = (
-    event: ChangeEvent<HTMLInputElement> | DragEvent<HTMLDivElement>
-  ) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement> | DragEvent<HTMLDivElement>) => {
     let file: File | null = null
 
     if ('dataTransfer' in event) {
@@ -89,9 +86,7 @@ const useFileUploadModel = () => {
   }
 
   const checkPlantMatch = async (className: string) => {
-    const matchedPlant = data?.krnmList?.find(
-      (name: string) => name === className
-    )
+    const matchedPlant = data?.krnmList?.find((name: string) => name === className)
 
     if (matchedPlant) {
       sessionStorage.setItem('cameFromAiFlowerDetection', 'true')

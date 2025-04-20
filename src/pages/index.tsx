@@ -18,18 +18,18 @@ const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
       <Head>
         <title>AI Flower Dictionary</title>
         <meta
-          name="description"
-          content="AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요."
+          name='description'
+          content='AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요.'
         />
-        <meta property="og:title" content="AI Flower Dictionary" />
+        <meta property='og:title' content='AI Flower Dictionary' />
         <meta
-          property="og:description"
-          content="AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요."
+          property='og:description'
+          content='AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요.'
         />
-        <meta name="twitter:title" content="AI Flower Dictionary" />
+        <meta name='twitter:title' content='AI Flower Dictionary' />
         <meta
-          name="twitter:description"
-          content="AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요."
+          name='twitter:description'
+          content='AI를 활용한 식물 인식 및 다양한 식물 정보 등 식물과 관련한 다양한 기능을 확인해보세요.'
         />
         {/* 업데이트 필요 */}
         {/* <meta property="og:image" content="/images/og-image.jpg" />
@@ -37,74 +37,71 @@ const Index = ({ staticIndexList, staticKrnmList }: IndexProps) => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" /> */}
         <link
-          rel="preload"
-          as="image"
-          href="/images/homepage_title_viedo_poster.webp"
-          type="image/webp"
+          rel='preload'
+          as='image'
+          href='/images/homepage_title_viedo_poster.webp'
+          type='image/webp'
         />
         <link
-          rel="preload"
-          href="/videos/homepage_title_viedo_1.webm"
-          as="video"
-          type="video/webm"
+          rel='preload'
+          href='/videos/homepage_title_viedo_1.webm'
+          as='video'
+          type='video/webm'
         />
         <link
-          rel="preload"
-          href="/fonts/PretendardVariable.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
+          rel='preload'
+          href='/fonts/PretendardVariable.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
         />
         <link
-          rel="preload"
-          href="/fonts/PoetsenOne-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
+          rel='preload'
+          href='/fonts/PoetsenOne-Regular.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
         />
         <link
-          rel="preload"
-          as="image"
+          rel='preload'
+          as='image'
           href={`/images/ai_flower_detection_title_image_4.avif`}
-          type="image/avif"
+          type='image/avif'
         />
         <link
-          rel="preload"
-          as="image"
+          rel='preload'
+          as='image'
           href={`/images/ai_flower_detection_title_image_4.webp`}
-          type="image/webp"
+          type='image/webp'
         />
         <link
-          rel="preload"
-          as="image"
+          rel='preload'
+          as='image'
           href={`/images/plant_info_title_image_3.avif`}
-          type="image/avif"
+          type='image/avif'
         />
         <link
-          rel="preload"
-          as="image"
+          rel='preload'
+          as='image'
           href={`/images/plant_info_title_image_3.webp`}
-          type="image/webp"
+          type='image/webp'
         />
         <link
-          rel="preload"
-          as="image"
+          rel='preload'
+          as='image'
           href={`/images/my_dictionary_title_image_2.avif`}
-          type="image/avif"
+          type='image/avif'
         />
         <link
-          rel="preload"
-          as="image"
+          rel='preload'
+          as='image'
           href={`/images/my_dictionary_title_image_2.webp`}
-          type="image/webp"
+          type='image/webp'
         />
       </Head>
       <Layout>
         <FormProvider {...methods}>
-          <HeroSection
-            staticIndexList={staticIndexList}
-            staticKrnmList={staticKrnmList}
-          />
+          <HeroSection staticIndexList={staticIndexList} staticKrnmList={staticKrnmList} />
           <FeatureSections />
           <ScrollButton />
         </FormProvider>

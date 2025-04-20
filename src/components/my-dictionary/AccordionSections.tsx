@@ -11,7 +11,7 @@ const AccordionSections = ({
 }: AccordionSectionsProps) => {
   return (
     <>
-      <section className="mt-8 w-full mobile:px-1 sm:px-4">
+      <section className='mt-8 w-full mobile:px-1 sm:px-4'>
         <button
           onClick={() =>
             setAccordionOpen((prev) => {
@@ -22,20 +22,18 @@ const AccordionSections = ({
             accordionOpen.likedPlants ? '' : ''
           }`}
         >
-          <span className="text-xl">
+          <span className='text-xl'>
             내가 좋아요 누른 식물
-            <span className="ml-2 text-zinc-400">
+            <span className='ml-2 text-zinc-400'>
               {`(${plantAccordionData.likedPlants.length}/${data?.response.response.body.totalCount})`}
             </span>
           </span>
-          <span className="text-2xl font-bold">
-            {accordionOpen.likedPlants ? '-' : '+'}
-          </span>
+          <span className='text-2xl font-bold'>{accordionOpen.likedPlants ? '-' : '+'}</span>
         </button>
 
         {accordionOpen.likedPlants &&
           (plantAccordionData.likedPlants.length > 0 ? (
-            <div className="accordion_image_grid">
+            <div className='accordion_image_grid'>
               {plantAccordionData.likedPlants.map((item) => (
                 <Link
                   key={item.krnm}
@@ -46,16 +44,16 @@ const AccordionSections = ({
                   passHref
                   aria-label={`${item.krnm}상세 페이지로 이동`}
                 >
-                  <figure className="rounded-lg text-center hover:bg-zinc-300 dark:hover:bg-gray-500 mobile:p-1.5 sm:p-2">
+                  <figure className='rounded-lg text-center hover:bg-zinc-300 dark:hover:bg-gray-500 mobile:p-1.5 sm:p-2'>
                     <Image
                       src={item.imgUrl}
                       alt={`${item.krnm}식물`}
-                      className="h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500"
+                      className='h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500'
                       width={157}
                       height={128}
-                      loading="lazy"
+                      loading='lazy'
                     />
-                    <figcaption className="mt-2 text-sm text-gray-700 dark:text-slate-300">
+                    <figcaption className='mt-2 text-sm text-gray-700 dark:text-slate-300'>
                       {item.krnm}
                     </figcaption>
                   </figure>
@@ -63,19 +61,15 @@ const AccordionSections = ({
               ))}
             </div>
           ) : (
-            <div className="flex items-center justify-center gap-4 bg-stone-100 p-20">
-              <BoxOpen
-                className="h-10 w-10"
-                fill="#a1a1aa"
-                aria-hidden="true"
-              />
-              <p className="font-bold text-zinc-400">
+            <div className='flex items-center justify-center gap-4 bg-stone-100 p-20'>
+              <BoxOpen className='h-10 w-10' fill='#a1a1aa' aria-hidden='true' />
+              <p className='font-bold text-zinc-400'>
                 아직 좋아요를 누른 식물이 존재하지 않습니다.
               </p>
             </div>
           ))}
       </section>
-      <section className="my-20 mt-8 w-full mobile:px-1 sm:px-4">
+      <section className='my-20 mt-8 w-full mobile:px-1 sm:px-4'>
         <button
           onClick={() =>
             setAccordionOpen((prev) => {
@@ -86,20 +80,18 @@ const AccordionSections = ({
             accordionOpen.myDictionary ? '' : ''
           }`}
         >
-          <span className="text-xl">
+          <span className='text-xl'>
             나의 식물도감
-            <span className="ml-2 text-zinc-400">
+            <span className='ml-2 text-zinc-400'>
               {`(${plantAccordionData.myDictionary.length}/${data?.response.response.body.totalCount})`}
             </span>
           </span>
-          <span className="text-2xl font-bold">
-            {accordionOpen.myDictionary ? '-' : '+'}
-          </span>
+          <span className='text-2xl font-bold'>{accordionOpen.myDictionary ? '-' : '+'}</span>
         </button>
 
         {accordionOpen.myDictionary &&
           (plantAccordionData.myDictionary.length > 0 ? (
-            <div className="accordion_image_grid">
+            <div className='accordion_image_grid'>
               {plantAccordionData.myDictionary.map((item) => (
                 <Link
                   key={item.krnm}
@@ -110,15 +102,15 @@ const AccordionSections = ({
                   passHref
                   aria-label={`${item.krnm}상세 페이지로 이동`}
                 >
-                  <figure className="rounded-lg text-center hover:bg-zinc-300 dark:hover:bg-gray-500 mobile:p-1.5 sm:p-2">
+                  <figure className='rounded-lg text-center hover:bg-zinc-300 dark:hover:bg-gray-500 mobile:p-1.5 sm:p-2'>
                     <Image
                       src={item.imgUrl}
                       alt={`${item.imgUrl}의 이미지`}
-                      className="h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500"
+                      className='h-32 w-full rounded border-4 border-stone-400 object-cover dark:border-stone-500'
                       width={157}
                       height={128}
                     />
-                    <figcaption className="mt-2 text-sm text-gray-700 dark:text-slate-300">
+                    <figcaption className='mt-2 text-sm text-gray-700 dark:text-slate-300'>
                       {item.krnm}
                     </figcaption>
                   </figure>
@@ -126,15 +118,9 @@ const AccordionSections = ({
               ))}
             </div>
           ) : (
-            <div className="flex items-center justify-center gap-4 bg-stone-100 p-20">
-              <BoxOpen
-                className="h-10 w-10"
-                fill="#a1a1aa"
-                aria-hidden="true"
-              />
-              <p className="font-bold text-zinc-400">
-                아직 발견한 식물이 존재하지 않습니다.
-              </p>
+            <div className='flex items-center justify-center gap-4 bg-stone-100 p-20'>
+              <BoxOpen className='h-10 w-10' fill='#a1a1aa' aria-hidden='true' />
+              <p className='font-bold text-zinc-400'>아직 발견한 식물이 존재하지 않습니다.</p>
             </div>
           ))}
       </section>

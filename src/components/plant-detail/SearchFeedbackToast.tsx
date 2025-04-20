@@ -26,44 +26,40 @@ const SearchFeedbackToast = ({
       onClick={onClick}
     >
       <button
-        type="button"
+        type='button'
         onClick={(e) => {
           e.stopPropagation()
           onClose()
         }}
-        aria-label="토스트 팝업 닫기"
-        className="absolute right-4 top-4 self-end p-1"
+        aria-label='토스트 팝업 닫기'
+        className='absolute right-4 top-4 self-end p-1'
       >
-        <Close className="h-3 w-3" aria-hidden="true" />
+        <Close className='h-3 w-3' aria-hidden='true' />
       </button>
-      <div className="flex flex-col">
-        <p className="my-0.5 text-center text-zinc-500">인식한 이미지:</p>
+      <div className='flex flex-col'>
+        <p className='my-0.5 text-center text-zinc-500'>인식한 이미지:</p>
         <Image
           src={capturedImageUrl}
-          alt="인식에 사용된 이미지"
-          className="h-[12.5rem] w-60 rounded-lg border-4 border-stone-400"
+          alt='인식에 사용된 이미지'
+          className='h-[12.5rem] w-60 rounded-lg border-4 border-stone-400'
           width={240}
           height={200}
         />
       </div>
       {!hasFeedbackSubmitted ? (
-        <div className="flex flex-col items-center justify-center">
-          <p className="my-1.5 text-center font-semibold">
-            검색 결과에 만족하시나요?
-          </p>
+        <div className='flex flex-col items-center justify-center'>
+          <p className='my-1.5 text-center font-semibold'>검색 결과에 만족하시나요?</p>
           <button
-            type="button"
-            className="p-0.5"
+            type='button'
+            className='p-0.5'
             onClick={() => setHasFeedbackSubmitted(true)}
-            aria-label="검색 결과 만족"
+            aria-label='검색 결과 만족'
           >
             👍
           </button>
         </div>
       ) : (
-        <p className="my-1.5 text-center font-semibold">
-          설문에 참여해주셔서 감사합니다!😄
-        </p>
+        <p className='my-1.5 text-center font-semibold'>설문에 참여해주셔서 감사합니다!😄</p>
       )}
     </div>
   )

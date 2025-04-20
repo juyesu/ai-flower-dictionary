@@ -8,8 +8,9 @@ import { useCapturedPlantImageStore } from '@/store/imageURLStore'
 import usePlantDetectionModelLoad from '@/components/ai-flower-detection/hooks/usePlantDetectionModelLoad'
 
 const useCameraModel = () => {
-  const [plantDetectionModel, setPlantDetectionModel] =
-    useState<tmImage.CustomMobileNet | null>(null)
+  const [plantDetectionModel, setPlantDetectionModel] = useState<tmImage.CustomMobileNet | null>(
+    null
+  )
   const [maxPredictions, setMaxPredictions] = useState(0)
   const [plantDescription, setPlantDescription] = useState('')
   const [flowerName, setFlowerName] = useState('')
@@ -88,9 +89,7 @@ const useCameraModel = () => {
     if (isGptFetchingRef.current) return
     isGptFetchingRef.current = true
     setIsAnalyzing(true)
-    const matchedPlant = data?.krnmList?.find(
-      (name: string) => name === className
-    )
+    const matchedPlant = data?.krnmList?.find((name: string) => name === className)
 
     if (matchedPlant) {
       sessionStorage.setItem('cameFromAiFlowerDetection', 'true')

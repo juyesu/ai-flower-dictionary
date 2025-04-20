@@ -35,52 +35,48 @@ const TableView = ({
           kornFamlNm: item.kornFamlNm,
           bloomPeriodCn: item.bloomPeriodCn,
           isLiked: (
-            <div className="relative flex flex-row items-center justify-center mobile:gap-2 md:gap-4">
+            <div className='relative flex flex-row items-center justify-center mobile:gap-2 md:gap-4'>
               <button
-                type="button"
-                aria-label={
-                  likedPlants.includes(item.krnm)
-                    ? '좋아요 해제'
-                    : '좋아요 추가'
-                }
+                type='button'
+                aria-label={likedPlants.includes(item.krnm) ? '좋아요 해제' : '좋아요 추가'}
                 onClick={(e) => {
                   e.preventDefault()
                   e.stopPropagation()
                   handlePlantLike(item.krnm)
                 }}
-                className="p-1"
+                className='p-1'
               >
                 {likedPlants.includes(item.krnm) ? (
                   <Liked
-                    className="mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
-                    fill="#FF5C8D"
-                    aria-hidden="true"
+                    className='mobile:h-5 mobile:w-5 sm:h-6 sm:w-6'
+                    fill='#FF5C8D'
+                    aria-hidden='true'
                   />
                 ) : (
                   <Unliked
-                    className="text-zinc-800 dark:text-slate-300 mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
-                    fill="currentColor"
-                    aria-hidden="true"
+                    className='text-zinc-800 dark:text-slate-300 mobile:h-5 mobile:w-5 sm:h-6 sm:w-6'
+                    fill='currentColor'
+                    aria-hidden='true'
                   />
                 )}
               </button>
               <button
-                type="button"
-                aria-label="이 식물 페이지를 공유"
+                type='button'
+                aria-label='이 식물 페이지를 공유'
                 onClick={async (e) => {
                   e.preventDefault()
                   e.stopPropagation()
                   await handlePlantLinkShare(item.krnm, setActiveTooltipKey)
                 }}
-                className="relative p-1"
+                className='relative p-1'
               >
                 <Share
-                  className="text-zinc-800 dark:text-slate-300 mobile:h-5 mobile:w-5 sm:h-6 sm:w-6"
-                  fill="currentColor"
-                  aria-hidden="true"
+                  className='text-zinc-800 dark:text-slate-300 mobile:h-5 mobile:w-5 sm:h-6 sm:w-6'
+                  fill='currentColor'
+                  aria-hidden='true'
                 />
                 {activeTooltipKey === item.krnm && (
-                  <div className="absolute left-1/2 top-full mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-3 py-1 text-sm text-white transition-opacity duration-300">
+                  <div className='absolute left-1/2 top-full mb-2 -translate-x-1/2 transform whitespace-nowrap rounded bg-black px-3 py-1 text-sm text-white transition-opacity duration-300'>
                     링크가 복사되었습니다!
                   </div>
                 )}
@@ -92,9 +88,7 @@ const TableView = ({
     )
   }, [apiData, likedPlants, activeTooltipKey])
 
-  const [tableDataState, setTableDataState] = useState<PlantTableType[]>([
-    ...tableData,
-  ])
+  const [tableDataState, setTableDataState] = useState<PlantTableType[]>([...tableData])
 
   useEffect(() => {
     setTableDataState([...tableData])
@@ -115,8 +109,7 @@ const TableView = ({
       size:
         viewPortWidth.isUnder767pxScreen || viewPortWidth.is768To1023pxScreen
           ? 80
-          : viewPortWidth.is1024To1279pxScreen ||
-              viewPortWidth.is1280To1535pxScreen
+          : viewPortWidth.is1024To1279pxScreen || viewPortWidth.is1280To1535pxScreen
             ? 200
             : viewPortWidth.isAbove1536pxScreen
               ? 380
@@ -139,8 +132,7 @@ const TableView = ({
       size:
         viewPortWidth.isUnder767pxScreen || viewPortWidth.is768To1023pxScreen
           ? 80
-          : viewPortWidth.is1024To1279pxScreen ||
-              viewPortWidth.is1280To1535pxScreen
+          : viewPortWidth.is1024To1279pxScreen || viewPortWidth.is1280To1535pxScreen
             ? 200
             : viewPortWidth.isAbove1536pxScreen
               ? 300
@@ -163,8 +155,7 @@ const TableView = ({
       size:
         viewPortWidth.isUnder767pxScreen || viewPortWidth.is768To1023pxScreen
           ? 40
-          : viewPortWidth.is1024To1279pxScreen ||
-              viewPortWidth.is1280To1535pxScreen
+          : viewPortWidth.is1024To1279pxScreen || viewPortWidth.is1280To1535pxScreen
             ? 120
             : viewPortWidth.isAbove1536pxScreen
               ? 140
@@ -180,20 +171,17 @@ const TableView = ({
   })
 
   return (
-    <table className="mt-16 w-full table-fixed rounded text-zinc-900 dark:text-slate-300">
+    <table className='mt-16 w-full table-fixed rounded text-zinc-900 dark:text-slate-300'>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header, index) => (
               <th
                 key={header.id}
-                className="bg-zinc-100 px-5 py-3 dark:bg-zinc-600"
+                className='bg-zinc-100 px-5 py-3 dark:bg-zinc-600'
                 style={{ width: columns[index].size || 'auto' }}
               >
-                {flexRender(
-                  header.column.columnDef.header,
-                  header.getContext()
-                )}
+                {flexRender(header.column.columnDef.header, header.getContext())}
               </th>
             ))}
           </tr>
@@ -205,7 +193,7 @@ const TableView = ({
           return (
             <tr
               key={row.id}
-              className="cursor-pointer hover:bg-zinc-300 dark:hover:bg-zinc-700"
+              className='cursor-pointer hover:bg-zinc-300 dark:hover:bg-zinc-700'
               onClick={() => {
                 router.push({
                   pathname: '/view/plant-detail',

@@ -22,44 +22,44 @@ const PlantSearchBar = ({
   return (
     <>
       <form
-        className="relative flex-col items-center mobile:mt-8 sm:mt-12"
+        className='relative flex-col items-center mobile:mt-8 sm:mt-12'
         onSubmit={(e) => {
           e.preventDefault()
         }}
       >
-        <div className="flex items-center">
-          <label htmlFor="search_plant" className="sr-only">
+        <div className='flex items-center'>
+          <label htmlFor='search_plant' className='sr-only'>
             Search for Plants
           </label>
           <MagnifyingGlass
-            className="absolute z-10 mobile:mx-4 mobile:h-5 mobile:w-5 sm:mx-6 sm:h-[1.4rem] sm:w-[1.4rem]"
-            fill="#787878"
-            aria-hidden="true"
+            className='absolute z-10 mobile:mx-4 mobile:h-5 mobile:w-5 sm:mx-6 sm:h-[1.4rem] sm:w-[1.4rem]'
+            fill='#787878'
+            aria-hidden='true'
           />
           <input
             {...methods.register('input')}
-            id="search_plant"
-            type="search"
-            autoComplete="off"
+            id='search_plant'
+            type='search'
+            autoComplete='off'
             onFocus={searchInputFocus}
             onBlur={searchInputBlur}
             onChange={(e) => methods.setValue('input', e.target.value)}
             onKeyUp={searchKeyUp}
-            className="rounded-full bg-white py-2 opacity-80 dark:bg-zinc-900 dark:text-slate-200 mobile:h-[2.8rem] mobile:w-[22rem] mobile:pl-12 mobile:text-lg mobile:font-semibold sm:h-[3.2rem] sm:w-[40rem] sm:pl-16 sm:text-xl sm:font-bold lg:w-[48rem]"
+            className='rounded-full bg-white py-2 opacity-80 dark:bg-zinc-900 dark:text-slate-200 mobile:h-[2.8rem] mobile:w-[22rem] mobile:pl-12 mobile:text-lg mobile:font-semibold sm:h-[3.2rem] sm:w-[40rem] sm:pl-16 sm:text-xl sm:font-bold lg:w-[48rem]'
           />
           {methods.getValues('input') && (
             <button
-              type="button"
+              type='button'
               onClick={() => methods.setValue('input', '')}
-              aria-label="검색어 초기화"
-              className="absolute cursor-pointer mobile:right-4 sm:right-8"
+              aria-label='검색어 초기화'
+              className='absolute cursor-pointer mobile:right-4 sm:right-8'
             >
-              <Close className="h-4 w-4" fill="#787878" aria-hidden="true" />
+              <Close className='h-4 w-4' fill='#787878' aria-hidden='true' />
             </button>
           )}
         </div>
         {isSearchInputFocus && methods.watch('input') && (
-          <ul className="absolute top-16 flex w-full flex-col rounded-3xl bg-white opacity-100 dark:bg-zinc-800">
+          <ul className='absolute top-16 flex w-full flex-col rounded-3xl bg-white opacity-100 dark:bg-zinc-800'>
             {currentAutoCompletePlantNames.map((item, index, array) => {
               return (
                 <Link
@@ -89,13 +89,9 @@ const PlantSearchBar = ({
                             : ''
                     }`}
                   >
-                    {reactStringReplace(
-                      item,
-                      methods.getValues('input'),
-                      (match) => (
-                        <span>{match}</span>
-                      )
-                    )}
+                    {reactStringReplace(item, methods.getValues('input'), (match) => (
+                      <span>{match}</span>
+                    ))}
                   </li>
                 </Link>
               )
@@ -138,8 +134,7 @@ const PlantSearchBar = ({
                         pathname: '/view/plant-detail',
                         query: {
                           plantName: item.krnm,
-                          prevPage:
-                            currentPage === 'home' ? 'home' : currentPage,
+                          prevPage: currentPage === 'home' ? 'home' : currentPage,
                         },
                       }}
                       className={`rounded-xl px-1.5 py-1 text-sm underline ${

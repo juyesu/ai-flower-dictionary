@@ -3,78 +3,61 @@ import PlantSearchBarContainer from '@/components/common/plant-search-bar'
 import ModeSwitchButton from '@/components/ai-flower-detection/ModeSwitchButton'
 import Image from 'next/image'
 
-const PageTitle = ({
-  analysisMode,
-  setAnalysisMode,
-  titleImage,
-  titleOptions,
-}: PageTitleProps) => {
+const PageTitle = ({ analysisMode, setAnalysisMode, titleImage, titleOptions }: PageTitleProps) => {
   return (
     <div
       className={`relative flex w-full items-end justify-center overflow-hidden ${titleOptions == 'PlantSearchBar' ? 'mobile:h-[28.75rem] sm:h-[40.75rem]' : 'mobile:h-[22.5rem] sm:h-[31.25rem]'}`}
     >
       <picture>
-        <source srcSet={`/images/${titleImage}.webp`} type="image/webp" />
-        <source srcSet={`/images/${titleImage}.avif`} type="image/avif" />
+        <source srcSet={`/images/${titleImage}.webp`} type='image/webp' />
+        <source srcSet={`/images/${titleImage}.avif`} type='image/avif' />
         <Image
           src={`/images/${titleImage}.jpg`}
-          alt="타이틀 커버 이미지"
-          className="object-cover"
+          alt='타이틀 커버 이미지'
+          className='object-cover'
           fill
           priority
-          fetchPriority="high"
-          sizes="(max-width: 1919px) 100vw, (min-width: 1920px) 70vw"
+          fetchPriority='high'
+          sizes='(max-width: 1919px) 100vw, (min-width: 1920px) 70vw'
         />
       </picture>
-      <div className="title_image_gradient dark:title_image_gradient absolute inset-0" />
+      <div className='title_image_gradient dark:title_image_gradient absolute inset-0' />
       {(() => {
         switch (titleOptions) {
           case 'ModeSwitchButton':
             return (
               <>
-                <div className="mt-30 absolute inset-0 flex flex-col items-center justify-center gap-3 pb-20">
-                  <h1 className="page_main_title dark:text-slate-300">
-                    AI Flower Detection
-                  </h1>
-                  <p className="ml-1 mt-1.5 text-center font-semibold text-zinc-800 dark:text-slate-300 sm:text-lg">
-                    카메라에 꽃을 비추거나, 꽃 이미지를 업로드하면 <br /> 해당
-                    꽃의 이름과 정보를 알려드립니다.
+                <div className='mt-30 absolute inset-0 flex flex-col items-center justify-center gap-3 pb-20'>
+                  <h1 className='page_main_title dark:text-slate-300'>AI Flower Detection</h1>
+                  <p className='ml-1 mt-1.5 text-center font-semibold text-zinc-800 dark:text-slate-300 sm:text-lg'>
+                    카메라에 꽃을 비추거나, 꽃 이미지를 업로드하면 <br /> 해당 꽃의 이름과 정보를
+                    알려드립니다.
                   </p>
                 </div>
                 {analysisMode && setAnalysisMode && (
-                  <ModeSwitchButton
-                    analysisMode={analysisMode}
-                    setAnalysisMode={setAnalysisMode}
-                  />
+                  <ModeSwitchButton analysisMode={analysisMode} setAnalysisMode={setAnalysisMode} />
                 )}
               </>
             )
           case 'PlantSearchBar':
             return (
-              <div className="absolute inset-0 flex w-full flex-col items-center gap-5">
-                <div className="mt-28 flex flex-col items-center">
-                  <h1 className="page_main_title dark:text-slate-300">
-                    Plant Info
-                  </h1>
-                  <p className="ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300">
+              <div className='absolute inset-0 flex w-full flex-col items-center gap-5'>
+                <div className='mt-28 flex flex-col items-center'>
+                  <h1 className='page_main_title dark:text-slate-300'>Plant Info</h1>
+                  <p className='ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300'>
                     다양한 식물 정보를 탐색하고 사용자들과 <br />
                     식물에 대한 경험을 공유해보세요
                   </p>
                 </div>
-                <PlantSearchBarContainer
-                  color="dark"
-                  currentPage="plant-info"
-                />
+                <PlantSearchBarContainer color='dark' currentPage='plant-info' />
               </div>
             )
           case 'default':
             return (
-              <div className="absolute inset-0 flex w-full flex-col items-center justify-center gap-5">
-                <div className="mb-12 flex flex-col items-center">
-                  <h1 className="page_main_title dark:text-slate-300">
-                    My Dictionary
-                  </h1>
-                  <p className="ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300">
+              <div className='absolute inset-0 flex w-full flex-col items-center justify-center gap-5'>
+                <div className='mb-12 flex flex-col items-center'>
+                  <h1 className='page_main_title dark:text-slate-300'>My Dictionary</h1>
+                  <p className='ml-1 mt-1.5 text-center text-lg font-semibold text-zinc-800 dark:text-slate-300'>
                     내가 발견한 식물들로 <br />
                     세상에 단 하나뿐인 나만의 도감을 완성해보세요
                   </p>

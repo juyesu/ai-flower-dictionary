@@ -12,9 +12,7 @@ const usePlantInfoPageState = () => {
   }
   const [viewMode, setViewMode] = useState<'card' | 'table'>('card')
   const [currentPage, setCurrentPage] = useState(1)
-  const [maximumPageSize, setMaximumPageSize] = useState(
-    viewPortWidth.isUnder767pxScreen ? 14 : 15
-  )
+  const [maximumPageSize, setMaximumPageSize] = useState(viewPortWidth.isUnder767pxScreen ? 14 : 15)
   const [likedPlants, setLikedPlants] = useState<string[]>([])
   const [activeTooltipKey, setActiveTooltipKey] = useState('')
 

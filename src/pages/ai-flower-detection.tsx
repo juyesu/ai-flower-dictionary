@@ -8,9 +8,7 @@ import Head from 'next/head'
 import router from 'next/router'
 
 const AiFlowerDetection = () => {
-  const [analysisMode, setAnalysisMode] = useState<'camera' | 'imageUpload'>(
-    'camera'
-  )
+  const [analysisMode, setAnalysisMode] = useState<'camera' | 'imageUpload'>('camera')
 
   useEffect(() => {
     if (router.query.sort == 'imageUpload') {
@@ -23,29 +21,29 @@ const AiFlowerDetection = () => {
       <Head>
         <title>AI Flower Detection</title>
         <meta
-          name="description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          name='description'
+          content='카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다.'
         />
-        <meta property="og:title" content="AI Flower Detection" />
+        <meta property='og:title' content='AI Flower Detection' />
         <meta
-          property="og:description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          property='og:description'
+          content='카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다.'
         />
-        <meta name="twitter:title" content="AI Flower Detection" />
+        <meta name='twitter:title' content='AI Flower Detection' />
         <meta
-          name="twitter:description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          name='twitter:description'
+          content='카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다.'
         />
       </Head>
       <Layout>
-        <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
+        <div className='flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]'>
           <PageTitle
             analysisMode={analysisMode}
             setAnalysisMode={setAnalysisMode}
-            titleImage="ai_flower_detection_title_image_4"
-            titleOptions="ModeSwitchButton"
+            titleImage='ai_flower_detection_title_image_4'
+            titleOptions='ModeSwitchButton'
           />
-          <div className="flex w-full flex-col items-center">
+          <div className='flex w-full flex-col items-center'>
             {analysisMode == 'camera' ? <CameraModel /> : <FileUploadModel />}
           </div>
         </div>

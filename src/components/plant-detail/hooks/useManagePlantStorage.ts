@@ -15,9 +15,7 @@ const useManagePlantStorage = ({
 
   useEffect(() => {
     if (userId) {
-      setLikedPlants(
-        JSON.parse(localStorage.getItem(`${userId}.likedPlants`) || '[]')
-      )
+      setLikedPlants(JSON.parse(localStorage.getItem(`${userId}.likedPlants`) || '[]'))
     }
   }, [userId])
 
@@ -26,15 +24,10 @@ const useManagePlantStorage = ({
       prevPage === 'ai-flower-detection' &&
       sessionStorage.getItem('cameFromAiFlowerDetection') === 'true'
     ) {
-      const storedPlants = JSON.parse(
-        localStorage.getItem(`${userId}.findPlants`) || '[]'
-      )
+      const storedPlants = JSON.parse(localStorage.getItem(`${userId}.findPlants`) || '[]')
 
       if (userId && !storedPlants.includes(plantName)) {
-        localStorage.setItem(
-          `${userId}.findPlants`,
-          JSON.stringify([...storedPlants, plantName])
-        )
+        localStorage.setItem(`${userId}.findPlants`, JSON.stringify([...storedPlants, plantName]))
       }
       sessionStorage.removeItem('cameFromAiFlowerDetection')
     }

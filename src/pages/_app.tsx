@@ -17,11 +17,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+          <ThemeProvider attribute='class' enableSystem defaultTheme='system'>
             <Component {...pageProps} />
           </ThemeProvider>
         </AuthProvider>

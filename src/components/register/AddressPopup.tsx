@@ -8,20 +8,20 @@ const AddressPopup = ({ setOpenPostcode }: AddressPopupProps) => {
   return (
     <>
       <div
-        className="fixed inset-0 z-40 h-full w-full bg-black bg-opacity-30"
+        className='fixed inset-0 z-40 h-full w-full bg-black bg-opacity-30'
         onClick={() => setOpenPostcode(false)}
-        aria-hidden="true"
-        aria-labelledby="modal-title"
+        aria-hidden='true'
+        aria-labelledby='modal-title'
       />
       <div
-        className="roundex-xl fixed z-50 flex w-[25rem] items-center justify-center"
-        aria-modal="true"
+        className='roundex-xl fixed z-50 flex w-[25rem] items-center justify-center'
+        aria-modal='true'
       >
-        <h2 id="modal-title" className="sr-only">
+        <h2 id='modal-title' className='sr-only'>
           주소 검색 모달
         </h2>
         <DaumPostcode
-          className="rounded-xl"
+          className='rounded-xl'
           onComplete={(data) => {
             setValue('address', data.address)
             setOpenPostcode(false)

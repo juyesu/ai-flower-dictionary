@@ -28,8 +28,7 @@ const useLoginForm = () => {
     } else {
       openModal({
         type: 'ALERT',
-        message:
-          '일치하는 계정이 존재하지 않습니다.\n 이메일 또는 비밀번호를 다시 확인해주세요.',
+        message: '일치하는 계정이 존재하지 않습니다.\n 이메일 또는 비밀번호를 다시 확인해주세요.',
       })
       methods.setValue('password', '')
     }

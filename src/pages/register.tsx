@@ -13,32 +13,27 @@ const Register = () => {
       <Head>
         <title>회원가입 페이지</title>
         <meta
-          name="description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          name='description'
+          content='카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다.'
         />
-        <meta property="og:title" content="회원가입 페이지" />
+        <meta property='og:title' content='회원가입 페이지' />
         <meta
-          property="og:description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          property='og:description'
+          content='카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다.'
         />
-        <meta name="twitter:title" content="회원가입 페이지" />
+        <meta name='twitter:title' content='회원가입 페이지' />
         <meta
-          name="twitter:description"
-          content="카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다."
+          name='twitter:description'
+          content='카메라로 식물을 비추거나 이미지를 업로드하면, AI 분석을 통해 해당 식물의 정보를 알려드립니다.'
         />
       </Head>
       <Layout>
         <FormProvider {...methods}>
-          <div className="login_page_layout">
-            <div className="login_container">
-              <div className="login_form dark:border-zinc-500">
-                <h1 className="login_page_title dark:text-slate-300">
-                  회원가입
-                </h1>
-                <RegisterForm
-                  onSubmit={onSubmit}
-                  setOpenPostcode={setOpenPostcode}
-                />
+          <div className='login_page_layout'>
+            <div className='login_container'>
+              <div className='login_form dark:border-zinc-500'>
+                <h1 className='login_page_title dark:text-slate-300'>회원가입</h1>
+                <RegisterForm onSubmit={onSubmit} setOpenPostcode={setOpenPostcode} />
               </div>
             </div>
             {openPostcode && <AddressPopup setOpenPostcode={setOpenPostcode} />}

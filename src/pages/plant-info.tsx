@@ -28,26 +28,20 @@ const PlantInfo = () => {
     activeTooltipKey,
     setActiveTooltipKey,
   } = usePlantInfoPageState()
-  const { handleChangeToCardList, handleChangeToTableList } =
-    useViewModeHandlers({
-      setViewMode,
-      setCurrentPage,
-      setMaximumPageSize,
-      viewPortWidth,
-    })
-  const { data, isLoading, error } = usePlantIndexFetchData(
-    currentPage,
-    maximumPageSize
-  )
+  const { handleChangeToCardList, handleChangeToTableList } = useViewModeHandlers({
+    setViewMode,
+    setCurrentPage,
+    setMaximumPageSize,
+    viewPortWidth,
+  })
+  const { data, isLoading, error } = usePlantIndexFetchData(currentPage, maximumPageSize)
   useSetApiErrorModal({ data, isLoading, error })
   const { userId } = useAuth()
   const hasMounted = useRef(false)
 
   useEffect(() => {
     if (userId) {
-      setLikedPlants(
-        JSON.parse(localStorage.getItem(`${userId}.likedPlants`) || '[]')
-      )
+      setLikedPlants(JSON.parse(localStorage.getItem(`${userId}.likedPlants`) || '[]'))
     }
   }, [userId])
 
@@ -69,27 +63,15 @@ const PlantInfo = () => {
     <>
       <Head>
         <title>Plant Info</title>
-        <meta
-          name="description"
-          content="100종 이상의 다양한 식물 정보를 확인해보세요."
-        />
-        <meta property="og:title" content="Plant Info" />
-        <meta
-          property="og:description"
-          content="100종 이상의 다양한 식물 정보를 확인해보세요."
-        />
-        <meta name="twitter:title" content="Plant Info" />
-        <meta
-          name="twitter:description"
-          content="100종 이상의 다양한 식물 정보를 확인해보세요."
-        />
+        <meta name='description' content='100종 이상의 다양한 식물 정보를 확인해보세요.' />
+        <meta property='og:title' content='Plant Info' />
+        <meta property='og:description' content='100종 이상의 다양한 식물 정보를 확인해보세요.' />
+        <meta name='twitter:title' content='Plant Info' />
+        <meta name='twitter:description' content='100종 이상의 다양한 식물 정보를 확인해보세요.' />
       </Head>
       <Layout>
-        <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
-          <PageTitle
-            titleImage="plant_info_title_image_3"
-            titleOptions="PlantSearchBar"
-          />
+        <div className='flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]'>
+          <PageTitle titleImage='plant_info_title_image_3' titleOptions='PlantSearchBar' />
           <ViewModeSwitchButton
             handleChangeToCardList={handleChangeToCardList}
             handleChangeToTableList={handleChangeToTableList}

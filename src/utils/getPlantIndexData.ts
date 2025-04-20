@@ -1,9 +1,5 @@
 import axios from 'axios'
-import {
-  PlantIndexItem,
-  PlantIndexParams,
-  PlantIndexResponse,
-} from '@/types/type'
+import { PlantIndexItem, PlantIndexParams, PlantIndexResponse } from '@/types/type'
 
 const fetchPlantIndexData = async (
   pageNumber: number,
@@ -21,9 +17,7 @@ const fetchPlantIndexData = async (
       params,
     })
 
-    const indexList = response?.data?.response.body.items.item.map(
-      (item: PlantIndexItem) => item
-    )
+    const indexList = response?.data?.response.body.items.item.map((item: PlantIndexItem) => item)
     const krnmList = response?.data?.response.body.items.item.map(
       (item: PlantIndexItem) => item.krnm
     )

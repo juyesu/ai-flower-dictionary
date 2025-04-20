@@ -36,27 +36,21 @@ const MyDictionary = () => {
     <>
       <Head>
         <title>My Dictionary</title>
+        <meta name='description' content='좋아하는 식물들로 이루어진 나만의 도감을 만들어보세요.' />
+        <meta property='og:title' content='My Dictionary' />
         <meta
-          name="description"
-          content="좋아하는 식물들로 이루어진 나만의 도감을 만들어보세요."
+          property='og:description'
+          content='좋아하는 식물들로 이루어진 나만의 도감을 만들어보세요.'
         />
-        <meta property="og:title" content="My Dictionary" />
+        <meta name='twitter:title' content='My Dictionary' />
         <meta
-          property="og:description"
-          content="좋아하는 식물들로 이루어진 나만의 도감을 만들어보세요."
-        />
-        <meta name="twitter:title" content="My Dictionary" />
-        <meta
-          name="twitter:description"
-          content="좋아하는 식물들로 이루어진 나만의 도감을 만들어보세요."
+          name='twitter:description'
+          content='좋아하는 식물들로 이루어진 나만의 도감을 만들어보세요.'
         />
       </Head>
       <Layout>
-        <div className="flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]">
-          <PageTitle
-            titleImage="my_dictionary_title_image_2"
-            titleOptions="default"
-          />
+        <div className='flex min-h-screen w-full flex-col items-center fhd:px-96 qhd:px-[32rem]'>
+          <PageTitle titleImage='my_dictionary_title_image_2' titleOptions='default' />
           <AccordionSections
             accordionOpen={accordionOpen}
             setAccordionOpen={setAccordionOpen}

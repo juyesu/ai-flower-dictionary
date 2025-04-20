@@ -28,9 +28,7 @@ export const fetchChatGptResponse = async (plantName: string) => {
     })
 
     const data = await response.json()
-    return (
-      data?.choices?.[0]?.message?.content || '식물 정보를 찾을 수 없습니다.'
-    )
+    return data?.choices?.[0]?.message?.content || '식물 정보를 찾을 수 없습니다.'
   } catch (error) {
     console.error('ChatGPT API 호출 오류:', error)
     return '식물 정보를 가져오는 데 실패했습니다.'

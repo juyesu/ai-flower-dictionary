@@ -1,12 +1,6 @@
 import { useModalStore } from '@/store/useModalStore'
 import { AuthContextType } from '@/types/type'
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from 'react'
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
@@ -43,9 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider
-      value={{ userId, setUserId, logout, withdrawAccount }}
-    >
+    <AuthContext.Provider value={{ userId, setUserId, logout, withdrawAccount }}>
       {children}
     </AuthContext.Provider>
   )

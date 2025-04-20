@@ -17,9 +17,7 @@ const useSectionScroll = () => {
 
         if (visibleSections.length > 0) {
           const newActiveSection = visibleSections[0]
-          setActiveSection((prev) =>
-            prev !== newActiveSection ? newActiveSection : prev
-          )
+          setActiveSection((prev) => (prev !== newActiveSection ? newActiveSection : prev))
 
           requestAnimationFrame(() => {
             document.getElementById(newActiveSection)?.scrollIntoView({

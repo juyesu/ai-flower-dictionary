@@ -14,11 +14,8 @@ const usePlantSearch = ({
   const { getValues, watch, setValue, setFocus } = methods
   const [isSearchInputFocus, setIsSearchInputFocus] = useState(false)
   const [randomPlants, setRandomPlants] = useState<PlantIndexItem[]>([])
-  const [autoCompletePlantNames, setAutoCompletePlantNames] = useState<
-    string[]
-  >([])
-  const [currentAutoCompletePlantNames, setCurrentAutoCompletePlantNames] =
-    useState<string[]>([])
+  const [autoCompletePlantNames, setAutoCompletePlantNames] = useState<string[]>([])
+  const [currentAutoCompletePlantNames, setCurrentAutoCompletePlantNames] = useState<string[]>([])
   const [selectedAutocompleteIndex, setSelectedAutocompleteIndex] = useState(-1)
   const isMinMobileScreen = useMediaQuery({ minWidth: 320 })
   const isMinSmScreen = useMediaQuery({ minWidth: 640 })
@@ -26,20 +23,14 @@ const usePlantSearch = ({
   const skipAutoFocusRef = useRef(true)
   const router = useRouter()
   const { data } =
-    !staticIndexList || !staticKrnmList
-      ? usePlantIndexFetchData(1, 300)
-      : { data: null }
+    !staticIndexList || !staticKrnmList ? usePlantIndexFetchData(1, 300) : { data: null }
 
   useEffect(() => {
     if (staticIndexList && staticKrnmList) {
-      setRandomPlants(
-        [...(staticIndexList || [])].sort(() => Math.random() - 0.5).slice(0, 5)
-      )
+      setRandomPlants([...(staticIndexList || [])].sort(() => Math.random() - 0.5).slice(0, 5))
       setAutoCompletePlantNames(staticKrnmList)
     } else if (data) {
-      setRandomPlants(
-        [...(data?.indexList || [])].sort(() => Math.random() - 0.5).slice(0, 5)
-      )
+      setRandomPlants([...(data?.indexList || [])].sort(() => Math.random() - 0.5).slice(0, 5))
       setAutoCompletePlantNames(data?.krnmList)
     }
   }, [data, staticIndexList, staticKrnmList])
@@ -81,23 +72,14 @@ const usePlantSearch = ({
 
   const searchKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     const searchInputValue = getValues('input')
-    const filteredList = autoCompletePlantNames?.filter((el) =>
-      el.includes(searchInputValue)
-    )
+    const filteredList = autoCompletePlantNames?.filter((el) => el.includes(searchInputValue))
     if (e.key === 'Enter') {
       if (selectedAutocompleteIndex != -1) {
-        setValue(
-          'input',
-          currentAutoCompletePlantNames[selectedAutocompleteIndex]
-        )
+        setValue('input', currentAutoCompletePlantNames[selectedAutocompleteIndex])
       } else {
         if (
-          staticIndexList?.some(
-            (item: PlantIndexItem) => item.krnm == searchInputValue
-          ) ||
-          data?.indexList.some(
-            (item: PlantIndexItem) => item.krnm == searchInputValue
-          )
+          staticIndexList?.some((item: PlantIndexItem) => item.krnm == searchInputValue) ||
+          data?.indexList.some((item: PlantIndexItem) => item.krnm == searchInputValue)
         ) {
           router.push({
             pathname: 'view/plant-detail',
@@ -114,9 +96,7 @@ const usePlantSearch = ({
     }
 
     if (e.key === 'ArrowUp') {
-      setSelectedAutocompleteIndex((prevIndex) =>
-        prevIndex > 0 ? prevIndex - 1 : prevIndex
-      )
+      setSelectedAutocompleteIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : prevIndex))
     } else if (e.key === 'ArrowDown') {
       setSelectedAutocompleteIndex((prevIndex) =>
         prevIndex < filteredList.length - 1 ? prevIndex + 1 : prevIndex

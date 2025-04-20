@@ -6,11 +6,10 @@ const useMyDictionaryPageState = () => {
     likedPlants: true,
     myDictionary: true,
   })
-  const [plantAccordionData, setPlantAccordionData] =
-    useState<PlantAccordionDataType>({
-      likedPlants: [],
-      myDictionary: [],
-    })
+  const [plantAccordionData, setPlantAccordionData] = useState<PlantAccordionDataType>({
+    likedPlants: [],
+    myDictionary: [],
+  })
   const [userEmail, setUserEmail] = useState<string | null>(null)
 
   return {

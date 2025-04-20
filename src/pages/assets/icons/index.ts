@@ -26,4 +26,3 @@ export { default as TypeScript } from '@/pages/assets/icons/TypeScript.svg'
 export { default as Unliked } from '@/pages/assets/icons/Unliked.svg'
 export { default as Upload } from '@/pages/assets/icons/Upload.svg'
 export { default as User } from '@/pages/assets/icons/User.svg'
-

@@ -25,9 +25,7 @@ const PlantDetail = () => {
     if (!data || isLoading || !plantName) return
     const decodedKrnm = decodeURIComponent(plantName as string)
 
-    const foundPlant = data?.indexList.find(
-      (p: PlantIndexItem) => p.krnm === decodedKrnm
-    )
+    const foundPlant = data?.indexList.find((p: PlantIndexItem) => p.krnm === decodedKrnm)
 
     setPlantData(foundPlant || null)
   }, [data, isLoading, plantName])
@@ -43,22 +41,22 @@ const PlantDetail = () => {
       <Head>
         <title>{plantName} 상세 페이지</title>
         <meta
-          name="description"
+          name='description'
           content={`${plantName}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
         />
-        <meta property="og:title" content={`${plantName} 상세 페이지`} />
+        <meta property='og:title' content={`${plantName} 상세 페이지`} />
         <meta
-          property="og:description"
+          property='og:description'
           content={`${plantName}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
         />
-        <meta name="twitter:title" content={`${plantName} 상세 페이지`} />
+        <meta name='twitter:title' content={`${plantName} 상세 페이지`} />
         <meta
-          name="twitter:description"
+          name='twitter:description'
           content={`${plantName}에 대한 색상, 개화시기, 특징 등 다양한 정보를 확인해보세요.`}
         />
       </Head>
       <Layout>
-        <div className="flex min-h-screen w-full flex-col items-center bg-[#FEF5CC] dark:bg-inherit sm:px-2 md:px-4 xl:px-8 2xl:px-16 fhd:px-[32rem]">
+        <div className='flex min-h-screen w-full flex-col items-center bg-[#FEF5CC] dark:bg-inherit sm:px-2 md:px-4 xl:px-8 2xl:px-16 fhd:px-[32rem]'>
           {plantData && (
             <>
               <PlantDetailTitle
@@ -69,7 +67,7 @@ const PlantDetail = () => {
                 prevPage={prevPage}
                 sort={sort}
               />
-              <hr className="my-6 mb-10 w-full dark:border-gray-400" />
+              <hr className='my-6 mb-10 w-full dark:border-gray-400' />
               <PlantDetailContent plantData={plantData} />
             </>
           )}

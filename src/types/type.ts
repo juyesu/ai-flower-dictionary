@@ -16,9 +16,7 @@ export type AuthContextType = {
 
 export type PlantDetectionModelLoadOptions = {
   plantDetectionModel: tmImage.CustomMobileNet | null
-  setPlantDetectionModel: Dispatch<
-    SetStateAction<tmImage.CustomMobileNet | null>
-  >
+  setPlantDetectionModel: Dispatch<SetStateAction<tmImage.CustomMobileNet | null>>
   setMaxPredictions: Dispatch<SetStateAction<number>>
   data: PlantIndexResponse | undefined
   isLoading: boolean
@@ -165,9 +163,7 @@ export type PlantAccordionDataType = {
 
 export type AccordionSectionsProps = {
   accordionOpen: { likedPlants: boolean; myDictionary: boolean }
-  setAccordionOpen: Dispatch<
-    SetStateAction<{ likedPlants: boolean; myDictionary: boolean }>
-  >
+  setAccordionOpen: Dispatch<SetStateAction<{ likedPlants: boolean; myDictionary: boolean }>>
   plantAccordionData: PlantAccordionDataType
   data: PlantIndexResponse | undefined
 }

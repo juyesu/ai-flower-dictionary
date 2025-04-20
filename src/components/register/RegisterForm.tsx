@@ -8,14 +8,14 @@ const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="login_input_group">
-        <label htmlFor="name" className="dark:text-zinc-300">
+      <div className='login_input_group'>
+        <label htmlFor='name' className='dark:text-zinc-300'>
           이름
         </label>
         <input
-          id="name"
-          type="text"
-          className="login_form_input"
+          id='name'
+          type='text'
+          className='login_form_input'
           {...register('name', {
             required: '이름을 입력해주세요',
             minLength: {
@@ -33,20 +33,18 @@ const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
           })}
         />
         {formState.errors.name && (
-          <p className="login_form_schema_error">
-            {formState.errors.name.message}
-          </p>
+          <p className='login_form_schema_error'>{formState.errors.name.message}</p>
         )}
       </div>
 
-      <div className="login_input_group">
-        <label htmlFor="email" className="dark:text-zinc-300">
+      <div className='login_input_group'>
+        <label htmlFor='email' className='dark:text-zinc-300'>
           이메일
         </label>
         <input
-          id="email"
-          type="email"
-          className="login_form_input"
+          id='email'
+          type='email'
+          className='login_form_input'
           {...register('email', {
             required: '이메일을 입력해주세요',
             pattern: {
@@ -56,20 +54,18 @@ const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
           })}
         />
         {formState.errors.email && (
-          <p className="login_form_schema_error">
-            {formState.errors.email.message}
-          </p>
+          <p className='login_form_schema_error'>{formState.errors.email.message}</p>
         )}
       </div>
 
-      <div className="login_input_group">
-        <label htmlFor="password" className="dark:text-zinc-300">
+      <div className='login_input_group'>
+        <label htmlFor='password' className='dark:text-zinc-300'>
           비밀번호
         </label>
         <input
-          id="password"
-          type="password"
-          className="login_form_input"
+          id='password'
+          type='password'
+          className='login_form_input'
           {...register('password', {
             required: '비밀번호를 입력해주세요',
             minLength: {
@@ -84,46 +80,42 @@ const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
           })}
         />
         {formState.errors.password && (
-          <p className="login_form_schema_error">
-            {formState.errors.password.message}
-          </p>
+          <p className='login_form_schema_error'>{formState.errors.password.message}</p>
         )}
       </div>
 
-      <div className="login_input_group">
-        <label htmlFor="address" className="dark:text-zinc-300">
+      <div className='login_input_group'>
+        <label htmlFor='address' className='dark:text-zinc-300'>
           주소
         </label>
-        <div className="flex gap-2">
+        <div className='flex gap-2'>
           <input
-            id="address"
-            type="text"
-            className="login_form_input bg-stone-100 dark:bg-zinc-800"
+            id='address'
+            type='text'
+            className='login_form_input bg-stone-100 dark:bg-zinc-800'
             {...register('address', {
               required: '주소를 입력해주세요',
             })}
             readOnly
           />
           <button
-            type="button"
-            className="mt-1.5 flex items-center justify-center rounded bg-zinc-300 px-3 hover:bg-zinc-400 dark:bg-zinc-400 dark:hover:bg-zinc-500"
+            type='button'
+            className='mt-1.5 flex items-center justify-center rounded bg-zinc-300 px-3 hover:bg-zinc-400 dark:bg-zinc-400 dark:hover:bg-zinc-500'
             onClick={() => setOpenPostcode(true)}
-            aria-label="주소입력 팝업 열기"
+            aria-label='주소입력 팝업 열기'
           >
-            <MagnifyingGlass className="h-4 w-4" aria-hidden="true" />
+            <MagnifyingGlass className='h-4 w-4' aria-hidden='true' />
           </button>
         </div>
         {formState.errors.address && (
-          <p className="login_form_schema_error">
-            {formState.errors.address.message}
-          </p>
+          <p className='login_form_schema_error'>{formState.errors.address.message}</p>
         )}
       </div>
 
-      <button className="login_form_submit_button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600">
+      <button className='login_form_submit_button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600'>
         회원가입
       </button>
-      <Link href="/login" className="login_register_switch_link">
+      <Link href='/login' className='login_register_switch_link'>
         이미 계정이 있으신가요?
         <span>로그인</span>
       </Link>

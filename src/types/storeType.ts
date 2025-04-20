@@ -1,4 +1,3 @@
-
 export type ImageStoreType = {
   capturedImageUrl: string
   setCapturedImageUrl: (value: string) => void

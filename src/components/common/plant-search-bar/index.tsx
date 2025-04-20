@@ -1,7 +1,4 @@
-import {
-  PlantSearchBarContainerProps,
-  PlantSearchFormValues,
-} from '@/types/type'
+import { PlantSearchBarContainerProps, PlantSearchFormValues } from '@/types/type'
 import { FormProvider, useForm } from 'react-hook-form'
 import PlantSearchBar from '@/components/common/plant-search-bar/PlantSearchBar'
 import usePlantSearch from '@/components/common/plant-search-bar/hooks/usePlantSearch'

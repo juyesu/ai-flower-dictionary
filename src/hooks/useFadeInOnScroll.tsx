@@ -29,9 +29,7 @@ const useFadeInOnScroll = () => {
       { threshold: 0.2 }
     )
 
-    document
-      .querySelectorAll('.hidden_opacity[id]')
-      .forEach((el) => observer.observe(el))
+    document.querySelectorAll('.hidden_opacity[id]').forEach((el) => observer.observe(el))
 
     return () => observer.disconnect()
   }, [])
