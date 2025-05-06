@@ -2,16 +2,10 @@ import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
 import { CircleUser } from '@/pages/assets/icons'
 import { useEffect, useState } from 'react'
+import requestWithdraw from '@/utils/requestWithdraw'
 
 const LoginSwitcher = () => {
-  const { userId, logout, withdrawAccount } = useAuth()
-  const [userName, setUserName] = useState<string | null>('')
-
-  useEffect(() => {
-    if (userId) {
-      setUserName(localStorage.getItem(`${userId}.name`))
-    }
-  }, [userId])
+  const { userId, logout, userInfo } = useAuth()
 
   return (
     <div className='mr-4 h-full items-center justify-center mobile:hidden sm:ml-2 sm:gap-1 lg:ml-4 lg:flex lg:gap-1.5'>
@@ -23,9 +17,9 @@ const LoginSwitcher = () => {
               fill='currentColor'
               aria-hidden='true'
             />
-            {userName && (
+            {userInfo?.name && (
               <p className='text-blue-400 dark:text-blue-600'>
-                <span className='font-bold'>{userName}</span>님 반갑습니다!
+                <span className='font-bold'>{userInfo.name}</span>님 반갑습니다!
               </p>
             )}
           </div>
@@ -39,7 +33,7 @@ const LoginSwitcher = () => {
             <button
               className='rounded-full border-2 bg-zinc-400 text-zinc-100 hover:border-zinc-600 dark:border-gray-500 dark:bg-zinc-700 dark:text-zinc-500 dark:hover:border-gray-400 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold'
               type='button'
-              onClick={() => withdrawAccount()}
+              onClick={() => requestWithdraw(logout)}
             >
               회원 탈퇴
             </button>

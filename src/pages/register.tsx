@@ -4,12 +4,13 @@ import AddressPopup from '@/components/register/AddressPopup'
 import { FormProvider } from 'react-hook-form'
 import useRegisterForm from '@/components/register/hooks/useRegisterForm'
 import Head from 'next/head'
+import RedirectIfAuthenticated from '@/components/common/auth-guard/RedirectIfAuthenticated'
 
 const Register = () => {
   const { methods, onSubmit, openPostcode, setOpenPostcode } = useRegisterForm()
 
   return (
-    <>
+    <RedirectIfAuthenticated>
       <Head>
         <title>회원가입 페이지</title>
         <meta
@@ -40,7 +41,7 @@ const Register = () => {
           </div>
         </FormProvider>
       </Layout>
-    </>
+    </RedirectIfAuthenticated>
   )
 }
 

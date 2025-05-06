@@ -11,7 +11,11 @@ export type AuthContextType = {
   userId: string | null
   setUserId: (user: string | null) => void
   logout: () => void
-  withdrawAccount: () => void
+  userInfo: {
+    name: string
+    email: string
+    address: string
+  }
 }
 
 export type PlantDetectionModelLoadOptions = {

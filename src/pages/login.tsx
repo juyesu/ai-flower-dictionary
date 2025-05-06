@@ -3,12 +3,13 @@ import { FormProvider } from 'react-hook-form'
 import useLoginForm from '@/components/login/hooks/useLoginForm'
 import LoginForm from '@/components/login/LoginForm'
 import Head from 'next/head'
+import RedirectIfAuthenticated from '@/components/common/auth-guard/RedirectIfAuthenticated'
 
 const Login = () => {
   const { methods, onSubmit } = useLoginForm()
 
   return (
-    <>
+    <RedirectIfAuthenticated>
       <Head>
         <title>로그인 페이지</title>
         <meta name='description' content='서비스에 로그인하여 더욱 다양한 기능을 이용해보세요.' />
@@ -35,7 +36,7 @@ const Login = () => {
           </div>
         </div>
       </Layout>
-    </>
+    </RedirectIfAuthenticated>
   )
 }
 

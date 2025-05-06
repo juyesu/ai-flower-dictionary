@@ -13,7 +13,7 @@ const useSyncStateFromLocalStorage = ({
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const emailFromLocalStorage = localStorage.getItem('userEmail')
+      const emailFromLocalStorage = localStorage.getItem('userId')
       if (emailFromLocalStorage) {
         setUserEmail(emailFromLocalStorage)
       } else {

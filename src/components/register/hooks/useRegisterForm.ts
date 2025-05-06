@@ -1,48 +1,38 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { LoginFormType } from '@/types/type'
-import { useRouter } from 'next/router'
-import { useAuth } from '@/context/AuthContext'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useModalStore } from '@/store/useModalStore'
+import { supabase } from '@/lib/supabase'
 
 const useRegisterForm = () => {
   const [openPostcode, setOpenPostcode] = useState(false)
   const methods = useForm<LoginFormType>()
-  const router = useRouter()
   const { openModal } = useModalStore()
-  const { userId } = useAuth()
 
-  useEffect(() => {
-    if (userId) {
-      router.push('/')
-    }
-  }, [userId])
+  const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
+    const { name, email, password, address } = data
 
-  const onSubmit: SubmitHandler<LoginFormType> = (data) => {
-    if (localStorage.getItem(`${data.email}.name`)) {
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          name,
+          address,
+        },
+      },
+    })
+
+    if (error) {
       openModal({
         type: 'ALERT',
-        message: '이미 존재하는 이메일입니다.\n 다른 이메일로 시도해주세요',
+        message: '회원가입 중 오류가 발생했습니다.',
       })
-      methods.setFocus('email')
-      methods.reset({ email: '' })
-    } else {
-      try {
-        localStorage.setItem(`${data.email}.name`, data.name)
-        localStorage.setItem(`${data.email}.email`, data.email)
-        localStorage.setItem(`${data.email}.password`, data.password)
-        localStorage.setItem(`${data.email}.address`, data.address)
-
-        openModal({
-          type: 'REGISTER_SUCCESS',
-        })
-      } catch {
-        openModal({
-          type: 'ALERT',
-          message: '회원가입 중 오류가 발생했습니다.',
-        })
-      }
+      console.error(error)
+      return
     }
+
+    openModal({ type: 'REGISTER_SUCCESS' })
   }
 
   return { methods, onSubmit, openPostcode, setOpenPostcode }
