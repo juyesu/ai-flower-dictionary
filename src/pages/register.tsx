@@ -7,7 +7,8 @@ import Head from 'next/head'
 import RedirectIfAuthenticated from '@/components/common/auth-guard/RedirectIfAuthenticated'
 
 const Register = () => {
-  const { methods, onSubmit, openPostcode, setOpenPostcode } = useRegisterForm()
+  const { methods, onSubmit, openPostcode, setOpenPostcode, isEmailUnique, checkEmailDuplication } =
+    useRegisterForm()
 
   return (
     <RedirectIfAuthenticated>
@@ -34,7 +35,12 @@ const Register = () => {
             <div className='login_container'>
               <div className='login_form dark:border-zinc-500'>
                 <h1 className='login_page_title dark:text-slate-300'>회원가입</h1>
-                <RegisterForm onSubmit={onSubmit} setOpenPostcode={setOpenPostcode} />
+                <RegisterForm
+                  onSubmit={onSubmit}
+                  setOpenPostcode={setOpenPostcode}
+                  isEmailUnique={isEmailUnique}
+                  checkEmailDuplication={checkEmailDuplication}
+                />
               </div>
             </div>
             {openPostcode && <AddressPopup setOpenPostcode={setOpenPostcode} />}

@@ -203,6 +203,8 @@ export type AddressPopupProps = {
 export type RegisterFormProps = {
   onSubmit: SubmitHandler<LoginFormType>
   setOpenPostcode: Dispatch<SetStateAction<boolean>>
+  isEmailUnique: boolean
+  checkEmailDuplication: () => Promise<void>
 }
 
 export type LoginFormType = {

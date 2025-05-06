@@ -3,7 +3,12 @@ import Link from 'next/link'
 import { useFormContext } from 'react-hook-form'
 import { MagnifyingGlass } from '@/pages/assets/icons'
 
-const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
+const RegisterForm = ({
+  onSubmit,
+  setOpenPostcode,
+  isEmailUnique,
+  checkEmailDuplication,
+}: RegisterFormProps) => {
   const { register, handleSubmit, formState } = useFormContext<LoginFormType>()
 
   return (
@@ -41,18 +46,34 @@ const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
         <label htmlFor='email' className='dark:text-zinc-300'>
           이메일
         </label>
-        <input
-          id='email'
-          type='email'
-          className='login_form_input'
-          {...register('email', {
-            required: '이메일을 입력해주세요',
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: '이메일 형식이 잘못되었습니다',
-            },
-          })}
-        />
+        <div className='flex gap-2'>
+          <div className='relative w-full'>
+            <input
+              id='email'
+              type='email'
+              className='login_form_input'
+              {...register('email', {
+                required: '이메일을 입력해주세요',
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: '이메일 형식이 잘못되었습니다',
+                },
+              })}
+            />
+            {isEmailUnique && (
+              <span className='pointer-events-none absolute right-3 top-3.5 z-50 select-none text-base'>
+                ✅
+              </span>
+            )}
+          </div>
+          <button
+            type='button'
+            className='mt-1.5 flex items-center justify-center whitespace-nowrap rounded border border-zinc-500 bg-gray-200 px-3 font-semibold hover:bg-zinc-400 dark:bg-zinc-400 dark:hover:bg-zinc-500'
+            onClick={checkEmailDuplication}
+          >
+            중복 확인
+          </button>
+        </div>
         {formState.errors.email && (
           <p className='login_form_schema_error'>{formState.errors.email.message}</p>
         )}
@@ -113,7 +134,7 @@ const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
       </div>
 
       <button
-        type='button'
+        type='submit'
         className='login_form_submit_button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600'
       >
         회원가입

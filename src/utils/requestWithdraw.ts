@@ -1,9 +1,9 @@
-import { supabase } from "@/lib/supabase"
+import { supabase } from '@/lib/supabase'
+import { useModalStore } from '@/store/useModalStore'
 
 const requestWithdraw = async (logout: () => void) => {
-  //   const token = localStorage.getItem('sb-access-token')
-
   const { data, error } = await supabase.auth.getSession()
+  const { openModal } = useModalStore()
 
   if (error || !data.session) {
     console.error('세션 정보 없음:', error)
@@ -13,7 +13,7 @@ const requestWithdraw = async (logout: () => void) => {
   const token = data.session.access_token
 
   if (!token) {
-    alert('인증 정보가 없습니다. 다시 로그인해주세요.')
+    openModal({ type: 'LOGIN_REQUIRED', goBackOnClose: false })
     return
   }
 
@@ -26,17 +26,16 @@ const requestWithdraw = async (logout: () => void) => {
       },
     })
 
-    const data = await response.json()
-
     if (!response.ok) {
-      alert(data.error || '회원 탈퇴에 실패했습니다.')
+      openModal({ type: 'ACCOUNT_DELETION_FAILED' })
       return
     }
 
-    alert('회원 탈퇴가 완료되었습니다.')
+    openModal({ type: 'ACCOUNT_DELETION_SUCCESS' })
     logout()
   } catch (error) {
-    alert('오류가 발생했습니다. 다시 시도해주세요.')
+    openModal({ type: 'SERVER_ERROR' })
+    console.error(error)
   }
 }
 
