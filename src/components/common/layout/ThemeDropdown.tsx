@@ -50,6 +50,7 @@ const ThemeDropdown = ({ hiddenUntil, hideAtMobile }: ThemeDropdownProps) => {
       >
         <li role='menuitem'>
           <button
+            type='button'
             className='flex w-full flex-row items-center rounded-t-xl px-5 py-4 hover:bg-zinc-400 dark:hover:bg-slate-500'
             onClick={() => setTheme('light')}
           >
@@ -65,6 +66,7 @@ const ThemeDropdown = ({ hiddenUntil, hideAtMobile }: ThemeDropdownProps) => {
         </li>
         <li role='menuitem'>
           <button
+            type='button'
             className='flex w-full flex-row items-center px-5 py-4 text-lg hover:bg-zinc-400 dark:hover:bg-slate-500'
             onClick={() => setTheme('dark')}
           >
@@ -80,6 +82,7 @@ const ThemeDropdown = ({ hiddenUntil, hideAtMobile }: ThemeDropdownProps) => {
         </li>
         <li role='menuitem'>
           <button
+            type='button'
             className='flex w-full flex-row items-center rounded-b-xl px-5 py-4 text-lg hover:bg-zinc-400 dark:hover:bg-slate-500'
             onClick={() => setTheme('system')}
           >

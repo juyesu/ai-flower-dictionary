@@ -13,6 +13,7 @@ const AccordionSections = ({
     <>
       <section className='mt-8 w-full mobile:px-1 sm:px-4'>
         <button
+          type='button'
           onClick={() =>
             setAccordionOpen((prev) => {
               return { ...prev, likedPlants: !prev.likedPlants }
@@ -71,6 +72,7 @@ const AccordionSections = ({
       </section>
       <section className='my-20 mt-8 w-full mobile:px-1 sm:px-4'>
         <button
+          type='button'
           onClick={() =>
             setAccordionOpen((prev) => {
               return { ...prev, myDictionary: !prev.myDictionary }

@@ -25,14 +25,15 @@ const LoginSwitcher = () => {
           </div>
           <div className='mx-4 flex justify-center gap-2'>
             <button
+              type='button'
               className='rounded-full border-2 text-zinc-500 hover:border-zinc-600 dark:border-gray-500 dark:text-zinc-400 dark:hover:border-gray-400 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold'
               onClick={() => logout()}
             >
               로그아웃
             </button>
             <button
-              className='rounded-full border-2 bg-zinc-400 text-zinc-100 hover:border-zinc-600 dark:border-gray-500 dark:bg-zinc-700 dark:text-zinc-500 dark:hover:border-gray-400 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold'
               type='button'
+              className='rounded-full border-2 bg-zinc-400 text-zinc-100 hover:border-zinc-600 dark:border-gray-500 dark:bg-zinc-700 dark:text-zinc-500 dark:hover:border-gray-400 sm:px-4 sm:py-1 sm:text-sm sm:font-semibold lg:font-bold'
               onClick={() => requestWithdraw(logout)}
             >
               회원 탈퇴

@@ -54,13 +54,16 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
           </li>
           <li className='drawer_menu_item'>
             {userId ? (
-              <button onClick={() => logout()}>Logout</button>
+              <button type='button' onClick={() => logout()}>
+                Logout
+              </button>
             ) : (
               <Link href='/login'>Login</Link>
             )}
           </li>
           <li className='mt-8 w-full px-8 text-xl'>
             <button
+              type='button'
               onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
               aria-controls='theme-submenu'
               aria-expanded={isThemeMenuOpen}
@@ -72,7 +75,11 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
               className={`transition-all duration-100 ease-out ${isThemeMenuOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none opacity-0'} mt-2 -translate-y-2`}
             >
               <li className='py-2 text-xl'>
-                <button className='flex items-center' onClick={() => setTheme('light')}>
+                <button
+                  type='button'
+                  className='flex items-center'
+                  onClick={() => setTheme('light')}
+                >
                   <span className='mr-2'>
                     <Sun
                       className='h-5 w-5 text-zinc-800 dark:text-gray-200'
@@ -84,7 +91,11 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
                 </button>
               </li>
               <li className='py-2 text-xl'>
-                <button className='flex items-center' onClick={() => setTheme('dark')}>
+                <button
+                  type='button'
+                  className='flex items-center'
+                  onClick={() => setTheme('dark')}
+                >
                   <span className='mr-3'>
                     <Moon
                       className='h-5 w-5 text-zinc-800 dark:text-gray-200'
@@ -96,7 +107,11 @@ const SideDrawer = ({ isOpen, onClose }: SideDrawerProps) => {
                 </button>
               </li>
               <li className='py-2 text-xl'>
-                <button className='flex items-center' onClick={() => setTheme('system')}>
+                <button
+                  type='button'
+                  className='flex items-center'
+                  onClick={() => setTheme('system')}
+                >
                   <span className='mr-3'>
                     <Desktop
                       className='h-5 w-5 text-zinc-800 dark:text-gray-200'

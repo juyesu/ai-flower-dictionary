@@ -41,7 +41,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
         )}
       </div>
 
-      <button className='login_form_submit_button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600'>
+      <button type='submit' className='login_form_submit_button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600'>
         로그인
       </button>
       <Link href='/register' className='login_register_switch_link'>

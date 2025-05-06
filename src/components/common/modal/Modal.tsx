@@ -37,6 +37,7 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
           </p>
           <div className='flex flex-row gap-4'>
             <button
+              type='button'
               ref={confirmButtonRef}
               onClick={onClose}
               className={`${
@@ -50,6 +51,7 @@ const Modal = ({ onClose, bgOverlay, secoundButton, message }: ModalProps) => {
             </button>
             {secoundButton && (
               <button
+                type='button'
                 onClick={() => secoundButton.onSecondButtonClick?.()}
                 className='my-4 w-28 self-center rounded-lg bg-sky-400 py-2 font-semibold text-white focus-visible:outline-none dark:text-slate-200 dark:brightness-[.9]'
                 aria-label='페이지 이동'

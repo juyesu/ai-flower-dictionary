@@ -112,7 +112,10 @@ const RegisterForm = ({ onSubmit, setOpenPostcode }: RegisterFormProps) => {
         )}
       </div>
 
-      <button className='login_form_submit_button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600'>
+      <button
+        type='button'
+        className='login_form_submit_button dark:bg-blue-500 dark:text-slate-100 dark:hover:bg-blue-600'
+      >
         회원가입
       </button>
       <Link href='/login' className='login_register_switch_link'>
