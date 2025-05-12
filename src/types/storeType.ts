@@ -3,6 +3,11 @@ export type ImageStoreType = {
   setCapturedImageUrl: (value: string) => void
 }
 
+export type SideDrawerStoreType = {
+  isDrawerOpen: boolean
+  setIsDrawerOpen: (value: boolean) => void
+}
+
 type ModalType =
   | { type: 'ALERT'; message: string }
   | { type: 'PLANT_DETECTION_MODEL_ERROR' }

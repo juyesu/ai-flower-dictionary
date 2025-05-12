@@ -2,14 +2,12 @@ import Link from 'next/link'
 import type { ChildrenComponentsProps } from '@/types/type'
 import LoginSwitcher from '@/components/common/layout/LoginSwitcher'
 import ThemeDropdown from '@/components/common/layout/ThemeDropdown'
-import { useState } from 'react'
-import SideDrawer from '@/components/common/layout/SideDrawer'
+import SideDrawerClient from '@/components/common/layout/SideDrawerClient'
 import ModalManager from '@/components/common/modal/ModalManager'
-import { MenuBars, TypeScript, React, NextJs, TailwindCss } from '@/pages/assets/icons'
+import SideDrawerOpenButton from '@/components/common/ui/SideDrawerOpenButton'
+import { TypeScript, React, NextJs, TailwindCss } from '@/pages/assets/icons'
 
 const RootLayout = ({ children }: ChildrenComponentsProps) => {
-  const [openSideDrawer, setOpenSideDrawer] = useState(false)
-
   return (
     <>
       <div className='relative flex min-h-screen w-full flex-col items-center'>
@@ -34,13 +32,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
             </div>
             {/* width: 1024px미만 */}
             <div className='mr-3 mt-0.5 flex items-center gap-5 lg:hidden'>
-              <button
-                type='button'
-                aria-label='메뉴 오버레이 열기'
-                onClick={() => setOpenSideDrawer(true)}
-              >
-                <MenuBars className='h-7 w-7' fill='currentColor' aria-hidden='true' />
-              </button>
+              <SideDrawerOpenButton />
             </div>
             <LoginSwitcher />
             <ThemeDropdown hiddenUntil='md' hideAtMobile={true} />
@@ -78,7 +70,7 @@ const RootLayout = ({ children }: ChildrenComponentsProps) => {
         </footer>
         <ModalManager />
       </div>
-      <SideDrawer isOpen={openSideDrawer} onClose={() => setOpenSideDrawer(false)} />
+      <SideDrawerClient />
     </>
   )
 }
